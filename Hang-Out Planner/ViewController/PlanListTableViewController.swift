@@ -7,14 +7,12 @@
 
 import UIKit
 
-/*
- Screen which display list of plan `[Plan]`.
- Receive `[Plan]` from Planner.
- If user select one of `Plan`, it will move to next VC.
- */
-
+///  Screen which display list of plan `[Plan]`.
+///  Receive `[Plan]` from Planner.
+///  If user select one of `Plan`, it will move to next VC.
 class PlanListTableViewController: UITableViewController {
   
+  // [Plan] you receive from planner model
   let plans: [Plan]
   
   override func viewDidLoad() {

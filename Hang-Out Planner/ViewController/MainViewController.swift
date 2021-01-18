@@ -7,13 +7,11 @@
 
 import UIKit
 
-/*
- Main(home and top) screen.
- Here, user can select categories in certain order.
- If user push "go", it will pass [Category] to Planner,
- and move to next VC.
- */
 
+///  Main(home and top) screen.
+///  Here, user can select categories in certain order.
+///  If user push "go", it will pass [Category] to Planner,
+///  and move to next VC.
 class MainViewController: UIViewController {
   
   // categories that user has selected
@@ -36,7 +34,7 @@ class MainViewController: UIViewController {
   //Action when goButton is tapped
   @objc func goButtonTapped(){
     
-    //Send selectedCategories to logic model
+    //Send selectedCategories to planner model
     let plans = Planner.calculatePlans(categories: selectedCategories)
     let nextVC = PlanListTableViewController(plans: plans)
     

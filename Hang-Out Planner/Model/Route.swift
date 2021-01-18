@@ -15,4 +15,26 @@ struct Route{
   // if we can get time by bike or car, we will add more variables here
   let timeToReachByWalk       : Int
 
+  static var sampleRoutes : [Route] = [
+    Route(
+      startLocationId: Location.sampleStartPoint.id,
+      nextLocationId: Location.sampleLocations[0].id,
+      timeToReachByWalk: 15
+    ),
+    Route(
+      startLocationId: Location.sampleLocations[0].id,
+      nextLocationId: Location.sampleLocations[1].id,
+      timeToReachByWalk: 22
+    ),
+    Route(
+      startLocationId: Location.sampleLocations[1].id,
+      nextLocationId: Location.sampleLocations[2].id,
+      timeToReachByWalk: 19
+    ),
+    Route(
+      startLocationId: Location.sampleLocations[2].id,
+      nextLocationId: Location.sampleStartPoint.id,
+      timeToReachByWalk: 7
+    ),
+  ]
 }

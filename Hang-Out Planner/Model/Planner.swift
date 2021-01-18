@@ -7,3 +7,9 @@
 
 import Foundation
 
+class Planner {
+  static func calculatePlans(categories: [Categories]) -> [Plan]{
+  
+    return [Plan()]
+  }
+}

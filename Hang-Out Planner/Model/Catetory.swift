@@ -21,6 +21,7 @@ enum Categories{
   case clothes
   case park
   case cafe
+  case other
 }
 
 

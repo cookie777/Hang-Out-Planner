@@ -14,5 +14,5 @@ struct Route{
   // time(minutes) cost (by walk) to go the next location.
   // if we can get time by bike or car, we will add more variables here
   let timeToReachByWalk       : Int
-  
+
 }

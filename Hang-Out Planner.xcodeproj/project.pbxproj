@@ -1,0 +1,832 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57125B52D3900264AF9 /* AppDelegate.swift */; };
+		48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57325B52D3900264AF9 /* SceneDelegate.swift */; };
+		48A4C57925B52D3900264AF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48A4C57725B52D3900264AF9 /* Main.storyboard */; };
+		48A4C57B25B52D3B00264AF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48A4C57A25B52D3B00264AF9 /* Assets.xcassets */; };
+		48A4C57E25B52D3B00264AF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48A4C57C25B52D3B00264AF9 /* LaunchScreen.storyboard */; };
+		48A4C58925B52D3B00264AF9 /* Hang_Out_PlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C58825B52D3B00264AF9 /* Hang_Out_PlannerTests.swift */; };
+		48A4C59425B52D3B00264AF9 /* Hang_Out_PlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C59325B52D3B00264AF9 /* Hang_Out_PlannerUITests.swift */; };
+		48A4C5BE25B5385D00264AF9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5BD25B5385D00264AF9 /* MainViewController.swift */; };
+		48A4C5C925B5524700264AF9 /* PlanListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */; };
+		48A4C5CE25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */; };
+		48A4C5CF25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */; };
+		48A4C5D025B5528D00264AF9 /* PlanDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */; };
+		48A4C5D725B552AE00264AF9 /* PlanListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */; };
+		48A4C5DB25B552AF00264AF9 /* PlanListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */; };
+		48A4C5DF25B552B200264AF9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5BD25B5385D00264AF9 /* MainViewController.swift */; };
+		48A4C5E325B552B200264AF9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5BD25B5385D00264AF9 /* MainViewController.swift */; };
+		48A4C5E825B552CA00264AF9 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */; };
+		48A4C5E925B552CA00264AF9 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */; };
+		48A4C5EA25B552CA00264AF9 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */; };
+		48A4C5F225B5536300264AF9 /* MainViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5F125B5536300264AF9 /* MainViewButton.swift */; };
+		48A4C60225B553AA00264AF9 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C60125B553AA00264AF9 /* AddButton.swift */; };
+		48A4C60725B553B400264AF9 /* GoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C60625B553B400264AF9 /* GoButton.swift */; };
+		48A4C60C25B553E100264AF9 /* CardTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C60B25B553E100264AF9 /* CardTVCell.swift */; };
+		48A4C61725B5546C00264AF9 /* CategoryCardTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C61625B5546C00264AF9 /* CategoryCardTVCell.swift */; };
+		48A4C61C25B5548000264AF9 /* PlanCardTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C61B25B5548000264AF9 /* PlanCardTVCell.swift */; };
+		48A4C62125B5549500264AF9 /* LocationCardTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C62025B5549500264AF9 /* LocationCardTVCell.swift */; };
+		48A4C62625B554AB00264AF9 /* DistanceCardTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C62525B554AB00264AF9 /* DistanceCardTVCell.swift */; };
+		48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C64125B5562B00264AF9 /* LargeHeaderLabel.swift */; };
+		48A4C64825B5564800264AF9 /* MediumHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C64725B5564800264AF9 /* MediumHeaderLabel.swift */; };
+		48A4C65025B5566100264AF9 /* SmallHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C64F25B5566100264AF9 /* SmallHeaderLabel.swift */; };
+		48A4C65525B5568100264AF9 /* TextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C65425B5568100264AF9 /* TextLabel.swift */; };
+		48A4C65A25B5569000264AF9 /* SubTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C65925B5569000264AF9 /* SubTextLabel.swift */; };
+		48A4C66C25B5574A00264AF9 /* HorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66625B5574A00264AF9 /* HorizontalStackView.swift */; };
+		48A4C66D25B5574A00264AF9 /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66725B5574A00264AF9 /* VerticalStackView.swift */; };
+		48A4C66E25B5574A00264AF9 /* UILabel+LineSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66925B5574A00264AF9 /* UILabel+LineSpacing.swift */; };
+		48A4C66F25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66A25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift */; };
+		48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */; };
+		48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
+		48A4C67625B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
+		48A4C67725B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
+		48A4C68625B5586300264AF9 /* Catetory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C68525B5586300264AF9 /* Catetory.swift */; };
+		48A4C68E25B5588900264AF9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C68D25B5588900264AF9 /* Location.swift */; };
+		48A4C69325B5589C00264AF9 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C69225B5589C00264AF9 /* Route.swift */; };
+		48A4C69825B558AF00264AF9 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C69725B558AF00264AF9 /* Plan.swift */; };
+		48A4C6A025B559E700264AF9 /* Planner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C69F25B559E700264AF9 /* Planner.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		48A4C58525B52D3B00264AF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48A4C56625B52D3900264AF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 48A4C56D25B52D3900264AF9;
+			remoteInfo = "Hang-Out Planner";
+		};
+		48A4C59025B52D3B00264AF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48A4C56625B52D3900264AF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 48A4C56D25B52D3900264AF9;
+			remoteInfo = "Hang-Out Planner";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hang-Out Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48A4C57125B52D3900264AF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		48A4C57325B52D3900264AF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		48A4C57825B52D3900264AF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		48A4C57A25B52D3B00264AF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		48A4C57D25B52D3B00264AF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		48A4C57F25B52D3B00264AF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Hang-Out Planner/Info.plist"; sourceTree = SOURCE_ROOT; };
+		48A4C58425B52D3B00264AF9 /* Hang-Out PlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hang-Out PlannerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48A4C58825B52D3B00264AF9 /* Hang_Out_PlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hang_Out_PlannerTests.swift; sourceTree = "<group>"; };
+		48A4C58A25B52D3B00264AF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48A4C58F25B52D3B00264AF9 /* Hang-Out PlannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hang-Out PlannerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48A4C59325B52D3B00264AF9 /* Hang_Out_PlannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hang_Out_PlannerUITests.swift; sourceTree = "<group>"; };
+		48A4C59525B52D3B00264AF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48A4C5BD25B5385D00264AF9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanListTableViewController.swift; sourceTree = "<group>"; };
+		48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDetailViewController.swift; sourceTree = "<group>"; };
+		48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
+		48A4C5F125B5536300264AF9 /* MainViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewButton.swift; sourceTree = "<group>"; };
+		48A4C60125B553AA00264AF9 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		48A4C60625B553B400264AF9 /* GoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoButton.swift; sourceTree = "<group>"; };
+		48A4C60B25B553E100264AF9 /* CardTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTVCell.swift; sourceTree = "<group>"; };
+		48A4C61625B5546C00264AF9 /* CategoryCardTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCardTVCell.swift; sourceTree = "<group>"; };
+		48A4C61B25B5548000264AF9 /* PlanCardTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCardTVCell.swift; sourceTree = "<group>"; };
+		48A4C62025B5549500264AF9 /* LocationCardTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCardTVCell.swift; sourceTree = "<group>"; };
+		48A4C62525B554AB00264AF9 /* DistanceCardTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceCardTVCell.swift; sourceTree = "<group>"; };
+		48A4C64125B5562B00264AF9 /* LargeHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeHeaderLabel.swift; sourceTree = "<group>"; };
+		48A4C64725B5564800264AF9 /* MediumHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumHeaderLabel.swift; sourceTree = "<group>"; };
+		48A4C64F25B5566100264AF9 /* SmallHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallHeaderLabel.swift; sourceTree = "<group>"; };
+		48A4C65425B5568100264AF9 /* TextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLabel.swift; sourceTree = "<group>"; };
+		48A4C65925B5569000264AF9 /* SubTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTextLabel.swift; sourceTree = "<group>"; };
+		48A4C66625B5574A00264AF9 /* HorizontalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalStackView.swift; sourceTree = "<group>"; };
+		48A4C66725B5574A00264AF9 /* VerticalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
+		48A4C66925B5574A00264AF9 /* UILabel+LineSpacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+LineSpacing.swift"; sourceTree = "<group>"; };
+		48A4C66A25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIEdgeInsetsnilAcceptable.swift; sourceTree = "<group>"; };
+		48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintLayout.swift"; sourceTree = "<group>"; };
+		48A4C67425B557D900264AF9 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		48A4C68525B5586300264AF9 /* Catetory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catetory.swift; sourceTree = "<group>"; };
+		48A4C68D25B5588900264AF9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		48A4C69225B5589C00264AF9 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		48A4C69725B558AF00264AF9 /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
+		48A4C69F25B559E700264AF9 /* Planner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planner.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		48A4C56B25B52D3900264AF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48A4C58125B52D3B00264AF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48A4C58C25B52D3B00264AF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		48A4C56525B52D3900264AF9 = {
+			isa = PBXGroup;
+			children = (
+				48A4C57025B52D3900264AF9 /* Hang-Out Planner */,
+				48A4C58725B52D3B00264AF9 /* Hang-Out PlannerTests */,
+				48A4C59225B52D3B00264AF9 /* Hang-Out PlannerUITests */,
+				48A4C56F25B52D3900264AF9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		48A4C56F25B52D3900264AF9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */,
+				48A4C58425B52D3B00264AF9 /* Hang-Out PlannerTests.xctest */,
+				48A4C58F25B52D3B00264AF9 /* Hang-Out PlannerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		48A4C57025B52D3900264AF9 /* Hang-Out Planner */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C67425B557D900264AF9 /* NetworkController.swift */,
+				48A4C68125B5580800264AF9 /* ViewController */,
+				48A4C62B25B554ED00264AF9 /* View,Cell */,
+				48A4C5B125B52E3C00264AF9 /* Model */,
+				48A4C5A425B52DDD00264AF9 /* SupportFiles */,
+				48A4C57F25B52D3B00264AF9 /* Info.plist */,
+			);
+			path = "Hang-Out Planner";
+			sourceTree = "<group>";
+		};
+		48A4C58725B52D3B00264AF9 /* Hang-Out PlannerTests */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C58825B52D3B00264AF9 /* Hang_Out_PlannerTests.swift */,
+				48A4C58A25B52D3B00264AF9 /* Info.plist */,
+			);
+			path = "Hang-Out PlannerTests";
+			sourceTree = "<group>";
+		};
+		48A4C59225B52D3B00264AF9 /* Hang-Out PlannerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C59325B52D3B00264AF9 /* Hang_Out_PlannerUITests.swift */,
+				48A4C59525B52D3B00264AF9 /* Info.plist */,
+			);
+			path = "Hang-Out PlannerUITests";
+			sourceTree = "<group>";
+		};
+		48A4C5A425B52DDD00264AF9 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C66425B5574A00264AF9 /* Utils */,
+				48A4C57125B52D3900264AF9 /* AppDelegate.swift */,
+				48A4C57325B52D3900264AF9 /* SceneDelegate.swift */,
+				48A4C57725B52D3900264AF9 /* Main.storyboard */,
+				48A4C57A25B52D3B00264AF9 /* Assets.xcassets */,
+				48A4C57C25B52D3B00264AF9 /* LaunchScreen.storyboard */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		48A4C5B125B52E3C00264AF9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C68D25B5588900264AF9 /* Location.swift */,
+				48A4C68525B5586300264AF9 /* Catetory.swift */,
+				48A4C69225B5589C00264AF9 /* Route.swift */,
+				48A4C69725B558AF00264AF9 /* Plan.swift */,
+				48A4C69F25B559E700264AF9 /* Planner.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		48A4C62A25B554D600264AF9 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C63425B555B200264AF9 /* Label */,
+				48A4C63125B5557C00264AF9 /* Button */,
+				48A4C63025B5557000264AF9 /* Cell */,
+			);
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		48A4C62B25B554ED00264AF9 /* View,Cell */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C62F25B5551400264AF9 /* Combined */,
+				48A4C62A25B554D600264AF9 /* Basic */,
+			);
+			path = "View,Cell";
+			sourceTree = "<group>";
+		};
+		48A4C62F25B5551400264AF9 /* Combined */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C63325B5559200264AF9 /* Cell */,
+				48A4C63225B5558500264AF9 /* Button */,
+			);
+			path = Combined;
+			sourceTree = "<group>";
+		};
+		48A4C63025B5557000264AF9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C62025B5549500264AF9 /* LocationCardTVCell.swift */,
+				48A4C60B25B553E100264AF9 /* CardTVCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		48A4C63125B5557C00264AF9 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C5F125B5536300264AF9 /* MainViewButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		48A4C63225B5558500264AF9 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C60125B553AA00264AF9 /* AddButton.swift */,
+				48A4C60625B553B400264AF9 /* GoButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		48A4C63325B5559200264AF9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C61625B5546C00264AF9 /* CategoryCardTVCell.swift */,
+				48A4C62525B554AB00264AF9 /* DistanceCardTVCell.swift */,
+				48A4C61B25B5548000264AF9 /* PlanCardTVCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		48A4C63425B555B200264AF9 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C64125B5562B00264AF9 /* LargeHeaderLabel.swift */,
+				48A4C64725B5564800264AF9 /* MediumHeaderLabel.swift */,
+				48A4C64F25B5566100264AF9 /* SmallHeaderLabel.swift */,
+				48A4C65425B5568100264AF9 /* TextLabel.swift */,
+				48A4C65925B5569000264AF9 /* SubTextLabel.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		48A4C66425B5574A00264AF9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C66525B5574A00264AF9 /* Subclasses */,
+				48A4C66825B5574A00264AF9 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		48A4C66525B5574A00264AF9 /* Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C66625B5574A00264AF9 /* HorizontalStackView.swift */,
+				48A4C66725B5574A00264AF9 /* VerticalStackView.swift */,
+			);
+			path = Subclasses;
+			sourceTree = "<group>";
+		};
+		48A4C66825B5574A00264AF9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C66925B5574A00264AF9 /* UILabel+LineSpacing.swift */,
+				48A4C66A25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift */,
+				48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		48A4C68125B5580800264AF9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C5BD25B5385D00264AF9 /* MainViewController.swift */,
+				48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */,
+				48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */,
+				48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		48A4C56D25B52D3900264AF9 /* Hang-Out Planner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48A4C59825B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out Planner" */;
+			buildPhases = (
+				48A4C56A25B52D3900264AF9 /* Sources */,
+				48A4C56B25B52D3900264AF9 /* Frameworks */,
+				48A4C56C25B52D3900264AF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Hang-Out Planner";
+			productName = "Hang-Out Planner";
+			productReference = 48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */;
+			productType = "com.apple.product-type.application";
+		};
+		48A4C58325B52D3B00264AF9 /* Hang-Out PlannerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48A4C59B25B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out PlannerTests" */;
+			buildPhases = (
+				48A4C58025B52D3B00264AF9 /* Sources */,
+				48A4C58125B52D3B00264AF9 /* Frameworks */,
+				48A4C58225B52D3B00264AF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				48A4C58625B52D3B00264AF9 /* PBXTargetDependency */,
+			);
+			name = "Hang-Out PlannerTests";
+			productName = "Hang-Out PlannerTests";
+			productReference = 48A4C58425B52D3B00264AF9 /* Hang-Out PlannerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		48A4C58E25B52D3B00264AF9 /* Hang-Out PlannerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48A4C59E25B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out PlannerUITests" */;
+			buildPhases = (
+				48A4C58B25B52D3B00264AF9 /* Sources */,
+				48A4C58C25B52D3B00264AF9 /* Frameworks */,
+				48A4C58D25B52D3B00264AF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				48A4C59125B52D3B00264AF9 /* PBXTargetDependency */,
+			);
+			name = "Hang-Out PlannerUITests";
+			productName = "Hang-Out PlannerUITests";
+			productReference = 48A4C58F25B52D3B00264AF9 /* Hang-Out PlannerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		48A4C56625B52D3900264AF9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1230;
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					48A4C56D25B52D3900264AF9 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					48A4C58325B52D3B00264AF9 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 48A4C56D25B52D3900264AF9;
+					};
+					48A4C58E25B52D3B00264AF9 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 48A4C56D25B52D3900264AF9;
+					};
+				};
+			};
+			buildConfigurationList = 48A4C56925B52D3900264AF9 /* Build configuration list for PBXProject "Hang-Out Planner" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 48A4C56525B52D3900264AF9;
+			productRefGroup = 48A4C56F25B52D3900264AF9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				48A4C56D25B52D3900264AF9 /* Hang-Out Planner */,
+				48A4C58325B52D3B00264AF9 /* Hang-Out PlannerTests */,
+				48A4C58E25B52D3B00264AF9 /* Hang-Out PlannerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		48A4C56C25B52D3900264AF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48A4C57E25B52D3B00264AF9 /* LaunchScreen.storyboard in Resources */,
+				48A4C57B25B52D3B00264AF9 /* Assets.xcassets in Resources */,
+				48A4C57925B52D3900264AF9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48A4C58225B52D3B00264AF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48A4C58D25B52D3B00264AF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		48A4C56A25B52D3900264AF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48A4C65525B5568100264AF9 /* TextLabel.swift in Sources */,
+				48A4C66E25B5574A00264AF9 /* UILabel+LineSpacing.swift in Sources */,
+				48A4C66D25B5574A00264AF9 /* VerticalStackView.swift in Sources */,
+				48A4C5E825B552CA00264AF9 /* LocationDetailViewController.swift in Sources */,
+				48A4C69325B5589C00264AF9 /* Route.swift in Sources */,
+				48A4C60C25B553E100264AF9 /* CardTVCell.swift in Sources */,
+				48A4C62625B554AB00264AF9 /* DistanceCardTVCell.swift in Sources */,
+				48A4C68E25B5588900264AF9 /* Location.swift in Sources */,
+				48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */,
+				48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */,
+				48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */,
+				48A4C60725B553B400264AF9 /* GoButton.swift in Sources */,
+				48A4C66F25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift in Sources */,
+				48A4C69825B558AF00264AF9 /* Plan.swift in Sources */,
+				48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */,
+				48A4C65A25B5569000264AF9 /* SubTextLabel.swift in Sources */,
+				48A4C61725B5546C00264AF9 /* CategoryCardTVCell.swift in Sources */,
+				48A4C60225B553AA00264AF9 /* AddButton.swift in Sources */,
+				48A4C68625B5586300264AF9 /* Catetory.swift in Sources */,
+				48A4C5F225B5536300264AF9 /* MainViewButton.swift in Sources */,
+				48A4C62125B5549500264AF9 /* LocationCardTVCell.swift in Sources */,
+				48A4C5CE25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */,
+				48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */,
+				48A4C5C925B5524700264AF9 /* PlanListTableViewController.swift in Sources */,
+				48A4C61C25B5548000264AF9 /* PlanCardTVCell.swift in Sources */,
+				48A4C65025B5566100264AF9 /* SmallHeaderLabel.swift in Sources */,
+				48A4C6A025B559E700264AF9 /* Planner.swift in Sources */,
+				48A4C66C25B5574A00264AF9 /* HorizontalStackView.swift in Sources */,
+				48A4C5BE25B5385D00264AF9 /* MainViewController.swift in Sources */,
+				48A4C64825B5564800264AF9 /* MediumHeaderLabel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48A4C58025B52D3B00264AF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48A4C5D725B552AE00264AF9 /* PlanListTableViewController.swift in Sources */,
+				48A4C5E925B552CA00264AF9 /* LocationDetailViewController.swift in Sources */,
+				48A4C67625B557D900264AF9 /* NetworkController.swift in Sources */,
+				48A4C5CF25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */,
+				48A4C58925B52D3B00264AF9 /* Hang_Out_PlannerTests.swift in Sources */,
+				48A4C5DF25B552B200264AF9 /* MainViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48A4C58B25B52D3B00264AF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48A4C5DB25B552AF00264AF9 /* PlanListTableViewController.swift in Sources */,
+				48A4C5EA25B552CA00264AF9 /* LocationDetailViewController.swift in Sources */,
+				48A4C67725B557D900264AF9 /* NetworkController.swift in Sources */,
+				48A4C5D025B5528D00264AF9 /* PlanDetailViewController.swift in Sources */,
+				48A4C59425B52D3B00264AF9 /* Hang_Out_PlannerUITests.swift in Sources */,
+				48A4C5E325B552B200264AF9 /* MainViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		48A4C58625B52D3B00264AF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 48A4C56D25B52D3900264AF9 /* Hang-Out Planner */;
+			targetProxy = 48A4C58525B52D3B00264AF9 /* PBXContainerItemProxy */;
+		};
+		48A4C59125B52D3B00264AF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 48A4C56D25B52D3900264AF9 /* Hang-Out Planner */;
+			targetProxy = 48A4C59025B52D3B00264AF9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		48A4C57725B52D3900264AF9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				48A4C57825B52D3900264AF9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		48A4C57C25B52D3B00264AF9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				48A4C57D25B52D3B00264AF9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		48A4C59625B52D3B00264AF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		48A4C59725B52D3B00264AF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		48A4C59925B52D3B00264AF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Hang-Out Planner/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-Planner";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		48A4C59A25B52D3B00264AF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Hang-Out Planner/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-Planner";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		48A4C59C25B52D3B00264AF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Hang-Out PlannerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-PlannerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hang-Out Planner.app/Hang-Out Planner";
+			};
+			name = Debug;
+		};
+		48A4C59D25B52D3B00264AF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Hang-Out PlannerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-PlannerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hang-Out Planner.app/Hang-Out Planner";
+			};
+			name = Release;
+		};
+		48A4C59F25B52D3B00264AF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Hang-Out PlannerUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-PlannerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Hang-Out Planner";
+			};
+			name = Debug;
+		};
+		48A4C5A025B52D3B00264AF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Hang-Out PlannerUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-PlannerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Hang-Out Planner";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		48A4C56925B52D3900264AF9 /* Build configuration list for PBXProject "Hang-Out Planner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48A4C59625B52D3B00264AF9 /* Debug */,
+				48A4C59725B52D3B00264AF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48A4C59825B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out Planner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48A4C59925B52D3B00264AF9 /* Debug */,
+				48A4C59A25B52D3B00264AF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48A4C59B25B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out PlannerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48A4C59C25B52D3B00264AF9 /* Debug */,
+				48A4C59D25B52D3B00264AF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48A4C59E25B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out PlannerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48A4C59F25B52D3B00264AF9 /* Debug */,
+				48A4C5A025B52D3B00264AF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 48A4C56625B52D3900264AF9 /* Project object */;
+}

@@ -14,6 +14,6 @@ import UIKit
  Singleton.
  */
 class NetworkController {
-  
-
+  static let shared = NetworkController()
+  private init(){}
 }

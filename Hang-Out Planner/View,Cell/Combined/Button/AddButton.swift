@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddButton: UIButton {
+class AddButton: MainVCButton {
 
     /*
     // Only override draw() if you perform custom drawing.

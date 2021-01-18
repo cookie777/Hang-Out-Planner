@@ -7,6 +7,10 @@
 
 import UIKit
 
+/*
+ Screen for displaying location details
+ */
+
 class LocationDetailViewController: UIViewController {
 
     override func viewDidLoad() {

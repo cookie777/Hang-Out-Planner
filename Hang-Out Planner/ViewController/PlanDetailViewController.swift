@@ -7,6 +7,11 @@
 
 import UIKit
 
+
+/*
+ Screen for displaying Plan details.
+ */
+
 class PlanDetailViewController: UIViewController {
 
     override func viewDidLoad() {

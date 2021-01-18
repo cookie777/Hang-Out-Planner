@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlanCardTVCell: UITableViewCell {
+class PlanCardTVCell: CardTVCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

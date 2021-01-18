@@ -7,7 +7,15 @@
 
 import UIKit
 
+/*
+ Screen which display list of plan `[Plan]`.
+ Receive `[Plan]` from Planner.
+ If user select one of `Plan`, it will move to next VC.
+ */
+
 class PlanListTableViewController: UITableViewController {
+  
+  let plans: [Plan]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +26,16 @@ class PlanListTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+  
+  init(plans: [Plan]) {
+    self.plans = plans
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

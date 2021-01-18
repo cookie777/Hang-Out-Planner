@@ -26,7 +26,7 @@
 		48A4C5E825B552CA00264AF9 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */; };
 		48A4C5E925B552CA00264AF9 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */; };
 		48A4C5EA25B552CA00264AF9 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */; };
-		48A4C5F225B5536300264AF9 /* MainViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5F125B5536300264AF9 /* MainViewButton.swift */; };
+		48A4C5F225B5536300264AF9 /* MainVCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5F125B5536300264AF9 /* MainVCButton.swift */; };
 		48A4C60225B553AA00264AF9 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C60125B553AA00264AF9 /* AddButton.swift */; };
 		48A4C60725B553B400264AF9 /* GoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C60625B553B400264AF9 /* GoButton.swift */; };
 		48A4C60C25B553E100264AF9 /* CardTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C60B25B553E100264AF9 /* CardTVCell.swift */; };
@@ -89,7 +89,7 @@
 		48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanListTableViewController.swift; sourceTree = "<group>"; };
 		48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDetailViewController.swift; sourceTree = "<group>"; };
 		48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
-		48A4C5F125B5536300264AF9 /* MainViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewButton.swift; sourceTree = "<group>"; };
+		48A4C5F125B5536300264AF9 /* MainVCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCButton.swift; sourceTree = "<group>"; };
 		48A4C60125B553AA00264AF9 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		48A4C60625B553B400264AF9 /* GoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoButton.swift; sourceTree = "<group>"; };
 		48A4C60B25B553E100264AF9 /* CardTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTVCell.swift; sourceTree = "<group>"; };
@@ -207,8 +207,8 @@
 		48A4C5B125B52E3C00264AF9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				48A4C68D25B5588900264AF9 /* Location.swift */,
 				48A4C68525B5586300264AF9 /* Catetory.swift */,
+				48A4C68D25B5588900264AF9 /* Location.swift */,
 				48A4C69225B5589C00264AF9 /* Route.swift */,
 				48A4C69725B558AF00264AF9 /* Plan.swift */,
 				48A4C69F25B559E700264AF9 /* Planner.swift */,
@@ -256,7 +256,7 @@
 		48A4C63125B5557C00264AF9 /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				48A4C5F125B5536300264AF9 /* MainViewButton.swift */,
+				48A4C5F125B5536300264AF9 /* MainVCButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -480,7 +480,7 @@
 				48A4C61725B5546C00264AF9 /* CategoryCardTVCell.swift in Sources */,
 				48A4C60225B553AA00264AF9 /* AddButton.swift in Sources */,
 				48A4C68625B5586300264AF9 /* Catetory.swift in Sources */,
-				48A4C5F225B5536300264AF9 /* MainViewButton.swift in Sources */,
+				48A4C5F225B5536300264AF9 /* MainVCButton.swift in Sources */,
 				48A4C62125B5549500264AF9 /* LocationCardTVCell.swift in Sources */,
 				48A4C5CE25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */,
 				48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */,
@@ -682,7 +682,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-Planner";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Hang-Out-Planner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -700,7 +700,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-Planner";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Hang-Out-Planner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

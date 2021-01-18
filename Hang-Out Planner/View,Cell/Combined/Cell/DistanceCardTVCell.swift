@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DistanceCardTVCell: UITableViewCell {
+class DistanceCardTVCell: CardTVCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

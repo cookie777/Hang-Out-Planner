@@ -7,10 +7,7 @@
 
 import Foundation
 
-/*
- 
- eg. var plans : [Plan]
- */
+/// var plans : [Plan]
 struct Plan{
   let routes    : [Route]
   let totalTimeByWalk : Int

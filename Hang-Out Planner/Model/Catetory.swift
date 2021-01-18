@@ -7,14 +7,10 @@
 
 import Foundation
 
-/*
- Definition of categories
- 
- eg usage,
- 
- var userOrder: [Categories] = [.clothes, .restaurant, .park]
- */
 
+/// Definition of categories
+/// eg usage,
+/// var userOrder: [Categories] = [.clothes, .restaurant, .park]
 enum Categories{
   case amusement
   case restaurant

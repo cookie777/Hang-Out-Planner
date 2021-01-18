@@ -11,6 +11,6 @@ import Foundation
 class Planner {
   static func calculatePlans(categories: [Categories]) -> [Plan]{
   
-    return [Plan.samplePlan,Plan.samplePlan,Plan.samplePlan,]
+    return [Plan.samplePlan,Plan.samplePlan,Plan.samplePlan,Plan.samplePlan,Plan.samplePlan,Plan.samplePlan,Plan.samplePlan,Plan.samplePlan,Plan.samplePlan,Plan.samplePlan]
   }
 }

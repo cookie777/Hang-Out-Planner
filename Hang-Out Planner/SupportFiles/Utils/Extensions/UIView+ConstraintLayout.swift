@@ -202,7 +202,7 @@ extension UIView{
   ///   - heightRatio: Default is 1. if you set 2, it will be 2 times larger. If you don't want to set, use "nil"
   ///   - widthConstant: Default is 0. left and right padding. If you set 8, it will set left 8 and right 8 padding (== total 16 padding).
   ///   - heightConstant: Default is 0. top and right height. If you set 8, it will set top 8 and bottom 8 padding (== total 16 padding).
-  func matchSize(widthRatio: CGFloat? = 1,  heightRatio:CGFloat? = 1, widthConstant:CGFloat = 0, heightConstant: CGFloat = 0) {
+  func matchSizeWith(widthRatio: CGFloat? = 1,  heightRatio:CGFloat? = 1, widthConstant:CGFloat = 0, heightConstant: CGFloat = 0) {
     if let superWidthAnchor = superview?.widthAnchor, let widthRatio = widthRatio {
       self.widthAnchor.constraint(equalTo: superWidthAnchor, multiplier: widthRatio, constant: -widthConstant*2).isActive = true
     }

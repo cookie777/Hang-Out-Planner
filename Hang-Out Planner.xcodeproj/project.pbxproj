@@ -52,6 +52,7 @@
 		48A4C69325B5589C00264AF9 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C69225B5589C00264AF9 /* Route.swift */; };
 		48A4C69825B558AF00264AF9 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C69725B558AF00264AF9 /* Plan.swift */; };
 		48A4C6A025B559E700264AF9 /* Planner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C69F25B559E700264AF9 /* Planner.swift */; };
+		48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4876325B5836800EA55D6 /* BasicLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		48A4C69225B5589C00264AF9 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		48A4C69725B558AF00264AF9 /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		48A4C69F25B559E700264AF9 /* Planner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planner.swift; sourceTree = "<group>"; };
+		48D4876325B5836800EA55D6 /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,21 +218,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		48A4C62A25B554D600264AF9 /* Basic */ = {
+		48A4C62A25B554D600264AF9 /* Basic(Don't use this) */ = {
 			isa = PBXGroup;
 			children = (
-				48A4C63425B555B200264AF9 /* Label */,
+				48D4876225B5833600EA55D6 /* Label */,
 				48A4C63125B5557C00264AF9 /* Button */,
 				48A4C63025B5557000264AF9 /* Cell */,
 			);
-			path = Basic;
+			path = "Basic(Don't use this)";
 			sourceTree = "<group>";
 		};
 		48A4C62B25B554ED00264AF9 /* View,Cell */ = {
 			isa = PBXGroup;
 			children = (
 				48A4C62F25B5551400264AF9 /* Combined */,
-				48A4C62A25B554D600264AF9 /* Basic */,
+				48A4C62A25B554D600264AF9 /* Basic(Don't use this) */,
 			);
 			path = "View,Cell";
 			sourceTree = "<group>";
@@ -238,6 +240,7 @@
 		48A4C62F25B5551400264AF9 /* Combined */ = {
 			isa = PBXGroup;
 			children = (
+				48A4C63425B555B200264AF9 /* Label */,
 				48A4C63325B5559200264AF9 /* Cell */,
 				48A4C63225B5558500264AF9 /* Button */,
 			);
@@ -329,6 +332,14 @@
 				48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		48D4876225B5833600EA55D6 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				48D4876325B5836800EA55D6 /* BasicLabel.swift */,
+			);
+			path = Label;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -473,6 +484,7 @@
 				48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */,
 				48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */,
 				48A4C60725B553B400264AF9 /* GoButton.swift in Sources */,
+				48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */,
 				48A4C66F25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift in Sources */,
 				48A4C69825B558AF00264AF9 /* Plan.swift in Sources */,
 				48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */,

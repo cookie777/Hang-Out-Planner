@@ -9,8 +9,8 @@ import UIKit
 
 class GoButton: MainVCButton {
 
-  init() {
-    super.init(frame: .zero)
+  override init() {
+    super.init()
     self.setTitle("GO", for: .normal)
     self.backgroundColor = .systemBlue
   }

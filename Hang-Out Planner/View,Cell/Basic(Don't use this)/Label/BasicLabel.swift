@@ -11,6 +11,7 @@ class BasicLabel: UILabel {
 
   init(text: String) {
     super.init(frame: .zero)
+    self.numberOfLines = 0
     self.text = text
   }
   required init?(coder: NSCoder) {

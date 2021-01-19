@@ -27,8 +27,7 @@ class MainViewController: UIViewController {
     view.addSubview(goButton)
     goButton.centerXYinSafeArea(view)
     goButton.addTarget(self, action: #selector(goButtonTapped), for: .touchUpInside)
-    
-    
+
   }
   
   //Action when goButton is tapped

@@ -11,6 +11,8 @@ class TextLabel: BasicLabel {
   
   override init(text: String) {
     super.init(text: text)
+    self.font = .systemFont(ofSize: 16, weight: .regular)
+
   }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

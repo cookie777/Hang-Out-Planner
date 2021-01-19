@@ -8,33 +8,40 @@
 import Foundation
 
 struct Route{
-  let startLocationId : String
-  let nextLocationId: String //Last location points to the first location.
+  let startLocationId : Int
+  let nextLocationId  : Int
+
+  let distance          : Double // meter
   
-  // time(minutes) cost (by walk) to go the next location.
-  // if we can get time by bike or car, we will add more variables here
-  let timeToReachByWalk       : Int
+  // time(second) cost to go the next location.
+  let timeToReachByWalk : Int?
+  let timeToReachByCar  : Int?
+  
 
   static var sampleRoutes : [Route] = [
     Route(
       startLocationId: Location.sampleStartPoint.id,
       nextLocationId: Location.sampleLocations[0].id,
-      timeToReachByWalk: 15
+      distance : 513, timeToReachByWalk: 15*60,
+      timeToReachByCar: nil
     ),
     Route(
       startLocationId: Location.sampleLocations[0].id,
       nextLocationId: Location.sampleLocations[1].id,
-      timeToReachByWalk: 22
+      distance: 678, timeToReachByWalk: 22*60,
+      timeToReachByCar: nil
     ),
     Route(
       startLocationId: Location.sampleLocations[1].id,
       nextLocationId: Location.sampleLocations[2].id,
-      timeToReachByWalk: 19
+      distance: 578, timeToReachByWalk: 19*60,
+      timeToReachByCar: nil
     ),
     Route(
       startLocationId: Location.sampleLocations[2].id,
       nextLocationId: Location.sampleStartPoint.id,
-      timeToReachByWalk: 7
+      distance: 329, timeToReachByWalk: 7*60,
+      timeToReachByCar: nil
     ),
   ]
 }

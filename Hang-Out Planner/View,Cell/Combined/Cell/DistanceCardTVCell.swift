@@ -9,8 +9,8 @@ import UIKit
 
 class DistanceCardTVCell: CardTVCell {
 
-  override init(reuseIdentifier: String?) {
-      super.init(reuseIdentifier: reuseIdentifier)
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+      super.init(style: style, reuseIdentifier: reuseIdentifier)
   }
   
   required init?(coder: NSCoder) {

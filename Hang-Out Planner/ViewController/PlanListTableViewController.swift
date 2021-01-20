@@ -57,4 +57,12 @@ class PlanListTableViewController: UITableViewController {
     
     return cell
   }
+  
+  // Cell Select -> move to PlanDetailVC
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let planDetailVC = PlanDetailViewController(plan: plans[indexPath.section])
+    navigationController?.pushViewController(planDetailVC, animated: true)
+    print("Section \(indexPath.section), plan: \(plans[indexPath.section])")
+  }
+  
 }

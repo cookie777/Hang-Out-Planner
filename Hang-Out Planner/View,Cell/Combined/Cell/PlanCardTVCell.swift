@@ -9,7 +9,7 @@ import UIKit
 
 
 class PlanCardTVCell: CardTVCell {
-  
+  // cell content
   var totalTimelb = TextLabel(text: "")
   var totalTimeField = SmallHeaderLabel(text: "")
   var locationlb =  TextLabel(text: "")
@@ -30,7 +30,7 @@ class PlanCardTVCell: CardTVCell {
     locationStack.matchLeadingTrailing()
     locationStack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7).isActive = true
     vStackView.matchParent()
-    self.backgroundColor = .systemGray
+    self.backgroundColor = .systemGroupedBackground
   }
   
   required init?(coder: NSCoder) {
@@ -47,8 +47,8 @@ class PlanCardTVCell: CardTVCell {
     }
     locationlb.text = "Place to go: "
     for route in plan.routes {
-      locationField.text = "\(checkLocationName(id: route.startLocationId))"
-      print("\(checkLocationName(id: route.startLocationId))")
+      locationField.text = "\(PlanCardTVCell.checkLocationName(id: route.startLocationId))"
+      print("\(PlanCardTVCell.checkLocationName(id: route.startLocationId))")
     }
   }
   
@@ -63,7 +63,7 @@ class PlanCardTVCell: CardTVCell {
   }
   
   // Return Location title by location id
-  func checkLocationName(id: Int) -> String {
+  static func checkLocationName(id: Int) -> String {
     var locationName = ""
     for location in Location.sampleLocations {
       if location.id == id {

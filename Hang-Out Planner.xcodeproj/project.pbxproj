@@ -47,12 +47,13 @@
 		48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
 		48A4C67625B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
 		48A4C67725B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
-		48A4C68625B5586300264AF9 /* Catetory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C68525B5586300264AF9 /* Catetory.swift */; };
-		48A4C68E25B5588900264AF9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C68D25B5588900264AF9 /* Location.swift */; };
-		48A4C69325B5589C00264AF9 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C69225B5589C00264AF9 /* Route.swift */; };
-		48A4C69825B558AF00264AF9 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C69725B558AF00264AF9 /* Plan.swift */; };
-		48A4C6A025B559E700264AF9 /* Planner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C69F25B559E700264AF9 /* Planner.swift */; };
 		48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4876325B5836800EA55D6 /* BasicLabel.swift */; };
+		48DE334325B8ECE2001630B7 /* Catetory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333C25B8ECE2001630B7 /* Catetory.swift */; };
+		48DE334425B8ECE2001630B7 /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333D25B8ECE2001630B7 /* GlobalVariable.swift */; };
+		48DE334525B8ECE2001630B7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333E25B8ECE2001630B7 /* Location.swift */; };
+		48DE334625B8ECE2001630B7 /* Planner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333F25B8ECE2001630B7 /* Planner.swift */; };
+		48DE334725B8ECE2001630B7 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334025B8ECE2001630B7 /* Route.swift */; };
+		48DE334925B8ECE2001630B7 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334225B8ECE2001630B7 /* Plan.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,12 +110,13 @@
 		48A4C66A25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIEdgeInsetsnilAcceptable.swift; sourceTree = "<group>"; };
 		48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintLayout.swift"; sourceTree = "<group>"; };
 		48A4C67425B557D900264AF9 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
-		48A4C68525B5586300264AF9 /* Catetory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catetory.swift; sourceTree = "<group>"; };
-		48A4C68D25B5588900264AF9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		48A4C69225B5589C00264AF9 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
-		48A4C69725B558AF00264AF9 /* Plan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
-		48A4C69F25B559E700264AF9 /* Planner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planner.swift; sourceTree = "<group>"; };
 		48D4876325B5836800EA55D6 /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
+		48DE333C25B8ECE2001630B7 /* Catetory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catetory.swift; sourceTree = "<group>"; };
+		48DE333D25B8ECE2001630B7 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
+		48DE333E25B8ECE2001630B7 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		48DE333F25B8ECE2001630B7 /* Planner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planner.swift; sourceTree = "<group>"; };
+		48DE334025B8ECE2001630B7 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		48DE334225B8ECE2001630B7 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,11 +211,12 @@
 		48A4C5B125B52E3C00264AF9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				48A4C68525B5586300264AF9 /* Catetory.swift */,
-				48A4C68D25B5588900264AF9 /* Location.swift */,
-				48A4C69225B5589C00264AF9 /* Route.swift */,
-				48A4C69725B558AF00264AF9 /* Plan.swift */,
-				48A4C69F25B559E700264AF9 /* Planner.swift */,
+				48DE333D25B8ECE2001630B7 /* GlobalVariable.swift */,
+				48DE333F25B8ECE2001630B7 /* Planner.swift */,
+				48DE333C25B8ECE2001630B7 /* Catetory.swift */,
+				48DE333E25B8ECE2001630B7 /* Location.swift */,
+				48DE334225B8ECE2001630B7 /* Plan.swift */,
+				48DE334025B8ECE2001630B7 /* Route.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,32 +477,33 @@
 			files = (
 				48A4C65525B5568100264AF9 /* TextLabel.swift in Sources */,
 				48A4C66E25B5574A00264AF9 /* UILabel+LineSpacing.swift in Sources */,
+				48DE334725B8ECE2001630B7 /* Route.swift in Sources */,
 				48A4C66D25B5574A00264AF9 /* VerticalStackView.swift in Sources */,
 				48A4C5E825B552CA00264AF9 /* LocationDetailViewController.swift in Sources */,
-				48A4C69325B5589C00264AF9 /* Route.swift in Sources */,
 				48A4C60C25B553E100264AF9 /* CardTVCell.swift in Sources */,
 				48A4C62625B554AB00264AF9 /* DistanceCardTVCell.swift in Sources */,
-				48A4C68E25B5588900264AF9 /* Location.swift in Sources */,
+				48DE334525B8ECE2001630B7 /* Location.swift in Sources */,
 				48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */,
 				48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */,
 				48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */,
 				48A4C60725B553B400264AF9 /* GoButton.swift in Sources */,
 				48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */,
 				48A4C66F25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift in Sources */,
-				48A4C69825B558AF00264AF9 /* Plan.swift in Sources */,
 				48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */,
 				48A4C65A25B5569000264AF9 /* SubTextLabel.swift in Sources */,
+				48DE334425B8ECE2001630B7 /* GlobalVariable.swift in Sources */,
 				48A4C61725B5546C00264AF9 /* CategoryCardTVCell.swift in Sources */,
 				48A4C60225B553AA00264AF9 /* AddButton.swift in Sources */,
-				48A4C68625B5586300264AF9 /* Catetory.swift in Sources */,
 				48A4C5F225B5536300264AF9 /* MainVCButton.swift in Sources */,
 				48A4C62125B5549500264AF9 /* LocationCardTVCell.swift in Sources */,
 				48A4C5CE25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */,
 				48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */,
 				48A4C5C925B5524700264AF9 /* PlanListTableViewController.swift in Sources */,
 				48A4C61C25B5548000264AF9 /* PlanCardTVCell.swift in Sources */,
+				48DE334925B8ECE2001630B7 /* Plan.swift in Sources */,
+				48DE334325B8ECE2001630B7 /* Catetory.swift in Sources */,
 				48A4C65025B5566100264AF9 /* SmallHeaderLabel.swift in Sources */,
-				48A4C6A025B559E700264AF9 /* Planner.swift in Sources */,
+				48DE334625B8ECE2001630B7 /* Planner.swift in Sources */,
 				48A4C66C25B5574A00264AF9 /* HorizontalStackView.swift in Sources */,
 				48A4C5BE25B5385D00264AF9 /* MainViewController.swift in Sources */,
 				48A4C64825B5564800264AF9 /* MediumHeaderLabel.swift in Sources */,

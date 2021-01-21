@@ -17,7 +17,13 @@ struct Route{
   let timeToReachByWalk : Int?
   let timeToReachByCar  : Int?
   
-
+  /// This is a place to store all routes.
+  /// We will do this when the app is launched.
+  /// But the ideal is, calculates this data at server beforehand, and when the app is launched, we download it.
+  static var allRoutes : [[Route]] = {
+    return [sampleRoutes]
+  }()
+  
   static var sampleRoutes : [Route] = [
     Route(
       startLocationId: Location.sampleStartPoint.id,

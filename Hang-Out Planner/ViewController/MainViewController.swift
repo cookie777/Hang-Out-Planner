@@ -17,7 +17,7 @@ class MainViewController: UIViewController, UITableViewDelegate {
   let cellId = "categories"
   var safeArea: UILayoutGuide!
   // categories that user has selected
-  var selectedCategories: [Categories] = []
+  var selectedCategories: [Categories] = [.cafe, .clothes,.park]
   var sectionTitles: [String] = ["1st Location","2nd Location","3rd Location"]
   var goButton = GoButton()
   let headerTitle1 = LargeHeaderLabel(text: "Where You")

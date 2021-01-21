@@ -9,6 +9,7 @@ import UIKit
 
 class CategoryCardTVCell: CardTVCell, UIPickerViewDelegate, UIPickerViewDataSource {
   
+
   var options:[String] = ["Amusement","Restaurant","Clothes","Park","Cafe","Other"]
 
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -26,6 +27,8 @@ class CategoryCardTVCell: CardTVCell, UIPickerViewDelegate, UIPickerViewDataSour
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     textField.text = options[row]
   }
+
+  
   
   let textField: UITextField = {
     let text = UITextField()
@@ -59,6 +62,8 @@ class CategoryCardTVCell: CardTVCell, UIPickerViewDelegate, UIPickerViewDataSour
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
       super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+//      super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.textField.delegate = self
 
 //    let picker: UIPickerView = UIPickerView()
@@ -90,10 +95,10 @@ class CategoryCardTVCell: CardTVCell, UIPickerViewDelegate, UIPickerViewDataSour
 //           label.isUserInteractionEnabled = true
 //           label.addGestureRecognizer(tap)
 //
-  
-    
-    
   }
+    
+    
+  
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

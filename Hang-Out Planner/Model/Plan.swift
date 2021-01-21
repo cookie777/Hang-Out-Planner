@@ -10,7 +10,11 @@ import Foundation
 /// var plans : [Plan]
 struct Plan{
   let routes    : [Route]
-  let totalTimeByWalk : Int
+  let totalDistance   : Double //meter
   
-  static var samplePlan = Plan(routes: Route.sampleRoutes, totalTimeByWalk: Route.sampleRoutes.reduce(0, {$0+$1.timeToReachByWalk}))
+  let totalTimeByWalk : Int? // second
+  let totalTimeByCar  : Int? // second
+ 
+
+  static var samplePlan = Plan(routes: Route.sampleRoutes, totalDistance: Route.sampleRoutes.reduce(0, {$0+$1.distance}), totalTimeByWalk: Route.sampleRoutes.reduce(0, {$0+$1.timeToReachByWalk!}),totalTimeByCar: nil)
 }

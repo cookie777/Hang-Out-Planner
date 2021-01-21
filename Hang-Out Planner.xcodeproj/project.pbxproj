@@ -250,7 +250,6 @@
 		48A4C63025B5557000264AF9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				48A4C62025B5549500264AF9 /* LocationCardTVCell.swift */,
 				48A4C60B25B553E100264AF9 /* CardTVCell.swift */,
 			);
 			path = Cell;
@@ -277,8 +276,9 @@
 			isa = PBXGroup;
 			children = (
 				48A4C61625B5546C00264AF9 /* CategoryCardTVCell.swift */,
-				48A4C62525B554AB00264AF9 /* DistanceCardTVCell.swift */,
 				48A4C61B25B5548000264AF9 /* PlanCardTVCell.swift */,
+				48A4C62525B554AB00264AF9 /* DistanceCardTVCell.swift */,
+				48A4C62025B5549500264AF9 /* LocationCardTVCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";

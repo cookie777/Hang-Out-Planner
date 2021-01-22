@@ -54,6 +54,7 @@
 		48DE334625B8ECE2001630B7 /* Planner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333F25B8ECE2001630B7 /* Planner.swift */; };
 		48DE334725B8ECE2001630B7 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334025B8ECE2001630B7 /* Route.swift */; };
 		48DE334925B8ECE2001630B7 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334225B8ECE2001630B7 /* Plan.swift */; };
+		B088871F25B911D000D5F9E0 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		48DE333F25B8ECE2001630B7 /* Planner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planner.swift; sourceTree = "<group>"; };
 		48DE334025B8ECE2001630B7 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		48DE334225B8ECE2001630B7 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
+		B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				48A4C5BD25B5385D00264AF9 /* MainViewController.swift */,
+				B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */,
 				48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */,
 				48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */,
 				48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */,
@@ -502,6 +505,7 @@
 				48A4C61C25B5548000264AF9 /* PlanCardTVCell.swift in Sources */,
 				48DE334925B8ECE2001630B7 /* Plan.swift in Sources */,
 				48DE334325B8ECE2001630B7 /* Catetory.swift in Sources */,
+				B088871F25B911D000D5F9E0 /* CategorySelectViewController.swift in Sources */,
 				48A4C65025B5566100264AF9 /* SmallHeaderLabel.swift in Sources */,
 				48DE334625B8ECE2001630B7 /* Planner.swift in Sources */,
 				48A4C66C25B5574A00264AF9 /* HorizontalStackView.swift in Sources */,

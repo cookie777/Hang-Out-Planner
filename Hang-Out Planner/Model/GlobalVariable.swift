@@ -16,7 +16,7 @@ var userCurrentLocation : Location = Location(
   category: .other,
   latitude: userCurrentCoordinates!.0,
   longitude: userCurrentCoordinates!.1,
-  title: "",
+  title: "Temporary start point",
   imageURL: nil,
   address: Location.sampleStartPoint.address,
   website: nil,

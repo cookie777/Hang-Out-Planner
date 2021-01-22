@@ -22,6 +22,11 @@ class PlanListTableViewController: UITableViewController {
     navigationController?.navigationBar.prefersLargeTitles = true
     title = "Your Plans"
     tableView.register(PlanCardTVCell.self, forCellReuseIdentifier: cellId)
+    
+    print("userLocation: \(userCurrentLocation)")
+    print("usercurrentCoordinate: \(userCurrentCoordinates)")
+    print("allRoutes \(allRoutes)")
+    print("plan: \(plans)")
   }
   
   init(plans: [Plan]) {
@@ -44,7 +49,7 @@ class PlanListTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 200
+    return UITableView.automaticDimension
   }
   
   

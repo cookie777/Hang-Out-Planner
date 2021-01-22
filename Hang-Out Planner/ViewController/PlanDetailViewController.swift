@@ -26,7 +26,7 @@ class PlanDetailViewController: UIViewController {
     return imageView
   }()
   
-  let sectionTitle: [String] = ["1st Location", "2nd Location", "3rd Location", "4th Location"]
+  let sectionTitle: [String] = ["Start Point", "1st Location", "2nd Location", "3rd Location", "4th Location"]
   
   init(plan:Plan) {
     self.plan = plan
@@ -48,11 +48,11 @@ class PlanDetailViewController: UIViewController {
     view.addSubview(tableView)
     tableView.anchors(topAnchor: tempImage.bottomAnchor, leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, padding: UIEdgeInsets.init(top: 8, left: 8, bottom: 0, right: 8))
     
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "temp")
     tableView.dataSource = self
     tableView.delegate = self
     
     tableView.register(LocationCardTVCell.self, forCellReuseIdentifier: cellIdForLocation)
+    tableView.register(DistanceCardTVCell.self, forCellReuseIdentifier: cellIdForDistance)
   }
 }
 // Display Table View with plan.startPoint location -> Route -> Time
@@ -75,7 +75,16 @@ extension PlanDetailViewController : UITableViewDataSource {
       let route = plan.routes[indexPath.section]
       cell.update(with: route)
       return cell
-    } else {
+    }
+    
+    if indexPath.row == 1 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForDistance, for: indexPath) as! DistanceCardTVCell
+      let route = plan.routes[indexPath.section]
+      cell.update(with: route)
+      return cell
+    }
+    
+    else {
       let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)
       return cell
     }
@@ -84,6 +93,14 @@ extension PlanDetailViewController : UITableViewDataSource {
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     return sectionTitle[section]
 
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return UITableView.automaticDimension
+  }
+  
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 200
   }
 }
 

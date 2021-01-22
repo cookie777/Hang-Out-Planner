@@ -9,23 +9,12 @@
 /* Begin PBXBuildFile section */
 		48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57125B52D3900264AF9 /* AppDelegate.swift */; };
 		48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57325B52D3900264AF9 /* SceneDelegate.swift */; };
-		48A4C57925B52D3900264AF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48A4C57725B52D3900264AF9 /* Main.storyboard */; };
 		48A4C57B25B52D3B00264AF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48A4C57A25B52D3B00264AF9 /* Assets.xcassets */; };
 		48A4C57E25B52D3B00264AF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48A4C57C25B52D3B00264AF9 /* LaunchScreen.storyboard */; };
-		48A4C58925B52D3B00264AF9 /* Hang_Out_PlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C58825B52D3B00264AF9 /* Hang_Out_PlannerTests.swift */; };
-		48A4C59425B52D3B00264AF9 /* Hang_Out_PlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C59325B52D3B00264AF9 /* Hang_Out_PlannerUITests.swift */; };
 		48A4C5BE25B5385D00264AF9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5BD25B5385D00264AF9 /* MainViewController.swift */; };
 		48A4C5C925B5524700264AF9 /* PlanListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */; };
 		48A4C5CE25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */; };
-		48A4C5CF25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */; };
-		48A4C5D025B5528D00264AF9 /* PlanDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */; };
-		48A4C5D725B552AE00264AF9 /* PlanListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */; };
-		48A4C5DB25B552AF00264AF9 /* PlanListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */; };
-		48A4C5DF25B552B200264AF9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5BD25B5385D00264AF9 /* MainViewController.swift */; };
-		48A4C5E325B552B200264AF9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5BD25B5385D00264AF9 /* MainViewController.swift */; };
 		48A4C5E825B552CA00264AF9 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */; };
-		48A4C5E925B552CA00264AF9 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */; };
-		48A4C5EA25B552CA00264AF9 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */; };
 		48A4C5F225B5536300264AF9 /* MainVCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C5F125B5536300264AF9 /* MainVCButton.swift */; };
 		48A4C60225B553AA00264AF9 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C60125B553AA00264AF9 /* AddButton.swift */; };
 		48A4C60725B553B400264AF9 /* GoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C60625B553B400264AF9 /* GoButton.swift */; };
@@ -45,8 +34,6 @@
 		48A4C66F25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66A25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift */; };
 		48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */; };
 		48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
-		48A4C67625B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
-		48A4C67725B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
 		48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4876325B5836800EA55D6 /* BasicLabel.swift */; };
 		48DE334325B8ECE2001630B7 /* Catetory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333C25B8ECE2001630B7 /* Catetory.swift */; };
 		48DE334425B8ECE2001630B7 /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333D25B8ECE2001630B7 /* GlobalVariable.swift */; };
@@ -57,37 +44,13 @@
 		B088871F25B911D000D5F9E0 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		48A4C58525B52D3B00264AF9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48A4C56625B52D3900264AF9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 48A4C56D25B52D3900264AF9;
-			remoteInfo = "Hang-Out Planner";
-		};
-		48A4C59025B52D3B00264AF9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 48A4C56625B52D3900264AF9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 48A4C56D25B52D3900264AF9;
-			remoteInfo = "Hang-Out Planner";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hang-Out Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A4C57125B52D3900264AF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48A4C57325B52D3900264AF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		48A4C57825B52D3900264AF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		48A4C57A25B52D3B00264AF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48A4C57D25B52D3B00264AF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		48A4C57F25B52D3B00264AF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Hang-Out Planner/Info.plist"; sourceTree = SOURCE_ROOT; };
-		48A4C58425B52D3B00264AF9 /* Hang-Out PlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hang-Out PlannerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		48A4C58825B52D3B00264AF9 /* Hang_Out_PlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hang_Out_PlannerTests.swift; sourceTree = "<group>"; };
-		48A4C58A25B52D3B00264AF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48A4C58F25B52D3B00264AF9 /* Hang-Out PlannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hang-Out PlannerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		48A4C59325B52D3B00264AF9 /* Hang_Out_PlannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hang_Out_PlannerUITests.swift; sourceTree = "<group>"; };
-		48A4C59525B52D3B00264AF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48A4C5BD25B5385D00264AF9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanListTableViewController.swift; sourceTree = "<group>"; };
 		48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDetailViewController.swift; sourceTree = "<group>"; };
@@ -129,20 +92,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		48A4C58125B52D3B00264AF9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		48A4C58C25B52D3B00264AF9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -150,8 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				48A4C57025B52D3900264AF9 /* Hang-Out Planner */,
-				48A4C58725B52D3B00264AF9 /* Hang-Out PlannerTests */,
-				48A4C59225B52D3B00264AF9 /* Hang-Out PlannerUITests */,
 				48A4C56F25B52D3900264AF9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -160,8 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */,
-				48A4C58425B52D3B00264AF9 /* Hang-Out PlannerTests.xctest */,
-				48A4C58F25B52D3B00264AF9 /* Hang-Out PlannerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,31 +124,12 @@
 			path = "Hang-Out Planner";
 			sourceTree = "<group>";
 		};
-		48A4C58725B52D3B00264AF9 /* Hang-Out PlannerTests */ = {
-			isa = PBXGroup;
-			children = (
-				48A4C58825B52D3B00264AF9 /* Hang_Out_PlannerTests.swift */,
-				48A4C58A25B52D3B00264AF9 /* Info.plist */,
-			);
-			path = "Hang-Out PlannerTests";
-			sourceTree = "<group>";
-		};
-		48A4C59225B52D3B00264AF9 /* Hang-Out PlannerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				48A4C59325B52D3B00264AF9 /* Hang_Out_PlannerUITests.swift */,
-				48A4C59525B52D3B00264AF9 /* Info.plist */,
-			);
-			path = "Hang-Out PlannerUITests";
-			sourceTree = "<group>";
-		};
 		48A4C5A425B52DDD00264AF9 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
 				48A4C66425B5574A00264AF9 /* Utils */,
 				48A4C57125B52D3900264AF9 /* AppDelegate.swift */,
 				48A4C57325B52D3900264AF9 /* SceneDelegate.swift */,
-				48A4C57725B52D3900264AF9 /* Main.storyboard */,
 				48A4C57A25B52D3B00264AF9 /* Assets.xcassets */,
 				48A4C57C25B52D3B00264AF9 /* LaunchScreen.storyboard */,
 			);
@@ -368,42 +294,6 @@
 			productReference = 48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */;
 			productType = "com.apple.product-type.application";
 		};
-		48A4C58325B52D3B00264AF9 /* Hang-Out PlannerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 48A4C59B25B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out PlannerTests" */;
-			buildPhases = (
-				48A4C58025B52D3B00264AF9 /* Sources */,
-				48A4C58125B52D3B00264AF9 /* Frameworks */,
-				48A4C58225B52D3B00264AF9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				48A4C58625B52D3B00264AF9 /* PBXTargetDependency */,
-			);
-			name = "Hang-Out PlannerTests";
-			productName = "Hang-Out PlannerTests";
-			productReference = 48A4C58425B52D3B00264AF9 /* Hang-Out PlannerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		48A4C58E25B52D3B00264AF9 /* Hang-Out PlannerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 48A4C59E25B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out PlannerUITests" */;
-			buildPhases = (
-				48A4C58B25B52D3B00264AF9 /* Sources */,
-				48A4C58C25B52D3B00264AF9 /* Frameworks */,
-				48A4C58D25B52D3B00264AF9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				48A4C59125B52D3B00264AF9 /* PBXTargetDependency */,
-			);
-			name = "Hang-Out PlannerUITests";
-			productName = "Hang-Out PlannerUITests";
-			productReference = 48A4C58F25B52D3B00264AF9 /* Hang-Out PlannerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -415,14 +305,6 @@
 				TargetAttributes = {
 					48A4C56D25B52D3900264AF9 = {
 						CreatedOnToolsVersion = 12.3;
-					};
-					48A4C58325B52D3B00264AF9 = {
-						CreatedOnToolsVersion = 12.3;
-						TestTargetID = 48A4C56D25B52D3900264AF9;
-					};
-					48A4C58E25B52D3B00264AF9 = {
-						CreatedOnToolsVersion = 12.3;
-						TestTargetID = 48A4C56D25B52D3900264AF9;
 					};
 				};
 			};
@@ -440,8 +322,6 @@
 			projectRoot = "";
 			targets = (
 				48A4C56D25B52D3900264AF9 /* Hang-Out Planner */,
-				48A4C58325B52D3B00264AF9 /* Hang-Out PlannerTests */,
-				48A4C58E25B52D3B00264AF9 /* Hang-Out PlannerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -453,21 +333,6 @@
 			files = (
 				48A4C57E25B52D3B00264AF9 /* LaunchScreen.storyboard in Resources */,
 				48A4C57B25B52D3B00264AF9 /* Assets.xcassets in Resources */,
-				48A4C57925B52D3900264AF9 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		48A4C58225B52D3B00264AF9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		48A4C58D25B52D3B00264AF9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,56 +379,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		48A4C58025B52D3B00264AF9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				48A4C5D725B552AE00264AF9 /* PlanListTableViewController.swift in Sources */,
-				48A4C5E925B552CA00264AF9 /* LocationDetailViewController.swift in Sources */,
-				48A4C67625B557D900264AF9 /* NetworkController.swift in Sources */,
-				48A4C5CF25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */,
-				48A4C58925B52D3B00264AF9 /* Hang_Out_PlannerTests.swift in Sources */,
-				48A4C5DF25B552B200264AF9 /* MainViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		48A4C58B25B52D3B00264AF9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				48A4C5DB25B552AF00264AF9 /* PlanListTableViewController.swift in Sources */,
-				48A4C5EA25B552CA00264AF9 /* LocationDetailViewController.swift in Sources */,
-				48A4C67725B557D900264AF9 /* NetworkController.swift in Sources */,
-				48A4C5D025B5528D00264AF9 /* PlanDetailViewController.swift in Sources */,
-				48A4C59425B52D3B00264AF9 /* Hang_Out_PlannerUITests.swift in Sources */,
-				48A4C5E325B552B200264AF9 /* MainViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		48A4C58625B52D3B00264AF9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 48A4C56D25B52D3900264AF9 /* Hang-Out Planner */;
-			targetProxy = 48A4C58525B52D3B00264AF9 /* PBXContainerItemProxy */;
-		};
-		48A4C59125B52D3B00264AF9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 48A4C56D25B52D3900264AF9 /* Hang-Out Planner */;
-			targetProxy = 48A4C59025B52D3B00264AF9 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		48A4C57725B52D3900264AF9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				48A4C57825B52D3900264AF9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		48A4C57C25B52D3B00264AF9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -728,86 +546,6 @@
 			};
 			name = Release;
 		};
-		48A4C59C25B52D3B00264AF9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Hang-Out PlannerTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-PlannerTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hang-Out Planner.app/Hang-Out Planner";
-			};
-			name = Debug;
-		};
-		48A4C59D25B52D3B00264AF9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Hang-Out PlannerTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-PlannerTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hang-Out Planner.app/Hang-Out Planner";
-			};
-			name = Release;
-		};
-		48A4C59F25B52D3B00264AF9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Hang-Out PlannerUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-PlannerUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Hang-Out Planner";
-			};
-			name = Debug;
-		};
-		48A4C5A025B52D3B00264AF9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Hang-Out PlannerUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TakayukiYamaguchi.Hang-Out-PlannerUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Hang-Out Planner";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -825,24 +563,6 @@
 			buildConfigurations = (
 				48A4C59925B52D3B00264AF9 /* Debug */,
 				48A4C59A25B52D3B00264AF9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		48A4C59B25B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out PlannerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				48A4C59C25B52D3B00264AF9 /* Debug */,
-				48A4C59D25B52D3B00264AF9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		48A4C59E25B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out PlannerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				48A4C59F25B52D3B00264AF9 /* Debug */,
-				48A4C5A025B52D3B00264AF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

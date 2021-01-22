@@ -76,7 +76,7 @@ class Planner {
     }
 
     let planCandidates = generatePlanCandidates(locationCandidates)
-    print(planCandidates)
+//    print(planCandidates)
     let topNPlans =  selectTopNPlans(plans: planCandidates)
     return topNPlans
   }
@@ -159,7 +159,6 @@ class Planner {
     // create plan objects
     for plan in topNPlans{
       
-      
       var routes : [Route] = []
       var currentPlan : Plan
       
@@ -176,8 +175,8 @@ class Planner {
         )
         routes.append(route)
       }
-      
-      currentPlan = Plan(routes: routes, totalDistance: plan.value, totalTimeByWalk: nil, totalTimeByCar: nil)
+
+      currentPlan = Plan(routes: routes, destinationList: plan.key, totalDistance: plan.value, totalTimeByWalk: nil, totalTimeByCar: nil)
       returnPlans.append(currentPlan)
       
     }

@@ -22,11 +22,6 @@ class PlanListTableViewController: UITableViewController {
     navigationController?.navigationBar.prefersLargeTitles = true
     title = "Your Plans"
     tableView.register(PlanCardTVCell.self, forCellReuseIdentifier: cellId)
-    
-    print("userLocation: \(userCurrentLocation)")
-    print("usercurrentCoordinate: \(userCurrentCoordinates)")
-    print("allRoutes \(allRoutes)")
-    print("plan: \(plans)")
   }
   
   init(plans: [Plan]) {
@@ -39,7 +34,6 @@ class PlanListTableViewController: UITableViewController {
   }
   
   // MARK: - Table view data source
-  
   override func numberOfSections(in tableView: UITableView) -> Int {
     return plans.count
   }
@@ -67,7 +61,6 @@ class PlanListTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let planDetailVC = PlanDetailViewController(plan: plans[indexPath.section])
     navigationController?.pushViewController(planDetailVC, animated: true)
-    print("Section \(indexPath.section), plan: \(plans[indexPath.section])")
   }
   
 }

@@ -23,8 +23,7 @@ class PlanCardTVCell: CardTVCell {
     let totalDistanceStack = HorizontalStackView(arrangedSubviews: [totalDistancelb,totalDistanceField], spacing: 5, alignment: .fill, distribution: .fillEqually)
     let totalTimeStack = HorizontalStackView(arrangedSubviews: [totalTimelb, totalTimeField], spacing: 5, alignment: .fill, distribution: .fillEqually)
     let locationStack = HorizontalStackView(arrangedSubviews: [locationlb, locationField], spacing: 5, alignment: .fill, distribution: .fillEqually)
-    locationField.numberOfLines = 0
-    locationField.sizeToFit()
+   
     
     let vStackView = VerticalStackView(arrangedSubviews: [totalDistanceStack, totalTimeStack, locationStack], spacing: 0, alignment: .fill, distribution: .fillProportionally)
     contentView.addSubview(vStackView)
@@ -34,6 +33,7 @@ class PlanCardTVCell: CardTVCell {
     locationStack.matchLeadingTrailing()
     vStackView.matchParent()
     self.backgroundColor = .systemGroupedBackground
+
   }
   
   required init?(coder: NSCoder) {
@@ -53,7 +53,7 @@ class PlanCardTVCell: CardTVCell {
       locations = locations + "\(PlanCardTVCell.checkLocationName(id: route.startLocationId)) \n"
     }
     locationField.text = locations
-    
+
   }
   
   static func meterToKm(distance: Double) -> Double{

@@ -161,8 +161,9 @@ class Planner {
       
       var routes : [Route] = []
       var currentPlan : Plan
+      let theNumOfLocation = plan.key.count-2
       
-      for i in 0...plan.key.count-2{
+      for i in 0...theNumOfLocation{
         let start = plan.key[i]
         let end = plan.key[i+1]
         
@@ -175,8 +176,47 @@ class Planner {
         )
         routes.append(route)
       }
+      
+      // Creating all ave values. I can integrate this into previous for loop and it's better. But to make it readable, I split.
+      var aveRating = 0.0
+      var aveRatingNil = 0
+      var aveReviewCount = 0.0
+      var avePriceLevel = 0.0
+  
+      for i in 1...theNumOfLocation{
+        let currentLocation = allLocations[plan.key[i]]
+        if let r = currentLocation.rating{
+          aveRating += r
+        }else{
+          aveRatingNil += 1
+        }
+        if let rc = currentLocation.reviewCount{
+          aveReviewCount += Double(rc)
+        }
+        if let p = currentLocation.priceLevel{
+          avePriceLevel += Double(p)
+        }else if currentLocation.category != .park{
+          // if nil -> set average priceLevel 2, but as for park, set 0.
+          avePriceLevel += 2
+        }
+      }
+      
+      aveRating =  aveRating / Double(theNumOfLocation - aveRatingNil)
+      aveReviewCount = aveReviewCount / Double(theNumOfLocation)
+      avePriceLevel = avePriceLevel / Double(theNumOfLocation)
 
-      currentPlan = Plan(routes: routes, destinationList: plan.key, totalDistance: plan.value, totalTimeByWalk: nil, totalTimeByCar: nil)
+
+      currentPlan = Plan(
+        routes: routes,
+        destinationList: plan.key,
+        totalDistance: plan.value,
+        totalTimeByWalk: nil,
+        totalTimeByCar: nil,
+        averageRating: aveRating,
+        averageReviewCount: aveReviewCount,
+        averagePriceLevel: avePriceLevel,
+        averagePopularity: nil
+      )
       returnPlans.append(currentPlan)
       
     }

@@ -14,6 +14,8 @@ struct Route{
   let distance          : Double // meter
   
   // time(second) cost to go the next location.
+  // These two time will be estimated not from api, but just from simple calculate using average speed.
+  // Ideally, we can get from mapkit but there is an api limitation. So this time, don't use it.
   let timeToReachByWalk : Int?
   let timeToReachByCar  : Int?
   

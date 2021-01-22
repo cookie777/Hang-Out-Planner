@@ -20,7 +20,9 @@ var userCurrentLocation : Location = Location(
   imageURL: nil,
   address: Location.sampleStartPoint.address,
   website: nil,
-  rating: nil
+  rating: nil,
+  reviewCount: nil,
+  priceLevel: nil
 )
 
 var allLocations  = [userCurrentLocation] + Location.sampleLocations

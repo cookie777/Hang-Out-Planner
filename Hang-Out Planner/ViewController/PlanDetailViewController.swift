@@ -29,7 +29,8 @@ class PlanDetailViewController: UIViewController, CLLocationManagerDelegate, MKM
     return mapView
   }()
   
-  let sectionTitle: [String] = ["Start Point", "1st Location", "2nd Location", "3rd Location", "4th Location"]
+//  let sectionTitle: [String] = ["Start Point", "1st Location", "2nd Location", "3rd Location", "4th Location"]
+  var sectionTitles:[String] = ["Starting point"]
   
   init(plan:Plan) {
     self.plan = plan
@@ -60,6 +61,17 @@ class PlanDetailViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     tableView.sectionHeaderHeight = 25
     mapView.delegate = self
+    
+    // all the route count including starting point
+    let numOfRoutes = plan.routes.count
+    for index in  1...numOfRoutes - 1{
+      sectionTitles = sectionTitles + ["Location \(index)"]
+    }
+    sectionTitles = sectionTitles + ["Starting point"]
+    print("Section titles: \(sectionTitles)")
+    
+    
+    
   }
   
   func mapThis(destinationCord: CLLocationCoordinate2D){
@@ -107,37 +119,41 @@ class PlanDetailViewController: UIViewController, CLLocationManagerDelegate, MKM
 extension PlanDetailViewController : UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return plan.routes.count
+    return plan.routes.count + 1
   }
   
   // display LocationCardTVCell for row1, DistanceCardTVCell for row2
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 2
+    if section < plan.routes.count {return 2} else {return 0}
+
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-    switch indexPath.row {
-    case 0:
-      let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)  as! LocationCardTVCell
-      let route = plan.routes[indexPath.section]
-      cell.update(with: route)
-      // routeのstartid -> alllocations -> latitude and longitude
+    if indexPath.section < plan.routes.count {
+      switch indexPath.row {
+      case 0:
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)  as! LocationCardTVCell
+        let route = plan.routes[indexPath.section]
+        cell.update(with: route)
+        // routeのstartid -> alllocations -> latitude and longitude
 
-      
-      return cell
-    case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForDistance, for: indexPath) as! DistanceCardTVCell
-      let route = plan.routes[indexPath.section]
-      cell.update(with: route)
-      return cell
-    default:
-      fatalError()
+        
+        return cell
+      case 1:
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForDistance, for: indexPath) as! DistanceCardTVCell
+        let route = plan.routes[indexPath.section]
+        cell.update(with: route)
+        return cell
+      default:
+        fatalError()
+      }
+    } else {
+      return UITableViewCell()
     }
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return sectionTitle[section]
+    return sectionTitles[section]
 
   }
   

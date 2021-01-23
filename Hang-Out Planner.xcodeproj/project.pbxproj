@@ -74,6 +74,7 @@
 		48A4C66A25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIEdgeInsetsnilAcceptable.swift; sourceTree = "<group>"; };
 		48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintLayout.swift"; sourceTree = "<group>"; };
 		48A4C67425B557D900264AF9 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		48B59E2E25BBD446008FC66E /* DefaultLocation(Vancouver).gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DefaultLocation(Vancouver).gpx"; sourceTree = "<group>"; };
 		48D4876325B5836800EA55D6 /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		48DE333C25B8ECE2001630B7 /* Catetory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catetory.swift; sourceTree = "<group>"; };
 		48DE333D25B8ECE2001630B7 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 		48A4C56525B52D3900264AF9 = {
 			isa = PBXGroup;
 			children = (
+				48B59E2E25BBD446008FC66E /* DefaultLocation(Vancouver).gpx */,
 				48A4C57025B52D3900264AF9 /* Hang-Out Planner */,
 				48A4C56F25B52D3900264AF9 /* Products */,
 			);

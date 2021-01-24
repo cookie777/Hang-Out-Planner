@@ -45,12 +45,7 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Start tracking user data
-    LocationManager.shared.start(completion: {
-      // update user annotation here
-      print("update user annotation here")
-    })
-    
+
     view.backgroundColor = .systemBackground
     safeArea = view.layoutMarginsGuide
     
@@ -142,8 +137,6 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
     let nextVC = PlanListTableViewController(plans: plans)
     // Move to next VC
     navigationController?.pushViewController(nextVC, animated: true)
-    // Stop tracking user data
-    LocationManager.shared.stop()
   }
   
   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -204,3 +197,26 @@ extension MainViewController: UITableViewDataSource {
   }
 }
 
+
+// MARK: - Location manager process.
+// Here, we manage when to start and stop location manager.
+// The first time is called in viewDid load.
+
+extension MainViewController{
+  
+  override func viewWillAppear(_ animated: Bool) {
+    // Start updating location. Added by Yanmer
+    print("start mVC lc at will")
+    LocationController.shared.start(completion: {
+      // update user annotation here
+      print("update user annotation here")
+    })
+
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    // Stop tracking user data.  Added by Yanmer.
+    print("stop mVC lc at will")
+    LocationController.shared.stop()
+  }
+}

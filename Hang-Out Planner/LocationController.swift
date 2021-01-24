@@ -8,10 +8,11 @@
 import Foundation
 import CoreLocation
 
-class LocationManager: NSObject, CLLocationManagerDelegate {
-  static let shared = LocationManager()
-  private let locationManager : CLLocationManager
-  private var afterLocationUpdated : (()->Void)?
+class LocationController: NSObject, CLLocationManagerDelegate {
+  static let shared = LocationController()
+  let locationManager : CLLocationManager
+  var afterLocationUpdated : (()->Void)?
+  
   
   private override init() {
     // create only one locationManager
@@ -27,6 +28,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
   /// - Parameter completion: an action you want to do when the user location is updated.
   func start(completion : @escaping(()->Void)) {
     locationManager.requestAlwaysAuthorization()
+    //    locationManager.requestWhenInUseAuthorization()
     locationManager.startUpdatingLocation()
     self.afterLocationUpdated = completion
   }
@@ -49,13 +51,14 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
   }
   
-  
-  
-  
   // Error handling. This will be called when unable to retrieve a location value.
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    print(error)
-    locationManager.stopUpdatingLocation()
+    let status = manager.authorizationStatus
+    if status == .denied || status == .restricted || status == .notDetermined{
+      print("just user haven't allow using location data so nil. Don't worry")
+    }else{
+      print("fatal error: \(error)")
+    }
   }
   
   // If user denied using their location, we set some default location.

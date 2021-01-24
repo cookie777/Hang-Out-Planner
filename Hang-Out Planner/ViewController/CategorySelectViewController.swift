@@ -23,12 +23,12 @@ class CategorySelectViewController: UIViewController {
   let headerTitle2 = LargeHeaderLabel(text: "You Feeling?")
   let smallTitle1 = SmallHeaderLabel(text: "Current Location")
   let smallTitle2 = SmallHeaderLabel(text: "Location Types")
-  let categoryName0 = MediumHeaderLabel(text: "Cafe")
-  let categoryName1 = MediumHeaderLabel(text: "Amusment")
-  let categoryName2 = MediumHeaderLabel(text: "Clothes")
-  let categoryName3 = MediumHeaderLabel(text: "Cafe")
-  let categoryName4 = MediumHeaderLabel(text: "Restaurant")
-  let categoryName5 = MediumHeaderLabel(text: "Nature,Park")
+  let categoryName0 = MediumHeaderLabel(text: Categories.cafe.rawValue)
+  let categoryName1 = MediumHeaderLabel(text: Categories.amusement.rawValue)
+  let categoryName2 = MediumHeaderLabel(text: Categories.clothes.rawValue)
+  let categoryName3 = MediumHeaderLabel(text: Categories.cafe.rawValue)
+  let categoryName4 = MediumHeaderLabel(text: Categories.restaurant.rawValue)
+  let categoryName5 = MediumHeaderLabel(text: Categories.park.rawValue)
   
  
   override func viewDidLoad() {

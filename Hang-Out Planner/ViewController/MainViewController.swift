@@ -18,10 +18,11 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
   var safeArea: UILayoutGuide!
   
   var selectedCategories: [Categories] = [.cafe,.clothes,.park]
-  var categoryArray :[[String]] = [["Cafe"],["Clothes"],["Park"]]
+  var categoryArray :[[String]] = [[Categories.cafe.rawValue],[Categories.clothes.rawValue],[Categories.park.rawValue],[],[]]
   
   var sectionTitles: [String] = ["1st Location","2nd Location","3rd Location"]
   var goButton = GoButton()
+  var addButton = AddButton()
   let headerTitle1 = LargeHeaderLabel(text: "Where You")
   let headerTitle2 = LargeHeaderLabel(text: "Want To Go?")
   
@@ -83,19 +84,24 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
     tableview.translatesAutoresizingMaskIntoConstraints = false
     tableview.topAnchor.constraint(equalTo: locationLavel.bottomAnchor, constant: 16).isActive = true
     tableview.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    tableview.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 8).isActive
+    tableview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -88).isActive
       = true
     tableview.separatorStyle = .none
-    
-    
+  
     //Add goButton to view (you can modify this)
     view.addSubview(goButton)
     //    goButton.centerXYinSafeArea(view)
     goButton.translatesAutoresizingMaskIntoConstraints = false
     goButton.addTarget(self, action: #selector(goButtonTapped), for: .touchUpInside)
-//    goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -144).isActive = true
-    goButton.centerXin(view)
+    goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -144).isActive = true
+    //    goButton.centerXin(view)
     goButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
+    
+    view.addSubview(addButton)
+    addButton.translatesAutoresizingMaskIntoConstraints = false
+    addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+    addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 144).isActive = true
+    addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
   }
   
   func edit(_ category: String,_ row: Int, _ section:Int) {
@@ -107,19 +113,19 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
     tableview.reloadData()
     
     switch category {
-    case "Amusment":
+    case Categories.amusement.rawValue:
       selectedCategories.remove(at: section)
       selectedCategories.insert(.amusement, at: section)
-    case "Cafe":
+    case Categories.cafe.rawValue:
       selectedCategories.remove(at: section)
       selectedCategories.insert(.cafe, at: section)
-    case "Clothes":
+    case Categories.clothes.rawValue:
       selectedCategories.remove(at: section)
       selectedCategories.insert(.clothes, at: section)
-    case "Restaurant":
+    case Categories.restaurant.rawValue:
       selectedCategories.remove(at: section)
       selectedCategories.insert(.restaurant, at: section)
-    case "Nature,Park":
+    case Categories.park.rawValue:
       selectedCategories.remove(at: section)
       selectedCategories.insert(.park, at: section)
     default:
@@ -132,8 +138,44 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
     //Send selectedCategories to planner model
     let plans = Planner.calculatePlans(categories: selectedCategories)
     let nextVC = PlanListTableViewController(plans: plans)
+    
     // Move to next VC
     navigationController?.pushViewController(nextVC, animated: true)
+  }
+  
+  @objc func addButtonTapped(){
+    switch sectionTitles.count {
+    case 1:
+      sectionTitles.append("2nd Location")
+      categoryArray[1].insert(Categories.clothes.rawValue, at: 0)
+      selectedCategories.append(.clothes)
+    case 2:
+      sectionTitles.append("3rd Location")
+      categoryArray[2].insert(Categories.park.rawValue, at: 0)
+      selectedCategories.append(.park)
+    case 3:
+      sectionTitles.append("4th Location")
+      categoryArray[3].insert(Categories.restaurant.rawValue, at: 0)
+      selectedCategories.append(.restaurant)
+    case 4:
+      sectionTitles.append("5th Location")
+      categoryArray[4].insert(Categories.amusement.rawValue, at: 0)
+      selectedCategories.append(.amusement)
+    default:
+      print("Add Button didn't work...")
+    }
+    tableview.reloadData()
+    print(categoryArray)
+    print(selectedCategories)
+    updateAddButtonState()
+  }
+//  if the number of section is over 4, add button will disappear
+  func updateAddButtonState() {
+    if sectionTitles.count == 5 {
+      addButton.isHidden = true
+    } else {
+      addButton.isHidden = false
+    }
   }
   
   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -141,18 +183,36 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    3
+    sectionTitles.count
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     return sectionTitles[section]
   }
   
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    if !categoryArray[1].isEmpty {
+      return .delete
+    } else {
+      return .none
+    }
+  }
+  
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    tableview.isUserInteractionEnabled = false
-    tableview.allowsSelection = false
-    tableview.deselectRow(at: indexPath, animated: false)
+    if editingStyle == .delete {
+      categoryArray[indexPath.section].remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+      sectionTitles.removeLast()
+      selectedCategories.remove(at: indexPath.section)
+      let sampleArray:[String] = categoryArray.flatMap { $0 }
+      var sampleArray2 :[[String]] = [[],[],[],[],[]]
+      for i in 0...sampleArray.count-1 {
+        sampleArray2[i].insert(sampleArray[i], at: 0)
+      }
+      categoryArray = sampleArray2
+    }
     tableview.reloadData()
+    updateAddButtonState()
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -163,10 +223,10 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
     return 80
   }
   
-  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-    let removedToDoItem = categoryArray[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-    categoryArray[destinationIndexPath.section].insert(removedToDoItem, at: destinationIndexPath.row)
-  }
+  //  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+  //    let removedToDoItem = categoryArray[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+  //    categoryArray[destinationIndexPath.section].insert(removedToDoItem, at: destinationIndexPath.row)
+  //  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let addEditVC = CategorySelectViewController()
@@ -179,12 +239,11 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
     tableview.deselectRow(at: indexPath, animated: true)
     tableview.reloadData()
   }
-  
 }
 
 extension MainViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return categoryArray[section].count
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell

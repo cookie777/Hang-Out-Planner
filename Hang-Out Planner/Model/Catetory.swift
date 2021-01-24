@@ -11,13 +11,13 @@ import Foundation
 /// Definition of categories
 /// eg usage,
 /// var userOrder: [Categories] = [.clothes, .restaurant, .park]
-enum Categories{
-  case amusement
-  case restaurant
-  case clothes
-  case park
-  case cafe
-  case other
+enum Categories : String {
+  case amusement = "Amusement"
+  case restaurant = "Restaurant"
+  case clothes = "Clothes"
+  case park = "Park"
+  case cafe = "Cafe"
+  case other = "Other"
 }
 
 

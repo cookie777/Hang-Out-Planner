@@ -15,8 +15,6 @@ import UIKit
 ///  and move to next VC.
 class MainViewController: UIViewController, UITableViewDelegate,UINavigationControllerDelegate,EditCategoryDelegate{
   
-  // This variable is used for tracking user's location
-  private var locationManager: CLLocationManager?
   
   let cellId = "categories"
   var safeArea: UILayoutGuide!
@@ -47,7 +45,11 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setUpLocationManager() // This func is ask user to use their location tracking service.
+    // Start tracking user data
+    LocationManager.shared.start(completion: {
+      // update user annotation here
+      print("update user annotation here")
+    })
     
     view.backgroundColor = .systemBackground
     safeArea = view.layoutMarginsGuide
@@ -140,6 +142,8 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
     let nextVC = PlanListTableViewController(plans: plans)
     // Move to next VC
     navigationController?.pushViewController(nextVC, animated: true)
+    // Stop tracking user data
+    LocationManager.shared.stop()
   }
   
   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -199,56 +203,4 @@ extension MainViewController: UITableViewDataSource {
     return cell
   }
 }
-
-
-
-
-
-
-// MARK: - GPS Tracker feature.
-// Added by Yanmer
-
-// This library is required for tracking user's location
-import CoreLocation
-
-extension MainViewController: CLLocationManagerDelegate{
-  
-  // Create LocationManager and ask user to use it.
-  func setUpLocationManager(){
-    locationManager = CLLocationManager()
-    locationManager?.requestAlwaysAuthorization()
-    locationManager?.startUpdatingLocation()
-    locationManager?.delegate = self
-  }
-  
-  // If user denied using their location, we set some default location.
-  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    
-    let status = manager.authorizationStatus
-    if status == .denied || status == .restricted || status == .notDetermined{
-      userCurrentCoordinates = (
-        Location.sampleStartPoint.latitude,
-        Location.sampleStartPoint.longitude
-      )
-    }
-    
-  }
-  
-  // Whenever user location is updated(change), this func is invoked. Delegate.
-  // You can update your global variable, and
-  // you can update your annotation 📍 place in map view.
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    
-    // update user current location
-    userCurrentCoordinates = (
-      Double((locations.last?.coordinate.latitude )!),
-      Double((locations.last?.coordinate.longitude)!)
-    )
-    
-    // update pin(annotation) location
-    // at later here !
-  }
-  
-}
-
 

@@ -16,4 +16,7 @@ import UIKit
 class NetworkController {
   static let shared = NetworkController()
   private init(){}
+  
+  
 }
+

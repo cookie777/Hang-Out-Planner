@@ -13,7 +13,7 @@ import UIKit
 ///  Here, user can select categories in certain order.
 ///  If user push "go", it will pass [Category] to Planner,
 ///  and move to next VC.
-class MainViewController: UIViewController, UITableView
+class MainViewController: UIViewController, UITableViewDelegate
 ,UINavigationControllerDelegate,EditCategoryDelegate{
   
   
@@ -283,16 +283,13 @@ extension MainViewController{
   
   override func viewWillAppear(_ animated: Bool) {
     // Start updating location. Added by Yanmer
-    print("start mVC lc at will")
     LocationController.shared.start(completion: {
       // update user annotation here
-      print("update user annotation here")
     })
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     // Stop tracking user data.  Added by Yanmer.
-    print("stop mVC lc at will")
     LocationController.shared.stop()
   }
 }

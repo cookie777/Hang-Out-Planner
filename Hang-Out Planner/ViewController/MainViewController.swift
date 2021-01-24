@@ -8,11 +8,15 @@
 import UIKit
 
 
+
 ///  Main(home and top) screen.
 ///  Here, user can select categories in certain order.
 ///  If user push "go", it will pass [Category] to Planner,
 ///  and move to next VC.
 class MainViewController: UIViewController, UITableViewDelegate,UINavigationControllerDelegate,EditCategoryDelegate{
+  
+  // This variable is used for tracking user's location
+  private var locationManager: CLLocationManager?
   
   let cellId = "categories"
   var safeArea: UILayoutGuide!
@@ -44,6 +48,8 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setUpLocationManager() // This func is ask user to use their location tracking service.
+    
     view.backgroundColor = .systemBackground
     safeArea = view.layoutMarginsGuide
     
@@ -87,14 +93,13 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
     tableview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -88).isActive
       = true
     tableview.separatorStyle = .none
-  
+    
     //Add goButton to view (you can modify this)
     view.addSubview(goButton)
     //    goButton.centerXYinSafeArea(view)
     goButton.translatesAutoresizingMaskIntoConstraints = false
     goButton.addTarget(self, action: #selector(goButtonTapped), for: .touchUpInside)
     goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -144).isActive = true
-    //    goButton.centerXin(view)
     goButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
     
     view.addSubview(addButton)
@@ -144,32 +149,49 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
   }
   
   @objc func addButtonTapped(){
+    let addEditVC = CategorySelectViewController()
+    addEditVC.delegate = self
+    
     switch sectionTitles.count {
     case 1:
       sectionTitles.append("2nd Location")
       categoryArray[1].insert(Categories.clothes.rawValue, at: 0)
       selectedCategories.append(.clothes)
+      addEditVC.categoryName0.text = Categories.clothes.rawValue
+      addEditVC.row = 0
+      addEditVC.section = 1
     case 2:
       sectionTitles.append("3rd Location")
       categoryArray[2].insert(Categories.park.rawValue, at: 0)
       selectedCategories.append(.park)
+      addEditVC.categoryName0.text = Categories.park.rawValue
+      addEditVC.row = 0
+      addEditVC.section = 2
     case 3:
       sectionTitles.append("4th Location")
       categoryArray[3].insert(Categories.restaurant.rawValue, at: 0)
       selectedCategories.append(.restaurant)
+      addEditVC.categoryName0.text = Categories.restaurant.rawValue
+      addEditVC.row = 0
+      addEditVC.section = 3
     case 4:
       sectionTitles.append("5th Location")
       categoryArray[4].insert(Categories.amusement.rawValue, at: 0)
       selectedCategories.append(.amusement)
+      addEditVC.categoryName0.text = Categories.amusement.rawValue
+      addEditVC.row = 0
+      addEditVC.section = 4
     default:
       print("Add Button didn't work...")
     }
+    let addToDoVC = UINavigationController(rootViewController: addEditVC)
+    present(addToDoVC, animated: true, completion: nil)
     tableview.reloadData()
     print(categoryArray)
     print(selectedCategories)
     updateAddButtonState()
   }
-//  if the number of section is over 4, add button will disappear
+  //  if the number of section is over 4, add button will disappear
   func updateAddButtonState() {
     if sectionTitles.count == 5 {
       addButton.isHidden = true
@@ -252,3 +274,51 @@ extension MainViewController: UITableViewDataSource {
     return cell
   }
 }
+
+// MARK: - GPS Tracker feature.
+// Added by Yanmer
+
+// This library is required for tracking user's location
+import CoreLocation
+
+extension MainViewController: CLLocationManagerDelegate{
+  
+  // Create LocationManager and ask user to use it.
+  func setUpLocationManager(){
+    locationManager = CLLocationManager()
+    locationManager?.requestAlwaysAuthorization()
+    locationManager?.startUpdatingLocation()
+    locationManager?.delegate = self
+  }
+  
+  // If user denied using their location, we set some default location.
+  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    
+    let status = manager.authorizationStatus
+    if status == .denied || status == .restricted || status == .notDetermined{
+      userCurrentCoordinates = (
+        Location.sampleStartPoint.latitude,
+        Location.sampleStartPoint.longitude
+      )
+    }
+    
+  }
+  
+  // Whenever user location is updated(change), this func is invoked. Delegate.
+  // You can update your global variable, and
+  // you can update your annotation 📍 place in map view.
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    
+    // update user current location
+    userCurrentCoordinates = (
+      Double((locations.last?.coordinate.latitude )!),
+      Double((locations.last?.coordinate.longitude)!)
+    )
+    
+    // update pin(annotation) location
+    // at later here !
+  }
+  
+}
+
+

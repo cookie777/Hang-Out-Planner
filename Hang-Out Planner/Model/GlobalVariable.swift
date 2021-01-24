@@ -8,7 +8,10 @@
 import Foundation
 
 //store GPS data (lat,long)
-var userCurrentCoordinates : (Double, Double)? = (Location.sampleStartPoint.latitude,Location.sampleStartPoint.longitude)
+var userCurrentCoordinates : (Double, Double)? = (
+  Location.sampleStartPoint.latitude,
+  Location.sampleStartPoint.longitude
+)
 
 var userCurrentLocation : Location = Location(
   id: 0,

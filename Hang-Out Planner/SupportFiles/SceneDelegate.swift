@@ -51,7 +51,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // if already updating, need not to do.
     if UserLocationController.shared.isUpdatingLocation{return}
-    
     UserLocationController.shared.start {}
    
   }

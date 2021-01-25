@@ -47,9 +47,6 @@ class MainViewController: UIViewController, UITableViewDelegate
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-  
-
     view.backgroundColor = .systemBackground
     safeArea = view.layoutMarginsGuide
     
@@ -150,6 +147,9 @@ class MainViewController: UIViewController, UITableViewDelegate
         self?.navigationController?.pushViewController(nextVC, animated: true)
         // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
+        
+        NetworkController.shared.printLocations(locations: allLocations)
+        NetworkController.shared.printPlans(plans: plans)
       }
       
     }else{

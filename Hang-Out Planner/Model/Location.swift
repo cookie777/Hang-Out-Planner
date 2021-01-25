@@ -15,8 +15,8 @@ struct Location{
   let apiId   : String?// used for api call
   let category: Categories
   
-  let latitude    : Double
-  let longitude   : Double
+  var latitude    : Double
+  var longitude   : Double
   
   let title   : String
   let imageURL: String?

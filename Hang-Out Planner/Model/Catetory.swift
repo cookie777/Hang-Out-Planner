@@ -21,3 +21,14 @@ enum Categories : String {
 }
 
 
+/// Definition of categories used for yelp-API access.
+/// In the future, we will match the name(not raw value), same as `Category`
+enum CategoriesForAPI : String{
+  case park = "parks,beaches"
+  case cafe = "cafes,coffee,coffeeteasupplies,coffeeroasteries"
+  case clothes = "deptstores,menscloth,womenscloth"
+  case artAndGallery = "museums,galleries,media,libraries,theater"
+  case amusement = "arcades,amusementparks,aquariums,movietheaters"
+}
+
+

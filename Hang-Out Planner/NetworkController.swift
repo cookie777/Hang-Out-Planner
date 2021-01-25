@@ -16,6 +16,11 @@ import UIKit
 class NetworkController {
   static let shared = NetworkController()
   private init(){}
+  
+  // We store fetched locations data here, temporary.
+  // This doesn't include user's location nor id.
+  // After return final data, it should be all deleted from memory save.
+  var tempAllLocations : [Location] = []
 }
 
 

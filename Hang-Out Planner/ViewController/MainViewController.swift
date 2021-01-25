@@ -47,6 +47,8 @@ class MainViewController: UIViewController, UITableViewDelegate
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+
 
     view.backgroundColor = .systemBackground
     safeArea = view.layoutMarginsGuide
@@ -138,12 +140,19 @@ class MainViewController: UIViewController, UITableViewDelegate
   }
   //Action when goButton is tapped
   @objc func goButtonTapped(){
-    //Send selectedCategories to planner model
-    let plans = Planner.calculatePlans(categories: selectedCategories)
-    let nextVC = PlanListTableViewController(plans: plans)
-    
-    // Move to next VC
-    navigationController?.pushViewController(nextVC, animated: true)
+//    //Send selectedCategories to planner model
+//    let plans = Planner.calculatePlans(categories: selectedCategories)
+//    let nextVC = PlanListTableViewController(plans: plans)
+//
+//    // Move to next VC
+//    navigationController?.pushViewController(nextVC, animated: true)
+//
+    NetworkController.shared.createAllLocations { [weak self] in
+      Planner.calculateAllRoutes()
+      let plans = Planner.calculatePlans(categories: self?.selectedCategories ?? [.cafe])
+      let nextVC = PlanListTableViewController(plans: plans)
+      self?.navigationController?.pushViewController(nextVC, animated: true)
+    }
   }
   
   @objc func addButtonTapped(){

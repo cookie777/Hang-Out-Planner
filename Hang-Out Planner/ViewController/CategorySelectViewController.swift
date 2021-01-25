@@ -34,8 +34,8 @@ class CategorySelectViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
-    let saveButton = UIBarButtonItem(barButtonSystemItem:.save, target: self, action: #selector(saveToDo))
-    navigationItem.rightBarButtonItem = saveButton
+//    let saveButton = UIBarButtonItem(barButtonSystemItem:.save, target: self, action: #selector(saveToDo))
+//    navigationItem.rightBarButtonItem = saveButton
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissFunc))
 
     view.addSubview(headerTitle1)
@@ -142,18 +142,33 @@ class CategorySelectViewController: UIViewController {
  
   @objc func tapped1 () {
     categoryName0.text = categoryName1.text
+    let category = categoryName0.text
+    delegate?.edit(category!,row!,section!)
+      dismissFunc()
   }
   @objc func tapped2 () {
     categoryName0.text = categoryName2.text
+    let category = categoryName0.text
+    delegate?.edit(category!,row!,section!)
+      dismissFunc()
   }
   @objc func tapped3 () {
     categoryName0.text = categoryName3.text
+    let category = categoryName0.text
+    delegate?.edit(category!,row!,section!)
+      dismissFunc()
   }
   @objc func tapped4 () {
     categoryName0.text = categoryName4.text
+    let category = categoryName0.text
+    delegate?.edit(category!,row!,section!)
+      dismissFunc()
   }
   @objc func tapped5 () {
     categoryName0.text = categoryName5.text
+    let category = categoryName0.text
+    delegate?.edit(category!,row!,section!)
+      dismissFunc()
   }
   @objc func saveToDo() {
     let category = categoryName0.text

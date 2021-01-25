@@ -37,6 +37,7 @@
 		48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
 		48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4876325B5836800EA55D6 /* BasicLabel.swift */; };
 		48DDE18425BE55DE008FA63A /* yelp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48DDE18325BE55DE008FA63A /* yelp-Info.plist */; };
+		48DDE18725BE5B1B008FA63A /* NetworkController+fetchLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */; };
 		48DE334325B8ECE2001630B7 /* Catetory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333C25B8ECE2001630B7 /* Catetory.swift */; };
 		48DE334425B8ECE2001630B7 /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333D25B8ECE2001630B7 /* GlobalVariable.swift */; };
 		48DE334525B8ECE2001630B7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333E25B8ECE2001630B7 /* Location.swift */; };
@@ -80,6 +81,7 @@
 		48B59E2E25BBD446008FC66E /* DefaultLocation(Vancouver).gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DefaultLocation(Vancouver).gpx"; sourceTree = "<group>"; };
 		48D4876325B5836800EA55D6 /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		48DDE18325BE55DE008FA63A /* yelp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "yelp-Info.plist"; sourceTree = "<group>"; };
+		48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkController+fetchLocations.swift"; sourceTree = "<group>"; };
 		48DE333C25B8ECE2001630B7 /* Catetory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catetory.swift; sourceTree = "<group>"; };
 		48DE333D25B8ECE2001630B7 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
 		48DE333E25B8ECE2001630B7 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				48A4C67425B557D900264AF9 /* NetworkController.swift */,
+				48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */,
 				486D0D5D25BD412D00858B03 /* LocationController.swift */,
 				48A4C68125B5580800264AF9 /* ViewController */,
 				48A4C62B25B554ED00264AF9 /* View,Cell */,
@@ -352,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48DDE18725BE5B1B008FA63A /* NetworkController+fetchLocations.swift in Sources */,
 				48A4C65525B5568100264AF9 /* TextLabel.swift in Sources */,
 				48A4C66E25B5574A00264AF9 /* UILabel+LineSpacing.swift in Sources */,
 				48DE334725B8ECE2001630B7 /* Route.swift in Sources */,

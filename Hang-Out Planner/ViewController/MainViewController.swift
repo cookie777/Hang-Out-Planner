@@ -48,7 +48,7 @@ class MainViewController: UIViewController, UITableViewDelegate
   override func viewDidLoad() {
     super.viewDidLoad()
     
-
+  
 
     view.backgroundColor = .systemBackground
     safeArea = view.layoutMarginsGuide
@@ -148,6 +148,7 @@ class MainViewController: UIViewController, UITableViewDelegate
         let plans = Planner.calculatePlans(categories: self!.selectedCategories)
         let nextVC = PlanListTableViewController(plans: plans)
         self?.navigationController?.pushViewController(nextVC, animated: true)
+        // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
       }
       
@@ -302,6 +303,7 @@ extension MainViewController{
   
   override func viewWillAppear(_ animated: Bool) {
     // Start updating location. Added by Yanmer
+    print("viewWillApper")
     UserLocationController.shared.start(completion: {
       // update user annotation here
     })
@@ -311,4 +313,6 @@ extension MainViewController{
     // Stop tracking user data.  Added by Yanmer.
     UserLocationController.shared.stop()
   }
+  
+  
 }

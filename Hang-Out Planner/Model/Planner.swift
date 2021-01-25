@@ -30,7 +30,6 @@ class Planner {
   ///  Calculate every routes between locations including user's current location.
   static func calculateAllRoutes(){
     let numOfLocations = allLocations.count
-    NetworkController.shared.printLocations(locations: allLocations)
     
     // Calculate and store all routes
     for si in 0..<numOfLocations{

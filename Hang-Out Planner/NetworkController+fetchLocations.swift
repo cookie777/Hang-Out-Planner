@@ -7,8 +7,10 @@
 
 import Foundation
 
-
+// This extension is to add fetching locations data from yelp-api
+// The code is long, so I added as extension
 extension NetworkController{
+  
   // Getting the apiKey from plist
   private func getAPIKey()->String{
     var apiKey: String {
@@ -27,6 +29,7 @@ extension NetworkController{
   }
   
   
+  // MARK: - Fetch func
   
   /// Create all locations by fetching yelp-api.
   /// - Created data will be store as `allLocations`
@@ -76,6 +79,7 @@ extension NetworkController{
     group.notify(queue: .main) {
       
       // Creating final locations with adding user location and assigning id.
+      allLocations.removeAll()
       allLocations = [userCurrentLocation] + NetworkController.shared.tempAllLocations
       (0..<allLocations.count).forEach{allLocations[$0].id = $0}
       // Remove temp data for memory saving.
@@ -268,8 +272,8 @@ extension NetworkController{
 }
 
 
+// MARK: - Debug func. Print data
 
-// Func for debug, printing
 extension NetworkController{
   
   // print `[Location]`
@@ -327,6 +331,4 @@ extension NetworkController{
       """)
     }
   }
-
-  
 }

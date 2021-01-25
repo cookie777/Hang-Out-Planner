@@ -303,7 +303,9 @@ extension MainViewController{
   
   override func viewWillAppear(_ animated: Bool) {
     // Start updating location. Added by Yanmer
-    print("viewWillApper")
+    
+    // if already updating, need not to do.
+    if UserLocationController.shared.isUpdatingLocation{return}
     UserLocationController.shared.start(completion: {
       // update user annotation here
     })

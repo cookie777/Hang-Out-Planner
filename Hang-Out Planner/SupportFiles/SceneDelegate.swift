@@ -44,13 +44,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func sceneWillEnterForeground(_ scene: UIScene) {
     // Called as the scene transitions from the background to the foreground.
     // Use this method to undo the changes made on entering the background.
-//    print(window?.rootViewController)
+    
+    // if current VC is main VC, then start updating.
+    guard let nv = window?.rootViewController as? UINavigationController,
+          let _ = nv.topViewController as? MainViewController else{return}
+    
+    // if already updating, need not to do.
+    if UserLocationController.shared.isUpdatingLocation{return}
+    
+    UserLocationController.shared.start {}
+   
   }
   
   func sceneDidEnterBackground(_ scene: UIScene) {
     // Called as the scene transitions from the foreground to the background.
     // Use this method to save data, release shared resources, and store enough scene-specific state information
     // to restore the scene back to its current state.
+    
+    // Whenever the screen gets background, stop tracking
+    UserLocationController.shared.stop()
   }
   
   

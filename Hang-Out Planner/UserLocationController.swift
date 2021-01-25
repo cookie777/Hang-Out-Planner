@@ -23,6 +23,8 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
   // and instead, we just use previous `allLocations`
   var coordinatesLastTimeYouTappedGo : CLLocationCoordinate2D?
   var coordinatesMostRecent: CLLocationCoordinate2D?
+  
+  var isUpdatingLocation: Bool = false
 
   
   
@@ -40,17 +42,20 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
   /// - Parameter completion: an action you want to do when the user location is updated.
   func start(completion : @escaping(()->Void)) {
     locationManager.requestAlwaysAuthorization()
-    //    locationManager.requestWhenInUseAuthorization()
     locationManager.startUpdatingLocation()
+    isUpdatingLocation = true
     self.afterLocationUpdated = completion
+
   }
   
   /// Stop Start updating(tacking) user location
   func stop() {
     locationManager.stopUpdatingLocation()
+    isUpdatingLocation = false
   }
   
-  // While `start` && user location is updated, this func is called.
+  // Whenever `startUpdatingLocation()` gets active
+  // or after that, whenever user location is updated, this func is called.
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
     // If you can get current location, update it
@@ -60,7 +65,6 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
     // If you have a completion handler, call it.
     guard let completion = self.afterLocationUpdated else {return}
     completion()
-    
   }
   
   // Error handling. This will be called when unable to retrieve a location value.
@@ -76,16 +80,6 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
     }
   }
   
-//  // If user denied using their location, we set some default location.
-//  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-//
-//    let status = manager.authorizationStatus
-//    if status == .denied || status == .restricted || status == .notDetermined{
-//
-//      coordinatesMostRecent = CLLocationCoordinate2D(latitude: Location.sampleStartPoint.latitude, longitude: Location.sampleStartPoint.longitude)
-//    }
-//
-//  }
   
   
   /// Return if user has moved (user's coordinates has changed)

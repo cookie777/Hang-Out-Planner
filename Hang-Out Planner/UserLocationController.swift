@@ -8,10 +8,15 @@
 import Foundation
 import CoreLocation
 
-class LocationController: NSObject, CLLocationManagerDelegate {
-  static let shared = LocationController()
+
+/// This class manages user's location. Singleton.  Please use `shared`
+class UserLocationController: NSObject, CLLocationManagerDelegate {
+  static let shared = UserLocationController()
   let locationManager : CLLocationManager
   var afterLocationUpdated : (()->Void)?
+  var coordinatesLastTimeYouTappedGo : CLLocationCoordinate2D?
+  var coordinatesMostRecent: CLLocationCoordinate2D?
+
   
   
   private override init() {
@@ -43,7 +48,7 @@ class LocationController: NSObject, CLLocationManagerDelegate {
     
     // If you can get current location, update it
     guard let currentLocation = locations.last else {return}
-    userCurrentCoordinates = (currentLocation.coordinate.latitude, currentLocation.coordinate.longitude)
+    coordinatesMostRecent = currentLocation.coordinate
     
     // If you have a completion handler, call it.
     guard let completion = self.afterLocationUpdated else {return}
@@ -55,7 +60,7 @@ class LocationController: NSObject, CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     let status = manager.authorizationStatus
     if status == .denied || status == .restricted || status == .notDetermined{
-      print("just user haven't allow using location data so nil. Don't worry")
+      print("This message is shown when user haven't allow using location data. So the current location might be nil. Don't worry")
     }else{
       print("fatal error: \(error)")
     }
@@ -66,12 +71,21 @@ class LocationController: NSObject, CLLocationManagerDelegate {
     
     let status = manager.authorizationStatus
     if status == .denied || status == .restricted || status == .notDetermined{
-      userCurrentCoordinates = (
-        Location.sampleStartPoint.latitude,
-        Location.sampleStartPoint.longitude
-      )
+      
+      coordinatesMostRecent = CLLocationCoordinate2D(latitude: Location.sampleStartPoint.latitude, longitude: Location.sampleStartPoint.longitude)
     }
     
+  }
+  
+  func hasUserMoved() -> Bool {
+    
+    guard let cA = coordinatesLastTimeYouTappedGo,
+          let cB = coordinatesMostRecent else { return true}
+    
+    if cA.latitude != cB.latitude {return true}
+    if cA.longitude != cB.longitude {return true}
+
+    return false
   }
   
 }

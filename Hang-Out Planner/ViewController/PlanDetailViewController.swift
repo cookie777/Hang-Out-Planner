@@ -305,12 +305,12 @@ extension PlanDetailViewController{
 
   override func viewWillAppear(_ animated: Bool) {
     // Start updating location. Added by Yanmer
-    LocationController.shared.start(completion: {})
+    UserLocationController.shared.start(completion: {})
   }
 
   override func viewWillDisappear(_ animated: Bool) {
     // Stop tracking user data.  Added by Yanmer.
-    LocationController.shared.stop()
+    UserLocationController.shared.stop()
   }
 }
 

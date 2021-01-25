@@ -28,14 +28,18 @@ extension NetworkController{
   
   
   
-  /// Create all locations by fetching yelp-api
-  /// Created data will store as `allLocations`
+  /// Create all locations by fetching yelp-api.
+  /// - Created data will be store as `allLocations`
   /// - Parameter completion: after created, what do want to do?
   func createAllLocations(completion: @escaping () -> Void ){
+    
+    // This is to execute calculating routes and plans after "all fetch are done"
     let group = DispatchGroup()
     
+    // Delete all cache
     NetworkController.shared.tempAllLocations.removeAll()
     
+    //Fetch TopN locations in each(five) category
     group.enter()
     NetworkController.shared.fetchLocations(
       group : group,
@@ -67,6 +71,8 @@ extension NetworkController{
       completion: NetworkController.shared.convertAndStoreLocation
     )
     
+    
+    // This is executed after "all fetch are done"
     group.notify(queue: .main) {
       
       // Creating final locations with adding user location and assigning id.
@@ -80,6 +86,8 @@ extension NetworkController{
     }
   }
   
+  
+
   
   
   /// Fetch locations from yelp API.
@@ -101,8 +109,8 @@ extension NetworkController{
     
     // Query parameters. This will be like ? key0=value0 & key1=value1 ...
     // Use user coordinates fetched from GPS
-    let lat = userCurrentCoordinates?.0 ?? 0 // later fix. set some default coordinate
-    let long = userCurrentCoordinates?.1 ?? 0 // later fix.
+    let lat =  UserLocationController.shared.coordinatesMostRecent!.latitude as Double// later fix. set some default coordinate
+    let long = UserLocationController.shared.coordinatesMostRecent!.longitude as Double// later fix.
     // Search area n meter from coordinates.
     let radius = 10_000
     let queryParameters = [
@@ -170,7 +178,7 @@ extension NetworkController{
     var topNLocations: [Location] = []
     var yelpLocations = yelpLocations // waste of memory?
     
-    while (topNLocations.count <= 5 && yelpLocations.count > 0) {
+    while (topNLocations.count < 5 && yelpLocations.count > 0) {
       let yl = yelpLocations.removeFirst()
       
       // Filter: not to add
@@ -270,7 +278,7 @@ extension NetworkController{
     for l in locations{
       print("""
 
-        apiid      : \(l.id)
+        apiId      : \(l.id)
         latitude: \(l.latitude)
         longitude: \(l.longitude)
         name    : \(l.title)
@@ -289,15 +297,36 @@ extension NetworkController{
   
   // print `[Location]`
   func printPlans(plans: [Plan]) {
-    
+
     for l in plans{
       print("""
 
-        
+      Plan info -------------
+
+        TotalDistance : \(l.totalDistance)
+        TotalDistance : \(l.totalDistance)
+        AveRating     : \(l.averageRating)
+        AveReviewCount: \(l.averageReviewCount)
+        AvePriceLevel : \(l.averagePriceLevel)
+      """)
+      l.routes.forEach { (route) in
+        print("""
+
+              [ Route   :
+                StartId : \(route.startLocationId) <----> NextId  : \(route.nextLocationId)
+                Distance is : \(route.distance) m ]
+
+        """)
+      }
+      print("""
+        ------------------------
+
+
+
 
       """)
     }
   }
-  
+
   
 }

@@ -140,19 +140,29 @@ class MainViewController: UIViewController, UITableViewDelegate
   }
   //Action when goButton is tapped
   @objc func goButtonTapped(){
-//    //Send selectedCategories to planner model
-//    let plans = Planner.calculatePlans(categories: selectedCategories)
-//    let nextVC = PlanListTableViewController(plans: plans)
-//
-//    // Move to next VC
-//    navigationController?.pushViewController(nextVC, animated: true)
-//
-    NetworkController.shared.createAllLocations { [weak self] in
-      Planner.calculateAllRoutes()
-      let plans = Planner.calculatePlans(categories: self?.selectedCategories ?? [.cafe])
+    
+    // if you has moved, re-create(request, and calculate) all data
+    if UserLocationController.shared.hasUserMoved(){
+      NetworkController.shared.createAllLocations { [weak self] in
+        Planner.calculateAllRoutes()
+        let plans = Planner.calculatePlans(categories: self!.selectedCategories)
+        let nextVC = PlanListTableViewController(plans: plans)
+        self?.navigationController?.pushViewController(nextVC, animated: true)
+        UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
+      }
+      
+    }else{
+      // if same place + only category has changed
+      // code : only do Planner.calculatePlans(), no createAllLocations
+      let plans = Planner.calculatePlans(categories: selectedCategories)
       let nextVC = PlanListTableViewController(plans: plans)
-      self?.navigationController?.pushViewController(nextVC, animated: true)
+      navigationController?.pushViewController(nextVC, animated: true)
+
+      // if user info is completely same as previous "go" (== same coordinates, same category order)
+      // just use previous plans (add later)
     }
+      
+
   }
   
   @objc func addButtonTapped(){
@@ -292,13 +302,13 @@ extension MainViewController{
   
   override func viewWillAppear(_ animated: Bool) {
     // Start updating location. Added by Yanmer
-    LocationController.shared.start(completion: {
+    UserLocationController.shared.start(completion: {
       // update user annotation here
     })
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     // Stop tracking user data.  Added by Yanmer.
-    LocationController.shared.stop()
+    UserLocationController.shared.stop()
   }
 }

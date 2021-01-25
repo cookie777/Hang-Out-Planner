@@ -26,7 +26,7 @@ enum Categories : String {
 enum CategoriesForAPI : String{
   case park = "parks,beaches"
   case cafe = "cafes,coffee,coffeeteasupplies,coffeeroasteries"
-  case clothes = "deptstores,menscloth,womenscloth"
+  case clothes = "menscloth,womenscloth"
   case artAndGallery = "museums,galleries,media,libraries,theater"
   case amusement = "arcades,amusementparks,aquariums,movietheaters"
 }

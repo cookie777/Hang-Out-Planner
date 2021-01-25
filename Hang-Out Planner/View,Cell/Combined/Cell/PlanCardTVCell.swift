@@ -10,62 +10,68 @@ import UIKit
 
 class PlanCardTVCell: CardTVCell {
   // cell content
-  var totalTimelb = TextLabel(text: "")
+  var totalDistancelb = SubTextLabel(text: "")
+  var totalDistanceField = SmallHeaderLabel(text: "")
+  var totalTimelb = SubTextLabel(text: "")
   var totalTimeField = SmallHeaderLabel(text: "")
-  var locationlb =  TextLabel(text: "")
+  var locationlb =  SubTextLabel(text: "")
   var locationField = TextLabel(text: "")
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: .default, reuseIdentifier: reuseIdentifier)
     
+    let totalDistanceStack = HorizontalStackView(arrangedSubviews: [totalDistancelb,totalDistanceField], spacing: 5, alignment: .fill, distribution: .fillEqually)
     let totalTimeStack = HorizontalStackView(arrangedSubviews: [totalTimelb, totalTimeField], spacing: 5, alignment: .fill, distribution: .fillEqually)
     let locationStack = HorizontalStackView(arrangedSubviews: [locationlb, locationField], spacing: 5, alignment: .fill, distribution: .fillEqually)
-    locationField.numberOfLines = 0
-    locationField.sizeToFit()
+   
     
-    let vStackView = VerticalStackView(arrangedSubviews: [totalTimeStack, locationStack], spacing: 0, alignment: .fill, distribution: .fillProportionally)
+    let vStackView = VerticalStackView(arrangedSubviews: [totalDistanceStack, totalTimeStack, locationStack], spacing: 0, alignment: .fill, distribution: .fillProportionally)
     contentView.addSubview(vStackView)
+    
+    totalDistanceStack.matchLeadingTrailing()
     totalTimeStack.matchLeadingTrailing()
-    totalTimeStack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3).isActive = true
     locationStack.matchLeadingTrailing()
-    locationStack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7).isActive = true
     vStackView.matchParent()
     self.backgroundColor = .systemGroupedBackground
+
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   func update(with plan: Plan) {
+    // total distance for a plan
+    totalDistancelb.text = "Total distance: "
+    totalDistanceField.text = "\(PlanCardTVCell.meterToKm(distance: plan.totalDistance)) Km"
     
     totalTimelb.text = "Total time: "
-    if let totalTime = plan.totalTimeByWalk {
-      let hour = calcToHour(minutes: totalTime).0
-      let minute = calcToHour(minutes: totalTime).1
-      totalTimeField.text = "\(hour) h \(minute) m"
-      
-    }
-    locationlb.text = "Place to go: "
-    for route in plan.routes {
-      locationField.text = "\(PlanCardTVCell.checkLocationName(id: route.startLocationId))"
-      print("\(PlanCardTVCell.checkLocationName(id: route.startLocationId))")
-    }
-  }
-  
-  
-  // calculate minutes -> hour and second
-  func calcToHour(minutes: Int) -> (Int, Double) {
-    let calculateToDouble = Double(minutes / 60)
-    let totalTimeInHour = Int(calculateToDouble)
-    let minutes = (calculateToDouble.truncatingRemainder(dividingBy: 1) * 60)
+    totalTimeField.text = "\(calcWalkingSpeed(distance: plan.totalDistance)) Hour on foot 🚶‍♂️"
     
-    return (totalTimeInHour, minutes)
+    locationlb.text = "Place to go: "
+    var locations = ""
+    for route in plan.routes {
+      locations = locations + "\(PlanCardTVCell.checkLocationName(id: route.startLocationId)) \n"
+    }
+    locationField.text = locations
+
   }
   
-  // Return Location title by location id
-  static func checkLocationName(id: Int) -> String {
+  static func meterToKm(distance: Double) -> Double{
+    let km = distance * 0.001
+    return round(km * 10)/10
+  }
+  
+  // average human: 5km per hour
+ func calcWalkingSpeed(distance: Double) -> Double{
+    let distanceInKm = distance * 0.001
+    let walkingSpped = distanceInKm / 5
+    return  round(walkingSpped * 10)/10
+  }
+  
+  // return Location title by location id
+ static func checkLocationName(id: Int) -> String {
     var locationName = ""
-    for location in Location.sampleLocations {
+    for location in allLocations {
       if location.id == id {
         locationName = location.title
       }

@@ -6,27 +6,38 @@
 //
 
 import UIKit
-
+import MapKit
 
 
 /// Screen for displaying Plan details.
-class PlanDetailViewController: UIViewController {
-  
-  let cellIdForLocation = "locationCardCell"
-  let cellIdForDistance = "distanceCardCell"
+class PlanDetailViewController: UIViewController{
   
   // A plan selected at `PlanListTableViewController`
   let plan: Plan
+  // variables related to tableView
   let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
+  let cellIdForLocation = "locationCardCell"
+  let cellIdForDistance = "distanceCardCell"
+  var currentLocation = "Current Location"
+  lazy var sectionTitles:[String] = ["\(currentLocation)"]
   
-  lazy var tempImage: UIImageView = {
-    let imageView = UIImageView()
-    imageView.image = UIImage(named: "tempImage")
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    return imageView
+  // variables related to mapKit
+  var coordinate: (Double, Double)?
+  let locationManager = CLLocationManager()
+  var mapView: MKMapView = {
+    let mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    mapView.translatesAutoresizingMaskIntoConstraints = false
+    return mapView
   }()
-  
-  let sectionTitle: [String] = ["1st Location", "2nd Location", "3rd Location", "4th Location"]
+  // distance measurement in meters
+  let distanceSpan: CLLocationDistance = 5000
+  // No need to use. You can delete. Yanmer
+  //  var sourceCoordinates: CLLocationCoordinate2D?
+  //  var destCoordinates: CLLocationCoordinate2D?
+  //  var sourcePlacemark: MKPlacemark?
+  //  var destPlacemark: MKPlacemark?
+  //  var sourceItem : MKMapItem?
+  //  var destItem : MKMapItem?
   
   init(plan:Plan) {
     self.plan = plan
@@ -36,61 +47,270 @@ class PlanDetailViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: viewDidLoad method
   override func viewDidLoad() {
-    super.viewDidLoad()
     super.viewDidLoad()
     view.backgroundColor = .white
     navigationController?.navigationBar.prefersLargeTitles = true
-    title = "Here Is Your Plan!"
-    view.addSubview(tempImage)
-    tempImage.anchors(topAnchor: view.safeAreaLayoutGuide.topAnchor, leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, bottomAnchor: nil, padding: UIEdgeInsets.init(top: 8, left: 8, bottom: 0, right: 8))
+    title = "Here is Your Plan!"
+    // set mapView
+    view.addSubview(mapView)
+    mapView.anchors(topAnchor: view.safeAreaLayoutGuide.topAnchor, leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, bottomAnchor: nil, padding: UIEdgeInsets.init(top: 8, left: 8, bottom: 0, right: 8))
+    mapView.constraintHeight(equalToConstant: view.frame.height / 3)
+    mapView.delegate = self
+    mapView.showsScale = true
+    mapView.pointOfInterestFilter = MKPointOfInterestFilter()
+    mapView.showsUserLocation = true
+    mapView.showsTraffic = true
+
     
+    // set annotation per route
+    for route in plan.routes {
+      createAnnotation(startLocationId: route.startLocationId)
+      mapRoute(startLocationId: route.startLocationId, nextLocationId: route.nextLocationId)
+    }
+    
+    let userCurrentMapCoordinates = CLLocation(latitude: userCurrentLocation.latitude, longitude: userCurrentLocation.longitude)
+    //    setZoomLevel(location: userCurrentMapCoordinates)
+    
+    // set tableView
     view.addSubview(tableView)
-    tableView.anchors(topAnchor: tempImage.bottomAnchor, leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, padding: UIEdgeInsets.init(top: 8, left: 8, bottom: 0, right: 8))
+    tableView.anchors(topAnchor: mapView.bottomAnchor, leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, padding: UIEdgeInsets.init(top: 10, left: 8, bottom: 0, right: 8))
     
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "temp")
     tableView.dataSource = self
     tableView.delegate = self
-    
+    // register 2 types of custom cells
     tableView.register(LocationCardTVCell.self, forCellReuseIdentifier: cellIdForLocation)
+    tableView.register(DistanceCardTVCell.self, forCellReuseIdentifier: cellIdForDistance)
+    
+    tableView.sectionHeaderHeight = 25
+    
+    // set dynamic section titles
+    let numOfRoutes = plan.routes.count
+    for index in  1...numOfRoutes - 1{
+      sectionTitles = sectionTitles + ["Location \(index)"]
+    }
+    sectionTitles = sectionTitles + ["\(currentLocation)"]
   }
 }
-// Display Table View with plan.startPoint location -> Route -> Time
+
+
+// MARK: TableViewDataSource extension
 extension PlanDetailViewController : UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return plan.routes.count    // 4
+    return plan.routes.count + 1
   }
-
   
+  // display LocationCardTVCell for row1, DistanceCardTVCell for row2
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 2                    // Section ごとにlocationCardCell, DistanceCell
+    guard section < plan.routes.count else {return 0}
+    return 2
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    if indexPath.row == 0 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)  as! LocationCardTVCell
-      // 1つ目のルート
-      let route = plan.routes[indexPath.section]
-      cell.update(with: route)
-      return cell
+    if indexPath.section < plan.routes.count {
+      switch indexPath.row {
+      case 0:
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)  as! LocationCardTVCell
+        let route = plan.routes[indexPath.section]
+        cell.update(with: route)
+        return cell
+      case 1:
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForDistance, for: indexPath) as! DistanceCardTVCell
+        let route = plan.routes[indexPath.section]
+        cell.update(with: route)
+        return cell
+      default:
+        fatalError()
+      }
     } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)
-      return cell
+      return UITableViewCell()
     }
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return sectionTitle[section]
-
+    return sectionTitles[section]
   }
+  
+  // Dynamic row height
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return UITableView.automaticDimension
+  }
+  
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    switch indexPath.row {
+    case 0:
+      return 300
+    case 1:
+      return 200
+    default:
+      fatalError()
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    cell.layoutIfNeeded()
+  }
+  
 }
 
-
+// MARK: TableViewDelegate extension
 extension PlanDetailViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-  
+    
   }
 }
+
+
+// MARK: MapViewDelegate extension
+extension PlanDetailViewController: MKMapViewDelegate {
+
+  
+  // Generate route
+  //  func mapRoute(startLocationId: Int, nextLocationId: Int) {
+  //    for location in allLocations {
+  //      if startLocationId == location.id {
+  //        sourceCoordinates = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+  //        sourcePlacemark = MKPlacemark(coordinate:sourceCoordinates!)
+  //        sourceItem = MKMapItem(placemark: sourcePlacemark!)
+  //      }
+  //      if nextLocationId == location.id {
+  //        destCoordinates = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+  //        destPlacemark = MKPlacemark(coordinate: destCoordinates!)
+  //        destItem = MKMapItem(placemark: destPlacemark!)
+  //      }
+  //
+  //      if sourceItem != nil, destItem != nil {
+  //      let directionRequest = MKDirections.Request()
+  //      directionRequest.source = sourceItem
+  //      directionRequest.destination = destItem
+  //      directionRequest.transportType = .walking
+  //
+  //      let directions = MKDirections(request: directionRequest)
+  //      directions.calculate { (response, error) in
+  //
+  //        guard let response = response else {
+  //          if let error = error {
+  //            print(error)
+  //          }
+  //          return
+  //        }
+  //        // grab the fastest route
+  //        let route = response.routes[0]
+  //        // add polyline
+  //        self.mapView.addOverlay(route.polyline, level: .aboveRoads)
+  //        // set start rectangle
+  //        let rekt = route.polyline.boundingMapRect
+  //        self.mapView.setRegion(MKCoordinateRegion(rekt), animated: true)
+  //      }
+  //      }
+  //    }
+  //  }
+  
+  // Great work! ↑ but this code makes a lot of api request so that I might easily get restriction( that you can't access api for a while). To avoid this, I modified the function, which is less access to api.
+  
+  
+  /// Draw map route in map.
+  /// - Parameters:
+  ///   - startLocationId: id of stat point location
+  ///   - nextLocationId: id of next point locaiton
+  func mapRoute(startLocationId: Int, nextLocationId: Int) {
+    
+    // Creat MKitem from itemId
+    let sourceItem  = createMapItemFromItemId(itemId: startLocationId)
+    let destItem    = createMapItemFromItemId(itemId: nextLocationId)
+    
+    // Create request
+    let directionRequest = MKDirections.Request()
+    directionRequest.source = sourceItem
+    directionRequest.destination = destItem
+    directionRequest.transportType = .walking
+    
+    // Send request
+    let directions = MKDirections(request: directionRequest)
+    //
+    directions.calculate { (response, error) in
+      guard let response = response else {
+        if let error = error { print(error)}
+        return
+      }
+      // grab the fastest route
+      let route = response.routes[0]
+      // add polyline
+      self.mapView.addOverlay(route.polyline, level: .aboveRoads)
+      // set start rectangle
+      let rekt = route.polyline.boundingMapRect
+      self.mapView.setRegion(MKCoordinateRegion(rekt), animated: true)
+    }
+  }
+  
+  /// Create MKMapItem from location id. This is a helper function which is used in `mapRoute`
+  /// - Parameter itemId: id of location
+  /// - Returns: MKMapItem to draw route
+  func createMapItemFromItemId(itemId : Int)-> MKMapItem{
+    let location = allLocations[itemId]
+    let coordinates = CLLocationCoordinate2D(
+      latitude: location.latitude,
+      longitude: location.longitude
+    )
+    let placemark = MKPlacemark(coordinate: coordinates)
+    let item = MKMapItem(placemark: placemark)
+    return item
+  }
+  
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    let renderer = MKPolylineRenderer(overlay: overlay)
+    renderer.strokeColor = .blue
+    renderer.lineWidth = 5.0
+    
+    return renderer
+  }
+  
+  
+  
+  // Create annotation on locations
+  func createAnnotation(startLocationId: Int) {
+    for location in allLocations {
+      if startLocationId == location.id  {
+        let annotation = MKPointAnnotation()
+        annotation.title = location.title
+        annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude , longitude: location.longitude as! CLLocationDegrees)
+        annotation.subtitle = location.address
+        mapView.addAnnotation(annotation)
+      }
+    }
+  }
+  
+  // Set region, zoom level
+  func setZoomLevel(location: CLLocation) {
+    let mapCoordinates = MKCoordinateRegion(center: location.coordinate,latitudinalMeters: distanceSpan, longitudinalMeters: distanceSpan )
+    // set new region
+    mapView.setRegion(mapCoordinates, animated: true)
+  }
+  
+}
+
+
+// MARK: - Location manager process.
+// Just showing route, we don't need updateLocation, nor authorization.
+// We don't need this.
+// But when you want to show user current location, we need this.
+
+
+// Here, we manage when to start and stop location manager.
+extension PlanDetailViewController{
+
+  override func viewWillAppear(_ animated: Bool) {
+    // Start updating location. Added by Yanmer
+    LocationController.shared.start(completion: {})
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    // Stop tracking user data.  Added by Yanmer.
+    LocationController.shared.stop()
+  }
+}
+

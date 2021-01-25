@@ -34,7 +34,6 @@ class PlanListTableViewController: UITableViewController {
   }
   
   // MARK: - Table view data source
-  
   override func numberOfSections(in tableView: UITableView) -> Int {
     return plans.count
   }
@@ -44,7 +43,7 @@ class PlanListTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 200
+    return UITableView.automaticDimension
   }
   
   
@@ -62,7 +61,6 @@ class PlanListTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let planDetailVC = PlanDetailViewController(plan: plans[indexPath.section])
     navigationController?.pushViewController(planDetailVC, animated: true)
-    print("Section \(indexPath.section), plan: \(plans[indexPath.section])")
   }
   
 }

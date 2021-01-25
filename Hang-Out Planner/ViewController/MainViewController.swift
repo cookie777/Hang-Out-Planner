@@ -14,10 +14,9 @@ import CoreLocation
 ///  Here, user can select categories in certain order.
 ///  If user push "go", it will pass [Category] to Planner,
 ///  and move to next VC.
-class MainViewController: UIViewController, UITableViewDelegate,UINavigationControllerDelegate,EditCategoryDelegate{
+class MainViewController: UIViewController, UITableViewDelegate
+,UINavigationControllerDelegate,EditCategoryDelegate{
   
-  // This variable is used for tracking user's location
-  private var locationManager: CLLocationManager?
   
   let cellId = "categories"
   var safeArea: UILayoutGuide!
@@ -49,8 +48,7 @@ class MainViewController: UIViewController, UITableViewDelegate,UINavigationCont
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setUpLocationManager() // This func is ask user to use their location tracking service.
-    
+
     view.backgroundColor = .systemBackground
     safeArea = view.layoutMarginsGuide
     
@@ -277,85 +275,86 @@ extension MainViewController: UITableViewDataSource {
   }
 }
 
-// MARK: - GPS Tracker feature.
-// Added by Yanmer
 
-// This library is required for tracking user's location
-import CoreLocation
 
-extension MainViewController: CLLocationManagerDelegate{
+// MARK: - Location manager process.
+// Here, we manage when to start and stop location manager.
+// The first time is called in viewDid load.
+
+extension MainViewController{
   
-  // Create LocationManager and ask user to use it.
-  func setUpLocationManager(){
-    locationManager = CLLocationManager()
-    locationManager?.requestAlwaysAuthorization()
-    locationManager?.startUpdatingLocation()
-    locationManager?.delegate = self
+  override func viewWillAppear(_ animated: Bool) {
+    // Start updating location. Added by Yanmer
+    LocationController.shared.start(completion: { [self] in
+      // update user annotation here
+      let center = CLLocationCoordinate2D(latitude: userCurrentCoordinates!.0, longitude: userCurrentCoordinates!.1)
+      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+      let annotation = MKPointAnnotation()
+          annotation.coordinate = center
+          annotation.title = "I'm here!"
+          annotation.subtitle = "current location"
+          mapView.addAnnotation(annotation)
+      self.mapView.setRegion(region, animated: true)
+    })
   }
   
-  // If user denied using their location, we set some default location.
-  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    
-    let status = manager.authorizationStatus
-    if status == .denied || status == .restricted || status == .notDetermined{
-      userCurrentCoordinates = (
-        Location.sampleStartPoint.latitude,
-        Location.sampleStartPoint.longitude
-      )
-    }
-    
+  override func viewWillDisappear(_ animated: Bool) {
+    // Stop tracking user data.  Added by Yanmer.
+    LocationController.shared.stop()
   }
-  
-  // Whenever user location is updated(change), this func is invoked. Delegate.
-  // You can update your global variable, and
-  // you can update your annotation 📍 place in map view.
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    
-    // update user current location
-    userCurrentCoordinates = (
-      Double((locations.last?.coordinate.latitude )!),
-      Double((locations.last?.coordinate.longitude)!)
-    )
-    let center = CLLocationCoordinate2D(latitude: userCurrentCoordinates!.0, longitude: userCurrentCoordinates!.1)
-    let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-  let annotation = MKPointAnnotation()
-        annotation.coordinate = center
-        annotation.title = "I'm here!"
-        annotation.subtitle = "current location"
-        mapView.addAnnotation(annotation)
-    self.mapView.setRegion(region, animated: true)
-   
-    
-    func lookUpCurrentLocation(completionHandler: @escaping (CLPlacemark?)
-                    -> Void ) {
-        // Use the last reported location.
-      if let lastLocation = self.locationManager?.location {
-            let geocoder = CLGeocoder()
-                
-            // Look up the location and pass it to the completion handler
-            geocoder.reverseGeocodeLocation(lastLocation,
-                                            completionHandler: { [self] (placemarks, error) in
-                if error == nil {
-                    let firstLocation = placemarks?[0]
-                    completionHandler(firstLocation)
-                  locationLabel.text = firstLocation?.name
-                  print(firstLocation?.name as Any)
-                }
-                else {
-               // An error occurred during geocoding.
-                    completionHandler(nil)
-                }
-            })
-        }
-        else {
-            // No location was available.
-            completionHandler(nil)
-        }
-    }
-    // update pin(annotation) location
-    // at later here !
-  }
-  
 }
-
-
+//<<<<<<< HEAD
+//
+//  // Whenever user location is updated(change), this func is invoked. Delegate.
+//  // You can update your global variable, and
+//  // you can update your annotation 📍 place in map view.
+//  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//
+//    // update user current location
+//    userCurrentCoordinates = (
+//      Double((locations.last?.coordinate.latitude )!),
+//      Double((locations.last?.coordinate.longitude)!)
+//    )
+//    let center = CLLocationCoordinate2D(latitude: userCurrentCoordinates!.0, longitude: userCurrentCoordinates!.1)
+//    let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//  let annotation = MKPointAnnotation()
+//        annotation.coordinate = center
+//        annotation.title = "I'm here!"
+//        annotation.subtitle = "current location"
+//        mapView.addAnnotation(annotation)
+//    self.mapView.setRegion(region, animated: true)
+//
+//
+//    func lookUpCurrentLocation(completionHandler: @escaping (CLPlacemark?)
+//                    -> Void ) {
+//        // Use the last reported location.
+//      if let lastLocation = self.locationManager?.location {
+//            let geocoder = CLGeocoder()
+//
+//            // Look up the location and pass it to the completion handler
+//            geocoder.reverseGeocodeLocation(lastLocation,
+//                                            completionHandler: { [self] (placemarks, error) in
+//                if error == nil {
+//                    let firstLocation = placemarks?[0]
+//                    completionHandler(firstLocation)
+//                  locationLabel.text = firstLocation?.name
+//                  print(firstLocation?.name as Any)
+//                }
+//                else {
+//               // An error occurred during geocoding.
+//                    completionHandler(nil)
+//                }
+//            })
+//        }
+//        else {
+//            // No location was available.
+//            completionHandler(nil)
+//        }
+//    }
+//    // update pin(annotation) location
+//    // at later here !
+//  }
+//
+//=======
+//>>>>>>> main
+//}

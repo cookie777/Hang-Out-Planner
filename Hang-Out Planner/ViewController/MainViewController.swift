@@ -152,8 +152,8 @@ class MainViewController: UIViewController, UITableViewDelegate
         // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
         
-        NetworkController.shared.printLocations(locations: allLocations)
-        NetworkController.shared.printPlans(plans: plans)
+//        NetworkController.shared.printLocations(locations: allLocations)
+//        NetworkController.shared.printPlans(plans: plans)
       }
       
     }else{

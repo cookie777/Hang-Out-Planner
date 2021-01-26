@@ -31,13 +31,7 @@ class PlanDetailViewController: UIViewController{
   }()
   // distance measurement in meters
   let distanceSpan: CLLocationDistance = 5000
-  // No need to use. You can delete. Yanmer
-  //  var sourceCoordinates: CLLocationCoordinate2D?
-  //  var destCoordinates: CLLocationCoordinate2D?
-  //  var sourcePlacemark: MKPlacemark?
-  //  var destPlacemark: MKPlacemark?
-  //  var sourceItem : MKMapItem?
-  //  var destItem : MKMapItem?
+
   
   init(plan:Plan) {
     self.plan = plan
@@ -47,7 +41,7 @@ class PlanDetailViewController: UIViewController{
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: viewDidLoad method
+  // MARK: - viewDidLoad method
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
@@ -69,6 +63,10 @@ class PlanDetailViewController: UIViewController{
       createAnnotation(startLocationId: route.startLocationId)
       mapRoute(startLocationId: route.startLocationId, nextLocationId: route.nextLocationId)
     }
+    
+    // Fetch images for all the route here, store it into array....? -> Use the array in LocationCardTVCell
+  
+    
     
     let userCurrentMapCoordinates = CLLocation(latitude: userCurrentLocation.latitude, longitude: userCurrentLocation.longitude)
     //    setZoomLevel(location: userCurrentMapCoordinates)
@@ -92,10 +90,26 @@ class PlanDetailViewController: UIViewController{
     }
     sectionTitles = sectionTitles + ["\(currentLocation)"]
   }
+  
+  
+  // MARK: - TEMP
+//  func checkImageURL(id: Int) -> String {
+//    var urlString = ""
+//    for location in allLocations {
+//      if location.id == id{
+//        if location.imageURL != nil {
+//          urlString = "\(location.imageURL!)"
+//        }
+//      }
+//    }
+//     return urlString
+//  }
+  
+  
 }
 
 
-// MARK: TableViewDataSource extension
+// MARK: - TableViewDataSource extension
 extension PlanDetailViewController : UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -135,9 +149,9 @@ extension PlanDetailViewController : UITableViewDataSource {
   }
   
   // Dynamic row height
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return UITableView.automaticDimension
-  }
+//  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//    return UITableView.automaticDimension
+//  }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     switch indexPath.row {
@@ -150,13 +164,10 @@ extension PlanDetailViewController : UITableViewDataSource {
     }
   }
   
-  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    cell.layoutIfNeeded()
-  }
   
 }
 
-// MARK: TableViewDelegate extension
+// MARK: - TableViewDelegate extension
 extension PlanDetailViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -165,53 +176,8 @@ extension PlanDetailViewController: UITableViewDelegate {
 }
 
 
-// MARK: MapViewDelegate extension
+// MARK: - MapViewDelegate extension
 extension PlanDetailViewController: MKMapViewDelegate {
-
-  
-  // Generate route
-  //  func mapRoute(startLocationId: Int, nextLocationId: Int) {
-  //    for location in allLocations {
-  //      if startLocationId == location.id {
-  //        sourceCoordinates = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-  //        sourcePlacemark = MKPlacemark(coordinate:sourceCoordinates!)
-  //        sourceItem = MKMapItem(placemark: sourcePlacemark!)
-  //      }
-  //      if nextLocationId == location.id {
-  //        destCoordinates = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-  //        destPlacemark = MKPlacemark(coordinate: destCoordinates!)
-  //        destItem = MKMapItem(placemark: destPlacemark!)
-  //      }
-  //
-  //      if sourceItem != nil, destItem != nil {
-  //      let directionRequest = MKDirections.Request()
-  //      directionRequest.source = sourceItem
-  //      directionRequest.destination = destItem
-  //      directionRequest.transportType = .walking
-  //
-  //      let directions = MKDirections(request: directionRequest)
-  //      directions.calculate { (response, error) in
-  //
-  //        guard let response = response else {
-  //          if let error = error {
-  //            print(error)
-  //          }
-  //          return
-  //        }
-  //        // grab the fastest route
-  //        let route = response.routes[0]
-  //        // add polyline
-  //        self.mapView.addOverlay(route.polyline, level: .aboveRoads)
-  //        // set start rectangle
-  //        let rekt = route.polyline.boundingMapRect
-  //        self.mapView.setRegion(MKCoordinateRegion(rekt), animated: true)
-  //      }
-  //      }
-  //    }
-  //  }
-  
-  // Great work! ↑ but this code makes a lot of api request so that I might easily get restriction( that you can't access api for a while). To avoid this, I modified the function, which is less access to api.
-  
   
   /// Draw map route in map.
   /// - Parameters:
@@ -261,6 +227,7 @@ extension PlanDetailViewController: MKMapViewDelegate {
     return item
   }
   
+  /// degine  renderer on the map
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     let renderer = MKPolylineRenderer(overlay: overlay)
     renderer.strokeColor = .blue
@@ -269,15 +236,14 @@ extension PlanDetailViewController: MKMapViewDelegate {
     return renderer
   }
   
-  
-  
+
   // Create annotation on locations
   func createAnnotation(startLocationId: Int) {
     for location in allLocations {
       if startLocationId == location.id  {
         let annotation = MKPointAnnotation()
         annotation.title = location.title
-        annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude , longitude: location.longitude as! CLLocationDegrees)
+        annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude , longitude: location.longitude )
         annotation.subtitle = location.address
         mapView.addAnnotation(annotation)
       }
@@ -292,4 +258,3 @@ extension PlanDetailViewController: MKMapViewDelegate {
   }
   
 }
-

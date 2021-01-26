@@ -17,6 +17,7 @@ class LocationCardTVCell: UITableViewCell {
     imageView.image = UIImage(named: "tempImage")
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.contentMode = .scaleAspectFit
+    imageView.setContentHuggingPriority(.required, for: .horizontal)
     return imageView
   }()
   
@@ -27,6 +28,8 @@ class LocationCardTVCell: UITableViewCell {
     vStackView.translatesAutoresizingMaskIntoConstraints = false
   
     let hStackView = HorizontalStackView(arrangedSubviews: [vStackView, locationImage], spacing: 0, alignment: .fill, distribution: .fillProportionally)
+    locationImage.widthAnchor.constraint(equalTo: hStackView.widthAnchor, multiplier: 0.5).isActive = true
+    locationImage.heightAnchor.constraint(equalTo: hStackView.heightAnchor, multiplier: 1).isActive = true
     contentView.addSubview(hStackView)
     hStackView.matchParent()
     self.backgroundColor = .systemGroupedBackground
@@ -48,6 +51,7 @@ class LocationCardTVCell: UITableViewCell {
     locationTitleLabel.text = "\(PlanCardTVCell.checkLocationName(id: id))"
     // set location address
     addressLabel.text = "\(LocationCardTVCell.checkLocationAddress(id: id))"
+    NetworkController.shared.fetchImage(urlString: checkImageURL(id: id), imageView: locationImage)
 
   }
   
@@ -62,16 +66,17 @@ class LocationCardTVCell: UITableViewCell {
       return locationAddress
   }
   
-  // routeのstartid -> alllocations -> latitude and longitude
-//  func checkCoordinate(id: Int) -> (Double, Double) {
-//    var locationCoordinate = (0.0,0.0)
-//    for location in allLocations {
-//      if location.id == id {
-//        locationCoordinate  = (location.latitude, location.longitude)
-//      }
-//      return  locationCoordinate
-//    }
-//  }
+  func checkImageURL(id: Int) -> String {
+    var urlString = ""
+    for location in allLocations {
+      if location.id == id{
+        if location.imageURL != nil {
+          urlString = "\(location.imageURL!)"
+        }
+      }
+    }
+     return urlString
+  }
   
   
 }

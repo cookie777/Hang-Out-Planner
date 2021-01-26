@@ -11,12 +11,12 @@ import Foundation
 struct Location{
   
   // Have to change all optional except id and category
-  let id      : Int // used for app calculation
+  var id      : Int // used for app calculation
   let apiId   : String?// used for api call
   let category: Categories
   
-  let latitude    : Double
-  let longitude   : Double
+  var latitude    : Double
+  var longitude   : Double
   
   let title   : String
   let imageURL: String?

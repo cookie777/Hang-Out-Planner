@@ -7,28 +7,31 @@
 
 import Foundation
 
+// ↓ This variable moves to UserLocationController.swift
+//   This is to let UserLocationController keeps any info about user current coordinates data
+//
 //store GPS data (lat,long)
-var userCurrentCoordinates : (Double, Double)? = (
-  Location.sampleStartPoint.latitude,
-  Location.sampleStartPoint.longitude
-)
+//var userCurrentCoordinates : (Double, Double)? = (
+//  Location.sampleStartPoint.latitude,
+//  Location.sampleStartPoint.longitude
+//)
 
 var userCurrentLocation : Location = Location(
   id: 0,
   apiId: nil,
   category: .other,
-  latitude: userCurrentCoordinates!.0,
-  longitude: userCurrentCoordinates!.1,
-  title: "Temporary start point",
+  latitude: UserLocationController.shared.coordinatesMostRecent!.latitude as Double,
+  longitude: UserLocationController.shared.coordinatesMostRecent!.longitude as Double,
+  title: "Your current location",
   imageURL: nil,
-  address: Location.sampleStartPoint.address,
+  address: "fill dynamic address",
   website: nil,
   rating: nil,
   reviewCount: nil,
   priceLevel: nil
 )
 
-var allLocations  = [userCurrentLocation] + Location.sampleLocations
+var allLocations : [Location]  = []
 
 // Store all routes between every locations.
 var allRoutes : [[Double?]] = {

@@ -10,37 +10,41 @@ import MapKit
 
 
 class Planner {
+
+  /*
+   # Ideal:(TODO later if I have time.)
+   ## calc priority
+   - change to price or review.
+   
+   ## cache
+    - if no location change -> use same `allRoutes`.  No yelp-api, no routes calc
+    - and if no category change -> use same `plans`. No plan calc
+   
+   ## route cals
+   -  N^2 -> N^N/2.
+  */
   
-  // MARK: - Server-side pre-calculation
-  // These process should be server-side beforehand, but right now I temporarily do it at here.
-  // Calculate every routes between locations, except user's current location.
   
   
-  /// Calculate all Routes between location, except user stating point.
-  /// This should be done in server before hand. Now I do this temporarily at app side.
-  static func calculateRoutesAtServer(){
-    
+  // MARK: - Pre-Calc. Creates `allRoutes`.
+  ///  Calculate every routes between locations including user's current location.
+  static func calculateAllRoutes(){
     let numOfLocations = allLocations.count
     
-    // fill all routes without starting point
-    // TODO: fix this algorithm, prepare own all Locations and calDistance
-    for si in 1..<numOfLocations{
-      for ei in 1..<numOfLocations{
-        // I can reduce here.
+    // Calculate and store all routes
+    for si in 0..<numOfLocations{
+      for ei in 0..<numOfLocations{
+        // I can reduce here. N^2 -> N^N/2. Fix later
         allRoutes[si][ei] = calculateDistance(startId: si, endId: ei)
       }
     }
   }
 
-  
-  
-  
-  
-
-  // MARK: - App-side pre-calculation.
-  // We calculate each routes between current user location and every locations.
-  
-  ///Calculate distance between start-end. it will return meter.
+  /// Calculate distance between start-end. it will return meter.
+  /// - Parameters:
+  ///   - startId: start id of location in `allLocations`
+  ///   - endId: end id of location in `allLocations`
+  /// - Returns: Simple straight distance (Euclidean distance?), without using api.
   static func calculateDistance(startId: Int, endId: Int)->Double{
     let start = allLocations[startId]
     let end = allLocations[endId]
@@ -49,24 +53,14 @@ class Planner {
     let distanceInMeters = coordinateStart.distance(from: coordinateEnd)
     return distanceInMeters
   }
-  
-  /// Calculate and store routes between user and every location.
-  static func calculateRoutesBetweenUser(){
-    // create allRoutes data wit nil
-    let numOfLocations = allLocations.count
-    
-    // calculate from user-current-location to each locations.
-    for i in 0..<numOfLocations{
-      let distance = calculateDistance(startId: 0, endId: i)
-      allRoutes[0][i] = distance
-      allRoutes[i][0] = distance
-    }
-  }
-  
+
 
   
-  
-  // MARK: - App-side plan generating
+  // MARK: - Generates Plans with using pre-calc `allRoutes`
+
+  /// Calc best plan by distance
+  /// - Parameter categories: category of location(order) that user wants to go.
+  /// - Returns: TopN best plan.
   static func calculatePlans(categories: [Categories]) -> [Plan]{
     
     var locationCandidates : [[Int]] = []

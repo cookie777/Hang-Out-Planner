@@ -48,7 +48,6 @@ class MainViewController: UIViewController, UITableViewDelegate
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
     view.backgroundColor = .systemBackground
     safeArea = view.layoutMarginsGuide
     
@@ -142,12 +141,33 @@ class MainViewController: UIViewController, UITableViewDelegate
   }
   //Action when goButton is tapped
   @objc func goButtonTapped(){
-    //Send selectedCategories to planner model
-    let plans = Planner.calculatePlans(categories: selectedCategories)
-    let nextVC = PlanListTableViewController(plans: plans)
     
-    // Move to next VC
-    navigationController?.pushViewController(nextVC, animated: true)
+    // if you has moved, re-create(request, and calculate) all data
+    if UserLocationController.shared.hasUserMoved(){
+      NetworkController.shared.createAllLocations { [weak self] in
+        Planner.calculateAllRoutes()
+        let plans = Planner.calculatePlans(categories: self!.selectedCategories)
+        let nextVC = PlanListTableViewController(plans: plans)
+        self?.navigationController?.pushViewController(nextVC, animated: true)
+        // update the previous coordinates
+        UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
+        
+        NetworkController.shared.printLocations(locations: allLocations)
+        NetworkController.shared.printPlans(plans: plans)
+      }
+      
+    }else{
+      // if same place + only category has changed
+      // code : only do Planner.calculatePlans(), no createAllLocations
+      let plans = Planner.calculatePlans(categories: selectedCategories)
+      let nextVC = PlanListTableViewController(plans: plans)
+      navigationController?.pushViewController(nextVC, animated: true)
+
+      // if user info is completely same as previous "go" (== same coordinates, same category order)
+      // just use previous plans (add later)
+    }
+      
+
   }
   
   @objc func addButtonTapped(){
@@ -285,76 +305,25 @@ extension MainViewController{
   
   override func viewWillAppear(_ animated: Bool) {
     // Start updating location. Added by Yanmer
-    LocationController.shared.start(completion: { [self] in
+
+    
+    // if already updating, need not to do.
+    if UserLocationController.shared.isUpdatingLocation{return}
+    
+    UserLocationController.shared.start(completion: { [weak self] in
       // update user annotation here
-      let center = CLLocationCoordinate2D(latitude: userCurrentCoordinates!.0, longitude: userCurrentCoordinates!.1)
+      
+      let center = UserLocationController.shared.coordinatesMostRecent!
       let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-      let annotation = MKPointAnnotation()
-          annotation.coordinate = center
-          annotation.title = "I'm here!"
-          annotation.subtitle = "current location"
-          mapView.addAnnotation(annotation)
-      self.mapView.setRegion(region, animated: true)
+      self?.mapView.setRegion(region, animated: true)
+      self?.mapView.showsUserLocation = true
     })
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     // Stop tracking user data.  Added by Yanmer.
-    LocationController.shared.stop()
+    UserLocationController.shared.stop()
   }
+  
+  
 }
-//<<<<<<< HEAD
-//
-//  // Whenever user location is updated(change), this func is invoked. Delegate.
-//  // You can update your global variable, and
-//  // you can update your annotation 📍 place in map view.
-//  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//    // update user current location
-//    userCurrentCoordinates = (
-//      Double((locations.last?.coordinate.latitude )!),
-//      Double((locations.last?.coordinate.longitude)!)
-//    )
-//    let center = CLLocationCoordinate2D(latitude: userCurrentCoordinates!.0, longitude: userCurrentCoordinates!.1)
-//    let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-//  let annotation = MKPointAnnotation()
-//        annotation.coordinate = center
-//        annotation.title = "I'm here!"
-//        annotation.subtitle = "current location"
-//        mapView.addAnnotation(annotation)
-//    self.mapView.setRegion(region, animated: true)
-//
-//
-//    func lookUpCurrentLocation(completionHandler: @escaping (CLPlacemark?)
-//                    -> Void ) {
-//        // Use the last reported location.
-//      if let lastLocation = self.locationManager?.location {
-//            let geocoder = CLGeocoder()
-//
-//            // Look up the location and pass it to the completion handler
-//            geocoder.reverseGeocodeLocation(lastLocation,
-//                                            completionHandler: { [self] (placemarks, error) in
-//                if error == nil {
-//                    let firstLocation = placemarks?[0]
-//                    completionHandler(firstLocation)
-//                  locationLabel.text = firstLocation?.name
-//                  print(firstLocation?.name as Any)
-//                }
-//                else {
-//               // An error occurred during geocoding.
-//                    completionHandler(nil)
-//                }
-//            })
-//        }
-//        else {
-//            // No location was available.
-//            completionHandler(nil)
-//        }
-//    }
-//    // update pin(annotation) location
-//    // at later here !
-//  }
-//
-//=======
-//>>>>>>> main
-//}

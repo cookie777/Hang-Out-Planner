@@ -258,28 +258,3 @@ extension PlanDetailViewController: MKMapViewDelegate {
   }
   
 }
-
-
-// MARK: - Location manager process.
-// Just showing route, we don't need updateLocation, nor authorization.
-// We don't need this.
-// But when you want to show user current location, we need this.
-
-
-// Here, we manage when to start and stop location manager.
-extension PlanDetailViewController{
-
-  override func viewWillAppear(_ animated: Bool) {
-    // Start updating location. Added by Yanmer
-    LocationController.shared.start(completion: {})
-  }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    // Stop tracking user data.  Added by Yanmer.
-    LocationController.shared.stop()
-  }
-}
-
-
-
-

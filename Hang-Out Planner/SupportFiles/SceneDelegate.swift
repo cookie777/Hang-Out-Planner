@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
@@ -13,11 +14,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    
-    // Call this before view did load (like scene Delegate)
-    Planner.calculateRoutesAtServer()
-    Planner.calculateRoutesBetweenUser()
-    
     
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -49,12 +45,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func sceneWillEnterForeground(_ scene: UIScene) {
     // Called as the scene transitions from the background to the foreground.
     // Use this method to undo the changes made on entering the background.
+    
+//    // if current VC is main VC, then start updating.
+//    guard let nv = window?.rootViewController as? UINavigationController,
+//          let mainVC = nv.topViewController as? MainViewController else{return}
+//
+//    // if already updating, need not to do.
+//    if UserLocationController.shared.isUpdatingLocation{return}
+//
+//    UserLocationController.shared.start(completion: { [weak mainVC] in
+//      // update user annotation here
+//      let center = UserLocationController.shared.coordinatesMostRecent!
+//      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//      mainVC?.mapView.setRegion(region, animated: true)
+//      mainVC?.mapView.showsUserLocation = true
+//    })
   }
+   
+
   
   func sceneDidEnterBackground(_ scene: UIScene) {
     // Called as the scene transitions from the foreground to the background.
     // Use this method to save data, release shared resources, and store enough scene-specific state information
     // to restore the scene back to its current state.
+    
+    // Whenever the screen gets background, stop tracking
+//    UserLocationController.shared.stop()
   }
   
   

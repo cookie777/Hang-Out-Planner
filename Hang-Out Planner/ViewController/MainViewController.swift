@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import MapKit
+import CoreLocation
 
 
 ///  Main(home and top) screen.
@@ -29,15 +30,15 @@ class MainViewController: UIViewController, UITableViewDelegate
   let headerTitle1 = LargeHeaderLabel(text: "Where You")
   let headerTitle2 = LargeHeaderLabel(text: "Want To Go?")
   
-  let mapView : UILabel = {
-    let map = UILabel()
+  let mapView : MKMapView = {
+    let map = MKMapView()
     map.backgroundColor = .lightGray
     map.translatesAutoresizingMaskIntoConstraints = false
     return map
   }()
   
   let locationTitle = SubTextLabel(text: "Your current location is:")
-  let locationLavel = SubTextLabel(text: "Near Keefer 58 PI")
+  let locationLabel = SubTextLabel(text: "Near Keefer 58 PI")
   
   let tableview: UITableView = {
     let table = UITableView()
@@ -77,15 +78,15 @@ class MainViewController: UIViewController, UITableViewDelegate
     locationTitle.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 8).isActive = true
     locationTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
     
-    view.addSubview(locationLavel)
-    locationLavel.translatesAutoresizingMaskIntoConstraints = false
-    locationLavel.textColor = .blue
-    locationLavel.topAnchor.constraint(equalTo: locationTitle.bottomAnchor, constant: 8).isActive = true
-    locationLavel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
+    view.addSubview(locationLabel)
+    locationLabel.translatesAutoresizingMaskIntoConstraints = false
+    locationLabel.textColor = .blue
+    locationLabel.topAnchor.constraint(equalTo: locationTitle.bottomAnchor, constant: 8).isActive = true
+    locationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
     
     view.addSubview(tableview)
     tableview.translatesAutoresizingMaskIntoConstraints = false
-    tableview.topAnchor.constraint(equalTo: locationLavel.bottomAnchor, constant: 16).isActive = true
+    tableview.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 16).isActive = true
     tableview.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
     tableview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -88).isActive
       = true
@@ -104,7 +105,10 @@ class MainViewController: UIViewController, UITableViewDelegate
     addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 144).isActive = true
     addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
+    
   }
+  
+  
   
   func edit(_ category: String,_ row: Int, _ section:Int) {
     let index = IndexPath(row: row, section: section)
@@ -205,8 +209,6 @@ class MainViewController: UIViewController, UITableViewDelegate
     let addToDoVC = UINavigationController(rootViewController: addEditVC)
     present(addToDoVC, animated: true, completion: nil)
     tableview.reloadData()
-    print(categoryArray)
-    print(selectedCategories)
     updateAddButtonState()
   }
   //  if the number of section is over 4, add button will disappear
@@ -303,11 +305,18 @@ extension MainViewController{
   
   override func viewWillAppear(_ animated: Bool) {
     // Start updating location. Added by Yanmer
+
     
     // if already updating, need not to do.
     if UserLocationController.shared.isUpdatingLocation{return}
-    UserLocationController.shared.start(completion: {
+    
+    UserLocationController.shared.start(completion: { [weak self] in
       // update user annotation here
+      
+      let center = UserLocationController.shared.coordinatesMostRecent!
+      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+      self?.mapView.setRegion(region, animated: true)
+      self?.mapView.showsUserLocation = true
     })
   }
   

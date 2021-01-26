@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
@@ -45,15 +46,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Called as the scene transitions from the background to the foreground.
     // Use this method to undo the changes made on entering the background.
     
-    // if current VC is main VC, then start updating.
-    guard let nv = window?.rootViewController as? UINavigationController,
-          let _ = nv.topViewController as? MainViewController else{return}
-    
-    // if already updating, need not to do.
-    if UserLocationController.shared.isUpdatingLocation{return}
-    UserLocationController.shared.start {}
-   
+//    // if current VC is main VC, then start updating.
+//    guard let nv = window?.rootViewController as? UINavigationController,
+//          let mainVC = nv.topViewController as? MainViewController else{return}
+//
+//    // if already updating, need not to do.
+//    if UserLocationController.shared.isUpdatingLocation{return}
+//
+//    UserLocationController.shared.start(completion: { [weak mainVC] in
+//      // update user annotation here
+//      let center = UserLocationController.shared.coordinatesMostRecent!
+//      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//      mainVC?.mapView.setRegion(region, animated: true)
+//      mainVC?.mapView.showsUserLocation = true
+//    })
   }
+   
+
   
   func sceneDidEnterBackground(_ scene: UIScene) {
     // Called as the scene transitions from the foreground to the background.
@@ -61,7 +70,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // to restore the scene back to its current state.
     
     // Whenever the screen gets background, stop tracking
-    UserLocationController.shared.stop()
+//    UserLocationController.shared.stop()
   }
   
   

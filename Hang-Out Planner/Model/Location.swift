@@ -27,8 +27,8 @@ struct Location{
   let rating: Double? // Double. Value ranges from 1, 1.5, ... 4.5, 5. Higher is better.
   let reviewCount: Int?
   let priceLevel: Int? // // Price level of the business. Value is one of 1, 2, 3 and 4. 1 means low cost, whereas 4 mean high cost.
-  let popularity: Int? = nil // The best Mach order from yelp api. not absolute, might not use
-  
+  var ranking: Int? = nil // The best Mach order from yelp api. not absolute
+  var phone : String? = nil
   // later discard.
   static var sampleStartPoint = Location(
     id: 0,

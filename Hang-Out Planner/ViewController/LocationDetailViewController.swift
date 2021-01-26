@@ -25,6 +25,13 @@ class LocationDetailViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    view.backgroundColor = .systemBackground
+    
+    // This is a test Label to check if the location has passed. You can delete this.
+    let testlb = UILabel()
+    testlb.text = location.title
+    view.addSubview(testlb)
+    testlb.centerXYin(view)
   }
   
   

@@ -142,8 +142,9 @@ class MainViewController: UIViewController, UITableViewDelegate
   //Action when goButton is tapped
   @objc func goButtonTapped(){
     
-    // if you has moved, re-create(request, and calculate) all data
-    if UserLocationController.shared.hasUserMoved(){
+    // if you has moved or no locations data?
+    // -> then re-create(request, and calculate) all data
+    if UserLocationController.shared.hasUserMoved() || allLocations.count == 0{
       NetworkController.shared.createAllLocations { [weak self] in
         Planner.calculateAllRoutes()
         let plans = Planner.calculatePlans(categories: self!.selectedCategories)
@@ -152,8 +153,8 @@ class MainViewController: UIViewController, UITableViewDelegate
         // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
         
-        NetworkController.shared.printLocations(locations: allLocations)
-        NetworkController.shared.printPlans(plans: plans)
+//        NetworkController.shared.printLocations(locations: allLocations)
+//        NetworkController.shared.printPlans(plans: plans)
       }
       
     }else{

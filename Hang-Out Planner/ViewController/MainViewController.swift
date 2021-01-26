@@ -15,7 +15,7 @@ import CoreLocation
 ///  If user push "go", it will pass [Category] to Planner,
 ///  and move to next VC.
 class MainViewController: UIViewController, UITableViewDelegate
-,UINavigationControllerDelegate,EditCategoryDelegate{
+                          ,UINavigationControllerDelegate,EditCategoryDelegate{
   
   
   let cellId = "categories"
@@ -162,12 +162,12 @@ class MainViewController: UIViewController, UITableViewDelegate
       let plans = Planner.calculatePlans(categories: selectedCategories)
       let nextVC = PlanListTableViewController(plans: plans)
       navigationController?.pushViewController(nextVC, animated: true)
-
+      
       // if user info is completely same as previous "go" (== same coordinates, same category order)
       // just use previous plans (add later)
     }
-      
-
+    
+    
   }
   
   @objc func addButtonTapped(){
@@ -305,7 +305,7 @@ extension MainViewController{
   
   override func viewWillAppear(_ animated: Bool) {
     // Start updating location. Added by Yanmer
-
+    
     
     // if already updating, need not to do.
     if UserLocationController.shared.isUpdatingLocation{return}
@@ -317,13 +317,29 @@ extension MainViewController{
       let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
       self?.mapView.setRegion(region, animated: true)
       self?.mapView.showsUserLocation = true
+      
+//      show current address
+      CLGeocoder().reverseGeocodeLocation(UserLocationController.shared.locationManager.location!) { placemarks, error in
+        guard
+          let placemark = placemarks?.first, error == nil,
+          let administrativeArea = placemark.administrativeArea,
+          let locality = placemark.locality,
+          let thoroughfare = placemark.thoroughfare,
+          let subThoroughfare = placemark.subThoroughfare
+        else {
+          self!.locationLabel.text = ""
+          return
+        }
+        self!.locationLabel.text = "\(administrativeArea) \(locality) \(thoroughfare) \(subThoroughfare)"
+      }
     })
+    
   }
-  
   override func viewWillDisappear(_ animated: Bool) {
     // Stop tracking user data.  Added by Yanmer.
     UserLocationController.shared.stop()
   }
+  
   
   
 }

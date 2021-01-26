@@ -36,7 +36,6 @@
 		48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */; };
 		48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
 		48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4876325B5836800EA55D6 /* BasicLabel.swift */; };
-		48DDE18425BE55DE008FA63A /* yelp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48DDE18325BE55DE008FA63A /* yelp-Info.plist */; };
 		48DDE18725BE5B1B008FA63A /* NetworkController+fetchLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */; };
 		48DE334325B8ECE2001630B7 /* Catetory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333C25B8ECE2001630B7 /* Catetory.swift */; };
 		48DE334425B8ECE2001630B7 /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333D25B8ECE2001630B7 /* GlobalVariable.swift */; };
@@ -45,6 +44,7 @@
 		48DE334725B8ECE2001630B7 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334025B8ECE2001630B7 /* Route.swift */; };
 		48DE334925B8ECE2001630B7 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334225B8ECE2001630B7 /* Plan.swift */; };
 		B088871F25B911D000D5F9E0 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */; };
+		B0AEF4FA25BFA673009CBF6D /* yelp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0AEF4F625BFA336009CBF6D /* yelp-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,7 +80,6 @@
 		48A4C67425B557D900264AF9 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		48B59E2E25BBD446008FC66E /* DefaultLocation(Vancouver).gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DefaultLocation(Vancouver).gpx"; sourceTree = "<group>"; };
 		48D4876325B5836800EA55D6 /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
-		48DDE18325BE55DE008FA63A /* yelp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "yelp-Info.plist"; sourceTree = "<group>"; };
 		48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkController+fetchLocations.swift"; sourceTree = "<group>"; };
 		48DE333C25B8ECE2001630B7 /* Catetory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catetory.swift; sourceTree = "<group>"; };
 		48DE333D25B8ECE2001630B7 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
@@ -89,6 +88,7 @@
 		48DE334025B8ECE2001630B7 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		48DE334225B8ECE2001630B7 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
+		B0AEF4F625BFA336009CBF6D /* yelp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "yelp-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +130,7 @@
 				48A4C5B125B52E3C00264AF9 /* Model */,
 				48A4C5A425B52DDD00264AF9 /* SupportFiles */,
 				48A4C57F25B52D3B00264AF9 /* Info.plist */,
-				48DDE18325BE55DE008FA63A /* yelp-Info.plist */,
+				B0AEF4F625BFA336009CBF6D /* yelp-Info.plist */,
 			);
 			path = "Hang-Out Planner";
 			sourceTree = "<group>";
@@ -343,7 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48A4C57E25B52D3B00264AF9 /* LaunchScreen.storyboard in Resources */,
-				48DDE18425BE55DE008FA63A /* yelp-Info.plist in Resources */,
+				B0AEF4FA25BFA673009CBF6D /* yelp-Info.plist in Resources */,
 				48A4C57B25B52D3B00264AF9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

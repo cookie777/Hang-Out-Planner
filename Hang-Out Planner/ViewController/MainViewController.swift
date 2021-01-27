@@ -14,12 +14,11 @@ import CoreLocation
 ///  Here, user can select categories in certain order.
 ///  If user push "go", it will pass [Category] to Planner,
 ///  and move to next VC.
-class MainViewController: UIViewController, UITableViewDelegate
+class MainViewController: UIViewController
                           ,UINavigationControllerDelegate,EditCategoryDelegate{
   
-  
+  // MARK: - Class Instance variables
   let cellId = "categories"
-  var safeArea: UILayoutGuide!
   
   var selectedCategories: [Categories] = [.clothes,.amusement,.cafe]
   var categoryArray :[[String]] = [[Categories.clothes.rawValue],[Categories.amusement.rawValue],[Categories.cafe.rawValue],[],[]]
@@ -39,13 +38,14 @@ class MainViewController: UIViewController, UITableViewDelegate
   
   let locationTitle = SubTextLabel(text: "Your current location is:")
   let locationLabel = TextLabel(text: "Near Keefer 58 PI")
+  // Wrapper of location info
   lazy var locationStackView = VerticalStackView(arrangedSubviews: [locationTitle, locationLabel], spacing: 8)
   
   let routeLabel :UILabel   = {
     let lb = MediumHeaderLabel(text: "Route")
+    // add bottom margin to label
     let h = lb.intrinsicContentSize.height
     lb.constraintHeight(equalToConstant: h+24)
-    
     return lb
   }()
   
@@ -55,40 +55,56 @@ class MainViewController: UIViewController, UITableViewDelegate
     return table
   }()
   
+  
+  // MARK: - Layout config
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
-    safeArea = view.layoutMarginsGuide
     
     // setting nv bar. Might use later
     //    navigationController?.navigationBar.prefersLargeTitles = true
     //    navigationItem.title = "Where do you\n want to go?"
     //    navigationController?.navigationBar.largeTitleTextAttributes = LargeHeaderLabel.attrs
     
+    // add to view and set constrans
+    setLayoutOfTableView()
+    
+    
+    
     // Tableview setting
     tableview.register(CategoryCardTVCell.self, forCellReuseIdentifier: cellId)
     tableview.dataSource = self
     tableview.delegate = self
     tableview.allowsMultipleSelectionDuringEditing = true
+
+  }
+  
+  func setLayoutOfTableView(){
     
-    
+    // Create upper [Title + map + location + route label] view
     let userLocationStackView = VerticalStackView(arrangedSubviews: [headerTitle, mapView, locationStackView], spacing: 24)
     let tableHeaderStackView = VerticalStackView(arrangedSubviews: [userLocationStackView,routeLabel],spacing: 40)
     mapView.constraintHeight(equalToConstant: 200)
     
     
+    // First add to view(this order is important)
     view.addSubview(tableview)
     tableview.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
+    // hide scroll
     tableview.showsVerticalScrollIndicator = false
-    tableview.separatorStyle = .none
     
+    // Set upper view as `tableHeaderView` of the table view.
     let thv = tableHeaderStackView
     tableview.tableHeaderView = thv
     thv.translatesAutoresizingMaskIntoConstraints = false
     
+    // Set width same as table view
     thv.matchSizeWith(widthRatio: 1, heightRatio: nil)
+    // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
     tableview.tableHeaderView?.setNeedsLayout()
     tableview.tableHeaderView?.layoutIfNeeded()
+    
+    
     
     //    Add goButton to view (you can modify this)
     view.addSubview(goButton)
@@ -106,10 +122,9 @@ class MainViewController: UIViewController, UITableViewDelegate
     
     tableview.sectionHeaderHeight = UITableView.automaticDimension
     //    tableview.rowHeight = UITableView.automaticDimension
-    
   }
   
-  
+  // MARK: - Botton Config
   
   func edit(_ category: String,_ row: Int, _ section:Int) {
     let index = IndexPath(row: row, section: section)
@@ -227,9 +242,14 @@ class MainViewController: UIViewController, UITableViewDelegate
   func numberOfSections(in tableView: UITableView) -> Int {
     sectionTitles.count
   }
+}
   
+
+
+
+// MARK: - Table view
   
-  
+extension MainViewController: UITableViewDelegate{
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let text = sectionTitles[section]
     let lb = TextLabel(text: text)
@@ -266,7 +286,6 @@ class MainViewController: UIViewController, UITableViewDelegate
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 112
   }
-  
   
   
   //  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

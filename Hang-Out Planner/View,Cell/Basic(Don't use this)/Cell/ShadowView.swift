@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+/// This is for creating shadow class. It is said this can reduce calc of shadow but I'm suspicious. Might not use.
 class ShadowView: UIView {
   
   var setupShadowDone: Bool = false

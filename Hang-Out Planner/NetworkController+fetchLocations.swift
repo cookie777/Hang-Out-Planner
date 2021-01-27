@@ -219,7 +219,9 @@ extension NetworkController{
           case "$$$$": return 4
           default: return nil
           }
-        }()
+        }(),
+        ranking: topNLocations.count+1,
+        phone: yl.phone
       )
       topNLocations.append(l)
     }
@@ -245,6 +247,7 @@ extension NetworkController{
     var priceLevel   : String?
     var website     : String
     var address : Address?
+    var phone : String?
     
     struct coordinates : Codable {
       var latitude: Double
@@ -266,6 +269,7 @@ extension NetworkController{
       case priceLevel     = "price"
       case website        = "url"
       case address        = "location"
+      case phone
     }
     
   }
@@ -293,6 +297,8 @@ extension NetworkController{
         priceLevel   : \(String(describing: l.priceLevel))
         category   : \(l.category)
         address: \(l.address)
+        ranking : \(String(describing: l.ranking))
+        phone: \(String(describing: l.phone))
 
       """)
     }

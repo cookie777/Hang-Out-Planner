@@ -182,6 +182,18 @@ extension PlanDetailViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
+    // If a user tap `DistanceCardTVCell` or start point, do nothing
+    if indexPath.row != 0 {return}
+    if indexPath.section == 0 {return}
+    // Otherwise, get selected Location id, and pass to nextVC
+    let selectedLocationId = plan.destinationList[indexPath.section]
+    let nextVC = LocationDetailViewController(location: allLocations[selectedLocationId])
+    
+    present(nextVC, animated: true, completion: nil)
+    
+//    print(indexPath.section)
+//    print(plan.destinationList)
+
   }
 }
 

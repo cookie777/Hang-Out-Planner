@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4823EEF925C0E40C006C7324 /* UIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EEF825C0E40C006C7324 /* UIController.swift */; };
+		4823EEFF25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */; };
+		4823EF0325C16057006C7324 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EF0225C16057006C7324 /* ShadowView.swift */; };
 		486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D0D5D25BD412D00858B03 /* UserLocationController.swift */; };
+		4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */; };
 		48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57125B52D3900264AF9 /* AppDelegate.swift */; };
 		48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57325B52D3900264AF9 /* SceneDelegate.swift */; };
 		48A4C57B25B52D3B00264AF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48A4C57A25B52D3B00264AF9 /* Assets.xcassets */; };
@@ -45,10 +49,15 @@
 		48DE334925B8ECE2001630B7 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334225B8ECE2001630B7 /* Plan.swift */; };
 		AEB62B0325BFA64F0004DFE9 /* yelp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEB62AFD25BFA3290004DFE9 /* yelp-Info.plist */; };
 		B088871F25B911D000D5F9E0 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */; };
+		B0AEF4FA25BFA673009CBF6D /* yelp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0AEF4F625BFA336009CBF6D /* yelp-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4823EEF825C0E40C006C7324 /* UIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIController.swift; sourceTree = "<group>"; };
+		4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+hideBarBackground.swift"; sourceTree = "<group>"; };
+		4823EF0225C16057006C7324 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		486D0D5D25BD412D00858B03 /* UserLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationController.swift; sourceTree = "<group>"; };
+		4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustedTableView.swift; sourceTree = "<group>"; };
 		48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hang-Out Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A4C57125B52D3900264AF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48A4C57325B52D3900264AF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +98,7 @@
 		48DE334225B8ECE2001630B7 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		AEB62AFD25BFA3290004DFE9 /* yelp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "yelp-Info.plist"; sourceTree = "<group>"; };
 		B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
+		B0AEF4F625BFA336009CBF6D /* yelp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "yelp-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +132,7 @@
 		48A4C57025B52D3900264AF9 /* Hang-Out Planner */ = {
 			isa = PBXGroup;
 			children = (
+				4823EEF825C0E40C006C7324 /* UIController.swift */,
 				48A4C67425B557D900264AF9 /* NetworkController.swift */,
 				48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */,
 				486D0D5D25BD412D00858B03 /* UserLocationController.swift */,
@@ -130,7 +141,7 @@
 				48A4C5B125B52E3C00264AF9 /* Model */,
 				48A4C5A425B52DDD00264AF9 /* SupportFiles */,
 				48A4C57F25B52D3B00264AF9 /* Info.plist */,
-				AEB62AFD25BFA3290004DFE9 /* yelp-Info.plist */,
+				B0AEF4F625BFA336009CBF6D /* yelp-Info.plist */,
 			);
 			path = "Hang-Out Planner";
 			sourceTree = "<group>";
@@ -163,6 +174,7 @@
 		48A4C62A25B554D600264AF9 /* Basic(Don't use this) */ = {
 			isa = PBXGroup;
 			children = (
+				4823EF0225C16057006C7324 /* ShadowView.swift */,
 				48D4876225B5833600EA55D6 /* Label */,
 				48A4C63125B5557C00264AF9 /* Button */,
 				48A4C63025B5557000264AF9 /* Cell */,
@@ -193,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				48A4C60B25B553E100264AF9 /* CardTVCell.swift */,
+				4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -261,6 +274,7 @@
 				48A4C66925B5574A00264AF9 /* UILabel+LineSpacing.swift */,
 				48A4C66A25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift */,
 				48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */,
+				4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -343,7 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48A4C57E25B52D3B00264AF9 /* LaunchScreen.storyboard in Resources */,
-				AEB62B0325BFA64F0004DFE9 /* yelp-Info.plist in Resources */,
+				B0AEF4FA25BFA673009CBF6D /* yelp-Info.plist in Resources */,
 				48A4C57B25B52D3B00264AF9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +380,8 @@
 				48DE334525B8ECE2001630B7 /* Location.swift in Sources */,
 				48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */,
 				48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */,
+				4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */,
+				4823EEF925C0E40C006C7324 /* UIController.swift in Sources */,
 				48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */,
 				48A4C60725B553B400264AF9 /* GoButton.swift in Sources */,
 				48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */,
@@ -389,6 +405,8 @@
 				48DE334625B8ECE2001630B7 /* Planner.swift in Sources */,
 				48A4C66C25B5574A00264AF9 /* HorizontalStackView.swift in Sources */,
 				48A4C5BE25B5385D00264AF9 /* MainViewController.swift in Sources */,
+				4823EEFF25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift in Sources */,
+				4823EF0325C16057006C7324 /* ShadowView.swift in Sources */,
 				48A4C64825B5564800264AF9 /* MediumHeaderLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 /// Definition of categories
@@ -18,6 +19,44 @@ enum Categories : String {
   case park = "Park"
   case cafe = "Cafe"
   case other = "Other"
+  
+  static func color(_ categories: Categories)->UIColor{
+    switch categories {
+    case .clothes:
+      return .systemPurple
+    case .amusement:
+      return .systemPink
+    case .restaurant:
+      return .systemOrange
+    case .cafe:
+      return .systemYellow
+    case .park:
+      return .systemGreen
+    case .other:
+      return .systemGray
+    }
+  }
+  
+  static func sfSymbolImage(_ categories: Categories)->UIImage?{
+    switch categories {
+    case .clothes:
+      return setImage("bag", categories)
+    case .amusement:
+      return setImage("music.mic", categories)
+    case .restaurant:
+      return setImage("photo", categories)
+    case .cafe:
+      return setImage("tornado", categories)
+    case .park:
+      return setImage("tortoise", categories)
+    case .other:
+      return setImage("person", categories)
+    }
+  }
+  
+  static func setImage(_ str: String, _ category : Categories)->UIImage{
+    return (UIImage(systemName: str, withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(Categories.color(category), renderingMode: .alwaysOriginal))!
+  }
 }
 
 

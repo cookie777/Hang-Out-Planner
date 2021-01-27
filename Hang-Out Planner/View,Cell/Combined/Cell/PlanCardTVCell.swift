@@ -32,7 +32,7 @@ class PlanCardTVCell: CardTVCell {
     totalTimeStack.matchLeadingTrailing()
     locationStack.matchLeadingTrailing()
     vStackView.matchParent()
-    self.backgroundColor = .systemGroupedBackground
+//    self.backgroundColor = .systemGroupedBackground
 
   }
   

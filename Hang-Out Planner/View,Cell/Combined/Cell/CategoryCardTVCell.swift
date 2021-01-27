@@ -46,21 +46,21 @@ class CategoryCardTVCell: CardTVCell{
     fatalError("init(coder:) has not been implemented")
   }
   
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 1, bottom:32, right: 1))
-  }
-  
-// This is to change size .
-//  override var frame: CGRect {
-//      get {
-//          return super.frame
-//      }
-//      set {
-//          var frame = newValue
-//          frame.origin.x += 15
-//          frame.size.width -= 2 * 15
-//          super.frame = frame
-//      }
+//  override func layoutSubviews() {
+//    super.layoutSubviews()
+//    contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom:0, right: 0))
 //  }
+  
+// This is to change size . God
+  override var frame: CGRect {
+      get {
+          return super.frame
+      }
+      set {
+          var frame = newValue
+          frame.origin.y += 16
+          frame.size.height -= 2 * 24
+          super.frame = frame
+      }
+  }
 }

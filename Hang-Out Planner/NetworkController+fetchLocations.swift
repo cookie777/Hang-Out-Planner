@@ -297,8 +297,8 @@ extension NetworkController{
         priceLevel   : \(String(describing: l.priceLevel))
         category   : \(l.category)
         address: \(l.address)
-        ranking : \(l.ranking)
-        phone: \(l.phone)
+        ranking : \(String(describing: l.ranking))
+        phone: \(String(describing: l.phone))
 
       """)
     }

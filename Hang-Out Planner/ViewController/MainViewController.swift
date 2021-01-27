@@ -27,18 +27,27 @@ class MainViewController: UIViewController, UITableViewDelegate
   var sectionTitles: [String] = ["1st Location","2nd Location","3rd Location"]
   var goButton = GoButton()
   var addButton = AddButton()
-  let headerTitle1 = LargeHeaderLabel(text: "Where You")
-  let headerTitle2 = LargeHeaderLabel(text: "Want To Go?")
+  let headerTitle = LargeHeaderLabel(text: "Where Do You \nWant To Go?")
   
   let mapView : MKMapView = {
     let map = MKMapView()
     map.backgroundColor = .lightGray
     map.translatesAutoresizingMaskIntoConstraints = false
+    map.layer.cornerRadius = 32
     return map
   }()
   
   let locationTitle = SubTextLabel(text: "Your current location is:")
   let locationLabel = SubTextLabel(text: "Near Keefer 58 PI")
+  lazy var locationStackView = VerticalStackView(arrangedSubviews: [locationTitle, locationLabel], spacing: 8)
+  
+  let routeLabel :UILabel   = {
+    let lb = MediumHeaderLabel(text: "Route")
+    let h = lb.intrinsicContentSize.height
+    lb.constraintHeight(equalToConstant: h+16)
+    
+    return lb
+  }()
   
   let tableview: UITableView = {
     let table = UITableView()
@@ -51,62 +60,53 @@ class MainViewController: UIViewController, UITableViewDelegate
     view.backgroundColor = .systemBackground
     safeArea = view.layoutMarginsGuide
     
+    // setting nv bar. Might use later
+//    navigationController?.navigationBar.prefersLargeTitles = true
+//    navigationItem.title = "Where do you\n want to go?"
+//    navigationController?.navigationBar.largeTitleTextAttributes = LargeHeaderLabel.attrs
+
+    // Tableview setting
     tableview.register(CategoryCardTVCell.self, forCellReuseIdentifier: cellId)
     tableview.dataSource = self
     tableview.delegate = self
     tableview.allowsMultipleSelectionDuringEditing = true
     
     
-    view.addSubview(headerTitle1)
-    headerTitle1.translatesAutoresizingMaskIntoConstraints = false
-    headerTitle1.centerXin(view)
-    headerTitle1.topAnchor.constraint(equalTo:view.topAnchor, constant: 96).isActive = true
-    
-    view.addSubview(headerTitle2)
-    headerTitle2.translatesAutoresizingMaskIntoConstraints = false
-    headerTitle2.centerXin(view)
-    headerTitle2.topAnchor.constraint(equalTo:headerTitle1.bottomAnchor, constant: 8).isActive = true
-    
-    view.addSubview(mapView)
-    mapView.topAnchor.constraint(equalTo: headerTitle2.bottomAnchor, constant: 16).isActive = true
-    mapView.centerXin(view)
-    mapView.constraintWidth(equalToConstant: 300)
-    mapView.constraintHeight(equalToConstant: 120)
-    
-    view.addSubview(locationTitle)
-    locationTitle.translatesAutoresizingMaskIntoConstraints = false
-    locationTitle.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 8).isActive = true
-    locationTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
-    
-    view.addSubview(locationLabel)
-    locationLabel.translatesAutoresizingMaskIntoConstraints = false
-    locationLabel.textColor = .blue
-    locationLabel.topAnchor.constraint(equalTo: locationTitle.bottomAnchor, constant: 8).isActive = true
-    locationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
+    let userLocationStackView = VerticalStackView(arrangedSubviews: [headerTitle, mapView, locationStackView], spacing: 24)
+    let tableHeaderStackView = VerticalStackView(arrangedSubviews: [userLocationStackView,routeLabel],spacing: 40)
+    mapView.constraintHeight(equalToConstant: 200)
+  
     
     view.addSubview(tableview)
-    tableview.translatesAutoresizingMaskIntoConstraints = false
-    tableview.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 16).isActive = true
-    tableview.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    tableview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -88).isActive
-      = true
+    tableview.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
+    tableview.showsVerticalScrollIndicator = false
     tableview.separatorStyle = .none
-    
-    //Add goButton to view (you can modify this)
+
+    let thv = tableHeaderStackView
+    tableview.tableHeaderView = thv
+    thv.translatesAutoresizingMaskIntoConstraints = false
+  
+    thv.matchSizeWith(widthRatio: 1, heightRatio: nil)
+    tableview.tableHeaderView?.setNeedsLayout()
+    tableview.tableHeaderView?.layoutIfNeeded()
+
+//    Add goButton to view (you can modify this)
     view.addSubview(goButton)
     //    goButton.centerXYinSafeArea(view)
     goButton.translatesAutoresizingMaskIntoConstraints = false
     goButton.addTarget(self, action: #selector(goButtonTapped), for: .touchUpInside)
     goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -144).isActive = true
     goButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
-    
+
     view.addSubview(addButton)
     addButton.translatesAutoresizingMaskIntoConstraints = false
     addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 144).isActive = true
     addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
 
-    
+    tableview.sectionHeaderHeight = UITableView.automaticDimension
+//    tableview.rowHeight = UITableView.automaticDimension
+
   }
   
   
@@ -223,17 +223,19 @@ class MainViewController: UIViewController, UITableViewDelegate
     }
   }
   
-  func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-    (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor.white
-  }
   
   func numberOfSections(in tableView: UITableView) -> Int {
     sectionTitles.count
   }
+
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return sectionTitles[section]
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let text = sectionTitles[section]
+    let lb = SmallHeaderLabel(text: text)
+    return lb
   }
+  
   
   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
     if !categoryArray[1].isEmpty {
@@ -259,15 +261,24 @@ class MainViewController: UIViewController, UITableViewDelegate
     tableview.reloadData()
     updateAddButtonState()
   }
-  
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 30
-  }
-  
+
+//
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 80
+    return 112
   }
   
+//  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//    // if you do not set `shadowPath` you'll notice laggy scrolling
+//    // add this in `willDisplay` method
+//    guard let cell = cell as? CategoryCardTVCell else {
+//      return
+//    }
+//    let radius = cell.mainBackground.layer.cornerRadius
+//    cell.shadowLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadowLayer.bounds, cornerRadius: radius).cgPath
+////    cell.shadowLayer.layer.shouldRasterize = true
+////    cell.shadowLayer.layer.rasterizationScale = UIScreen.main.scale
+//  }
+
   //  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
   //    let removedToDoItem = categoryArray[sourceIndexPath.section].remove(at: sourceIndexPath.row)
   //    categoryArray[destinationIndexPath.section].insert(removedToDoItem, at: destinationIndexPath.row)
@@ -294,9 +305,9 @@ extension MainViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell
     cell.categoryName.text = categoryArray[indexPath.section][indexPath.row]
-    cell.showsReorderControl = true
     return cell
   }
+
 }
 
 
@@ -343,7 +354,5 @@ extension MainViewController{
     // Stop tracking user data.  Added by Yanmer.
     UserLocationController.shared.stop()
   }
-  
-  
-  
+
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4823EEF925C0E40C006C7324 /* UIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EEF825C0E40C006C7324 /* UIController.swift */; };
 		4823EEFF25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */; };
+		4823EF0325C16057006C7324 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EF0225C16057006C7324 /* ShadowView.swift */; };
 		486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D0D5D25BD412D00858B03 /* UserLocationController.swift */; };
 		48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57125B52D3900264AF9 /* AppDelegate.swift */; };
 		48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57325B52D3900264AF9 /* SceneDelegate.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		4823EEF825C0E40C006C7324 /* UIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIController.swift; sourceTree = "<group>"; };
 		4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+hideBarBackground.swift"; sourceTree = "<group>"; };
+		4823EF0225C16057006C7324 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		486D0D5D25BD412D00858B03 /* UserLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationController.swift; sourceTree = "<group>"; };
 		48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hang-Out Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A4C57125B52D3900264AF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				48A4C60B25B553E100264AF9 /* CardTVCell.swift */,
+				4823EF0225C16057006C7324 /* ShadowView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				48A4C66C25B5574A00264AF9 /* HorizontalStackView.swift in Sources */,
 				48A4C5BE25B5385D00264AF9 /* MainViewController.swift in Sources */,
 				4823EEFF25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift in Sources */,
+				4823EF0325C16057006C7324 /* ShadowView.swift in Sources */,
 				48A4C64825B5564800264AF9 /* MediumHeaderLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,7 @@ class LargeHeaderLabel: BasicLabel {
   override init(text: String) {
     super.init(text: text)
     self.font = .systemFont(ofSize: 40, weight: .black)
+    self.textAlignment = .left
     
   }
   required init?(coder: NSCoder) {

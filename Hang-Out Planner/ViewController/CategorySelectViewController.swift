@@ -19,8 +19,8 @@ class CategorySelectViewController: UIViewController {
   var row: Int?
   var section: Int?
   
-  let headerTitle1 = LargeHeaderLabel(text: "How Are")
-  let headerTitle2 = LargeHeaderLabel(text: "You Feeling?")
+  let headerTitle1 = LargeHeaderLabel(text: "How Are\nYou Feeling?")
+//  let headerTitle2 = LargeHeaderLabel(text: "You Feeling?")
   let smallTitle1 = SmallHeaderLabel(text: "Current Location")
   let smallTitle2 = SmallHeaderLabel(text: "Location Types")
   let categoryName0 = MediumHeaderLabel(text: Categories.cafe.rawValue)
@@ -43,14 +43,14 @@ class CategorySelectViewController: UIViewController {
     headerTitle1.centerXin(view)
     headerTitle1.topAnchor.constraint(equalTo:view.topAnchor, constant: 56).isActive = true
     
-    view.addSubview(headerTitle2)
-    headerTitle2.translatesAutoresizingMaskIntoConstraints = false
-    headerTitle2.centerXin(view)
-    headerTitle2.topAnchor.constraint(equalTo:headerTitle1.bottomAnchor, constant: 8).isActive = true
-    
+//    view.addSubview(headerTitle2)
+//    headerTitle2.translatesAutoresizingMaskIntoConstraints = false
+//    headerTitle2.centerXin(view)
+//    headerTitle2.topAnchor.constraint(equalTo:headerTitle1.bottomAnchor, constant: 8).isActive = true
+//
     view.addSubview(smallTitle1)
     smallTitle1.translatesAutoresizingMaskIntoConstraints = false
-    smallTitle1.topAnchor.constraint(equalTo: headerTitle2.bottomAnchor, constant: 16).isActive = true
+    smallTitle1.topAnchor.constraint(equalTo: headerTitle1.bottomAnchor, constant: 16).isActive = true
     smallTitle1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
     
     view.addSubview(categoryName0)

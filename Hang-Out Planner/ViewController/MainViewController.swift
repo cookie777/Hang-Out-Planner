@@ -105,6 +105,7 @@ class MainViewController: UIViewController, UITableViewDelegate
     addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 144).isActive = true
     addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
+
     
   }
   
@@ -208,6 +209,7 @@ class MainViewController: UIViewController, UITableViewDelegate
       print("Add Button didn't work...")
     }
     let addToDoVC = UINavigationController(rootViewController: addEditVC)
+    addToDoVC.hideBarBackground() // hide nv bar background. added by yanmer
     present(addToDoVC, animated: true, completion: nil)
     tableview.reloadData()
     updateAddButtonState()
@@ -278,6 +280,7 @@ class MainViewController: UIViewController, UITableViewDelegate
     addEditVC.row = indexPath.row
     addEditVC.section = indexPath.section
     let addToDoVC = UINavigationController(rootViewController: addEditVC)
+    addToDoVC.hideBarBackground() // hide nv bar background. added by yanmer
     present(addToDoVC, animated: true, completion: nil)
     tableview.deselectRow(at: indexPath, animated: true)
     tableview.reloadData()

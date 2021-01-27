@@ -8,23 +8,59 @@
 import UIKit
 
 class CategoryCardTVCell: CardTVCell{
-
   
-  let categoryName = MediumHeaderLabel(text: "")
+  var icon = UIImageView(frame: .zero)
+  var textlb = SmallHeaderLabel(text: "")
+  
+  // If category is set, we also set icon img, lb text, background color
+  var category : String = ""{
+    didSet{
+      guard let c = Categories(rawValue: category)  else {return}
+      icon.image = Categories.sfSymbolImage(c)
+      textlb.text = category
+      textlb.textColor = Categories.color(c)
+      mainBackground.layer.borderColor = Categories.color(c).cgColor
+    }
+  }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-      super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-    contentView.addSubview(categoryName)
-    categoryName.translatesAutoresizingMaskIntoConstraints = false
-    categoryName.centerXYin(contentView)
-    categoryName.constraintWidth(equalToConstant: 280)
-    categoryName.constraintHeight(equalToConstant: 50)
-    categoryName.textAlignment = .center
-    categoryName.layer.borderColor = UIColor.darkGray.cgColor
-    categoryName.layer.borderWidth = 1
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    
+    // Icon layout
+    contentView.addSubview(icon)
+    icon.centerYin(contentView)
+    icon.leadingAnchor.constraint(equalTo: mainBackground.leadingAnchor, constant: 24).isActive = true
+    
+    
+    // Text layout
+    contentView.addSubview(textlb)
+    textlb.centerXYin(contentView)
+    
+    // mainBackground layout
+    mainBackground.layer.borderWidth = 1.6
+    
+    
   }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
- }
+  
+  //  override func layoutSubviews() {
+  //    super.layoutSubviews()
+  //    contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom:0, right: 0))
+  //  }
+  
+  // This is to change size . God
+  override var frame: CGRect {
+    get {
+      return super.frame
+    }
+    set {
+      var frame = newValue
+      frame.origin.y += 16
+      frame.size.height -= 2 * 24
+      super.frame = frame
+    }
+  }
+}

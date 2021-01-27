@@ -9,9 +9,18 @@ import UIKit
 
 class LargeHeaderLabel: BasicLabel {
   
+  static var fontData : UIFont =  UIFont.systemFont(ofSize: 40, weight: .black)
+  
+  // This attribute is used for modifying navigation bar large title.
+  // I store here because it's a bit relevant.
+  static let attrs = [
+    NSAttributedString.Key.font: LargeHeaderLabel.fontData
+  ]
+  
   override init(text: String) {
     super.init(text: text)
-    self.font = .systemFont(ofSize: 40, weight: .black)
+    self.font = LargeHeaderLabel.fontData
+    self.textAlignment = .left
     
   }
   required init?(coder: NSCoder) {

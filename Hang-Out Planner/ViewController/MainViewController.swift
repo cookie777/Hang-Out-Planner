@@ -21,8 +21,8 @@ class MainViewController: UIViewController, UITableViewDelegate
   let cellId = "categories"
   var safeArea: UILayoutGuide!
   
-  var selectedCategories: [Categories] = [.cafe,.clothes,.park]
-  var categoryArray :[[String]] = [[Categories.cafe.rawValue],[Categories.clothes.rawValue],[Categories.park.rawValue],[],[]]
+  var selectedCategories: [Categories] = [.clothes,.amusement,.cafe]
+  var categoryArray :[[String]] = [[Categories.clothes.rawValue],[Categories.amusement.rawValue],[Categories.cafe.rawValue],[],[]]
   
   var sectionTitles: [String] = ["1st Location","2nd Location","3rd Location"]
   var goButton = GoButton()
@@ -38,13 +38,13 @@ class MainViewController: UIViewController, UITableViewDelegate
   }()
   
   let locationTitle = SubTextLabel(text: "Your current location is:")
-  let locationLabel = SubTextLabel(text: "Near Keefer 58 PI")
+  let locationLabel = TextLabel(text: "Near Keefer 58 PI")
   lazy var locationStackView = VerticalStackView(arrangedSubviews: [locationTitle, locationLabel], spacing: 8)
   
   let routeLabel :UILabel   = {
     let lb = MediumHeaderLabel(text: "Route")
     let h = lb.intrinsicContentSize.height
-    lb.constraintHeight(equalToConstant: h+16)
+    lb.constraintHeight(equalToConstant: h+24)
     
     return lb
   }()
@@ -61,10 +61,10 @@ class MainViewController: UIViewController, UITableViewDelegate
     safeArea = view.layoutMarginsGuide
     
     // setting nv bar. Might use later
-//    navigationController?.navigationBar.prefersLargeTitles = true
-//    navigationItem.title = "Where do you\n want to go?"
-//    navigationController?.navigationBar.largeTitleTextAttributes = LargeHeaderLabel.attrs
-
+    //    navigationController?.navigationBar.prefersLargeTitles = true
+    //    navigationItem.title = "Where do you\n want to go?"
+    //    navigationController?.navigationBar.largeTitleTextAttributes = LargeHeaderLabel.attrs
+    
     // Tableview setting
     tableview.register(CategoryCardTVCell.self, forCellReuseIdentifier: cellId)
     tableview.dataSource = self
@@ -75,38 +75,38 @@ class MainViewController: UIViewController, UITableViewDelegate
     let userLocationStackView = VerticalStackView(arrangedSubviews: [headerTitle, mapView, locationStackView], spacing: 24)
     let tableHeaderStackView = VerticalStackView(arrangedSubviews: [userLocationStackView,routeLabel],spacing: 40)
     mapView.constraintHeight(equalToConstant: 200)
-  
+    
     
     view.addSubview(tableview)
     tableview.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
     tableview.showsVerticalScrollIndicator = false
     tableview.separatorStyle = .none
-
+    
     let thv = tableHeaderStackView
     tableview.tableHeaderView = thv
     thv.translatesAutoresizingMaskIntoConstraints = false
-  
+    
     thv.matchSizeWith(widthRatio: 1, heightRatio: nil)
     tableview.tableHeaderView?.setNeedsLayout()
     tableview.tableHeaderView?.layoutIfNeeded()
-
-//    Add goButton to view (you can modify this)
+    
+    //    Add goButton to view (you can modify this)
     view.addSubview(goButton)
     //    goButton.centerXYinSafeArea(view)
     goButton.translatesAutoresizingMaskIntoConstraints = false
     goButton.addTarget(self, action: #selector(goButtonTapped), for: .touchUpInside)
     goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -144).isActive = true
     goButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
-
+    
     view.addSubview(addButton)
     addButton.translatesAutoresizingMaskIntoConstraints = false
     addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 144).isActive = true
     addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
-
+    
     tableview.sectionHeaderHeight = UITableView.automaticDimension
-//    tableview.rowHeight = UITableView.automaticDimension
-
+    //    tableview.rowHeight = UITableView.automaticDimension
+    
   }
   
   
@@ -154,8 +154,8 @@ class MainViewController: UIViewController, UITableViewDelegate
         // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
         
-//        NetworkController.shared.printLocations(locations: allLocations)
-//        NetworkController.shared.printPlans(plans: plans)
+        //        NetworkController.shared.printLocations(locations: allLocations)
+        //        NetworkController.shared.printPlans(plans: plans)
       }
       
     }else{
@@ -227,12 +227,12 @@ class MainViewController: UIViewController, UITableViewDelegate
   func numberOfSections(in tableView: UITableView) -> Int {
     sectionTitles.count
   }
-
+  
   
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let text = sectionTitles[section]
-    let lb = SmallHeaderLabel(text: text)
+    let lb = TextLabel(text: text)
     return lb
   }
   
@@ -261,24 +261,14 @@ class MainViewController: UIViewController, UITableViewDelegate
     tableview.reloadData()
     updateAddButtonState()
   }
-
-//
+  
+  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 112
   }
   
-//  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//    // if you do not set `shadowPath` you'll notice laggy scrolling
-//    // add this in `willDisplay` method
-//    guard let cell = cell as? CategoryCardTVCell else {
-//      return
-//    }
-//    let radius = cell.mainBackground.layer.cornerRadius
-//    cell.shadowLayer.layer.shadowPath = UIBezierPath(roundedRect: cell.shadowLayer.bounds, cornerRadius: radius).cgPath
-////    cell.shadowLayer.layer.shouldRasterize = true
-////    cell.shadowLayer.layer.rasterizationScale = UIScreen.main.scale
-//  }
-
+  
+  
   //  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
   //    let removedToDoItem = categoryArray[sourceIndexPath.section].remove(at: sourceIndexPath.row)
   //    categoryArray[destinationIndexPath.section].insert(removedToDoItem, at: destinationIndexPath.row)
@@ -304,10 +294,10 @@ extension MainViewController: UITableViewDataSource {
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell
-    cell.categoryName.text = categoryArray[indexPath.section][indexPath.row]
+    cell.category = categoryArray[indexPath.section][indexPath.row]
     return cell
   }
-
+  
 }
 
 
@@ -333,7 +323,7 @@ extension MainViewController{
       self?.mapView.setRegion(region, animated: true)
       self?.mapView.showsUserLocation = true
       
-//      show current address
+      //      show current address
       CLGeocoder().reverseGeocodeLocation(UserLocationController.shared.locationManager.location!) { placemarks, error in
         guard
           let placemark = placemarks?.first, error == nil,
@@ -354,5 +344,5 @@ extension MainViewController{
     // Stop tracking user data.  Added by Yanmer.
     UserLocationController.shared.stop()
   }
-
+  
 }

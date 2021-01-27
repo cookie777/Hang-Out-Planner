@@ -170,6 +170,7 @@
 		48A4C62A25B554D600264AF9 /* Basic(Don't use this) */ = {
 			isa = PBXGroup;
 			children = (
+				4823EF0225C16057006C7324 /* ShadowView.swift */,
 				48D4876225B5833600EA55D6 /* Label */,
 				48A4C63125B5557C00264AF9 /* Button */,
 				48A4C63025B5557000264AF9 /* Cell */,
@@ -200,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				48A4C60B25B553E100264AF9 /* CardTVCell.swift */,
-				4823EF0225C16057006C7324 /* ShadowView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";

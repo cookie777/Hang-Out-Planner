@@ -66,17 +66,19 @@ class MainViewController: UIViewController
     //    navigationItem.title = "Where do you\n want to go?"
     //    navigationController?.navigationBar.largeTitleTextAttributes = LargeHeaderLabel.attrs
     
+    
     // add to view and set constrans
     setLayoutOfTableView()
-    
-    
+    setLayoutButton()
     
     // Tableview setting
     tableview.register(CategoryCardTVCell.self, forCellReuseIdentifier: cellId)
     tableview.dataSource = self
     tableview.delegate = self
     tableview.allowsMultipleSelectionDuringEditing = true
-
+    //    tableview.sectionHeaderHeight = UITableView.automaticDimension
+    //    tableview.rowHeight = UITableView.automaticDimension
+    
   }
   
   func setLayoutOfTableView(){
@@ -104,25 +106,30 @@ class MainViewController: UIViewController
     tableview.tableHeaderView?.setNeedsLayout()
     tableview.tableHeaderView?.layoutIfNeeded()
     
-    
+  }
+  
+  func setLayoutButton() {
     
     //    Add goButton to view (you can modify this)
     view.addSubview(goButton)
-    //    goButton.centerXYinSafeArea(view)
+    
+    let goButtonSize = goButton.intrinsicContentSize.width
+    let addButtonSize = addButton.intrinsicContentSize.width
+
     goButton.translatesAutoresizingMaskIntoConstraints = false
     goButton.addTarget(self, action: #selector(goButtonTapped), for: .touchUpInside)
-    goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -144).isActive = true
-    goButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
+    goButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: goButtonSize + 16).isActive = true
+    goButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
     
     view.addSubview(addButton)
     addButton.translatesAutoresizingMaskIntoConstraints = false
     addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-    addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 144).isActive = true
-    addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -48).isActive = true
+    addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant:  -1*(16 + addButtonSize)).isActive = true
+    addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
     
-    tableview.sectionHeaderHeight = UITableView.automaticDimension
-    //    tableview.rowHeight = UITableView.automaticDimension
+    
   }
+  
   
   // MARK: - Botton Config
   
@@ -243,12 +250,12 @@ class MainViewController: UIViewController
     sectionTitles.count
   }
 }
-  
+
 
 
 
 // MARK: - Table view
-  
+
 extension MainViewController: UITableViewDelegate{
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let text = sectionTitles[section]

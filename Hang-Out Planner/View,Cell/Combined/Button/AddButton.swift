@@ -11,11 +11,16 @@ class AddButton: MainVCButton {
   
   override init() {
     super.init()
-    self.setTitle("+", for: .normal)
-    self.backgroundColor = .white
+    // set main text
+    let lb = MediumHeaderLabel(text: "+")
+    lb.translatesAutoresizingMaskIntoConstraints = false
+    lb.textColor = .systemBlue
+    self.addSubview(lb)
+    lb.centerXYin(self)
+    
+    
+    self.backgroundColor = .systemBackground
     self.setTitleColor(.blue, for: .normal)
-    self.layer.borderWidth = 1
-    self.layer.borderColor = UIColor.black.cgColor
   }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

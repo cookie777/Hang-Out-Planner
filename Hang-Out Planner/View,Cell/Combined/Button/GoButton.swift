@@ -11,7 +11,14 @@ class GoButton: MainVCButton {
 
   override init() {
     super.init()
-    self.setTitle("GO", for: .normal)
+    
+    // set main text
+    let lb = SmallHeaderLabel(text: "GO")
+    lb.translatesAutoresizingMaskIntoConstraints = false
+    lb.textColor = .systemBackground
+    self.addSubview(lb)
+    lb.centerXYin(self)
+
     self.backgroundColor = .systemBlue
   }
   

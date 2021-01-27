@@ -22,10 +22,7 @@ class CardTVCell: UITableViewCell {
 //    shadowLayer.backgroundColor = .label
 //    contentView.addSubview(shadowLayer)
 //    shadowLayer.matchParent(padding: .init(top: 16, left: 0, right: 0, bottom: 24))
-//
-//
-    
-    
+
     // Set main backgroud
     mainBackground.translatesAutoresizingMaskIntoConstraints = false
     mainBackground.backgroundColor =  .systemBackground

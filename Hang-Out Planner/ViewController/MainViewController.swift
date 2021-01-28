@@ -166,6 +166,15 @@ class MainViewController: UIViewController
   //Action when goButton is tapped
   @objc func goButtonTapped(){
     
+    if noMoreAPI{
+      allLocations = [userCurrentLocation] + Location.sampleLocations
+      Planner.calculateAllRoutes()
+      let plans = Planner.calculatePlans(categories: selectedCategories)
+      let nextVC = PlanListTableViewController(plans: plans)
+      navigationController?.pushViewController(nextVC, animated: true)
+      return
+    }
+    
     // if you has moved or no locations data?
     // -> then re-create(request, and calculate) all data
     if UserLocationController.shared.hasUserMoved() || allLocations.count == 0{
@@ -299,7 +308,7 @@ extension MainViewController: UITableViewDelegate{
   
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 16+56+24
+    return 8+56+24
   }
   
   
@@ -330,7 +339,7 @@ extension MainViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell
     cell.category = categoryArray[indexPath.section][indexPath.row]
-    cell.setMargin(insets: .init(top: 16, left: 0 , right: 0, bottom: 24))
+    cell.setMargin(insets: .init(top: 8, left: 0 , right: 0, bottom: 24))
     return cell
   }
   

@@ -7,14 +7,8 @@
 
 import Foundation
 
-// ↓ This variable moves to UserLocationController.swift
-//   This is to let UserLocationController keeps any info about user current coordinates data
-//
-//store GPS data (lat,long)
-//var userCurrentCoordinates : (Double, Double)? = (
-//  Location.sampleStartPoint.latitude,
-//  Location.sampleStartPoint.longitude
-//)
+
+var noMoreAPI = true
 
 var userCurrentLocation : Location = Location(
   id: 0,

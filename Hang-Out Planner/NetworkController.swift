@@ -28,27 +28,32 @@ class NetworkController {
   /// - Parameters:
   ///   - urlString: String
   ///   - UIImage: locationImage(thumbnail) at each cell in PlanDetailVC
-  func fetchImage(urlString: String, completionHandler: @escaping (UIImage?, Error?) -> Void) {
-    guard let url = URL(string: urlString) else {return}
-    
-    let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+  func fetchImage(urlString: String?, completionHandler: @escaping (UIImage?, Error?) -> Void) {
+    // check if imageURL is nil
+    if let urlString = urlString {
+      // check if its type is URL
+      guard let url = URL(string: urlString) else {return}
       
-      if let data = data {
-        do {
-          if let image = UIImage(data: data) {
-            completionHandler(image, nil)
+      let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        
+        if let data = data {
+          do {
+            if let image = UIImage(data: data) {
+                completionHandler(image, nil)
+            }
+          } catch {
+            print(error.localizedDescription)
+            completionHandler(nil, error)
           }
-        } catch {
+        } else if let error = error {
           print(error.localizedDescription)
-          completionHandler(nil, error)
         }
-      } else if let error = error {
-        print(error.localizedDescription)
       }
+      task.resume()
     }
-    task.resume()
-  }
-  
+    
+    }
+    
 }
 
 

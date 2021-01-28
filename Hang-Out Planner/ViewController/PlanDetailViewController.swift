@@ -30,11 +30,10 @@ class PlanDetailViewController: UIViewController{
   }()
   
   /// variables related to store fetched images
-  let locationCardCell = LocationCardTVCell()
-  var routeOrder = 0
-
+//  let locationCardCell = LocationCardTVCell()
+//  var routeOrder = 0
+  var fetchedImages: [UIImage?] = []
   
-
   init(plan:Plan) {
     self.plan = plan
     super.init(nibName: nil, bundle: nil)
@@ -63,23 +62,24 @@ class PlanDetailViewController: UIViewController{
     for route in plan.routes {
       createAnnotation(startLocationId: route.startLocationId, routeCount: routeCount)
       mapRoute(startLocationId: route.startLocationId, nextLocationId: route.nextLocationId)
-      
+      fetchedImages.append(nil)
+      print("fetched images: \(fetchedImages)")
       /// Fetch images for all the route here, store it into dictionary
-      let urlString = checkImageURL(id: route.startLocationId)
-      NetworkController.shared.fetchImage(urlString: urlString) { (image, error) in
-        if let image = image {
-          print(image)
-          self.locationCardCell.FetchedImageDict[self.routeOrder] = image
-        } else if image == nil {
-          self.locationCardCell.FetchedImageDict[self.routeOrder] = nil
-        }else if let error = error {
-          print(error)
-        }
-      }
+//      let urlString = checkImageURL(id: route.startLocationId)
+//      NetworkController.shared.fetchImage(urlString: urlString) { (image, error) in
+//        if let image = image {
+//          print(image)
+//          self.locationCardCell.FetchedImageDict[self.routeOrder] = image
+//        } else if image == nil {
+//          self.locationCardCell.FetchedImageDict[self.routeOrder] = nil
+//        }else if let error = error {
+//          print(error)
+//        }
+//      }
       routeCount += 1
     }
-    
-    print("image dict: \(locationCardCell.FetchedImageDict)")
+//
+//    print("image dict: \(locationCardCell.FetchedImageDict)")
     
     
     /// set tableView here
@@ -104,12 +104,14 @@ class PlanDetailViewController: UIViewController{
 
   
 //   MARK: - TEMP
-  func checkImageURL(id: Int) -> String {
+  func checkImageURL(id: Int) -> String? {
     var urlString = ""
     for location in allLocations {
       if location.id == id {
         if location.imageURL != nil {
           urlString = "\(location.imageURL!)"
+        } else if location.imageURL == nil {
+          return nil
         }
       }
     }
@@ -136,15 +138,62 @@ extension PlanDetailViewController : UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-    if indexPath.section < plan.routes.count {
+
+    // section 0,1,2,3  <-> route は4つ
+    var section = indexPath.section
+    if section < plan.routes.count {
       switch indexPath.row {
       case 0:
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)  as! LocationCardTVCell
-        let route = plan.routes[indexPath.section]
+        let route = plan.routes[section]
         cell.update(with: route)
-       
-        return cell
+        
+        // if there is already an image
+        if fetchedImages[section] != nil {
+          cell.locationImage.image = fetchedImages[section]
+          return cell
+        } else {
+          // check imageURL of the route
+          let urlString = checkImageURL(id: route.startLocationId)
+          // apply default image if imageURL is nil
+          if urlString == nil {
+            self.fetchedImages[section] = UIImage(named: "tempImage")
+            return cell
+          } else {
+            // if there is no image, but there is imageURL available
+            NetworkController.shared.fetchImage(urlString: urlString) { (image, error) in
+              if let image = image {
+                // if there is an image, replace image with nil
+                self.fetchedImages[section] = image
+                DispatchQueue.main.async {
+                  cell.locationImage.image = self.fetchedImages[section]
+                  tableView.reloadData()
+             }
+              }
+//              else if image == nil {
+//                // if there is no image, replace defaula image with nil
+//                self.fetchedImages[section] = UIImage(named: "tempImage")
+//                DispatchQueue.main.async {
+//                  cell.locationImage.image = self.fetchedImages[section]
+//                  tableView.reloadData()
+//  //                self.returnCell(cell: cell)
+//             }
+              else if let error = error {
+                print(error)
+              }
+            }
+          }
+         
+     
+//          return cell
+//          return cell
+//          group.notify(queue: .main) -> cell {
+//            return cell
+//          }
+   
+          return cell
+        }
+
       case 1:
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForDistance, for: indexPath) as! DistanceCardTVCell
         let route = plan.routes[indexPath.section]
@@ -173,6 +222,9 @@ extension PlanDetailViewController : UITableViewDataSource {
     }
   }
   
+  func returnCell(cell: UITableViewCell) -> UITableViewCell {
+    return cell
+  }
   
 }
 

@@ -29,6 +29,23 @@ struct Location{
   let priceLevel: Int? // // Price level of the business. Value is one of 1, 2, 3 and 4. 1 means low cost, whereas 4 mean high cost.
   var ranking: Int? = nil // The best Mach order from yelp api. not absolute
   var phone : String? = nil
+  
+  
+  /// If you pass value from 1...5, it will create star
+  /// - Parameter score: 1...5
+  /// - Returns: ⭐️
+  static func starConverter(score :Double)->String{
+    
+    let star = "⭐️"
+    
+    var score = score
+    score.round()
+    
+    return String(repeating: star, count: Int(score))
+  }
+  
+  
+  
   // later discard.
   static var sampleStartPoint = Location(
     id: 0,
@@ -59,7 +76,8 @@ struct Location{
       website: "https://www.yelp.com/biz/new-amsterdam-caf%C3%A9-vancouver-2?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.0,
       reviewCount: 52,
-      priceLevel: 1
+      priceLevel: 1,
+      ranking: 1
     ),
     Location(
       id: 2,
@@ -73,7 +91,8 @@ struct Location{
       website: "https://www.yelp.com/biz/beaucoup-bakery-and-cafe-vancouver?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.0,
       reviewCount: 294,
-      priceLevel: 2
+      priceLevel: 2,
+      ranking: 2
     ),
     Location(
       id: 3,
@@ -87,7 +106,8 @@ struct Location{
       website: "https://www.yelp.com/biz/medina-cafe-vancouver?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.0,
       reviewCount: 2304,
-      priceLevel: 2
+      priceLevel: 2,
+      ranking: 3
     ),
     Location(
       id: 4,
@@ -101,7 +121,8 @@ struct Location{
       website: "https://www.yelp.com/biz/jam-cafe-on-beatty-vancouver?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.5,
       reviewCount: 1095,
-      priceLevel: 2
+      priceLevel: 2,
+      ranking: 4
     ),
     Location(
       id: 5,
@@ -115,7 +136,8 @@ struct Location{
       website: "https://www.yelp.com/biz/science-world-vancouver-2?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 3.5,
       reviewCount: 171,
-      priceLevel: nil
+      priceLevel: nil,
+      ranking: 1
     ),
     Location(
       id: 6,
@@ -129,7 +151,8 @@ struct Location{
       website: "https://www.yelp.com/biz/find-and-seek-puzzle-adventure-escape-rooms-vancouver-2?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 5.0,
       reviewCount: 89,
-      priceLevel: nil
+      priceLevel: nil,
+      ranking: 2
     ),
     Location(
       id: 7,
@@ -143,7 +166,8 @@ struct Location{
       website: "https://www.yelp.com/biz/i-exit-vancouver-3?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.5,
       reviewCount: 42,
-      priceLevel: nil
+      priceLevel: nil,
+      ranking: 3
     ),
     Location(
       id: 8,
@@ -157,7 +181,8 @@ struct Location{
       website: "https://www.yelp.com/biz/stanley-park-vancouver-4?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 5.0,
       reviewCount: 938,
-      priceLevel: nil
+      priceLevel: nil,
+      ranking: 1
     ),
     Location(
       id: 9,
@@ -171,7 +196,8 @@ struct Location{
       website: "https://www.yelp.com/biz/queen-elizabeth-park-vancouver?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.5,
       reviewCount: 152,
-      priceLevel: nil
+      priceLevel: nil,
+      ranking: 2
     ),
     Location(
       id: 10,
@@ -185,7 +211,8 @@ struct Location{
       website: "https://www.yelp.com/biz/pacific-spirit-regional-park-vancouver?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.5,
       reviewCount: 46,
-      priceLevel: nil
+      priceLevel: nil,
+      ranking: 3
     ),
     Location(
       id: 11,
@@ -199,7 +226,8 @@ struct Location{
       website: "https://www.yelp.com/biz/cactus-club-cafe-station-square-burnaby?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.0,
       reviewCount: 80,
-      priceLevel: 2
+      priceLevel: 2,
+      ranking: 1
     ),
     Location(
       id: 12,
@@ -213,7 +241,8 @@ struct Location{
       website: "https://www.yelp.com/biz/the-flying-pig-yaletown-vancouver?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.0,
       reviewCount: 1092,
-      priceLevel: 2
+      priceLevel: 2,
+      ranking: 2
     ),
     Location(
       id: 13,
@@ -227,7 +256,8 @@ struct Location{
       website: "https://www.yelp.com/biz/la-taqueria-pinche-taco-shop-vancouver-2?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.5,
       reviewCount: 473,
-      priceLevel: 2
+      priceLevel: 2,
+      ranking: 3
     ),
     Location(
       id: 14,
@@ -241,7 +271,8 @@ struct Location{
       website: "https://www.yelp.com/biz/vans-vancouver-4?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 4.5,
       reviewCount: 9,
-      priceLevel: 2
+      priceLevel: 2,
+      ranking: 1
     ),
     Location(
       id: 15,
@@ -255,7 +286,8 @@ struct Location{
       website: "https://www.yelp.com/biz/uniqlo-burnaby?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 3.5,
       reviewCount: 20,
-      priceLevel: 2
+      priceLevel: 2,
+      ranking: 2
     ),
     Location(
       id: 16,
@@ -269,7 +301,8 @@ struct Location{
       website: "https://www.yelp.com/biz/h-and-m-vancouver?adjust_creative=pww_RAT4PrkpchawZzKB7g&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=pww_RAT4PrkpchawZzKB7g",
       rating: 2.5,
       reviewCount: 87,
-      priceLevel: 2
+      priceLevel: 2,
+      ranking: 3
       
     ),
   ]

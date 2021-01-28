@@ -12,6 +12,8 @@ class CategoryCardTVCell: CardTVCell{
   var icon = UIImageView(frame: .zero)
   var textlb = SmallHeaderLabel(text: "")
   
+
+
   // If category is set, we also set icon img, lb text, background color
   var category : String = ""{
     didSet{
@@ -39,6 +41,7 @@ class CategoryCardTVCell: CardTVCell{
     
     // mainBackground layout
     mainBackground.layer.borderWidth = 1.6
+
     
     
   }
@@ -50,17 +53,5 @@ class CategoryCardTVCell: CardTVCell{
   //    super.layoutSubviews()
   //    contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom:0, right: 0))
   //  }
-  
-  // This is to change size . God
-  override var frame: CGRect {
-    get {
-      return super.frame
-    }
-    set {
-      var frame = newValue
-      frame.origin.y += 16
-      frame.size.height -= 2 * 24
-      super.frame = frame
-    }
-  }
+
 }

@@ -27,6 +27,7 @@ class NetworkController {
   /// fetch an image from imageURL, and return UIImage as completion handler
   /// - Parameters:
   ///   - urlString: String
+
   ///   - UIImage: locationImage(thumbnail) at each cell in PlanDetailVC
   func fetchImage(urlString: String?, completionHandler: @escaping (UIImage?, Error?) -> Void) {
     // check if imageURL is nil

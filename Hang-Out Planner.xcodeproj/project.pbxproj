@@ -12,6 +12,7 @@
 		4823EF0325C16057006C7324 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EF0225C16057006C7324 /* ShadowView.swift */; };
 		486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D0D5D25BD412D00858B03 /* UserLocationController.swift */; };
 		4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */; };
+		488094BD25C2AD1B0087416A /* UIStackView+removeAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */; };
 		48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57125B52D3900264AF9 /* AppDelegate.swift */; };
 		48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57325B52D3900264AF9 /* SceneDelegate.swift */; };
 		48A4C57B25B52D3B00264AF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48A4C57A25B52D3B00264AF9 /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		4823EF0225C16057006C7324 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		486D0D5D25BD412D00858B03 /* UserLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationController.swift; sourceTree = "<group>"; };
 		4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustedTableView.swift; sourceTree = "<group>"; };
+		488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+removeAll.swift"; sourceTree = "<group>"; };
 		48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hang-Out Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A4C57125B52D3900264AF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48A4C57325B52D3900264AF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				48A4C66A25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift */,
 				48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */,
 				4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */,
+				488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				48A4C61C25B5548000264AF9 /* PlanCardTVCell.swift in Sources */,
 				48DE334925B8ECE2001630B7 /* Plan.swift in Sources */,
 				48DE334325B8ECE2001630B7 /* Catetory.swift in Sources */,
+				488094BD25C2AD1B0087416A /* UIStackView+removeAll.swift in Sources */,
 				B088871F25B911D000D5F9E0 /* CategorySelectViewController.swift in Sources */,
 				48A4C65025B5566100264AF9 /* SmallHeaderLabel.swift in Sources */,
 				48DE334625B8ECE2001630B7 /* Planner.swift in Sources */,

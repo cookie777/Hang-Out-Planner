@@ -173,31 +173,46 @@ class Planner {
       
       // Creating all ave values. I can integrate this into previous for loop and it's better. But to make it readable, I split.
       var aveRating = 0.0
-      var aveRatingNil = 0
+      var aveRatingNil = 0 // if rating is nil, don't count. This is to record it.
+      
       var aveReviewCount = 0.0
       var avePriceLevel = 0.0
+      
+      var aveRanking = 0.0 // Ranking is just an order of Best in yelp-api. if you get topN item at each category, it will be 0..<N
   
       for i in 1...theNumOfLocation{
         let currentLocation = allLocations[plan.key[i]]
+        
+        // recored rating. if nil, don't count
         if let r = currentLocation.rating{
           aveRating += r
         }else{
           aveRatingNil += 1
         }
+        
+        // record review count.
         if let rc = currentLocation.reviewCount{
           aveReviewCount += Double(rc)
         }
+        
+        // record price level.
         if let p = currentLocation.priceLevel{
           avePriceLevel += Double(p)
         }else if currentLocation.category != .park{
           // if nil -> set average priceLevel 2, but as for park, set 0.
           avePriceLevel += 2
         }
+        
+        // record ranking
+        if let r = currentLocation.ranking{
+          aveRanking += Double(r)
+        }
       }
       
       aveRating =  aveRating / Double(theNumOfLocation - aveRatingNil)
       aveReviewCount = aveReviewCount / Double(theNumOfLocation)
       avePriceLevel = avePriceLevel / Double(theNumOfLocation)
+      aveRanking = aveRanking / Double(theNumOfLocation)
 
 
       currentPlan = Plan(
@@ -209,7 +224,7 @@ class Planner {
         averageRating: aveRating,
         averageReviewCount: aveReviewCount,
         averagePriceLevel: avePriceLevel,
-        averagePopularity: nil
+        averageRanking: aveRanking
       )
       returnPlans.append(currentPlan)
       

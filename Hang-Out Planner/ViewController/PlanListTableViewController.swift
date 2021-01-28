@@ -22,10 +22,8 @@ class PlanListTableViewController: UITableViewController {
     navigationController?.navigationBar.prefersLargeTitles = true
     title = "Your Plans"
     tableView.register(PlanCardTVCell.self, forCellReuseIdentifier: cellId)
-//    tableView.contentInset = UIEdgeInsets(top: 20,left: 20,bottom: 20,right: 0)
-//    tableView.matchSize()
-//    view.addSubview(tableView)
-//    tableView.matchParent(padding: .init(top: 0, left: 40, bottom: 40, right: 0))
+
+    tableView.layoutMargins = UIEdgeInsets(top: 0,left: 32,bottom: 0,right: 32)
   }
   
   init(plans: [Plan]) {

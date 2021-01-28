@@ -59,8 +59,8 @@ class PlanDetailViewController: UIViewController{
     mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
     
     ///set annotation per route
+    var routeCount = 0
     for route in plan.routes {
-      var routeCount = 0
       createAnnotation(startLocationId: route.startLocationId, routeCount: routeCount)
       mapRoute(startLocationId: route.startLocationId, nextLocationId: route.nextLocationId)
       
@@ -76,7 +76,6 @@ class PlanDetailViewController: UIViewController{
           print(error)
         }
       }
-      routeOrder += 1
       routeCount += 1
     }
     
@@ -262,15 +261,15 @@ extension PlanDetailViewController: MKMapViewDelegate {
   /// Create annotation on locations
   func createAnnotation(startLocationId: Int, routeCount: Int) {
     
-    var count = 0
+//    var count = 0
     for location in allLocations {
-      print("count: \(count)")
+//      print("count: \(count)")
       if startLocationId == location.id  {
         let annotation = CustomAnnotation(title: location.title, subtitle: location.address, coordinate: CLLocationCoordinate2D(latitude: location.latitude , longitude: location.longitude), routeOrder: routeCount)
         // set annotation marker to routeOrder count
         annotation.setMarkText()
         mapView.addAnnotation(annotation)
-        count += 1
+//        count += 1
       }
     }
   }
@@ -296,6 +295,7 @@ class CustomAnnotation: NSObject, MKAnnotation {
   var markerTintColor: UIColor = .orange
   // set default value
   var glyphText = String("1")
+  
   // update text depends on the pin content
   func setMarkText(){
     glyphText = "\(routeOrder)"

@@ -59,7 +59,9 @@ class MainViewController: UIViewController
   // MARK: - Layout config
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .systemBackground
+    view.backgroundColor = bgColor
+    tableview.backgroundColor = bgColor
+    
     
     // setting nv bar. Might use later
     //    navigationController?.navigationBar.prefersLargeTitles = true
@@ -76,8 +78,6 @@ class MainViewController: UIViewController
     tableview.dataSource = self
     tableview.delegate = self
     tableview.allowsMultipleSelectionDuringEditing = true
-    //    tableview.sectionHeaderHeight = UITableView.automaticDimension
-    //    tableview.rowHeight = UITableView.automaticDimension
     
   }
   
@@ -92,6 +92,7 @@ class MainViewController: UIViewController
     // First add to view(this order is important)
     view.addSubview(tableview)
     tableview.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
+    
     // hide scroll
     tableview.showsVerticalScrollIndicator = false
     
@@ -165,6 +166,17 @@ class MainViewController: UIViewController
   //Action when goButton is tapped
   @objc func goButtonTapped(){
     
+    
+    // For debug. If this var is true, it will only use sample data.
+    if noMoreAPI{
+      allLocations = [userCurrentLocation] + Location.sampleLocations
+      Planner.calculateAllRoutes()
+      let plans = Planner.calculatePlans(categories: selectedCategories)
+      let nextVC = PlanListTableViewController(plans: plans)
+      navigationController?.pushViewController(nextVC, animated: true)
+      return
+    }
+    
     // if you has moved or no locations data?
     // -> then re-create(request, and calculate) all data
     if UserLocationController.shared.hasUserMoved() || allLocations.count == 0{
@@ -175,9 +187,7 @@ class MainViewController: UIViewController
         self?.navigationController?.pushViewController(nextVC, animated: true)
         // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
-        
-        //        NetworkController.shared.printLocations(locations: allLocations)
-        //        NetworkController.shared.printPlans(plans: plans)
+
       }
       
     }else{
@@ -298,7 +308,7 @@ extension MainViewController: UITableViewDelegate{
   
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 96
+    return 8+56+24
   }
   
   
@@ -329,6 +339,7 @@ extension MainViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell
     cell.category = categoryArray[indexPath.section][indexPath.row]
+    cell.setMargin(insets: .init(top: 8, left: 0 , right: 0, bottom: 24))
     return cell
   }
   

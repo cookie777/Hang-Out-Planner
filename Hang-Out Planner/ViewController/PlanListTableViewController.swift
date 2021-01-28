@@ -15,17 +15,35 @@ class PlanListTableViewController: UITableViewController {
   // [Plan] you receive from planner model
   let plans: [Plan]
   var cellId = "planCardCell"
+  let headerTitle = LargeHeaderLabel(text: "Where Do You \nWant To Go?")
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
-    navigationController?.navigationBar.prefersLargeTitles = true
-    title = "Your Plans"
+    view.backgroundColor = bgColor
+
+//    view.backgroundColor = .systemBackground
     tableView.register(PlanCardTVCell.self, forCellReuseIdentifier: cellId)
-//    tableView.contentInset = UIEdgeInsets(top: 20,left: 20,bottom: 20,right: 0)
-//    tableView.matchSize()
-//    view.addSubview(tableView)
-//    tableView.matchParent(padding: .init(top: 0, left: 40, bottom: 40, right: 0))
+    
+    
+
+    // Set upper view as `tableHeaderView` of the table view.
+    headerTitle.constraintHeight(equalToConstant: headerTitle.intrinsicContentSize.height + 24)
+    let thv = headerTitle
+    tableView.tableHeaderView = thv
+    thv.translatesAutoresizingMaskIntoConstraints = false
+    tableView.tableHeaderView?.anchors(
+      topAnchor: nil,
+      leadingAnchor: tableView.layoutMarginsGuide.leadingAnchor,
+      trailingAnchor: nil,
+      bottomAnchor: nil,
+      padding: .init(top: nil, left: 12, right: 0, bottom: 0)
+    )
+
+    // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
+    tableView.tableHeaderView?.setNeedsLayout()
+    tableView.tableHeaderView?.layoutIfNeeded()
+    tableView.directionalLayoutMargins =  NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
+
   }
   
   init(plans: [Plan]) {
@@ -39,11 +57,11 @@ class PlanListTableViewController: UITableViewController {
   
   // MARK: - Table view data source
   override func numberOfSections(in tableView: UITableView) -> Int {
-    return plans.count
+    return 1
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) ->    Int {
-    return 1
+    return plans.count
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -53,10 +71,9 @@ class PlanListTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PlanCardTVCell
-    
-    cell.locationField.numberOfLines = 0
-    let plan = plans[indexPath.section]
-    cell.update(with: plan)
+    let plan = plans[indexPath.row]
+    cell.update(with: plan, planIndex: indexPath.row)
+
     
     return cell
   }

@@ -38,6 +38,7 @@ class NetworkController {
           DispatchQueue.main.async {
             imageView.image = image
             print("loading finished")
+            
           }
         }
       }

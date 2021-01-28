@@ -9,12 +9,16 @@ import UIKit
 
 class CardTVCell: UITableViewCell {
   
+  var margin : UIEdgeInsets = .zero
+  
   // Use custom shadow class to reduce calc (is it working?)
 //  let shadowLayer = ShadowView()
   let mainBackground = UIView()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    backgroundColor = .clear
     
     //Set shadow
 //    
@@ -30,6 +34,8 @@ class CardTVCell: UITableViewCell {
     contentView.addSubview(mainBackground)
     mainBackground.matchParent()
     mainBackground.layer.cornerRadius = 24
+    mainBackground.layer.masksToBounds = true
+
     
     
     // Selected config. If a user tap, it will cover transparent view
@@ -45,6 +51,28 @@ class CardTVCell: UITableViewCell {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  
+  func setMargin(insets: UIEdgeInsets)  {
+    self.margin = insets
+  }
+  
+  // This is to change size . God
+  override var frame: CGRect {
+    get {
+      return super.frame
+    }
+    set {
+      var frame = newValue
+      frame.origin.y += margin.top
+      frame.size.height -=  (margin.top + margin.bottom)
+      
+      frame.origin.x += margin.left
+      frame.size.width -= (margin.left + margin.right)
+      
+      super.frame = frame
+    }
   }
   
 }

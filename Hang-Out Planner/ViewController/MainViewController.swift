@@ -206,6 +206,7 @@ class MainViewController: UIViewController
       addEditVC.categoryName0.text = Categories.clothes.rawValue
       addEditVC.row = 0
       addEditVC.section = 1
+      addEditVC.selectArray[0].insert(Categories.clothes.rawValue, at: 0)
     case 2:
       sectionTitles.append("3rd Location")
       categoryArray[2].insert(Categories.park.rawValue, at: 0)
@@ -213,6 +214,8 @@ class MainViewController: UIViewController
       addEditVC.categoryName0.text = Categories.park.rawValue
       addEditVC.row = 0
       addEditVC.section = 2
+      addEditVC.selectArray[0].insert(Categories.park.rawValue, at: 0)
+
     case 3:
       sectionTitles.append("4th Location")
       categoryArray[3].insert(Categories.restaurant.rawValue, at: 0)
@@ -220,6 +223,8 @@ class MainViewController: UIViewController
       addEditVC.categoryName0.text = Categories.restaurant.rawValue
       addEditVC.row = 0
       addEditVC.section = 3
+      addEditVC.selectArray[0].insert(Categories.restaurant.rawValue, at: 0)
+
     case 4:
       sectionTitles.append("5th Location")
       categoryArray[4].insert(Categories.amusement.rawValue, at: 0)
@@ -227,6 +232,8 @@ class MainViewController: UIViewController
       addEditVC.categoryName0.text = Categories.amusement.rawValue
       addEditVC.row = 0
       addEditVC.section = 4
+      addEditVC.selectArray[0].insert(Categories.amusement.rawValue, at: 0)
+
     default:
       print("Add Button didn't work...")
     }
@@ -304,6 +311,7 @@ extension MainViewController: UITableViewDelegate{
     let addEditVC = CategorySelectViewController()
     addEditVC.delegate = self
     addEditVC.categoryName0.text = categoryArray[indexPath.section][indexPath.row]
+    addEditVC.selectArray[0].insert(categoryArray[indexPath.section][indexPath.row], at: 0)
     addEditVC.row = indexPath.row
     addEditVC.section = indexPath.section
     let addToDoVC = UINavigationController(rootViewController: addEditVC)

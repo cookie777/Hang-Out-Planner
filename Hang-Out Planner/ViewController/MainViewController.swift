@@ -76,7 +76,7 @@ class MainViewController: UIViewController
     tableview.dataSource = self
     tableview.delegate = self
     tableview.allowsMultipleSelectionDuringEditing = true
-    tableView.layoutMargins = UIEdgeInsets(top: 0,left: 32,bottom: 0,right: 32)
+//    tableView.layoutMargins = UIEdgeInsets(top: 0,left: 32,bottom: 0,right: 32)
     //    tableview.sectionHeaderHeight = UITableView.automaticDimension
     //    tableview.rowHeight = UITableView.automaticDimension
     

@@ -45,7 +45,7 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .systemBackground
+    view.backgroundColor = bgColor
     
     //    navigationItem.rightBarButtonItem = saveButton
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissFunc))
@@ -58,6 +58,7 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
     
     // Tableview setting
     view.addSubview(tableview)
+    tableview.backgroundColor = bgColor
     tableview.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
     
     tableview.showsVerticalScrollIndicator = false

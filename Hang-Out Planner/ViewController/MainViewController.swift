@@ -59,7 +59,9 @@ class MainViewController: UIViewController
   // MARK: - Layout config
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .systemBackground
+    view.backgroundColor = bgColor
+    tableview.backgroundColor = bgColor
+    
     
     // setting nv bar. Might use later
     //    navigationController?.navigationBar.prefersLargeTitles = true
@@ -76,9 +78,6 @@ class MainViewController: UIViewController
     tableview.dataSource = self
     tableview.delegate = self
     tableview.allowsMultipleSelectionDuringEditing = true
-//    tableView.layoutMargins = UIEdgeInsets(top: 0,left: 32,bottom: 0,right: 32)
-    //    tableview.sectionHeaderHeight = UITableView.automaticDimension
-    //    tableview.rowHeight = UITableView.automaticDimension
     
   }
   
@@ -93,6 +92,7 @@ class MainViewController: UIViewController
     // First add to view(this order is important)
     view.addSubview(tableview)
     tableview.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
+    
     // hide scroll
     tableview.showsVerticalScrollIndicator = false
     
@@ -166,6 +166,8 @@ class MainViewController: UIViewController
   //Action when goButton is tapped
   @objc func goButtonTapped(){
     
+    
+    // For debug. If this var is true, it will only use sample data.
     if noMoreAPI{
       allLocations = [userCurrentLocation] + Location.sampleLocations
       Planner.calculateAllRoutes()
@@ -185,9 +187,7 @@ class MainViewController: UIViewController
         self?.navigationController?.pushViewController(nextVC, animated: true)
         // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
-        
-        //        NetworkController.shared.printLocations(locations: allLocations)
-        //        NetworkController.shared.printPlans(plans: plans)
+
       }
       
     }else{

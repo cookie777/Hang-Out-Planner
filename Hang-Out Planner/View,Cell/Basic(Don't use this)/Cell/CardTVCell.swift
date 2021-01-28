@@ -18,6 +18,8 @@ class CardTVCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
+    backgroundColor = .clear
+    
     //Set shadow
 //    
 //    shadowLayer.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +34,8 @@ class CardTVCell: UITableViewCell {
     contentView.addSubview(mainBackground)
     mainBackground.matchParent()
     mainBackground.layer.cornerRadius = 24
+    mainBackground.layer.masksToBounds = true
+
     
     
     // Selected config. If a user tap, it will cover transparent view

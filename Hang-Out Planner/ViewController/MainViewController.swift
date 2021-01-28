@@ -299,7 +299,7 @@ extension MainViewController: UITableViewDelegate{
   
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 96
+    return 16+56+24
   }
   
   
@@ -330,6 +330,7 @@ extension MainViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell
     cell.category = categoryArray[indexPath.section][indexPath.row]
+    cell.setMargin(insets: .init(top: 16, left: 0 , right: 0, bottom: 24))
     return cell
   }
   

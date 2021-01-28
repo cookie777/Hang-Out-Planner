@@ -9,6 +9,8 @@ import UIKit
 
 class CardTVCell: UITableViewCell {
   
+  var margin : UIEdgeInsets = .zero
+  
   // Use custom shadow class to reduce calc (is it working?)
 //  let shadowLayer = ShadowView()
   let mainBackground = UIView()
@@ -45,6 +47,28 @@ class CardTVCell: UITableViewCell {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  
+  func setMargin(insets: UIEdgeInsets)  {
+    self.margin = insets
+  }
+  
+  // This is to change size . God
+  override var frame: CGRect {
+    get {
+      return super.frame
+    }
+    set {
+      var frame = newValue
+      frame.origin.y += margin.top
+      frame.size.height -=  (margin.top + margin.bottom)
+      
+      frame.origin.x += margin.left
+      frame.size.width -= (margin.left + margin.right)
+      
+      super.frame = frame
+    }
   }
   
 }

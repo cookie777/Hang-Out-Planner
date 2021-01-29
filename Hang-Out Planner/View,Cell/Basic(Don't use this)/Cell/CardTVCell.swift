@@ -35,8 +35,11 @@ class CardTVCell: UITableViewCell {
     mainBackground.matchParent()
     mainBackground.layer.cornerRadius = 24
     mainBackground.layer.masksToBounds = true
-
     
+    // set clear border (later, pain color depend on category)
+    mainBackground.layer.borderWidth = 1.6
+    mainBackground.layer.borderColor = .init(gray: 0, alpha: 0)
+
     
     // Selected config. If a user tap, it will cover transparent view
     // How ? -> bring the `selectedBackgroundView` (built in) to front, and make it transparent.

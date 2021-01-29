@@ -7,51 +7,57 @@
 
 import UIKit
 
-class LocationCardTVCell: UITableViewCell {
+class LocationCardTVCell: CardTVCell {
   
-
-  var locationTitleLabel = MediumHeaderLabel(text: "")
+  
+  var locationTitleLabel = SmallHeaderLabel(text: "")
   var addressLabel = SubTextLabel(text: "")
- 
-  lazy var locationImageWrapper: UIImageView = {
+  
+  lazy var locationImageView : UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "tempImage")
     imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.constraintWidth(equalToConstant: (frame.size.width - 32*2)*0.4)
+    imageView.constraintHeight(equalToConstant: (frame.size.width - 32*2)*0.4*0.618)
     imageView.contentMode = .scaleAspectFill
+    imageView.layer.cornerRadius = 16
     imageView.layer.masksToBounds = true
     return imageView
   }()
-  /// store fetched images
-  var fetchedImageDict: [Int: UIImage?] = [:]
+
+  
+  lazy var locationStackView = VerticalStackView(
+    arrangedSubviews: [locationTitleLabel, addressLabel],
+    spacing: 8,
+    alignment: .leading,
+    distribution: .fill
+  )
+  
+  lazy var mainStackView = HorizontalStackView(
+    arrangedSubviews: [locationStackView, locationImageView],
+    spacing: 16,
+    alignment: .top
+  )
+  
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-      super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
-    let locationStackView = VerticalStackView(
-      arrangedSubviews: [locationTitleLabel, addressLabel],
-      spacing: 8,
-      alignment: .leading,
-      distribution: .fill
-    )
-  
-    let mainStackView = HorizontalStackView(
-      arrangedSubviews: [locationStackView, locationImageWrapper],
-      alignment: .top
-    )
-    locationImageWrapper.heightAnchor.constraint(equalTo: locationImageWrapper.widthAnchor, multiplier: 3/4).isActive = true
-    locationImageWrapper.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.4).isActive = true
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+    
+    // Set margin of Stack vew
+    mainStackView.isLayoutMarginsRelativeArrangement = true
+    mainStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+    
+    
     
     contentView.addSubview(mainStackView)
     mainStackView.matchParent()
+
     
- 
     locationTitleLabel.numberOfLines = 0
-    locationTitleLabel.lineBreakMode = .byWordWrapping
     addressLabel.numberOfLines = 0
-    addressLabel.lineBreakMode = .byWordWrapping
     
-  
+    
   }
   
   required init?(coder: NSCoder) {
@@ -60,23 +66,28 @@ class LocationCardTVCell: UITableViewCell {
   
   func update(with route: Route) {
     let id = route.startLocationId
+    let color = Categories.color(allLocations.first {$0.id == id}?.category ?? .other)
+    
     // set location title
     locationTitleLabel.text = "\(PlanCardTVCell.checkLocationName(id: id))"
+    locationTitleLabel.textColor = color
+    
     // set location address
     addressLabel.text = "\(LocationCardTVCell.checkLocationAddress(id: id))"
-    // get image URL from id, set
-
+    
+    mainBackground.layer.borderColor = color.cgColor
+    
   }
   
   // Return Location address by location id
   static func checkLocationAddress(id: Int) -> String {
-      var locationAddress = ""
-      for location in allLocations {
-          if location.id == id {
-              locationAddress = location.address
-          }
+    var locationAddress = ""
+    for location in allLocations {
+      if location.id == id {
+        locationAddress = location.address
       }
-      return locationAddress
+    }
+    return locationAddress
   }
   
   func checkImageURL(id: Int) -> String {
@@ -88,7 +99,7 @@ class LocationCardTVCell: UITableViewCell {
         }
       }
     }
-     return urlString
+    return urlString
   }
   
   

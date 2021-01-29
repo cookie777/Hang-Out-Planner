@@ -35,12 +35,8 @@ class PlanCardTVCell: CardTVCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: .default, reuseIdentifier: reuseIdentifier)
-//    mainBackground.layer.borderColor = UIColor.systemGray.withAlphaComponent(0.05).cgColor
-//    mainBackground.layer.borderWidth = 2
-//    mainBackground.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.5)
-//    mainBackground.layer.cornerRadius = 32
-//
-    
+
+
     let totalInfoStackView = VerticalStackView(
       arrangedSubviews: [popularityField, totalDistanceField,totalTimeField],
       spacing: 8,

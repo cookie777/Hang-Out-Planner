@@ -21,7 +21,6 @@ class PlanListTableViewController: UITableViewController {
     super.viewDidLoad()
     view.backgroundColor = bgColor
 
-//    view.backgroundColor = .systemBackground
     tableView.register(PlanCardTVCell.self, forCellReuseIdentifier: cellId)
     
     

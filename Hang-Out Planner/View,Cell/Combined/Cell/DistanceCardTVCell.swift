@@ -9,16 +9,16 @@ import UIKit
 
 class DistanceCardTVCell: CardTVCell {
   
-  var arrowEmoji = LargeHeaderLabel(text: "⇣")
+  var arrowEmoji = SubTextLabel(text: "⇣")
   var timeToReach = SubTextLabel(text: "")
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     arrowEmoji.textAlignment = .right
-    let hStackView = HorizontalStackView(arrangedSubviews: [arrowEmoji, timeToReach], spacing: 5, alignment: .center, distribution: .equalCentering)
+    let hStackView = HorizontalStackView(arrangedSubviews: [arrowEmoji, timeToReach], spacing: 8, alignment: .center, distribution: .equalCentering)
     contentView.addSubview(hStackView)
     hStackView.matchParent()
-    self.backgroundColor = .systemGroupedBackground
+    self.backgroundColor = bgColor
   }
   
   required init?(coder: NSCoder) {

@@ -9,6 +9,7 @@ import UIKit
 
 class LocationCardTVCell: UITableViewCell {
   
+
   var locationTitleLabel = MediumHeaderLabel(text: "")
   var addressLabel = SubTextLabel(text: "")
  
@@ -20,6 +21,8 @@ class LocationCardTVCell: UITableViewCell {
     imageView.setContentHuggingPriority(.required, for: .horizontal)
     return imageView
   }()
+  /// store fetched images
+  var FetchedImageDict: [Int: UIImage?] = [:]
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
       super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,11 +37,14 @@ class LocationCardTVCell: UITableViewCell {
     hStackView.matchParent()
     self.backgroundColor = .systemGroupedBackground
     
-    
+ 
+ 
     locationTitleLabel.numberOfLines = 0
     locationTitleLabel.lineBreakMode = .byWordWrapping
     addressLabel.numberOfLines = 0
     addressLabel.lineBreakMode = .byWordWrapping
+    
+  
   }
   
   required init?(coder: NSCoder) {
@@ -51,7 +57,7 @@ class LocationCardTVCell: UITableViewCell {
     locationTitleLabel.text = "\(PlanCardTVCell.checkLocationName(id: id))"
     // set location address
     addressLabel.text = "\(LocationCardTVCell.checkLocationAddress(id: id))"
-    NetworkController.shared.fetchImage(urlString: checkImageURL(id: id), imageView: locationImage)
+    // get image URL from id, set
 
   }
   

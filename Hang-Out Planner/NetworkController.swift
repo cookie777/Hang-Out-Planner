@@ -23,31 +23,39 @@ class NetworkController {
   var tempAllLocations : [Location] = []
 
   
-  /// fetch an image from imageURL, and set the image to the imageView
+  
+  /// fetch an image from imageURL, and return UIImage as completion handler
   /// - Parameters:
   ///   - urlString: String
-  ///   - imageView: locationImage(thumbnail) at each cell in PlanDetailVC
-  func fetchImage(urlString: String, imageView: UIImageView) {
-    guard let url = URL(string: urlString) else {return}
 
-    print("fetching")
-    DispatchQueue.global().async { [weak self] in
-
-      if let data = try? Data(contentsOf: url) {
-        if let image = UIImage(data: data) {
-          DispatchQueue.main.async {
-            imageView.image = image
-            print("loading finished")
-            
+  ///   - UIImage: locationImage(thumbnail) at each cell in PlanDetailVC
+  func fetchImage(urlString: String?, completionHandler: @escaping (UIImage?, Error?) -> Void) {
+    // check if imageURL is nil
+    if let urlString = urlString {
+      // check if its type is URL
+      guard let url = URL(string: urlString) else {return}
+      
+      let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        
+        if let data = data {
+          do {
+            if let image = UIImage(data: data) {
+                completionHandler(image, nil)
+            }
+          } catch {
+            print(error.localizedDescription)
+            completionHandler(nil, error)
           }
+        } else if let error = error {
+          print(error.localizedDescription)
         }
       }
+      task.resume()
     }
-  }
-
-
+    
+    }
+    
 }
-
 
 
 

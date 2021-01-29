@@ -21,7 +21,6 @@ class PlanListTableViewController: UITableViewController {
     super.viewDidLoad()
     view.backgroundColor = bgColor
 
-//    view.backgroundColor = .systemBackground
     tableView.register(PlanCardTVCell.self, forCellReuseIdentifier: cellId)
     
     
@@ -80,7 +79,7 @@ class PlanListTableViewController: UITableViewController {
   
   // Cell Select -> move to PlanDetailVC
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let planDetailVC = PlanDetailViewController(plan: plans[indexPath.section])
+    let planDetailVC = PlanDetailViewController(plan: plans[indexPath.row])
     navigationController?.pushViewController(planDetailVC, animated: true)
   }
   

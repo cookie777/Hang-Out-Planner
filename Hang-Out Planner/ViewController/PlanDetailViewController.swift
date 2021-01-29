@@ -14,8 +14,53 @@ class PlanDetailViewController: UIViewController{
   
   /// A plan selected at `PlanListTableViewController`
   let plan: Plan
+  
+  
+  let headerTitle = LargeHeaderLabel(text: "Here is\nYour Plan!")
+  var mapView = MKMapView()
+  let outlineLabel = MediumHeaderLabel(text: "Outline")
+  let popularityWrapper :HorizontalStackView  = {
+    let leftLb = TextLabel(text: "Popularity")
+    let rightLb = TextLabel(text: "⭐️")
+    return HorizontalStackView(arrangedSubviews: [leftLb,rightLb], spacing: 16)
+  }()
+  let totalDistanceWrapper :HorizontalStackView  = {
+    let leftLb = TextLabel(text: "Total Distance")
+    let rightLb = TextLabel(text: "0 km")
+    return HorizontalStackView(arrangedSubviews: [leftLb,rightLb], spacing: 16)
+  }()
+  let totalTimeWrapper :HorizontalStackView  = {
+    let leftLb = TextLabel(text: "Total Time")
+    let rightLb = TextLabel(text: "0")
+    return HorizontalStackView(arrangedSubviews: [leftLb,rightLb], spacing: 16)
+  }()
+  let navigationLabel = MediumHeaderLabel(text: "Navigation")
+  lazy var  tableHeaderStackView :VerticalStackView = {
+    let sv = VerticalStackView(
+      arrangedSubviews: [
+        headerTitle,
+        mapView,
+        outlineLabel,
+        popularityWrapper,
+        totalDistanceWrapper,
+        totalTimeWrapper,
+        navigationLabel,
+        UIView()
+      ]
+    )
+    sv.setCustomSpacing(24, after: headerTitle)
+    sv.setCustomSpacing(32, after: mapView)
+    sv.setCustomSpacing(12, after: outlineLabel)
+    sv.setCustomSpacing(8, after: popularityWrapper)
+    sv.setCustomSpacing(8, after: totalDistanceWrapper)
+    sv.setCustomSpacing(32, after: totalTimeWrapper)
+    sv.setCustomSpacing(-28, after: navigationLabel)
+    return sv
+  }()
+  
+  
   /// variables related to tableView
-  let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
+  let tableView = UITableView()
   let cellIdForLocation = "locationCardCell"
   let cellIdForDistance = "distanceCardCell"
   var currentLocation = "Current Location"
@@ -23,15 +68,12 @@ class PlanDetailViewController: UIViewController{
   
   /// variables related to mapKit
   var coordinate: (Double, Double)?
-  var mapView: MKMapView = {
-    let mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    mapView.translatesAutoresizingMaskIntoConstraints = false
-    return mapView
-  }()
+  
+  
   
   /// variables related to store fetched images
-//  let locationCardCell = LocationCardTVCell()
-//  var routeOrder = 0
+  //  let locationCardCell = LocationCardTVCell()
+  //  var routeOrder = 0
   var fetchedImages: [UIImage?] = []
   
   init(plan:Plan) {
@@ -45,46 +87,80 @@ class PlanDetailViewController: UIViewController{
   // MARK: - viewDidLoad method
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
-    navigationController?.navigationBar.prefersLargeTitles = true
-    title = "Here is Your Plan!"
-    /// set mapView
-    view.addSubview(mapView)
-    mapView.anchors(topAnchor: view.safeAreaLayoutGuide.topAnchor, leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, bottomAnchor: nil, padding: UIEdgeInsets.init(top: 8, left: 8, bottom: 0, right: 8))
-    mapView.constraintHeight(equalToConstant: view.frame.height / 3)
-    mapView.delegate = self
+    view.backgroundColor = bgColor
     
-    /// register CustomAnnotationView
-    mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+    //set label value
+    let star = Location.starConverter(score: plan.averageRating)
+    (popularityWrapper.arrangedSubviews[1] as! TextLabel).text = star
+    let d = PlanCardTVCell.meterToKm(distance: plan.totalDistance)
+    (totalDistanceWrapper.arrangedSubviews[1] as! TextLabel).text = "\(d) km"
+    let wStr = PlanCardTVCell.calcWalkingSpeed(distance: plan.totalDistance)
+    let car = PlanCardTVCell.calcCarSpeed(distance: plan.totalDistance)
+    let cStr = car >= 0.1 ?  "\(car)h 🚗" :  ""
+    (totalTimeWrapper.arrangedSubviews[1] as! TextLabel).text = "\(cStr)\(wStr)"
     
-    ///set annotation per route
+    
+    
+    
+    //set annotation per route
     var routeCount = 0
     for route in plan.routes {
       createAnnotation(startLocationId: route.startLocationId, routeCount: routeCount)
       mapRoute(startLocationId: route.startLocationId, nextLocationId: route.nextLocationId)
       fetchedImages.append(nil)
-      print("fetched images: \(fetchedImages)")
-      /// Fetch images for all the route here, store it into dictionary
-//      let urlString = checkImageURL(id: route.startLocationId)
-//      NetworkController.shared.fetchImage(urlString: urlString) { (image, error) in
-//        if let image = image {
-//          print(image)
-//          self.locationCardCell.FetchedImageDict[self.routeOrder] = image
-//        } else if image == nil {
-//          self.locationCardCell.FetchedImageDict[self.routeOrder] = nil
-//        }else if let error = error {
-//          print(error)
-//        }
-//      }
       routeCount += 1
     }
-//
-//    print("image dict: \(locationCardCell.FetchedImageDict)")
+    //Set image for starting point
+//    let config = UIImage.SymbolConfiguration(
+//    fetchedImages[0] = UIImage(systemName: "mappin.and.ellipse")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+    fetchedImages[0] = UIImage()
+    //set dynamic section titles
+    let numOfRoutes = plan.routes.count
+    for index in  1...numOfRoutes - 1{
+      sectionTitles += ["Location \(index)"]
+    }
+    sectionTitles += ["Back to Start"]
     
+    setUpTableHeaderView()
+    setUpTableView()
     
-    /// set tableView here
+  }
+  
+  private func setUpTableHeaderView(){
+    
+    mapView.translatesAutoresizingMaskIntoConstraints = false
+    mapView.layer.cornerRadius = 32
+    mapView.matchSizeWith(widthRatio: 1)
+    mapView.heightAnchor.constraint(equalTo: mapView.widthAnchor, multiplier: 0.618).isActive = true
+    
+    /// register CustomAnnotationView
+    mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+    mapView.delegate = self
+    
+  }
+  
+  /// set tableView here
+  private func setUpTableView()  {
+    
     view.addSubview(tableView)
-    tableView.anchors(topAnchor: mapView.bottomAnchor, leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, padding: UIEdgeInsets.init(top: 10, left: 8, bottom: 0, right: 8))
+    tableView.separatorStyle = .none
+    tableView.backgroundColor = bgColor
+    tableView.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
+    // hide scroll
+    tableView.showsVerticalScrollIndicator = false
+ 
+    
+    // Set upper view as `tableHeaderView` of the table view.
+    let thv = tableHeaderStackView// tableHeaderStackView
+    tableView.tableHeaderView = thv
+    thv.translatesAutoresizingMaskIntoConstraints = false
+    
+    // Set width same as table view
+    thv.matchSizeWith(widthRatio: 1, heightRatio: nil)
+    // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
+    tableView.tableHeaderView?.setNeedsLayout()
+    tableView.tableHeaderView?.layoutIfNeeded()
+    
     
     tableView.dataSource = self
     tableView.delegate = self
@@ -92,18 +168,12 @@ class PlanDetailViewController: UIViewController{
     tableView.register(LocationCardTVCell.self, forCellReuseIdentifier: cellIdForLocation)
     tableView.register(DistanceCardTVCell.self, forCellReuseIdentifier: cellIdForDistance)
     
-    tableView.sectionHeaderHeight = 25
-    
-    ///set dynamic section titles
-    let numOfRoutes = plan.routes.count
-    for index in  1...numOfRoutes - 1{
-      sectionTitles = sectionTitles + ["Location \(index)"]
-    }
-    sectionTitles = sectionTitles + ["\(currentLocation)"]
   }
-
   
-//   MARK: - TEMP
+  
+  
+  
+  //   MARK: - TEMP
   func checkImageURL(id: Int) -> String? {
     var urlString = ""
     for location in allLocations {
@@ -115,10 +185,10 @@ class PlanDetailViewController: UIViewController{
         }
       }
     }
-     return urlString
+    return urlString
   }
- 
-  }
+  
+}
 
 
 
@@ -138,64 +208,54 @@ extension PlanDetailViewController : UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+    
+    
+    
     // section 0,1,2,3  <-> route は4つ
-    var section = indexPath.section
+    let section = indexPath.section
     if section < plan.routes.count {
+      
+      
       switch indexPath.row {
       case 0:
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)  as! LocationCardTVCell
+        cell.setMargin(insets: .init(top: 8, left: 0 , right: 0, bottom: 8))
+        
         let route = plan.routes[section]
         cell.update(with: route)
         
         // if there is already an image
         if fetchedImages[section] != nil {
-          cell.locationImage.image = fetchedImages[section]
-          return cell
-        } else {
-          // check imageURL of the route
-          let urlString = checkImageURL(id: route.startLocationId)
-          // apply default image if imageURL is nil
-          if urlString == nil {
-            self.fetchedImages[section] = UIImage(named: "tempImage")
-            return cell
-          } else {
-            // if there is no image, but there is imageURL available
-            NetworkController.shared.fetchImage(urlString: urlString) { (image, error) in
-              if let image = image {
-                // if there is an image, replace image with nil
-                self.fetchedImages[section] = image
-                DispatchQueue.main.async {
-                  cell.locationImage.image = self.fetchedImages[section]
-                  tableView.reloadData()
-             }
-              }
-//              else if image == nil {
-//                // if there is no image, replace defaula image with nil
-//                self.fetchedImages[section] = UIImage(named: "tempImage")
-//                DispatchQueue.main.async {
-//                  cell.locationImage.image = self.fetchedImages[section]
-//                  tableView.reloadData()
-//  //                self.returnCell(cell: cell)
-//             }
-              else if let error = error {
-                print(error)
-              }
-            }
-          }
-         
-     
-//          return cell
-//          return cell
-//          group.notify(queue: .main) -> cell {
-//            return cell
-//          }
-   
+          cell.locationImageView.image = fetchedImages[section]
           return cell
         }
-
+        
+        
+        self.fetchedImages[section] = UIImage(systemName: "photo")
+        
+        // check imageURL of the route
+        let urlString = checkImageURL(id: route.startLocationId)
+        // apply default image if imageURL is nil
+        if urlString == nil { return cell }// better to fill placeholder. Later fix
+        
+        
+        // if there is no image, but there is imageURL available
+        NetworkController.shared.fetchImage(urlString: urlString) { (image) in
+          guard let image = image else {return}
+          // if there is an image, replace image with nil
+          self.fetchedImages[section] = image
+          DispatchQueue.main.async {
+            cell.locationImageView.image = self.fetchedImages[section]
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+          }
+        }
+        
+        return cell
+        
       case 1:
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForDistance, for: indexPath) as! DistanceCardTVCell
+        cell.setMargin(insets: .init(top: 0, left: 0 , right: 0, bottom: -8))
         let route = plan.routes[indexPath.section]
         cell.update(with: route)
         return cell
@@ -207,24 +267,33 @@ extension PlanDetailViewController : UITableViewDataSource {
     }
   }
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return sectionTitles[section]
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let text = sectionTitles[section]
+    switch section {
+    case 0:
+      return UIView()
+    case 1..<plan.routes.count:
+      return TextLabel(text: text)
+    default:
+      return SubTextLabel(text: text)
+    }
   }
-    
-  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
     switch indexPath.row {
     case 0:
-      return 300
+//      if indexPath.section == 0 {return 80} // if first section == no cell
+      return 96 + 32
     case 1:
-      return 200
+      return 48
     default:
       fatalError()
     }
   }
   
-  func returnCell(cell: UITableViewCell) -> UITableViewCell {
-    return cell
-  }
+  
   
 }
 
@@ -242,9 +311,9 @@ extension PlanDetailViewController: UITableViewDelegate {
     
     present(nextVC, animated: true, completion: nil)
     
-//    print(indexPath.section)
-//    print(plan.destinationList)
-
+    //    print(indexPath.section)
+    //    print(plan.destinationList)
+    
   }
 }
 
@@ -309,24 +378,24 @@ extension PlanDetailViewController: MKMapViewDelegate {
     return renderer
   }
   
-
+  
   /// Create annotation on locations
   func createAnnotation(startLocationId: Int, routeCount: Int) {
     
-//    var count = 0
+    //    var count = 0
     for location in allLocations {
-//      print("count: \(count)")
+      //      print("count: \(count)")
       if startLocationId == location.id  {
         let annotation = CustomAnnotation(title: location.title, subtitle: location.address, coordinate: CLLocationCoordinate2D(latitude: location.latitude , longitude: location.longitude), routeOrder: routeCount)
         // set annotation marker to routeOrder count
         annotation.setMarkText()
         mapView.addAnnotation(annotation)
-//        count += 1
+        //        count += 1
       }
     }
   }
   
-
+  
 }
 
 /// Set up custom annotation

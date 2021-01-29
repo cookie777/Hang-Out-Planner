@@ -33,7 +33,7 @@ enum Categories : String {
     case .park:
       return .systemGreen
     case .other:
-      return .systemGray
+      return UIColor.systemGray.withAlphaComponent(0.2)
     }
   }
   

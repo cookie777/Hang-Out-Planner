@@ -63,13 +63,7 @@ class MainViewController: UIViewController
     view.backgroundColor = bgColor
     tableview.backgroundColor = bgColor
     
-    
-    // setting nv bar. Might use later
-    //    navigationController?.navigationBar.prefersLargeTitles = true
-    //    navigationItem.title = "Where do you\n want to go?"
-    //    navigationController?.navigationBar.largeTitleTextAttributes = LargeHeaderLabel.attrs
-    
-    
+
     // add to view and set constrans
     setLayoutOfTableView()
     setLayoutButton()
@@ -86,7 +80,7 @@ class MainViewController: UIViewController
     
     // Create upper [Title + map + location + route label] view
     let userLocationStackView = VerticalStackView(arrangedSubviews: [headerTitle, mapView, locationStackView], spacing: 24)
-    let tableHeaderStackView = VerticalStackView(arrangedSubviews: [userLocationStackView,routeLabel],spacing: 40)
+    let tableHeaderStackView = VerticalStackView(arrangedSubviews: [userLocationStackView,routeLabel],spacing: 32)
     mapView.constraintHeight(equalToConstant: 200)
     
     
@@ -382,7 +376,9 @@ extension MainViewController{
           self!.locationLabel.text = ""
           return
         }
-        self!.locationLabel.text = "\(administrativeArea) \(locality) \(thoroughfare) \(subThoroughfare)"
+        let userAddress = "\(administrativeArea) \(locality) \(thoroughfare) \(subThoroughfare)"
+        self!.locationLabel.text = userAddress
+        userCurrentLocation.address = userAddress
       }
     })
     

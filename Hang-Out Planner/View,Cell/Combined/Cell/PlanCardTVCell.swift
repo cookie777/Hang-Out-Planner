@@ -35,12 +35,8 @@ class PlanCardTVCell: CardTVCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: .default, reuseIdentifier: reuseIdentifier)
-//    mainBackground.layer.borderColor = UIColor.systemGray.withAlphaComponent(0.05).cgColor
-//    mainBackground.layer.borderWidth = 2
-//    mainBackground.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.5)
-//    mainBackground.layer.cornerRadius = 32
-//
-    
+
+
     let totalInfoStackView = VerticalStackView(
       arrangedSubviews: [popularityField, totalDistanceField,totalTimeField],
       spacing: 8,
@@ -85,7 +81,7 @@ class PlanCardTVCell: CardTVCell {
   func update(with plan: Plan, planIndex: Int) {
   
     topNLabel.text = "\(planIndex + 1)"
-    let guessDistance = plan.totalDistance * 1.5
+    let guessDistance = plan.totalDistance
     totalDistanceField.text = "\(PlanCardTVCell.meterToKm(distance: guessDistance)) Km"
     if PlanCardTVCell.calcCarSpeed(distance: guessDistance) == 0.0 {
       totalTimeField.text = "\(PlanCardTVCell.calcWalkingSpeed(distance: guessDistance)) 🚶‍♂️"

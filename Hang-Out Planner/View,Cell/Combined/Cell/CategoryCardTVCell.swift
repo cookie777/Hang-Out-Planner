@@ -39,8 +39,7 @@ class CategoryCardTVCell: CardTVCell{
     contentView.addSubview(textlb)
     textlb.centerXYin(contentView)
     
-    // mainBackground layout
-    mainBackground.layer.borderWidth = 1.6
+
 
     
     

@@ -218,7 +218,7 @@ class Planner {
       currentPlan = Plan(
         routes: routes,
         destinationList: plan.key,
-        totalDistance: plan.value,
+        totalDistance: plan.value * 1.5, // adjusting to real way
         totalTimeByWalk: nil,
         totalTimeByCar: nil,
         averageRating: aveRating,

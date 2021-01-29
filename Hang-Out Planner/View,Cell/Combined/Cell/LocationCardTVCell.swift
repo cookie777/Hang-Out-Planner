@@ -7,44 +7,58 @@
 
 import UIKit
 
-class LocationCardTVCell: UITableViewCell {
+class LocationCardTVCell: CardTVCell {
   
-
-  var locationTitleLabel = MediumHeaderLabel(text: "")
+  
+  var locationTitleLabel = SmallHeaderLabel(text: "")
   var addressLabel = SubTextLabel(text: "")
- 
-  lazy var locationImage: UIImageView = {
-    let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+  
+  lazy var locationImageView : UIImageView = {
+    let imageView = UIImageView()
     imageView.image = UIImage(named: "tempImage")
     imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.contentMode = .scaleAspectFit
-    imageView.setContentHuggingPriority(.required, for: .horizontal)
+    imageView.constraintWidth(equalToConstant: (frame.size.width - 32*2)*0.4)
+    imageView.constraintHeight(equalToConstant: (frame.size.width - 32*2)*0.4*0.76)
+    imageView.contentMode = .scaleAspectFill
+    imageView.layer.masksToBounds = true
+    imageView.layer.cornerRadius = 16
+    
     return imageView
   }()
-  /// store fetched images
-  var FetchedImageDict: [Int: UIImage?] = [:]
+
+  
+  lazy var locationStackView = VerticalStackView(
+    arrangedSubviews: [locationTitleLabel, addressLabel],
+    spacing: 8,
+    alignment: .leading,
+    distribution: .fill
+  )
+  
+  lazy var mainStackView = HorizontalStackView(
+    arrangedSubviews: [locationStackView, locationImageView],
+    spacing: 16,
+    alignment: .top
+  )
+  
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-      super.init(style: style, reuseIdentifier: reuseIdentifier)
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+
     
-    let vStackView = VerticalStackView(arrangedSubviews: [locationTitleLabel, addressLabel], spacing: 0, alignment: .fill, distribution: .fillProportionally)
-    vStackView.translatesAutoresizingMaskIntoConstraints = false
-  
-    let hStackView = HorizontalStackView(arrangedSubviews: [vStackView, locationImage], spacing: 0, alignment: .fill, distribution: .fillProportionally)
-    locationImage.widthAnchor.constraint(equalTo: hStackView.widthAnchor, multiplier: 0.5).isActive = true
-    locationImage.heightAnchor.constraint(equalTo: hStackView.heightAnchor, multiplier: 1).isActive = true
-    contentView.addSubview(hStackView)
-    hStackView.matchParent()
-    self.backgroundColor = .systemGroupedBackground
+    // Set margin of Stack vew
+    mainStackView.isLayoutMarginsRelativeArrangement = true
+    mainStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
     
- 
- 
-    locationTitleLabel.numberOfLines = 0
-    locationTitleLabel.lineBreakMode = .byWordWrapping
-    addressLabel.numberOfLines = 0
-    addressLabel.lineBreakMode = .byWordWrapping
     
-  
+    
+    contentView.addSubview(mainStackView)
+    mainStackView.matchParent()
+
+    
+    locationTitleLabel.numberOfLines = 2
+    addressLabel.numberOfLines = 2
+    
+    
   }
   
   required init?(coder: NSCoder) {
@@ -53,23 +67,29 @@ class LocationCardTVCell: UITableViewCell {
   
   func update(with route: Route) {
     let id = route.startLocationId
+    let color = Categories.color(allLocations.first {$0.id == id}?.category ?? .other)
+    
     // set location title
     locationTitleLabel.text = "\(PlanCardTVCell.checkLocationName(id: id))"
+    locationTitleLabel.textColor = id == 0 ? .systemGray : color // if start point color is gray
+    
     // set location address
     addressLabel.text = "\(LocationCardTVCell.checkLocationAddress(id: id))"
-    // get image URL from id, set
-
+    
+    mainBackground.layer.borderColor = color.cgColor
+    
+    
   }
   
   // Return Location address by location id
   static func checkLocationAddress(id: Int) -> String {
-      var locationAddress = ""
-      for location in allLocations {
-          if location.id == id {
-              locationAddress = location.address
-          }
+    var locationAddress = ""
+    for location in allLocations {
+      if location.id == id {
+        locationAddress = location.address
       }
-      return locationAddress
+    }
+    return locationAddress
   }
   
   func checkImageURL(id: Int) -> String {
@@ -81,7 +101,7 @@ class LocationCardTVCell: UITableViewCell {
         }
       }
     }
-     return urlString
+    return urlString
   }
   
   

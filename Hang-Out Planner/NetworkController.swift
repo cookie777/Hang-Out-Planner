@@ -21,40 +21,42 @@ class NetworkController {
   // This doesn't include user's location nor id.
   // After return final data, it should be all deleted from memory save.
   var tempAllLocations : [Location] = []
-
+  
   
   
   /// fetch an image from imageURL, and return UIImage as completion handler
   /// - Parameters:
   ///   - urlString: String
-
+  
   ///   - UIImage: locationImage(thumbnail) at each cell in PlanDetailVC
-  func fetchImage(urlString: String?, completionHandler: @escaping (UIImage?, Error?) -> Void) {
+  func fetchImage(urlString: String?, completionHandler: @escaping (UIImage?) -> Void) {
+    
     // check if imageURL is nil
-    if let urlString = urlString {
-      // check if its type is URL
-      guard let url = URL(string: urlString) else {return}
+    guard let urlString = urlString else {return}
+    
+    
+    // check if its type is URL
+    guard let url = URL(string: urlString) else {return}
+    
+    let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
       
-      let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-        
-        if let data = data {
-          do {
-            if let image = UIImage(data: data) {
-                completionHandler(image, nil)
-            }
-          } catch {
-            print(error.localizedDescription)
-            completionHandler(nil, error)
-          }
-        } else if let error = error {
-          print(error.localizedDescription)
-        }
+      guard let data = data else{
+        if let error = error { print(error.localizedDescription)}
+        return
       }
-      task.resume()
+      
+      guard let image = UIImage(data: data) else {
+        completionHandler(nil)
+        return
+      }
+      
+      completionHandler(image)
+      
     }
+    task.resume()
     
-    }
-    
+  }
+  
 }
 
 

@@ -11,9 +11,9 @@ class DistanceCardTVCell: CardTVCell {
   
   var arrowEmoji = LargeHeaderLabel(text: "⇣")
   var timeToReach = SubTextLabel(text: "")
-
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-      super.init(style: style, reuseIdentifier: reuseIdentifier)
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
     arrowEmoji.textAlignment = .right
     let hStackView = HorizontalStackView(arrangedSubviews: [arrowEmoji, timeToReach], spacing: 5, alignment: .center, distribution: .equalCentering)
     contentView.addSubview(hStackView)

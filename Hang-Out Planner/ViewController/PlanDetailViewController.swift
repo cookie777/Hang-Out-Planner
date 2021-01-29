@@ -14,6 +14,11 @@ class PlanDetailViewController: UIViewController{
   
   /// A plan selected at `PlanListTableViewController`
   let plan: Plan
+  
+  
+  let headerTitle = LargeHeaderLabel(text: "Here is\nYour Plan!")
+  let tableHeaderStackView :VerticalStackView = VerticalStackView(arrangedSubviews: [], spacing: 24)
+  
   /// variables related to tableView
   let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
   let cellIdForLocation = "locationCardCell"
@@ -45,17 +50,8 @@ class PlanDetailViewController: UIViewController{
   // MARK: - viewDidLoad method
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
-    navigationController?.navigationBar.prefersLargeTitles = true
-    title = "Here is Your Plan!"
-    /// set mapView
-    view.addSubview(mapView)
-    mapView.anchors(topAnchor: view.safeAreaLayoutGuide.topAnchor, leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, bottomAnchor: nil, padding: UIEdgeInsets.init(top: 8, left: 8, bottom: 0, right: 8))
-    mapView.constraintHeight(equalToConstant: view.frame.height / 3)
-    mapView.delegate = self
-    
-    /// register CustomAnnotationView
-    mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+    view.backgroundColor = bgColor
+
     
     ///set annotation per route
     var routeCount = 0
@@ -66,16 +62,49 @@ class PlanDetailViewController: UIViewController{
       routeCount += 1
     }
     
+    ///set dynamic section titles
+    let numOfRoutes = plan.routes.count
+    for index in  1...numOfRoutes - 1{
+      sectionTitles = sectionTitles + ["Location \(index)"]
+    }
+    sectionTitles = sectionTitles + ["\(currentLocation)"]
     
+    setUpTableHeaderView()
+    setUpTableView()
+  }
+  
+  func setUpTableHeaderView(){
+    
+    mapView.matchSizeWith(widthRatio: 1)
+    mapView.heightAnchor.constraint(equalTo: mapView.widthAnchor, multiplier: 1).isActive = true
+    tableHeaderStackView.addArrangedSubview(headerTitle)
+    tableHeaderStackView.addArrangedSubview(mapView)
+
+    /// register CustomAnnotationView
+    mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+    mapView.delegate = self
+    
+  }
+  
+  func setUpTableView()  {
+
     /// set tableView here
     view.addSubview(tableView)
-    tableView.anchors(
-      topAnchor: mapView.bottomAnchor,
-      leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor,
-      trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor,
-      bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor,
-      padding: UIEdgeInsets.init(top: 10, left: 8, bottom: 0, right: 8)
-    )
+    tableView.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
+    // hide scroll
+    tableView.showsVerticalScrollIndicator = false
+    
+    // Set upper view as `tableHeaderView` of the table view.
+    let thv = tableHeaderStackView// tableHeaderStackView
+    tableView.tableHeaderView = thv
+    thv.translatesAutoresizingMaskIntoConstraints = false
+    
+    // Set width same as table view
+    thv.matchSizeWith(widthRatio: 1, heightRatio: nil)
+    // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
+    tableView.tableHeaderView?.setNeedsLayout()
+    tableView.tableHeaderView?.layoutIfNeeded()
+
     
     tableView.dataSource = self
     tableView.delegate = self
@@ -84,44 +113,9 @@ class PlanDetailViewController: UIViewController{
     tableView.register(DistanceCardTVCell.self, forCellReuseIdentifier: cellIdForDistance)
     
     tableView.sectionHeaderHeight = 25
-    
-    ///set dynamic section titles
-    let numOfRoutes = plan.routes.count
-    for index in  1...numOfRoutes - 1{
-      sectionTitles = sectionTitles + ["Location \(index)"]
-    }
-    sectionTitles = sectionTitles + ["\(currentLocation)"]
   }
-//  
-//  
-//  func setLayoutOfTableView(){
-//    
-//    // Create upper [Title + map + location + route label] view
-//    let userLocationStackView = VerticalStackView(arrangedSubviews: [headerTitle, mapView, locationStackView], spacing: 24)
-//    let tableHeaderStackView = VerticalStackView(arrangedSubviews: [userLocationStackView,routeLabel],spacing: 40)
-//    mapView.constraintHeight(equalToConstant: 200)
-//    
-//    
-//    // First add to view(this order is important)
-//    view.addSubview(tableview)
-//    tableview.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
-//    
-//    // hide scroll
-//    tableview.showsVerticalScrollIndicator = false
-//    
-//    // Set upper view as `tableHeaderView` of the table view.
-//    let thv = tableHeaderStackView
-//    tableview.tableHeaderView = thv
-//    thv.translatesAutoresizingMaskIntoConstraints = false
-//    
-//    // Set width same as table view
-//    thv.matchSizeWith(widthRatio: 1, heightRatio: nil)
-//    // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
-//    tableview.tableHeaderView?.setNeedsLayout()
-//    tableview.tableHeaderView?.layoutIfNeeded()
-//    
-//  }
-//  
+
+
   
   
   //   MARK: - TEMP
@@ -216,7 +210,7 @@ extension PlanDetailViewController : UITableViewDataSource {
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     switch indexPath.row {
     case 0:
-      return 300
+      return UITableView.automaticDimension
     case 1:
       return 200
     default:

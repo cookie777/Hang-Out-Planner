@@ -30,14 +30,15 @@ class LocationCardTVCell: UITableViewCell {
     let locationStackView = VerticalStackView(
       arrangedSubviews: [locationTitleLabel, addressLabel],
       spacing: 8,
-      alignment: .leading
+      alignment: .leading,
+      distribution: .fill
     )
   
     let mainStackView = HorizontalStackView(
       arrangedSubviews: [locationStackView, locationImage],
-      distribution: .fill
+      distribution: .equalSpacing
     )
-    locationImage.matchSizeWith(widthRatio: 0.4)
+    locationImage.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.4).isActive = true
     locationImage.heightAnchor.constraint(equalTo: locationImage.widthAnchor, multiplier: 3/4).isActive = true
     
     contentView.addSubview(mainStackView)

@@ -94,8 +94,7 @@ class PlanDetailViewController: UIViewController{
     (popularityWrapper.arrangedSubviews[1] as! TextLabel).text = star
     let d = PlanCardTVCell.meterToKm(distance: plan.totalDistance)
     (totalDistanceWrapper.arrangedSubviews[1] as! TextLabel).text = "\(d) km"
-    let walk = PlanCardTVCell.calcWalkingSpeed(distance: plan.totalDistance)
-    let wStr = walk >= 0.1 ?  "\(walk)h 🚶🏻‍♀️" :  ""
+    let wStr = PlanCardTVCell.calcWalkingSpeed(distance: plan.totalDistance)
     let car = PlanCardTVCell.calcCarSpeed(distance: plan.totalDistance)
     let cStr = car >= 0.1 ?  "\(car)h 🚗" :  ""
     (totalTimeWrapper.arrangedSubviews[1] as! TextLabel).text = "\(cStr)\(wStr)"

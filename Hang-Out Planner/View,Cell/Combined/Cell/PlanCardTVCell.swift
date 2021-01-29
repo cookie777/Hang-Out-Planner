@@ -87,7 +87,12 @@ class PlanCardTVCell: CardTVCell {
     topNLabel.text = "\(planIndex + 1)"
     let guessDistance = plan.totalDistance * 1.5
     totalDistanceField.text = "\(PlanCardTVCell.meterToKm(distance: guessDistance)) Km"
-    totalTimeField.text = "\(PlanCardTVCell.calcCarSpeed(distance: guessDistance)) h 🚗  \(PlanCardTVCell.calcWalkingSpeed(distance: guessDistance)) h🚶‍♂️"
+    if PlanCardTVCell.calcCarSpeed(distance: guessDistance) == 0.0 {
+      totalTimeField.text = "\(PlanCardTVCell.calcWalkingSpeed(distance: guessDistance)) 🚶‍♂️"
+    } else {
+      totalTimeField.text = "\(PlanCardTVCell.calcCarSpeed(distance: guessDistance)) h 🚗  \(PlanCardTVCell.calcWalkingSpeed(distance: guessDistance)) 🚶‍♂️"
+    }
+   
     popularityField.text = Location.starConverter(score: plan.averageRating)
     
     
@@ -108,17 +113,34 @@ class PlanCardTVCell: CardTVCell {
     return round(km * 10)/10
   }
   
-  // average human: 5km per hour
-  static func calcWalkingSpeed(distance: Double) -> Double{
-    let distanceInKm = distance * 0.001
-    let walkingSpped = distanceInKm / 5
-    return  round(walkingSpped * 10)/10
+  // average human: 5km per hour, 85m per minute
+  static func calcWalkingSpeed(distance: Double) -> String{
+    let walkingSpeedInMinute = distance / 85
+    let result = round(walkingSpeedInMinute * 10)/10
+    if result <= 1 {
+      return "\(result) min"
+    } else if result < 60 {
+      return  "\(result) mins"
+    } else {
+        let distanceInKm = distance * 0.001
+        let walkingSpeed = distanceInKm / 5
+        let result = round(walkingSpeed * 10)/10
+      return "\(result) h"
+    }
   }
+  
+  
   // average car: 40km per hour
   static func calcCarSpeed(distance: Double) -> Double{
+   
+    
+    
+    
+    
     let distanceInKm = distance * 0.001
     let carSpped = distanceInKm / 40
-    return  round(carSpped * 10)/10
+    let result = round(carSpped * 10)/10
+      return result
   }
 
   // return Location title by location id

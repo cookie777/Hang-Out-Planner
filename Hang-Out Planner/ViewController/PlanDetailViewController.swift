@@ -165,7 +165,7 @@ extension PlanDetailViewController : UITableViewDataSource {
         
         // if there is already an image
         if fetchedImages[section] != nil {
-          cell.locationImage.image = fetchedImages[section]
+          cell.locationImageWrapper.image = fetchedImages[section]
           return cell
         }
         
@@ -184,7 +184,7 @@ extension PlanDetailViewController : UITableViewDataSource {
           // if there is an image, replace image with nil
           self.fetchedImages[section] = image
           DispatchQueue.main.async {
-            cell.locationImage.image = self.fetchedImages[section]
+            cell.locationImageWrapper.image = self.fetchedImages[section]
             tableView.reloadRows(at: [indexPath], with: .automatic)
           }
         }

@@ -13,7 +13,7 @@ class LocationCardTVCell: UITableViewCell {
   var locationTitleLabel = MediumHeaderLabel(text: "")
   var addressLabel = SubTextLabel(text: "")
  
-  lazy var locationImage: UIImageView = {
+  lazy var locationImageWrapper: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "tempImage")
     imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,11 +35,12 @@ class LocationCardTVCell: UITableViewCell {
     )
   
     let mainStackView = HorizontalStackView(
-      arrangedSubviews: [locationStackView, locationImage],
-      distribution: .equalSpacing
+      arrangedSubviews: [locationStackView, locationImageWrapper],
+      alignment: .top
     )
-    locationImage.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.4).isActive = true
-    locationImage.heightAnchor.constraint(equalTo: locationImage.widthAnchor, multiplier: 3/4).isActive = true
+    locationImageWrapper.heightAnchor.constraint(equalTo: locationImageWrapper.widthAnchor, multiplier: 3/4).isActive = true
+    locationImageWrapper.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.4).isActive = true
+
     
     contentView.addSubview(mainStackView)
     mainStackView.matchParent()

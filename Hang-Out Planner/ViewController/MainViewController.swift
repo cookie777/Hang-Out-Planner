@@ -365,7 +365,7 @@ extension MainViewController{
       
       let center = UserLocationController.shared.coordinatesMostRecent!
       let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-      self?.mapView.setRegion(region, animated: true)
+      self?.mapView.setRegion(region, animated: false)
       self?.mapView.showsUserLocation = true
       
       //      show current address

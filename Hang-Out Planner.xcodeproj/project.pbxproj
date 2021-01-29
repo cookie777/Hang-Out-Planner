@@ -48,7 +48,6 @@
 		48DE334625B8ECE2001630B7 /* Planner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333F25B8ECE2001630B7 /* Planner.swift */; };
 		48DE334725B8ECE2001630B7 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334025B8ECE2001630B7 /* Route.swift */; };
 		48DE334925B8ECE2001630B7 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334225B8ECE2001630B7 /* Plan.swift */; };
-		AEB62B0325BFA64F0004DFE9 /* yelp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEB62AFD25BFA3290004DFE9 /* yelp-Info.plist */; };
 		B088871F25B911D000D5F9E0 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */; };
 		B0AEF4FA25BFA673009CBF6D /* yelp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0AEF4F625BFA336009CBF6D /* yelp-Info.plist */; };
 /* End PBXBuildFile section */
@@ -98,7 +97,6 @@
 		48DE333F25B8ECE2001630B7 /* Planner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planner.swift; sourceTree = "<group>"; };
 		48DE334025B8ECE2001630B7 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		48DE334225B8ECE2001630B7 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
-		AEB62AFD25BFA3290004DFE9 /* yelp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "yelp-Info.plist"; sourceTree = "<group>"; };
 		B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 		B0AEF4F625BFA336009CBF6D /* yelp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "yelp-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,8 +232,8 @@
 			children = (
 				48A4C61625B5546C00264AF9 /* CategoryCardTVCell.swift */,
 				48A4C61B25B5548000264AF9 /* PlanCardTVCell.swift */,
-				48A4C62525B554AB00264AF9 /* DistanceCardTVCell.swift */,
 				48A4C62025B5549500264AF9 /* LocationCardTVCell.swift */,
+				48A4C62525B554AB00264AF9 /* DistanceCardTVCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";

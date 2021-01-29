@@ -81,7 +81,7 @@ class PlanCardTVCell: CardTVCell {
   func update(with plan: Plan, planIndex: Int) {
   
     topNLabel.text = "\(planIndex + 1)"
-    let guessDistance = plan.totalDistance * 1.5
+    let guessDistance = plan.totalDistance
     totalDistanceField.text = "\(PlanCardTVCell.meterToKm(distance: guessDistance)) Km"
     totalTimeField.text = "\(PlanCardTVCell.calcCarSpeed(distance: guessDistance)) h 🚗  \(PlanCardTVCell.calcWalkingSpeed(distance: guessDistance)) h🚶‍♂️"
     popularityField.text = Location.starConverter(score: plan.averageRating)

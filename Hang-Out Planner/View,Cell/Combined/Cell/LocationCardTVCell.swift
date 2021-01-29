@@ -18,7 +18,7 @@ class LocationCardTVCell: CardTVCell {
     imageView.image = UIImage(named: "tempImage")
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.constraintWidth(equalToConstant: (frame.size.width - 32*2)*0.4)
-    imageView.constraintHeight(equalToConstant: (frame.size.width - 32*2)*0.4*0.618)
+    imageView.constraintHeight(equalToConstant: (frame.size.width - 32*2)*0.4*0.76)
     imageView.contentMode = .scaleAspectFill
     imageView.layer.cornerRadius = 16
     imageView.layer.masksToBounds = true
@@ -54,8 +54,8 @@ class LocationCardTVCell: CardTVCell {
     mainStackView.matchParent()
 
     
-    locationTitleLabel.numberOfLines = 0
-    addressLabel.numberOfLines = 0
+    locationTitleLabel.numberOfLines = 2
+    addressLabel.numberOfLines = 2
     
     
   }
@@ -70,12 +70,13 @@ class LocationCardTVCell: CardTVCell {
     
     // set location title
     locationTitleLabel.text = "\(PlanCardTVCell.checkLocationName(id: id))"
-    locationTitleLabel.textColor = color
+    locationTitleLabel.textColor = id == 0 ? .systemGray : color // if start point color is gray
     
     // set location address
     addressLabel.text = "\(LocationCardTVCell.checkLocationAddress(id: id))"
     
     mainBackground.layer.borderColor = color.cgColor
+    
     
   }
   

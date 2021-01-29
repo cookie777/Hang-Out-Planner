@@ -20,7 +20,7 @@ struct Location{
   
   let title   : String
   let imageURL: String?
-  let address : String
+  var address : String
   
   let website : String?
   

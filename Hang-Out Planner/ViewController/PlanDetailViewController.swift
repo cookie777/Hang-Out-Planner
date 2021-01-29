@@ -16,51 +16,47 @@ class PlanDetailViewController: UIViewController{
   let plan: Plan
   
   
-  let tableHeaderStackView :VerticalStackView = VerticalStackView(arrangedSubviews: [], spacing: 24)
-  
   let headerTitle = LargeHeaderLabel(text: "Here is\nYour Plan!")
   var mapView = MKMapView()
-  
-  let outlineLabel : MediumHeaderLabel = {
-    let lb = MediumHeaderLabel(text: "Outline")
-    lb.constraintHeight(equalToConstant: lb.intrinsicContentSize.height + 16)
-    return lb
-  }()
+  let outlineLabel = MediumHeaderLabel(text: "Outline")
   let popularityWrapper :HorizontalStackView  = {
     let leftLb = TextLabel(text: "Popularity")
     let rightLb = TextLabel(text: "⭐️")
-    let sv = HorizontalStackView(arrangedSubviews: [leftLb,rightLb], spacing: 16)
-    
-    return sv
+    return HorizontalStackView(arrangedSubviews: [leftLb,rightLb], spacing: 16)
   }()
   let totalDistanceWrapper :HorizontalStackView  = {
     let leftLb = TextLabel(text: "Total Distance")
     let rightLb = TextLabel(text: "0 km")
-    let sv = HorizontalStackView(arrangedSubviews: [leftLb,rightLb], spacing: 16)
-    return sv
+    return HorizontalStackView(arrangedSubviews: [leftLb,rightLb], spacing: 16)
   }()
   let totalTimeWrapper :HorizontalStackView  = {
     let leftLb = TextLabel(text: "Total Time")
     let rightLb = TextLabel(text: "0")
-    let sv = HorizontalStackView(arrangedSubviews: [leftLb,rightLb], spacing: 16)
-//    leftLb.constraintHeight(equalToConstant: leftLb.intrinsicContentSize.height + 40)
+    return HorizontalStackView(arrangedSubviews: [leftLb,rightLb], spacing: 16)
+  }()
+  let navigationLabel = MediumHeaderLabel(text: "Navigation")
+  lazy var  tableHeaderStackView :VerticalStackView = {
+    let sv = VerticalStackView(
+      arrangedSubviews: [
+        headerTitle,
+        mapView,
+        outlineLabel,
+        popularityWrapper,
+        totalDistanceWrapper,
+        totalTimeWrapper,
+        navigationLabel,
+        UIView()
+      ]
+    )
+    sv.setCustomSpacing(24, after: headerTitle)
+    sv.setCustomSpacing(32, after: mapView)
+    sv.setCustomSpacing(12, after: outlineLabel)
+    sv.setCustomSpacing(8, after: popularityWrapper)
+    sv.setCustomSpacing(8, after: totalDistanceWrapper)
+    sv.setCustomSpacing(32, after: totalTimeWrapper)
+    sv.setCustomSpacing(-28, after: navigationLabel)
     return sv
   }()
-  lazy var detailWrapper = VerticalStackView(arrangedSubviews: [popularityWrapper, totalDistanceWrapper, totalTimeWrapper], spacing: 8)
-  let navigationLabel : MediumHeaderLabel = {
-    let lb = MediumHeaderLabel(text: "Navigation")
-    lb.constraintHeight(equalToConstant: lb.intrinsicContentSize.height + 24)
-    return lb
-  }()
-  lazy var tableHeaderLowerStackView = VerticalStackView(
-    arrangedSubviews: [
-      outlineLabel,
-      detailWrapper,
-      navigationLabel
-    ]
-  )
-
-  
   
   
   /// variables related to tableView
@@ -73,7 +69,7 @@ class PlanDetailViewController: UIViewController{
   /// variables related to mapKit
   var coordinate: (Double, Double)?
   
-
+  
   
   /// variables related to store fetched images
   //  let locationCardCell = LocationCardTVCell()
@@ -92,9 +88,22 @@ class PlanDetailViewController: UIViewController{
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = bgColor
-
     
-    ///set annotation per route
+    //set label value
+    let star = Location.starConverter(score: plan.averageRating)
+    (popularityWrapper.arrangedSubviews[1] as! TextLabel).text = star
+    let d = PlanCardTVCell.meterToKm(distance: plan.totalDistance)
+    (totalDistanceWrapper.arrangedSubviews[1] as! TextLabel).text = "\(d) km"
+    let walk = PlanCardTVCell.calcWalkingSpeed(distance: plan.totalDistance)
+    let wStr = walk >= 0.1 ?  "\(walk)h 🚶🏻‍♀️" :  ""
+    let car = PlanCardTVCell.calcCarSpeed(distance: plan.totalDistance)
+    let cStr = car >= 0.1 ?  "\(car)h 🚗" :  ""
+    (totalTimeWrapper.arrangedSubviews[1] as! TextLabel).text = "\(cStr)\(wStr)"
+    
+    
+    
+    
+    //set annotation per route
     var routeCount = 0
     for route in plan.routes {
       createAnnotation(startLocationId: route.startLocationId, routeCount: routeCount)
@@ -102,13 +111,16 @@ class PlanDetailViewController: UIViewController{
       fetchedImages.append(nil)
       routeCount += 1
     }
-    
-    ///set dynamic section titles
+    //Set image for starting point
+//    let config = UIImage.SymbolConfiguration(
+//    fetchedImages[0] = UIImage(systemName: "mappin.and.ellipse")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+    fetchedImages[0] = UIImage()
+    //set dynamic section titles
     let numOfRoutes = plan.routes.count
     for index in  1...numOfRoutes - 1{
       sectionTitles += ["Location \(index)"]
     }
-    sectionTitles += ["Back to\n\(currentLocation)"]
+    sectionTitles += ["Back to Start"]
     
     setUpTableHeaderView()
     setUpTableView()
@@ -120,11 +132,8 @@ class PlanDetailViewController: UIViewController{
     mapView.translatesAutoresizingMaskIntoConstraints = false
     mapView.layer.cornerRadius = 32
     mapView.matchSizeWith(widthRatio: 1)
-    mapView.heightAnchor.constraint(equalTo: mapView.widthAnchor, multiplier: 1).isActive = true
-    tableHeaderStackView.addArrangedSubview(headerTitle)
-    tableHeaderStackView.addArrangedSubview(mapView)
-    tableHeaderStackView.addArrangedSubview(tableHeaderLowerStackView)
-
+    mapView.heightAnchor.constraint(equalTo: mapView.widthAnchor, multiplier: 0.618).isActive = true
+    
     /// register CustomAnnotationView
     mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
     mapView.delegate = self
@@ -133,13 +142,14 @@ class PlanDetailViewController: UIViewController{
   
   /// set tableView here
   private func setUpTableView()  {
-
+    
     view.addSubview(tableView)
     tableView.separatorStyle = .none
     tableView.backgroundColor = bgColor
     tableView.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
     // hide scroll
     tableView.showsVerticalScrollIndicator = false
+ 
     
     // Set upper view as `tableHeaderView` of the table view.
     let thv = tableHeaderStackView// tableHeaderStackView
@@ -151,7 +161,7 @@ class PlanDetailViewController: UIViewController{
     // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
     tableView.tableHeaderView?.setNeedsLayout()
     tableView.tableHeaderView?.layoutIfNeeded()
-
+    
     
     tableView.dataSource = self
     tableView.delegate = self
@@ -160,8 +170,8 @@ class PlanDetailViewController: UIViewController{
     tableView.register(DistanceCardTVCell.self, forCellReuseIdentifier: cellIdForDistance)
     
   }
-
-
+  
+  
   
   
   //   MARK: - TEMP
@@ -200,15 +210,24 @@ extension PlanDetailViewController : UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
+    
+    
     // section 0,1,2,3  <-> route は4つ
     let section = indexPath.section
     if section < plan.routes.count {
+      
+      
       switch indexPath.row {
       case 0:
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)  as! LocationCardTVCell
         cell.setMargin(insets: .init(top: 8, left: 0 , right: 0, bottom: 8))
+        
         let route = plan.routes[section]
         cell.update(with: route)
+        
+  
+        
         
         // if there is already an image
         if fetchedImages[section] != nil {
@@ -217,12 +236,12 @@ extension PlanDetailViewController : UITableViewDataSource {
         }
         
         
-        self.fetchedImages[section] = UIImage(named: "tempImage")
+        self.fetchedImages[section] = UIImage(systemName: "photo")
         
         // check imageURL of the route
         let urlString = checkImageURL(id: route.startLocationId)
         // apply default image if imageURL is nil
-        if urlString == nil { return cell }
+        if urlString == nil { return cell }// better to fill placeholder. Later fix
         
         
         // if there is no image, but there is imageURL available
@@ -240,7 +259,7 @@ extension PlanDetailViewController : UITableViewDataSource {
         
       case 1:
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForDistance, for: indexPath) as! DistanceCardTVCell
-        cell.setMargin(insets: .init(top: 0, left: 0 , right: 0, bottom: -24))
+        cell.setMargin(insets: .init(top: 0, left: 0 , right: 0, bottom: -8))
         let route = plan.routes[indexPath.section]
         cell.update(with: route)
         return cell
@@ -251,26 +270,34 @@ extension PlanDetailViewController : UITableViewDataSource {
       return UITableViewCell()
     }
   }
-
+  
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let text = sectionTitles[section]
-    let lb = TextLabel(text: text)
-    return lb
+    switch section {
+    case 0:
+      return UIView()
+    case 1..<plan.routes.count:
+      return TextLabel(text: text)
+    default:
+      return SubTextLabel(text: text)
+    }
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      switch indexPath.row {
-      case 0:
-        return 96 + 32
-      case 1:
-        return 32
-      default:
-        fatalError()
-      }
+
+    switch indexPath.row {
+    case 0:
+//      if indexPath.section == 0 {return 80} // if first section == no cell
+      return 96 + 32
+    case 1:
+      return 48
+    default:
+      fatalError()
+    }
   }
-
-
+  
+  
   
 }
 

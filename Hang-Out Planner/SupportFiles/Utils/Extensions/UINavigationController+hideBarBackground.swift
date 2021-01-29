@@ -10,8 +10,17 @@ import UIKit
 extension UINavigationController{
   
   func hideBarBackground() {
-    self.navigationBar.setBackgroundImage(UIImage(), for:.default)
+    // this will totally delete bar.
+//    self.navigationBar.setBackgroundImage(UIImage(), for:.default)
+    
+    // This will just change color
+//    self.navigationBar.isTranslucent = true
+    self.navigationBar.barTintColor = UIColor.systemBackground
+    
+    
+    // This will delete boarder line
     self.navigationBar.shadowImage = UIImage()
+  
     self.navigationBar.layoutIfNeeded()
   }
   

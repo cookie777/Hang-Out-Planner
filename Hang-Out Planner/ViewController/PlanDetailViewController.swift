@@ -226,9 +226,6 @@ extension PlanDetailViewController : UITableViewDataSource {
         let route = plan.routes[section]
         cell.update(with: route)
         
-  
-        
-        
         // if there is already an image
         if fetchedImages[section] != nil {
           cell.locationImageView.image = fetchedImages[section]

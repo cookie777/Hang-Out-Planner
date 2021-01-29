@@ -20,8 +20,9 @@ class LocationCardTVCell: CardTVCell {
     imageView.constraintWidth(equalToConstant: (frame.size.width - 32*2)*0.4)
     imageView.constraintHeight(equalToConstant: (frame.size.width - 32*2)*0.4*0.76)
     imageView.contentMode = .scaleAspectFill
-    imageView.layer.cornerRadius = 16
     imageView.layer.masksToBounds = true
+    imageView.layer.cornerRadius = 16
+    
     return imageView
   }()
 

@@ -282,7 +282,7 @@ extension PlanDetailViewController: MKMapViewDelegate {
       self.mapView.addOverlay(route.polyline, level: .aboveRoads)
       // set start rectangle
       let rekt = route.polyline.boundingMapRect
-      self.mapView.setRegion(MKCoordinateRegion(rekt), animated: true)
+      self.mapView.setRegion(MKCoordinateRegion(rekt), animated: false)
     }
   }
   

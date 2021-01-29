@@ -54,7 +54,8 @@ class MainViewController: UIViewController
     table.translatesAutoresizingMaskIntoConstraints = false
     return table
   }()
-  
+  // distance measument in meters added by yumi
+  let distanceSpan: CLLocationDistance = 2000
   
   // MARK: - Layout config
   override func viewDidLoad() {
@@ -78,7 +79,7 @@ class MainViewController: UIViewController
     tableview.dataSource = self
     tableview.delegate = self
     tableview.allowsMultipleSelectionDuringEditing = true
-    
+
   }
   
   func setLayoutOfTableView(){
@@ -364,10 +365,11 @@ extension MainViewController{
       // update user annotation here
       
       let center = UserLocationController.shared.coordinatesMostRecent!
+
       let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-      self?.mapView.setRegion(region, animated: true)
+      self?.mapView.setRegion(region, animated: false)
       self?.mapView.showsUserLocation = true
-      
+    
       //      show current address
       CLGeocoder().reverseGeocodeLocation(UserLocationController.shared.locationManager.location!) { placemarks, error in
         guard
@@ -388,6 +390,18 @@ extension MainViewController{
   override func viewWillDisappear(_ animated: Bool) {
     // Stop tracking user data.  Added by Yanmer.
     UserLocationController.shared.stop()
+  }
+  
+}
+
+// function to set initial zoom setting
+extension MainViewController {
+
+  func setZoomLevel(location: CLLocation) {
+    // create new region for zoom level
+    let mapCoordinates = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: distanceSpan, longitudinalMeters: distanceSpan)
+    // set new region
+    self.mapView.setRegion(mapCoordinates, animated: true)
   }
   
 }

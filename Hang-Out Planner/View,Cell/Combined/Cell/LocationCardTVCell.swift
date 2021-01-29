@@ -14,30 +14,35 @@ class LocationCardTVCell: UITableViewCell {
   var addressLabel = SubTextLabel(text: "")
  
   lazy var locationImage: UIImageView = {
-    let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    let imageView = UIImageView()
     imageView.image = UIImage(named: "tempImage")
     imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.contentMode = .scaleAspectFit
-    imageView.setContentHuggingPriority(.required, for: .horizontal)
+    imageView.contentMode = .scaleAspectFill
+    imageView.layer.masksToBounds = true
     return imageView
   }()
   /// store fetched images
-  var FetchedImageDict: [Int: UIImage?] = [:]
+  var fetchedImageDict: [Int: UIImage?] = [:]
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
       super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    let vStackView = VerticalStackView(arrangedSubviews: [locationTitleLabel, addressLabel], spacing: 0, alignment: .fill, distribution: .fillProportionally)
-    vStackView.translatesAutoresizingMaskIntoConstraints = false
+    let locationStackView = VerticalStackView(
+      arrangedSubviews: [locationTitleLabel, addressLabel],
+      spacing: 8,
+      alignment: .leading
+    )
   
-    let hStackView = HorizontalStackView(arrangedSubviews: [vStackView, locationImage], spacing: 0, alignment: .fill, distribution: .fillProportionally)
-    locationImage.widthAnchor.constraint(equalTo: hStackView.widthAnchor, multiplier: 0.5).isActive = true
-    locationImage.heightAnchor.constraint(equalTo: hStackView.heightAnchor, multiplier: 1).isActive = true
-    contentView.addSubview(hStackView)
-    hStackView.matchParent()
-    self.backgroundColor = .systemGroupedBackground
+    let mainStackView = HorizontalStackView(
+      arrangedSubviews: [locationStackView, locationImage],
+      distribution: .fill
+    )
+    locationImage.matchSizeWith(widthRatio: 0.4)
+    locationImage.heightAnchor.constraint(equalTo: locationImage.widthAnchor, multiplier: 3/4).isActive = true
     
- 
+    contentView.addSubview(mainStackView)
+    mainStackView.matchParent()
+    
  
     locationTitleLabel.numberOfLines = 0
     locationTitleLabel.lineBreakMode = .byWordWrapping

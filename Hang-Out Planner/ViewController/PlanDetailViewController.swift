@@ -92,6 +92,36 @@ class PlanDetailViewController: UIViewController{
     }
     sectionTitles = sectionTitles + ["\(currentLocation)"]
   }
+//  
+//  
+//  func setLayoutOfTableView(){
+//    
+//    // Create upper [Title + map + location + route label] view
+//    let userLocationStackView = VerticalStackView(arrangedSubviews: [headerTitle, mapView, locationStackView], spacing: 24)
+//    let tableHeaderStackView = VerticalStackView(arrangedSubviews: [userLocationStackView,routeLabel],spacing: 40)
+//    mapView.constraintHeight(equalToConstant: 200)
+//    
+//    
+//    // First add to view(this order is important)
+//    view.addSubview(tableview)
+//    tableview.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
+//    
+//    // hide scroll
+//    tableview.showsVerticalScrollIndicator = false
+//    
+//    // Set upper view as `tableHeaderView` of the table view.
+//    let thv = tableHeaderStackView
+//    tableview.tableHeaderView = thv
+//    thv.translatesAutoresizingMaskIntoConstraints = false
+//    
+//    // Set width same as table view
+//    thv.matchSizeWith(widthRatio: 1, heightRatio: nil)
+//    // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
+//    tableview.tableHeaderView?.setNeedsLayout()
+//    tableview.tableHeaderView?.layoutIfNeeded()
+//    
+//  }
+//  
   
   
   //   MARK: - TEMP

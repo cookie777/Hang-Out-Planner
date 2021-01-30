@@ -120,6 +120,8 @@ class PlanDetailViewController: UIViewController{
  
       routeCount += 1
     }
+
+    mapView.fitAll()
     
     
     //set dynamic section titles
@@ -140,10 +142,7 @@ class PlanDetailViewController: UIViewController{
   }
 //
 //  @objc func mapTouchAction(gestureRecognizer: UITapGestureRecognizer) {
-//      UIView.animate(withDuration: 2, animations: {
-//          self.mapView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-//          self.mapView.layoutIfNeeded()
-//      })
+//
 //  }
   
   /// Set up mapView
@@ -404,12 +403,9 @@ extension PlanDetailViewController: MKMapViewDelegate {
       
       // add polyline
       self.mapView.addOverlay(route.polyline, level: .aboveRoads)
-      // set start rectangle
-      let rekt = route.polyline.boundingMapRect
-      print(rekt)
-//      print(MKCoordinateRegion(rekt))
-      self.mapView.setRegion(MKCoordinateRegion(rekt), animated: false)
     }
+    
+  
   }
   
   /// Create MKMapItem from location id. This is a helper function which is used in `mapRoute`
@@ -558,4 +554,43 @@ class CustomAnnotationView: MKMarkerAnnotationView {
   }
   
   
+}
+
+
+extension MKMapView {
+  
+//  https://stackoverflow.com/questions/39747957/mapview-to-show-all-annotations-and-zoom-in-as-much-as-possible-of-the-map
+
+    /// When we call this function, we have already added the annotations to the map, and just want all of them to be displayed.
+    func fitAll() {
+        var zoomRect            = MKMapRect.null;
+        for annotation in annotations {
+            let annotationPoint = MKMapPoint(annotation.coordinate)
+          let pointRect       = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0.01, height: 0.01);
+            zoomRect            = zoomRect.union(pointRect);
+        }
+        setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 56, left: 56, bottom: 56, right: 56), animated: false)
+        zoomRect            = MKMapRect.null;
+    }
+
+    /// We call this function and give it the annotations we want added to the map. we display the annotations if necessary
+    func fitAll(in annotations: [MKAnnotation], andShow show: Bool) {
+        var zoomRect:MKMapRect  = MKMapRect.null
+
+        for annotation in annotations {
+            let aPoint          = MKMapPoint(annotation.coordinate)
+            let rect            = MKMapRect(x: aPoint.x, y: aPoint.y, width: 0.1, height: 0.1)
+
+            if zoomRect.isNull {
+                zoomRect = rect
+            } else {
+                zoomRect = zoomRect.union(rect)
+            }
+        }
+        if(show) {
+            addAnnotations(annotations)
+        }
+        setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100), animated: true)
+    }
+
 }

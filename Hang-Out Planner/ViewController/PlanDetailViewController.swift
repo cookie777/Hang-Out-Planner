@@ -236,6 +236,24 @@ class PlanDetailViewController: UIViewController{
     return urlString
   }
   
+  func moveToLocationDetailVC(locationId: Int){
+
+    let nextVC = LocationDetailViewController(location: allLocations[locationId])
+    
+    // lcoaiton id : 11
+    // fetched image [0, image, image ,image]
+    // dest list [0, 12, 11, 5, 0]
+    guard let imageId = plan.destinationList.firstIndex(where: {$0 == locationId}) else {
+      return
+    }
+    
+    if let locationImage = fetchedImages[imageId]  {
+      nextVC.image.image = locationImage
+    }
+
+    present(nextVC, animated: true, completion: nil)
+  }
+  
 }
 
 
@@ -373,13 +391,8 @@ extension PlanDetailViewController: UITableViewDelegate {
     if indexPath.section == 0 {return}
     // Otherwise, get selected Location id, and pass to nextVC
     let selectedLocationId = plan.destinationList[indexPath.section]
-    let nextVC = LocationDetailViewController(location: allLocations[selectedLocationId])
     
-    
-    present(nextVC, animated: true, completion: nil)
-    
-    //    print(indexPath.section)
-    //    print(plan.destinationList)
+    moveToLocationDetailVC(locationId: selectedLocationId)
     
   }
 }
@@ -477,8 +490,7 @@ extension PlanDetailViewController: MKMapViewDelegate {
     guard let currentView = view.annotation as? CustomAnnotation else {
       return
     }
-    let nextVC = LocationDetailViewController(location: allLocations[currentView.locationId ] )
-    present(nextVC, animated: true, completion: nil)
+    moveToLocationDetailVC(locationId: currentView.locationId)
   }
   
   

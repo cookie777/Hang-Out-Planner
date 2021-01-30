@@ -78,7 +78,7 @@ class PlanDetailViewController: UIViewController{
   }()
   
   
-
+  
   // MARK: - Init, viewDidLoad method
   init(plan:Plan) {
     self.plan = plan
@@ -114,13 +114,13 @@ class PlanDetailViewController: UIViewController{
       // Set initial images
       fetchedImages.append(nil)
       //Set image for starting point
-//      let config = UIImage.SymbolConfiguration(
-//      fetchedImages[0] = UIImage(systemName: "mappin.and.ellipse")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+      //      let config = UIImage.SymbolConfiguration(
+      //      fetchedImages[0] = UIImage(systemName: "mappin.and.ellipse")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
       fetchedImages[0] = UIImage()
- 
+      
       routeCount += 1
     }
-
+    
     mapView.fitAll()
     
     
@@ -136,9 +136,41 @@ class PlanDetailViewController: UIViewController{
     setUpMapView()
     setUpTableView()
     
-    
+    createCrrentlocationImage()
   }
+  
+  func createCrrentlocationImage(){
+    let mapSnapshotOptions = MKMapSnapshotter.Options()
+    
+    // Set the region of the map that is rendered.
+    
+    let location = UserLocationController.shared.coordinatesLastTimeYouTappedGo!
+    let region = MKCoordinateRegion(center: location, latitudinalMeters: 1800, longitudinalMeters: 1800)
+    mapSnapshotOptions.region = region
+    
+    // Set the scale of the image. We'll just use the scale of the current device, which is 2x scale on Retina screens.
+    mapSnapshotOptions.scale = UIScreen.main.scale
+    
+    // Set the size of the image output.
+    mapSnapshotOptions.size = CGSize(width: 400, height: 400*0.618)
+    
+    
+    let snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
+    snapShotter.start(completionHandler: { (snapshot, error) -> Void in
+      if error == nil {
 
+//          var point = snapshot?.point(for: location)
+//          let v = UIView(frame:CGRect(x: 0, y: 0, width: 20, height: 20))
+//          v.backgroundColor = .cyan
+        
+        self.fetchedImages[0] = snapshot!.image
+        self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        //        self.tableView.reloadData()
+      } else {
+        print("error")
+      }
+    })
+  }
   
   /// Set up mapView
   private func setUpMapView(){
@@ -149,7 +181,7 @@ class PlanDetailViewController: UIViewController{
     
     /// register CustomAnnotationView
     mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-//    mapView.showAnnotations(mapView.annotations, animated: true)
+    //    mapView.showAnnotations(mapView.annotations, animated: true)
     mapView.delegate = self
     
     
@@ -164,7 +196,7 @@ class PlanDetailViewController: UIViewController{
     tableView.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
     // hide scroll
     tableView.showsVerticalScrollIndicator = false
- 
+    
     
     // Set upper view as `tableHeaderView` of the table view.
     let thv = tableHeaderStackView// tableHeaderStackView
@@ -310,7 +342,7 @@ extension PlanDetailViewController : UITableViewDataSource {
   
   // Set each row's hegiht
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
+    
     switch indexPath.row {
     // Height for Location card
     case 0:
@@ -363,7 +395,7 @@ extension PlanDetailViewController: MKMapViewDelegate {
   /// Create annotation on locations
   func createAnnotation(startLocationId: Int, routeCount: Int) {
     guard let currentLocation = (allLocations.first{$0.id == startLocationId}) else {return}
-//    let annotation = CustomAnnotation(title: currentLocation.title, subtitle: currentLocation.address, coordinate: CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude), routeOrder: routeCount)
+    //    let annotation = CustomAnnotation(title: currentLocation.title, subtitle: currentLocation.address, coordinate: CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude), routeOrder: routeCount)
     let annotation = CustomAnnotation(location: currentLocation, routeOrder: routeCount)
     // set annotation marker to routeOrder count
     annotation.setMarkText()
@@ -402,7 +434,7 @@ extension PlanDetailViewController: MKMapViewDelegate {
       self.mapView.addOverlay(route.polyline, level: .aboveRoads)
     }
     
-  
+    
   }
   
   /// Create MKMapItem from location id. This is a helper function which is used in `mapRoute`
@@ -423,8 +455,8 @@ extension PlanDetailViewController: MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     let renderer = MKPolylineRenderer(overlay: overlay)
     renderer.strokeColor = UIColor.systemBlue.withAlphaComponent(0.30)
-//    renderer.strokeStart = 0.02
-//    renderer.strokeEnd = 0.98
+    //    renderer.strokeStart = 0.02
+    //    renderer.strokeEnd = 0.98
     renderer.lineWidth = 8
     
     return renderer
@@ -440,8 +472,16 @@ extension PlanDetailViewController: MKMapViewDelegate {
     return annotationView
   }
   
+  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    
+    guard let currentView = view.annotation as? CustomAnnotation else {
+      return
+    }
+    let nextVC = LocationDetailViewController(location: allLocations[currentView.locationId ] )
+    present(nextVC, animated: true, completion: nil)
+  }
   
-
+  
   
   
 }
@@ -452,21 +492,23 @@ class CustomAnnotation: NSObject, MKAnnotation {
   var subtitle: String?
   var coordinate: CLLocationCoordinate2D
   var routeOrder: Int
+  var locationId : Int
   
   // use marker instead of pin
   var markerTintColor: UIColor = .systemGray
   // set default value
   var glyphText = String("1")
-//
-//  init(title: String, subtitle: String, coordinate:CLLocationCoordinate2D, routeOrder: Int) {
-//    self.title = title
-//    self.subtitle = subtitle
-//    self.coordinate = coordinate
-//    self.routeOrder = routeOrder
-//    super.init()
-//  }
+  //
+  //  init(title: String, subtitle: String, coordinate:CLLocationCoordinate2D, routeOrder: Int) {
+  //    self.title = title
+  //    self.subtitle = subtitle
+  //    self.coordinate = coordinate
+  //    self.routeOrder = routeOrder
+  //    super.init()
+  //  }
   
   init(location: Location, routeOrder: Int ) {
+    self.locationId = location.id
     self.title = location.title
     self.subtitle = location.address
     self.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
@@ -474,7 +516,7 @@ class CustomAnnotation: NSObject, MKAnnotation {
     self.markerTintColor = Categories.color(location.category)
     super.init()
   }
-
+  
   
   // update text depends on the pin content
   func setMarkText(){
@@ -556,38 +598,38 @@ class CustomAnnotationView: MKMarkerAnnotationView {
 
 extension MKMapView {
   
-//  https://stackoverflow.com/questions/39747957/mapview-to-show-all-annotations-and-zoom-in-as-much-as-possible-of-the-map
-
-    /// When we call this function, we have already added the annotations to the map, and just want all of them to be displayed.
-    func fitAll() {
-        var zoomRect            = MKMapRect.null;
-        for annotation in annotations {
-            let annotationPoint = MKMapPoint(annotation.coordinate)
-          let pointRect       = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0.01, height: 0.01);
-            zoomRect            = zoomRect.union(pointRect);
-        }
-        setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 56, left: 56, bottom: 56, right: 56), animated: false)
-        zoomRect            = MKMapRect.null;
+  //  https://stackoverflow.com/questions/39747957/mapview-to-show-all-annotations-and-zoom-in-as-much-as-possible-of-the-map
+  
+  /// When we call this function, we have already added the annotations to the map, and just want all of them to be displayed.
+  func fitAll() {
+    var zoomRect            = MKMapRect.null;
+    for annotation in annotations {
+      let annotationPoint = MKMapPoint(annotation.coordinate)
+      let pointRect       = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0.01, height: 0.01);
+      zoomRect            = zoomRect.union(pointRect);
     }
-
-    /// We call this function and give it the annotations we want added to the map. we display the annotations if necessary
-    func fitAll(in annotations: [MKAnnotation], andShow show: Bool) {
-        var zoomRect:MKMapRect  = MKMapRect.null
-
-        for annotation in annotations {
-            let aPoint          = MKMapPoint(annotation.coordinate)
-            let rect            = MKMapRect(x: aPoint.x, y: aPoint.y, width: 0.1, height: 0.1)
-
-            if zoomRect.isNull {
-                zoomRect = rect
-            } else {
-                zoomRect = zoomRect.union(rect)
-            }
-        }
-        if(show) {
-            addAnnotations(annotations)
-        }
-        setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100), animated: true)
+    setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 56, left: 56, bottom: 56, right: 56), animated: false)
+    zoomRect            = MKMapRect.null;
+  }
+  
+  /// We call this function and give it the annotations we want added to the map. we display the annotations if necessary
+  func fitAll(in annotations: [MKAnnotation], andShow show: Bool) {
+    var zoomRect:MKMapRect  = MKMapRect.null
+    
+    for annotation in annotations {
+      let aPoint          = MKMapPoint(annotation.coordinate)
+      let rect            = MKMapRect(x: aPoint.x, y: aPoint.y, width: 0.1, height: 0.1)
+      
+      if zoomRect.isNull {
+        zoomRect = rect
+      } else {
+        zoomRect = zoomRect.union(rect)
+      }
     }
-
+    if(show) {
+      addAnnotations(annotations)
+    }
+    setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100), animated: true)
+  }
+  
 }

@@ -170,6 +170,7 @@ class MainViewController: UIViewController
       let plans = Planner.calculatePlans(categories: selectedCategories)
       let nextVC = PlanListTableViewController(plans: plans)
       navigationController?.pushViewController(nextVC, animated: true)
+      UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
       return
     }
     

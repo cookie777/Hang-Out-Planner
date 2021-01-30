@@ -37,7 +37,7 @@ class MainViewController: UIViewController
   }()
   
   let locationTitle = SubTextLabel(text: "Your current location is:")
-  let locationLabel = TextLabel(text: "Near Keefer 58 PI")
+  let locationLabel = TextLabel(text: "")
   // Wrapper of location info
   lazy var locationStackView = VerticalStackView(arrangedSubviews: [locationTitle, locationLabel], spacing: 8)
   
@@ -62,6 +62,7 @@ class MainViewController: UIViewController
     super.viewDidLoad()
     view.backgroundColor = bgColor
     tableview.backgroundColor = bgColor
+    
     
 
     // add to view and set constrans
@@ -169,6 +170,7 @@ class MainViewController: UIViewController
       let plans = Planner.calculatePlans(categories: selectedCategories)
       let nextVC = PlanListTableViewController(plans: plans)
       navigationController?.pushViewController(nextVC, animated: true)
+      UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
       return
     }
     

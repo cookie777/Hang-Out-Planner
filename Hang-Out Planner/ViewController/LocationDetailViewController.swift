@@ -30,7 +30,7 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
   
   let image :UIImageView = {
     let image = UIImageView()
-    image.image = UIImage(named: "tempImage")
+    image.image = nil
     image.translatesAutoresizingMaskIntoConstraints = false
     return image
   }()

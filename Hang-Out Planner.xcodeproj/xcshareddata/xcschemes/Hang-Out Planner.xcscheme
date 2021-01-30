@@ -50,6 +50,13 @@
             ReferencedContainer = "container:Hang-Out Planner.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <LocationScenarioReference
          identifier = "../../DefaultLocation(Vancouver).gpx"
          referenceType = "0">

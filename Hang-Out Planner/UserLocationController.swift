@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import GLKit
 
 
 /// This class manages user's location. Singleton.  Please use `shared`
@@ -124,4 +125,56 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
     return false
   }
   
+  
+  /*
+  * calculate the center point of multiple latitude longitude coordinate-pairs
+    contributed by `https://github.com/ppoh71/playgounds/blob/master/centerLocationPoint.playground/Contents.swift`
+  */
+  // center func
+  func getCenterCoord( LocationPoints: [CLLocationCoordinate2D]) -> CLLocationCoordinate2D{
+      
+      var x:Float = 0.0
+      var y:Float = 0.0
+      var z:Float = 0.0
+      
+      for points in LocationPoints {
+          
+       let lat = GLKMathDegreesToRadians(Float(points.latitude))
+       let long = GLKMathDegreesToRadians(Float(points.longitude))
+          
+          x += cos(lat) * cos(long)
+          y += cos(lat) * sin(long)
+          z += sin(lat)
+      }
+      
+      x = x / Float(LocationPoints.count)
+      y = y / Float(LocationPoints.count)
+      z = z / Float(LocationPoints.count)
+    
+      let resultLong = atan2(y, x)
+      let resultHyp = sqrt(x * x + y * y)
+      let resultLat = atan2(z, resultHyp)
+      
+      
+      
+      let result = CLLocationCoordinate2D(latitude: CLLocationDegrees(GLKMathRadiansToDegrees(Float(resultLat))), longitude: CLLocationDegrees(GLKMathRadiansToDegrees(Float(resultLong))))
+      
+      return result
+    
+    
+//    let allCoordinates = plan.destinationList[0..<plan.destinationList.count-1].map{
+//      CLLocationCoordinate2D(
+//        latitude: allLocations[$0].latitude,
+//        longitude: allLocations[$0].longitude
+//      )
+//    }
+//    let centerCoordinate = UserLocationController.shared.getCenterCoord(LocationPoints: allCoordinates)
+//    mapView.setRegion(MKCoordinateRegion(center: centerCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)), animated: false)
+//
+      
+  }
+
+  
 }
+
+

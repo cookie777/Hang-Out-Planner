@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4823EEF925C0E40C006C7324 /* UIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EEF825C0E40C006C7324 /* UIController.swift */; };
 		4823EEFF25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */; };
 		4823EF0325C16057006C7324 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EF0225C16057006C7324 /* ShadowView.swift */; };
 		486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D0D5D25BD412D00858B03 /* UserLocationController.swift */; };
@@ -53,7 +52,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4823EEF825C0E40C006C7324 /* UIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIController.swift; sourceTree = "<group>"; };
 		4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+hideBarBackground.swift"; sourceTree = "<group>"; };
 		4823EF0225C16057006C7324 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		486D0D5D25BD412D00858B03 /* UserLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationController.swift; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 		48A4C57025B52D3900264AF9 /* Hang-Out Planner */ = {
 			isa = PBXGroup;
 			children = (
-				4823EEF825C0E40C006C7324 /* UIController.swift */,
 				48A4C67425B557D900264AF9 /* NetworkController.swift */,
 				48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */,
 				486D0D5D25BD412D00858B03 /* UserLocationController.swift */,
@@ -382,7 +379,6 @@
 				48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */,
 				48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */,
 				4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */,
-				4823EEF925C0E40C006C7324 /* UIController.swift in Sources */,
 				48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */,
 				48A4C60725B553B400264AF9 /* GoButton.swift in Sources */,
 				48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */,

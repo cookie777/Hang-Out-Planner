@@ -136,14 +136,9 @@ class PlanDetailViewController: UIViewController{
     setUpMapView()
     setUpTableView()
     
-//    let tap = UITapGestureRecognizer(target: self, action: #selector(self.mapTouchAction(gestureRecognizer:)))
-//    mapView.addGestureRecognizer(tap)
     
   }
-//
-//  @objc func mapTouchAction(gestureRecognizer: UITapGestureRecognizer) {
-//
-//  }
+
   
   /// Set up mapView
   private func setUpMapView(){

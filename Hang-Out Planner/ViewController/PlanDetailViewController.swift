@@ -20,6 +20,7 @@ class PlanDetailViewController: UIViewController{
   let tableView = UITableView()
   let cellIdForLocation = "locationCardCell"
   let cellIdForDistance = "distanceCardCell"
+  let annotationId = "annotation"
   var currentLocation = "Current Location"
   lazy var sectionTitles:[String] = ["\(currentLocation)"]
   
@@ -108,7 +109,7 @@ class PlanDetailViewController: UIViewController{
       
       // create annotation and draw rout
       createAnnotation(startLocationId: route.startLocationId, routeCount: routeCount)
-      mapRoute(startLocationId: route.startLocationId, nextLocationId: route.nextLocationId)
+      drawMapRoute(startLocationId: route.startLocationId, nextLocationId: route.nextLocationId)
       
       // Set initial images
       fetchedImages.append(nil)
@@ -133,8 +134,17 @@ class PlanDetailViewController: UIViewController{
     setUpMapView()
     setUpTableView()
     
+//    let tap = UITapGestureRecognizer(target: self, action: #selector(self.mapTouchAction(gestureRecognizer:)))
+//    mapView.addGestureRecognizer(tap)
+    
   }
-  
+//
+//  @objc func mapTouchAction(gestureRecognizer: UITapGestureRecognizer) {
+//      UIView.animate(withDuration: 2, animations: {
+//          self.mapView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+//          self.mapView.layoutIfNeeded()
+//      })
+//  }
   
   /// Set up mapView
   private func setUpMapView(){
@@ -145,7 +155,9 @@ class PlanDetailViewController: UIViewController{
     
     /// register CustomAnnotationView
     mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+//    mapView.showAnnotations(mapView.annotations, animated: true)
     mapView.delegate = self
+    
     
   }
   
@@ -345,14 +357,29 @@ extension PlanDetailViewController: UITableViewDelegate {
 }
 
 
+
+
+
+
 // MARK: - MapViewDelegate extension
 extension PlanDetailViewController: MKMapViewDelegate {
+  
+  /// Create annotation on locations
+  func createAnnotation(startLocationId: Int, routeCount: Int) {
+    guard let currentLocation = (allLocations.first{$0.id == startLocationId}) else {return}
+//    let annotation = CustomAnnotation(title: currentLocation.title, subtitle: currentLocation.address, coordinate: CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude), routeOrder: routeCount)
+    let annotation = CustomAnnotation(location: currentLocation, routeOrder: routeCount)
+    // set annotation marker to routeOrder count
+    annotation.setMarkText()
+    mapView.addAnnotation(annotation)
+    
+  }
   
   /// Draw map route in map.
   /// - Parameters:
   ///   - startLocationId: id of stat point location
   ///   - nextLocationId: id of next point locaiton
-  func mapRoute(startLocationId: Int, nextLocationId: Int) {
+  func drawMapRoute(startLocationId: Int, nextLocationId: Int) {
     
     // Creat MKitem from itemId
     let sourceItem  = createMapItemFromItemId(itemId: startLocationId)
@@ -374,10 +401,13 @@ extension PlanDetailViewController: MKMapViewDelegate {
       }
       // grab the fastest route
       let route = response.routes[0]
+      
       // add polyline
       self.mapView.addOverlay(route.polyline, level: .aboveRoads)
       // set start rectangle
       let rekt = route.polyline.boundingMapRect
+      print(rekt)
+//      print(MKCoordinateRegion(rekt))
       self.mapView.setRegion(MKCoordinateRegion(rekt), animated: false)
     }
   }
@@ -399,28 +429,26 @@ extension PlanDetailViewController: MKMapViewDelegate {
   /// degine  renderer on the map
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     let renderer = MKPolylineRenderer(overlay: overlay)
-    renderer.strokeColor = .blue
-    renderer.lineWidth = 5.0
+    renderer.strokeColor = UIColor.systemBlue.withAlphaComponent(0.30)
+//    renderer.strokeStart = 0.02
+//    renderer.strokeEnd = 0.98
+    renderer.lineWidth = 8
     
     return renderer
   }
   
-  
-  /// Create annotation on locations
-  func createAnnotation(startLocationId: Int, routeCount: Int) {
-    
-    //    var count = 0
-    for location in allLocations {
-      //      print("count: \(count)")
-      if startLocationId == location.id  {
-        let annotation = CustomAnnotation(title: location.title, subtitle: location.address, coordinate: CLLocationCoordinate2D(latitude: location.latitude , longitude: location.longitude), routeOrder: routeCount)
-        // set annotation marker to routeOrder count
-        annotation.setMarkText()
-        mapView.addAnnotation(annotation)
-        //        count += 1
-      }
-    }
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    // Cast annotation as our own class to access instance variables.
+    guard let annotation = annotation as? CustomAnnotation else {return nil}
+    //     `viewFor annotation` is an annotation that is about to be displayed.
+    //     `reusableAnnotation` is a plate that is dequeued from reusable AV.
+    let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier) as! CustomAnnotationView
+    annotationView.annotation = annotation
+    return annotationView
   }
+  
+  
+
   
   
 }
@@ -432,6 +460,11 @@ class CustomAnnotation: NSObject, MKAnnotation {
   var coordinate: CLLocationCoordinate2D
   var routeOrder: Int
   
+  // use marker instead of pin
+  var markerTintColor: UIColor = .systemGray
+  // set default value
+  var glyphText = String("1")
+  
   init(title: String, subtitle: String, coordinate:CLLocationCoordinate2D, routeOrder: Int) {
     self.title = title
     self.subtitle = subtitle
@@ -439,10 +472,16 @@ class CustomAnnotation: NSObject, MKAnnotation {
     self.routeOrder = routeOrder
     super.init()
   }
-  // use marker instead of pin
-  var markerTintColor: UIColor = .orange
-  // set default value
-  var glyphText = String("1")
+  
+  init(location: Location, routeOrder: Int ) {
+    self.title = location.title
+    self.subtitle = location.address
+    self.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+    self.routeOrder = routeOrder
+    self.markerTintColor = Categories.color(location.category)
+    super.init()
+  }
+
   
   // update text depends on the pin content
   func setMarkText(){
@@ -455,21 +494,67 @@ class CustomAnnotation: NSObject, MKAnnotation {
 /// Set up custom annotationView
 class CustomAnnotationView: MKMarkerAnnotationView {
   
+  let userIcon : UIView = {
+    let v = UIView()
+    v.constraintWidth(equalToConstant: 24)
+    v.constraintHeight(equalToConstant: 24)
+    v.layer.cornerRadius = 12
+    v.backgroundColor = .systemBackground
+    
+    let sub = UIView()
+    sub.constraintWidth(equalToConstant: 16)
+    sub.constraintHeight(equalToConstant: 16)
+    sub.layer.cornerRadius = 8
+    sub.backgroundColor = .systemBlue
+    
+    v.addSubview(sub)
+    sub.centerXYin(v)
+    
+    return v
+  }()
+  
   
   override var annotation: MKAnnotation?
   {
     willSet {
       guard let annotation = newValue as? CustomAnnotation else {return}
-      canShowCallout = true
-      // additonal distance to move when callout
-      calloutOffset = CGPoint(x: -5, y: 5)
+      // It seems every time it's reset so I put it here
+      displayPriority = .required
+      
+      // Create user icon if start point
+      if annotation.routeOrder == 0{
+        self.addSubview(userIcon)
+        userIcon.centerXYin(self)
+        userIcon.isHidden = false
+        markerTintColor = .clear
+        glyphImage = UIImage()
+        rightCalloutAccessoryView = UIButton()
+        return
+      }
+      
+      // otherwise, create locaiton icon
+      userIcon.isHidden = true
       rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-      
       markerTintColor = annotation.markerTintColor
-      
       glyphText = annotation.glyphText
       
+      
+      
     }
+  }
+  
+  override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+    super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+    
+    userIcon.isHidden = true
+    canShowCallout = true
+    // additonal distance to move when callout
+    calloutOffset = CGPoint(x: -5, y: 5)
+    
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
   

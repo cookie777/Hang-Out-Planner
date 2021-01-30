@@ -63,6 +63,7 @@ class MainViewController: UIViewController
     view.backgroundColor = bgColor
     tableview.backgroundColor = bgColor
     
+    
 
     // add to view and set constrans
     setLayoutOfTableView()

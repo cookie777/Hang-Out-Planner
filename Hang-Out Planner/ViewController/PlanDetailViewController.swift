@@ -12,10 +12,27 @@ import MapKit
 /// Screen for displaying Plan details.
 class PlanDetailViewController: UIViewController{
   
+  // MARK: - Class vars
   /// A plan selected at `PlanListTableViewController`
   let plan: Plan
   
+  /// variables related to tableView
+  let tableView = UITableView()
+  let cellIdForLocation = "locationCardCell"
+  let cellIdForDistance = "distanceCardCell"
+  var currentLocation = "Current Location"
+  lazy var sectionTitles:[String] = ["\(currentLocation)"]
   
+  /// variables related to mapKit
+  var coordinate: (Double, Double)?
+  
+  /// variables related to store fetched images
+  //  let locationCardCell = LocationCardTVCell()
+  //  var routeOrder = 0
+  var fetchedImages: [UIImage?] = []
+  
+  
+  // MARK: - SubViews
   let headerTitle = LargeHeaderLabel(text: "Here is\nYour Plan!")
   var mapView = MKMapView()
   let outlineLabel = MediumHeaderLabel(text: "Outline")
@@ -48,6 +65,7 @@ class PlanDetailViewController: UIViewController{
         UIView()
       ]
     )
+    // adjust spacing in stack views
     sv.setCustomSpacing(24, after: headerTitle)
     sv.setCustomSpacing(32, after: mapView)
     sv.setCustomSpacing(12, after: outlineLabel)
@@ -59,23 +77,8 @@ class PlanDetailViewController: UIViewController{
   }()
   
   
-  /// variables related to tableView
-  let tableView = UITableView()
-  let cellIdForLocation = "locationCardCell"
-  let cellIdForDistance = "distanceCardCell"
-  var currentLocation = "Current Location"
-  lazy var sectionTitles:[String] = ["\(currentLocation)"]
-  
-  /// variables related to mapKit
-  var coordinate: (Double, Double)?
-  
-  
-  
-  /// variables related to store fetched images
-  //  let locationCardCell = LocationCardTVCell()
-  //  var routeOrder = 0
-  var fetchedImages: [UIImage?] = []
-  
+
+  // MARK: - Init, viewDidLoad method
   init(plan:Plan) {
     self.plan = plan
     super.init(nibName: nil, bundle: nil)
@@ -84,12 +87,11 @@ class PlanDetailViewController: UIViewController{
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - viewDidLoad method
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = bgColor
     
-    //set label value
+    //set label value by plan data
     let star = Location.starConverter(score: plan.averageRating)
     (popularityWrapper.arrangedSubviews[1] as! TextLabel).text = star
     let d = PlanCardTVCell.meterToKm(distance: plan.totalDistance)
@@ -100,20 +102,25 @@ class PlanDetailViewController: UIViewController{
     (totalTimeWrapper.arrangedSubviews[1] as! TextLabel).text = "\(cStr)\(wStr)"
     
     
-    
-    
-    //set annotation per route
+    //set annotation and thumbnail image per route
     var routeCount = 0
     for route in plan.routes {
+      
+      // create annotation and draw rout
       createAnnotation(startLocationId: route.startLocationId, routeCount: routeCount)
       mapRoute(startLocationId: route.startLocationId, nextLocationId: route.nextLocationId)
+      
+      // Set initial images
       fetchedImages.append(nil)
+      //Set image for starting point
+//      let config = UIImage.SymbolConfiguration(
+//      fetchedImages[0] = UIImage(systemName: "mappin.and.ellipse")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+      fetchedImages[0] = UIImage()
+ 
       routeCount += 1
     }
-    //Set image for starting point
-//    let config = UIImage.SymbolConfiguration(
-//    fetchedImages[0] = UIImage(systemName: "mappin.and.ellipse")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
-    fetchedImages[0] = UIImage()
+    
+    
     //set dynamic section titles
     let numOfRoutes = plan.routes.count
     for index in  1...numOfRoutes - 1{
@@ -121,13 +128,16 @@ class PlanDetailViewController: UIViewController{
     }
     sectionTitles += ["Back to Start"]
     
-    setUpTableHeaderView()
+    
+    // Set up layouts
+    setUpMapView()
     setUpTableView()
     
   }
   
-  private func setUpTableHeaderView(){
-    
+  
+  /// Set up mapView
+  private func setUpMapView(){
     mapView.translatesAutoresizingMaskIntoConstraints = false
     mapView.layer.cornerRadius = 32
     mapView.matchSizeWith(widthRatio: 1)
@@ -139,7 +149,7 @@ class PlanDetailViewController: UIViewController{
     
   }
   
-  /// set tableView here
+  /// set tableView here. I embedded all headers and views as TableHeaderView
   private func setUpTableView()  {
     
     view.addSubview(tableView)
@@ -207,8 +217,8 @@ extension PlanDetailViewController : UITableViewDataSource {
     return 2
   }
   
+  // Define each cell at here
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
     
     
     // section 0,1,2,3  <-> route は4つ
@@ -217,27 +227,31 @@ extension PlanDetailViewController : UITableViewDataSource {
       
       
       switch indexPath.row {
+      
+      // Create location card cell
       case 0:
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)  as! LocationCardTVCell
         cell.setMargin(insets: .init(top: 8, left: 0 , right: 0, bottom: 8))
         
+        // update info of cell
         let route = plan.routes[section]
         cell.update(with: route)
         
-        // if there is already an image
+        // Try to use existing image
         if fetchedImages[section] != nil {
           cell.locationImageView.image = fetchedImages[section]
           return cell
         }
         
-        
+        // Fill place holder
         self.fetchedImages[section] = UIImage(systemName: "photo")
         
         // check imageURL of the route
         let urlString = checkImageURL(id: route.startLocationId)
         // apply default image if imageURL is nil
-        if urlString == nil { return cell }// better to fill placeholder. Later fix
+        if urlString == nil {
+          return cell
+        }
         
         
         // if there is no image, but there is imageURL available
@@ -253,9 +267,12 @@ extension PlanDetailViewController : UITableViewDataSource {
         
         return cell
         
+        
+      // Create distance cell
       case 1:
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForDistance, for: indexPath) as! DistanceCardTVCell
         cell.setMargin(insets: .init(top: 0, left: 0 , right: 0, bottom: -8))
+        cell.selectionStyle = .none
         let route = plan.routes[indexPath.section]
         cell.update(with: route)
         return cell
@@ -267,25 +284,30 @@ extension PlanDetailViewController : UITableViewDataSource {
     }
   }
   
-  
+  // Use custom view  as header section
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let text = sectionTitles[section]
     switch section {
+    // First section == user location, we show no header
     case 0:
       return UIView()
+    // Locations
     case 1..<plan.routes.count:
       return TextLabel(text: text)
+    // Last section == user location
     default:
       return SubTextLabel(text: text)
     }
   }
   
+  // Set each row's hegiht
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
     switch indexPath.row {
+    // Height for Location card
     case 0:
-//      if indexPath.section == 0 {return 80} // if first section == no cell
       return 96 + 32
+    // Height for Distance card
     case 1:
       return 48
     default:
@@ -297,10 +319,14 @@ extension PlanDetailViewController : UITableViewDataSource {
   
 }
 
+
 // MARK: - TableViewDelegate extension
 extension PlanDetailViewController: UITableViewDelegate {
   
+  
+  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
     
     // If a user tap `DistanceCardTVCell` or start point, do nothing
     if indexPath.row != 0 {return}
@@ -308,6 +334,7 @@ extension PlanDetailViewController: UITableViewDelegate {
     // Otherwise, get selected Location id, and pass to nextVC
     let selectedLocationId = plan.destinationList[indexPath.section]
     let nextVC = LocationDetailViewController(location: allLocations[selectedLocationId])
+    
     
     present(nextVC, animated: true, completion: nil)
     

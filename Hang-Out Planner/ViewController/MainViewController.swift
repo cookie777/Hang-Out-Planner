@@ -37,7 +37,7 @@ class MainViewController: UIViewController
   }()
   
   let locationTitle = SubTextLabel(text: "Your current location is:")
-  let locationLabel = TextLabel(text: "Near Keefer 58 PI")
+  let locationLabel = TextLabel(text: "")
   // Wrapper of location info
   lazy var locationStackView = VerticalStackView(arrangedSubviews: [locationTitle, locationLabel], spacing: 8)
   

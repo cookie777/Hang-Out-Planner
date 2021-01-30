@@ -129,7 +129,7 @@ class PlanDetailViewController: UIViewController{
     for index in  1...numOfRoutes - 1{
       sectionTitles += ["Location \(index)"]
     }
-    sectionTitles += ["Back to Start"]
+    sectionTitles += ["\nBack to Start"]
     
     
     // Set up layouts
@@ -282,7 +282,7 @@ extension PlanDetailViewController : UITableViewDataSource {
       // Create distance cell
       case 1:
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForDistance, for: indexPath) as! DistanceCardTVCell
-        cell.setMargin(insets: .init(top: 0, left: 0 , right: 0, bottom: -8))
+        cell.setMargin(insets: .init(top: 0, left: 0 , right: 0, bottom: -4))
         cell.selectionStyle = .none
         let route = plan.routes[indexPath.section]
         cell.update(with: route)
@@ -304,10 +304,12 @@ extension PlanDetailViewController : UITableViewDataSource {
       return UIView()
     // Locations
     case 1..<plan.routes.count:
-      return TextLabel(text: text)
+      return SmallHeaderLabel(text: text)
     // Last section == user location
     default:
-      return SubTextLabel(text: text)
+      let lb = SubTextLabel(text: text)
+      lb.textAlignment = .center
+      return lb
     }
   }
   
@@ -320,7 +322,7 @@ extension PlanDetailViewController : UITableViewDataSource {
       return 96 + 32
     // Height for Distance card
     case 1:
-      return 48
+      return 80
     default:
       fatalError()
     }
@@ -460,14 +462,14 @@ class CustomAnnotation: NSObject, MKAnnotation {
   var markerTintColor: UIColor = .systemGray
   // set default value
   var glyphText = String("1")
-  
-  init(title: String, subtitle: String, coordinate:CLLocationCoordinate2D, routeOrder: Int) {
-    self.title = title
-    self.subtitle = subtitle
-    self.coordinate = coordinate
-    self.routeOrder = routeOrder
-    super.init()
-  }
+//
+//  init(title: String, subtitle: String, coordinate:CLLocationCoordinate2D, routeOrder: Int) {
+//    self.title = title
+//    self.subtitle = subtitle
+//    self.coordinate = coordinate
+//    self.routeOrder = routeOrder
+//    super.init()
+//  }
   
   init(location: Location, routeOrder: Int ) {
     self.title = location.title

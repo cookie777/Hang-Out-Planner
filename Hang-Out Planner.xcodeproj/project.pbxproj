@@ -48,6 +48,7 @@
 		48DE334725B8ECE2001630B7 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334025B8ECE2001630B7 /* Route.swift */; };
 		48DE334925B8ECE2001630B7 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334225B8ECE2001630B7 /* Plan.swift */; };
 		AEAA13FF25C627B30066C487 /* yelp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEAA13FE25C627B30066C487 /* yelp-Info.plist */; };
+		AEB778AC25C7770500AA2EE5 /* SpeedCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB778AB25C7770500AA2EE5 /* SpeedCalculator.swift */; };
 		B088871F25B911D000D5F9E0 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		48DE334025B8ECE2001630B7 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		48DE334225B8ECE2001630B7 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		AEAA13FE25C627B30066C487 /* yelp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "yelp-Info.plist"; sourceTree = "<group>"; };
+		AEB778AB25C7770500AA2EE5 /* SpeedCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedCalculator.swift; sourceTree = "<group>"; };
 		B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +166,7 @@
 				48DE333E25B8ECE2001630B7 /* Location.swift */,
 				48DE334225B8ECE2001630B7 /* Plan.swift */,
 				48DE334025B8ECE2001630B7 /* Route.swift */,
+				AEB778AB25C7770500AA2EE5 /* SpeedCalculator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */,
 				4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */,
 				48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */,
+				AEB778AC25C7770500AA2EE5 /* SpeedCalculator.swift in Sources */,
 				48A4C60725B553B400264AF9 /* GoButton.swift in Sources */,
 				48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */,
 				48A4C66F25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift in Sources */,

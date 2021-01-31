@@ -82,12 +82,18 @@ class PlanCardTVCell: CardTVCell {
   
     topNLabel.text = "\(planIndex + 1)"
     let guessDistance = plan.totalDistance
-    totalDistanceField.text = "\(PlanCardTVCell.meterToKm(distance: guessDistance)) Km"
-    if PlanCardTVCell.calcCarSpeed(distance: guessDistance) == 0.0 {
-      totalTimeField.text = "\(PlanCardTVCell.calcWalkingSpeed(distance: guessDistance)) 🚶‍♂️"
+    let timeOnFoot = SpeedCalculator.calcWalkingSpeed(distance: guessDistance)
+    let hourByCar = SpeedCalculator.calcCarSpeedInHour(distance: guessDistance)
+    
+    totalDistanceField.text = "\(SpeedCalculator.meterTokm(distanceInMeter: guessDistance)) Km"
+  
+    if hourByCar == 0.0 {
+      totalTimeField.text = timeOnFoot + "🚶‍♂️"
     } else {
-      totalTimeField.text = "\(PlanCardTVCell.calcCarSpeed(distance: guessDistance)) h 🚗  \(PlanCardTVCell.calcWalkingSpeed(distance: guessDistance)) 🚶‍♂️"
+      totalTimeField.text = timeOnFoot + "🚶‍♂️" + "\(hourByCar) h 🚗"
     }
+    
+  
    
     popularityField.text = Location.starConverter(score: plan.averageRating)
     
@@ -104,40 +110,6 @@ class PlanCardTVCell: CardTVCell {
     
   }
   
-  static func meterToKm(distance: Double) -> Double{
-    let km = distance * 0.001
-    return round(km * 10)/10
-  }
-  
-  // average human: 5km per hour, 85m per minute
-  static func calcWalkingSpeed(distance: Double) -> String{
-    let walkingSpeedInMinute = distance / 85
-    let result = round(walkingSpeedInMinute * 10)/10
-    if result <= 1 {
-      return "\(result) min"
-    } else if result < 60 {
-      return  "\(result) mins"
-    } else {
-        let distanceInKm = distance * 0.001
-        let walkingSpeed = distanceInKm / 5
-        let result = round(walkingSpeed * 10)/10
-      return "\(result) h"
-    }
-  }
-  
-  
-  // average car: 40km per hour
-  static func calcCarSpeed(distance: Double) -> Double{
-   
-    
-    
-    
-    
-    let distanceInKm = distance * 0.001
-    let carSpped = distanceInKm / 40
-    let result = round(carSpped * 10)/10
-      return result
-  }
 
   // return Location title by location id
   static func checkLocationName(id: Int) -> String {

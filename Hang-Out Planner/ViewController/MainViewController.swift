@@ -159,7 +159,8 @@ class MainViewController: UIViewController
   }
   //Action when goButton is tapped
   @objc func goButtonTapped(){
-    
+    // this is to avoid pushing many times. We will enable it at view will appear.
+    goButton.isEnabled = false
     
     // For debug. If this var is true, it will only use sample data.
     if noMoreAPI{
@@ -349,9 +350,11 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController{
   
   override func viewWillAppear(_ animated: Bool) {
+    
+    goButton.isEnabled = true
+    
+    
     // Start updating location. Added by Yanmer
-    
-    
     // if already updating, need not to do.
     if UserLocationController.shared.isUpdatingLocation{return}
     

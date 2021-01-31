@@ -20,8 +20,8 @@ class MainViewController: UIViewController
   // MARK: - Class Instance variables
   let cellId = "categories"
   
-  var selectedCategories: [Categories] = [.clothes,.amusement,.cafe]
-  var categoryArray :[[String]] = [[Categories.clothes.rawValue],[Categories.amusement.rawValue],[Categories.cafe.rawValue],[],[]]
+  var selectedCategories: [Categories] = [.fashion,.amusement,.cafe]
+  var categoryArray :[[String]] = [[Categories.fashion.rawValue],[Categories.amusement.rawValue],[Categories.cafe.rawValue],[],[]]
   
   var sectionTitles: [String] = ["1st Location","2nd Location","3rd Location"]
   var goButton = GoButton()
@@ -143,15 +143,15 @@ class MainViewController: UIViewController
     case Categories.cafe.rawValue:
       selectedCategories.remove(at: section)
       selectedCategories.insert(.cafe, at: section)
-    case Categories.clothes.rawValue:
+    case Categories.fashion.rawValue:
       selectedCategories.remove(at: section)
-      selectedCategories.insert(.clothes, at: section)
-    case Categories.restaurant.rawValue:
+      selectedCategories.insert(.fashion, at: section)
+    case Categories.restaurantAndCafe.rawValue:
       selectedCategories.remove(at: section)
-      selectedCategories.insert(.restaurant, at: section)
-    case Categories.park.rawValue:
+      selectedCategories.insert(.restaurantAndCafe, at: section)
+    case Categories.artAndGallery.rawValue:
       selectedCategories.remove(at: section)
-      selectedCategories.insert(.park, at: section)
+      selectedCategories.insert(.artAndGallery, at: section)
     default:
       selectedCategories.remove(at: section)
       selectedCategories.insert(.other, at: section)
@@ -206,29 +206,29 @@ class MainViewController: UIViewController
     switch sectionTitles.count {
     case 1:
       sectionTitles.append("2nd Location")
-      categoryArray[1].insert(Categories.clothes.rawValue, at: 0)
-      selectedCategories.append(.clothes)
-      addEditVC.categoryName0.text = Categories.clothes.rawValue
+      categoryArray[1].insert(Categories.fashion.rawValue, at: 0)
+      selectedCategories.append(.fashion)
+      addEditVC.categoryName0.text = Categories.fashion.rawValue
       addEditVC.row = 0
       addEditVC.section = 1
-      addEditVC.selectArray[0].insert(Categories.clothes.rawValue, at: 0)
+      addEditVC.selectArray[0].insert(Categories.fashion.rawValue, at: 0)
     case 2:
       sectionTitles.append("3rd Location")
-      categoryArray[2].insert(Categories.park.rawValue, at: 0)
-      selectedCategories.append(.park)
-      addEditVC.categoryName0.text = Categories.park.rawValue
+      categoryArray[2].insert(Categories.artAndGallery.rawValue, at: 0)
+      selectedCategories.append(.artAndGallery)
+      addEditVC.categoryName0.text = Categories.artAndGallery.rawValue
       addEditVC.row = 0
       addEditVC.section = 2
-      addEditVC.selectArray[0].insert(Categories.park.rawValue, at: 0)
+      addEditVC.selectArray[0].insert(Categories.artAndGallery.rawValue, at: 0)
 
     case 3:
       sectionTitles.append("4th Location")
-      categoryArray[3].insert(Categories.restaurant.rawValue, at: 0)
-      selectedCategories.append(.restaurant)
-      addEditVC.categoryName0.text = Categories.restaurant.rawValue
+      categoryArray[3].insert(Categories.restaurantAndCafe.rawValue, at: 0)
+      selectedCategories.append(.restaurantAndCafe)
+      addEditVC.categoryName0.text = Categories.restaurantAndCafe.rawValue
       addEditVC.row = 0
       addEditVC.section = 3
-      addEditVC.selectArray[0].insert(Categories.restaurant.rawValue, at: 0)
+      addEditVC.selectArray[0].insert(Categories.restaurantAndCafe.rawValue, at: 0)
 
     case 4:
       sectionTitles.append("5th Location")

@@ -58,7 +58,7 @@ extension NetworkController{
     group.enter()
     NetworkController.shared.fetchLocations(
       group : group,
-      category:CategoriesForAPI.clothes,
+      category:CategoriesForAPI.fashion,
       completion: NetworkController.shared.convertAndStoreLocation
     )
     group.enter()
@@ -70,7 +70,7 @@ extension NetworkController{
     group.enter()
     NetworkController.shared.fetchLocations(
       group : group,
-      category:CategoriesForAPI.park,
+      category:CategoriesForAPI.restaurantAndCafe,
       completion: NetworkController.shared.convertAndStoreLocation
     )
     
@@ -197,10 +197,10 @@ extension NetworkController{
         category: {
           switch category{
           case .amusement     : return .amusement
-          case .artAndGallery : return .restaurant
+          case .artAndGallery : return .artAndGallery
           case .cafe          : return .cafe
-          case .park          : return .park
-          case .clothes       : return .clothes
+          case .restaurantAndCafe          : return .restaurantAndCafe
+          case .fashion       : return .fashion
           }
         }(),
         latitude: yl.coordinates.latitude,

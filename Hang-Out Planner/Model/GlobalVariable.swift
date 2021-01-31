@@ -10,7 +10,7 @@ import UIKit
 
 
 // This is a debug switcher. if you turn on, it will use only sample data
-var noMoreAPI = true
+var noMoreAPI = false
 
 //var bgColor = UIColor.init(displayP3Red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
 var bgColor = UIColor.systemBackground

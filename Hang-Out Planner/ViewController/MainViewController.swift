@@ -164,11 +164,16 @@ class MainViewController: UIViewController
     
     // For debug. If this var is true, it will only use sample data.
     if noMoreAPI{
+
+      let nextVC = PlanListTableViewController()
+      navigationController?.pushViewController(nextVC, animated: true)
+      
       allLocations = [userCurrentLocation] + Location.sampleLocations
       Planner.calculateAllRoutes()
       let plans = Planner.calculatePlans(categories: selectedCategories)
-      let nextVC = PlanListTableViewController(plans: plans)
-      navigationController?.pushViewController(nextVC, animated: true)
+      nextVC.plans = plans
+      nextVC.tableView.reloadData()
+      
       UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
       return
     }
@@ -176,11 +181,18 @@ class MainViewController: UIViewController
     // if you has moved or no locations data?
     // -> then re-create(request, and calculate) all data
     if UserLocationController.shared.hasUserMoved() || allLocations.count == 0{
+      let nextVC = PlanListTableViewController()
+      navigationController?.pushViewController(nextVC, animated: true)
+      
       NetworkController.shared.createAllLocations { [weak self] in
+
         Planner.calculateAllRoutes()
         let plans = Planner.calculatePlans(categories: self!.selectedCategories)
-        let nextVC = PlanListTableViewController(plans: plans)
-        self?.navigationController?.pushViewController(nextVC, animated: true)
+        nextVC.plans = plans
+        
+        DispatchQueue.main.async {
+          nextVC.tableView.reloadData()
+        }        
         // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
 
@@ -189,10 +201,13 @@ class MainViewController: UIViewController
     }else{
       // if same place + only category has changed
       // code : only do Planner.calculatePlans(), no createAllLocations
-      let plans = Planner.calculatePlans(categories: selectedCategories)
-      let nextVC = PlanListTableViewController(plans: plans)
+      
+      let nextVC = PlanListTableViewController()
       navigationController?.pushViewController(nextVC, animated: true)
       
+      let plans = Planner.calculatePlans(categories: selectedCategories)
+      nextVC.plans = plans
+      nextVC.tableView.reloadData()
       // if user info is completely same as previous "go" (== same coordinates, same category order)
       // just use previous plans (add later)
     }

@@ -159,6 +159,13 @@ class MainViewController: UIViewController
   }
   //Action when goButton is tapped
   @objc func goButtonTapped(){
+    
+    // If no user location, don't do anything.
+    guard let _ = UserLocationController.shared.coordinatesMostRecent else {
+      print("no user location, try it again!")
+      return
+    }
+    
     // this is to avoid pushing many times. We will enable it at view will appear.
     goButton.isEnabled = false
     
@@ -375,7 +382,7 @@ extension MainViewController{
     // Start updating location.
     // if already updating, need not to do.
     if UserLocationController.shared.isUpdatingLocation{return}
-    
+
     
     UserLocationController.shared.start(completion: { [weak self] in
       // Whenever user location is updated (or start updating), this closure is invoked.
@@ -385,11 +392,16 @@ extension MainViewController{
 
       // Set region of the mapView using current location
       let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+
       self?.mapView.setRegion(region, animated: false)
       self?.mapView.showsUserLocation = true
-    
       // Get address by using current location
       UserLocationController.shared.getCurrentAddress(){ address in
+        // if you couldn't get address, use ip one.
+        if address.count <= 1 {
+          self?.locationLabel.text = userCurrentLocation.address
+          return
+        }
         // update user location info
         userCurrentLocation.address = address
         // update location label

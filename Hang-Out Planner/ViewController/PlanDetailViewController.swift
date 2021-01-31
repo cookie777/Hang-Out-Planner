@@ -349,7 +349,7 @@ extension PlanDetailViewController : UITableViewDataSource {
       return UIView()
     // Locations
     case 1..<plan.routes.count:
-      return SmallHeaderLabel(text: text)
+      return TextLabel(text: text)
     // Last section == user location
     default:
       let lb = SubTextLabel(text: text)
@@ -408,7 +408,7 @@ extension PlanDetailViewController: MKMapViewDelegate {
   /// Create annotation on locations
   func createAnnotation(startLocationId: Int, routeCount: Int) {
     guard let currentLocation = (allLocations.first{$0.id == startLocationId}) else {return}
-    //    let annotation = CustomAnnotation(title: currentLocation.title, subtitle: currentLocation.address, coordinate: CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude), routeOrder: routeCount)
+ 
     let annotation = CustomAnnotation(location: currentLocation, routeOrder: routeCount)
     // set annotation marker to routeOrder count
     annotation.setMarkText()
@@ -510,22 +510,14 @@ class CustomAnnotation: NSObject, MKAnnotation {
   var markerTintColor: UIColor = .systemGray
   // set default value
   var glyphText = String("1")
-  //
-  //  init(title: String, subtitle: String, coordinate:CLLocationCoordinate2D, routeOrder: Int) {
-  //    self.title = title
-  //    self.subtitle = subtitle
-  //    self.coordinate = coordinate
-  //    self.routeOrder = routeOrder
-  //    super.init()
-  //  }
-  
+
   init(location: Location, routeOrder: Int ) {
     self.locationId = location.id
     self.title = location.title
     self.subtitle = location.address
     self.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
     self.routeOrder = routeOrder
-    self.markerTintColor = Categories.color(location.category)
+    self.markerTintColor = Categories.color(location.category).withAlphaComponent(0.7)
     super.init()
   }
   

@@ -366,41 +366,37 @@ extension MainViewController{
   
   override func viewWillAppear(_ animated: Bool) {
     
+    // Whenever the view is shown, enaible goButton.
     goButton.isEnabled = true
     
-    
-    // Start updating location. Added by Yanmer
+    // Start updating location.
     // if already updating, need not to do.
     if UserLocationController.shared.isUpdatingLocation{return}
     
+    
     UserLocationController.shared.start(completion: { [weak self] in
-      // update user annotation here
+      // Whenever user location is updated (or start updating), this closure is invoked.
       
-      let center = UserLocationController.shared.coordinatesMostRecent!
+      // Get current user locaiton
+      guard let center = UserLocationController.shared.coordinatesMostRecent else {return}
 
+      // Set region of the mapView using current location
       let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
       self?.mapView.setRegion(region, animated: false)
       self?.mapView.showsUserLocation = true
     
-      //      show current address
-      CLGeocoder().reverseGeocodeLocation(UserLocationController.shared.locationManager.location!) { placemarks, error in
-        guard
-          let placemark = placemarks?.first, error == nil,
-          let administrativeArea = placemark.administrativeArea,
-          let locality = placemark.locality,
-          let thoroughfare = placemark.thoroughfare,
-          let subThoroughfare = placemark.subThoroughfare
-        else {
-          self!.locationLabel.text = " "
-          return
-        }
-        let userAddress = "\(administrativeArea) \(locality) \(thoroughfare) \(subThoroughfare)"
-        self!.locationLabel.text = userAddress
-        userCurrentLocation.address = userAddress
+      // Get address by using current location
+      UserLocationController.shared.getCurrentAddress(){ address in
+        // update user location info
+        userCurrentLocation.address = address
+        // update location label
+        self?.locationLabel.text = address
       }
     })
     
   }
+  
+  
   override func viewWillDisappear(_ animated: Bool) {
     // Stop tracking user data.  Added by Yanmer.
     UserLocationController.shared.stop()

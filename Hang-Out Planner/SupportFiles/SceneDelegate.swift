@@ -51,20 +51,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Called as the scene transitions from the background to the foreground.
     // Use this method to undo the changes made on entering the background.
     
-//    // if current VC is main VC, then start updating.
-//    guard let nv = window?.rootViewController as? UINavigationController,
-//          let mainVC = nv.topViewController as? MainViewController else{return}
-//
-//    // if already updating, need not to do.
-//    if UserLocationController.shared.isUpdatingLocation{return}
-//
-//    UserLocationController.shared.start(completion: { [weak mainVC] in
-//      // update user annotation here
-//      let center = UserLocationController.shared.coordinatesMostRecent!
-//      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-//      mainVC?.mapView.setRegion(region, animated: true)
-//      mainVC?.mapView.showsUserLocation = true
-//    })
+    // if current VC is main VC, then start updating.
+    
+
+    // Start updating location.
+    // if already updating, need not to do.
+    if UserLocationController.shared.isUpdatingLocation{return}
+    
+    
+    UserLocationController.shared.start(completion: { [weak self] in
+      guard let nv = self?.window?.rootViewController as? UINavigationController,
+            let mainVC = nv.topViewController as? MainViewController else{return}
+      
+      
+      // Whenever user location is updated (or start updating), this closure is invoked.
+      
+      // Get current user locaiton
+      guard let center = UserLocationController.shared.coordinatesMostRecent else {return}
+
+      // Set region of the mapView using current location
+      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+      mainVC.mapView.setRegion(region, animated: false)
+      mainVC.mapView.showsUserLocation = true
+    
+      // Get address by using current location
+      UserLocationController.shared.getCurrentAddress(){ address in
+        // update user location info
+        userCurrentLocation.address = address
+        // update location label
+        mainVC.locationLabel.text = address
+      }
+    })
   }
    
 
@@ -75,7 +92,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // to restore the scene back to its current state.
     
     // Whenever the screen gets background, stop tracking
-//    UserLocationController.shared.stop()
+    UserLocationController.shared.stop()
   }
   
   

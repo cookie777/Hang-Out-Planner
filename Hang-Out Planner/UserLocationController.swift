@@ -63,6 +63,8 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
   
   /// Stop Start updating(tacking) user location
   func stop() {
+    // if nothing started, do nothing. This is important. Without this, it will cause an error at scene dissapper.
+    if !isUpdatingLocation{return}
     locationManager.stopUpdatingLocation()
     isUpdatingLocation = false
   }
@@ -123,6 +125,30 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
     if cA.longitude != cB.longitude {return true}
 
     return false
+  }
+  
+  
+  func getCurrentAddress(completion: @escaping ((String) -> Void)){
+    var address = ""
+
+    //      show current address
+    CLGeocoder().reverseGeocodeLocation(locationManager.location!) { placemarks, error in
+      
+      guard
+        let placemark = placemarks?.first, error == nil,
+        let administrativeArea = placemark.administrativeArea,
+        let locality = placemark.locality,
+        let thoroughfare = placemark.thoroughfare,
+        let subThoroughfare = placemark.subThoroughfare
+      else {
+        completion("")
+        return
+      }
+      address = "\(administrativeArea) \(locality) \(thoroughfare) \(subThoroughfare)"
+      completion(address)
+      return
+    }
+
   }
   
   

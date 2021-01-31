@@ -50,6 +50,16 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
     
+    if image.image == nil {
+      let locationUrl = location.imageURL
+        NetworkController.shared.fetchImage(urlString: locationUrl) { (fetchedimage) in
+         guard let fetchedImage = fetchedimage else {return}
+         DispatchQueue.main.async {
+          self.image.image = fetchedImage
+         }
+        }
+    }
+    
     view.addSubview(backButton)
     backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
     backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true

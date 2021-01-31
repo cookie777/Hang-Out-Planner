@@ -130,11 +130,11 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
   }
   
   func updateValues() {
-    let boderView = UIView()
-    boderView.layer.borderWidth = 3
-    boderView.layer.borderColor = Categories.color(location.category).withAlphaComponent(0.7).cgColor
-    view.addSubview(boderView)
-    boderView.matchParent()
+//    let boderView = UIView()
+//    boderView.layer.borderWidth = 3
+//    boderView.layer.borderColor = Categories.color(location.category).withAlphaComponent(0.7).cgColor
+//    view.addSubview(boderView)
+//    boderView.matchParent()
  
    imageView.layer.borderWidth = 0
    imageView.layer.borderColor = Categories.color(location.category).withAlphaComponent(0.7).cgColor
@@ -157,12 +157,14 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
   }
   
   func setYelpLink() {
-    let tap = UITapGestureRecognizer(target: self, action: #selector(goToYelp))
-    yelpLink.isUserInteractionEnabled = true
-    yelpLink.addGestureRecognizer(tap)
     yelpLink.setContentHuggingPriority(.required, for: .horizontal)
     yelpLink.textColor = .systemBlue
     yelpLinkLabel.textAlignment = .right
+    let tap = UITapGestureRecognizer(target: self, action: #selector(goToYelp))
+    yelpLink.isUserInteractionEnabled = true
+    yelpLink.addGestureRecognizer(tap)
+    yelpLink.layer.zPosition = 2
+    print(tap)
   }
   
   @objc func backAction() {
@@ -170,6 +172,7 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
   }
   //  if you tap Yelp Label, you can go to the website.
   @objc func goToYelp() {
+    print("tapped")
     let vc = SFSafariViewController(url: URL(string: location.website!)!)
     present(vc, animated: true)
   }

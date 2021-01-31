@@ -248,7 +248,7 @@ class PlanDetailViewController: UIViewController{
     }
     
     if let locationImage = fetchedImages[imageId]  {
-      nextVC.image.image = locationImage
+      nextVC.imageView.image = locationImage
     }
 
     present(nextVC, animated: true, completion: nil)

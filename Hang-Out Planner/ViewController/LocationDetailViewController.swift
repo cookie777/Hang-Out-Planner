@@ -28,9 +28,10 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
     return button
   }()
   
-  let image :UIImageView = {
+  let imageView :UIImageView = {
     let image = UIImageView()
-    image.image = nil
+    image.layer.cornerRadius = 32
+    image.image = nil // later, fill
     image.translatesAutoresizingMaskIntoConstraints = false
     return image
   }()
@@ -50,12 +51,13 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
     
-    if image.image == nil {
+    // If there is no image, try fetch.
+    if imageView.image == nil {
       let locationUrl = location.imageURL
         NetworkController.shared.fetchImage(urlString: locationUrl) { (fetchedimage) in
          guard let fetchedImage = fetchedimage else {return}
          DispatchQueue.main.async {
-          self.image.image = fetchedImage
+          self.imageView.image = fetchedImage
          }
         }
     }
@@ -69,18 +71,18 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
     backButton.constraintWidth(equalToConstant: 40)
     backButton.constraintHeight(equalToConstant: 40)
     
-    view.addSubview(image)
-    image.topAnchor.constraint(equalTo: view.topAnchor, constant: 65).isActive = true
-    image.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-    image.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-    image.constraintHeight(equalToConstant: 300)
+    view.addSubview(imageView)
+    imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 65).isActive = true
+    imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+    imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+    imageView.constraintHeight(equalToConstant: 300)
     
     view.addSubview(nameLabel)
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.text = location.title
     nameLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
     nameLabel.numberOfLines = 0
-    nameLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10).isActive = true
+    nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
     nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
     nameLabel.constraintWidth(equalToConstant: 300)
     

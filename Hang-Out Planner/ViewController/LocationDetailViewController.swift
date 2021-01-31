@@ -35,6 +35,7 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
     imageV.translatesAutoresizingMaskIntoConstraints = false
     imageV.contentMode = .scaleAspectFill
     imageV.layer.masksToBounds = true
+    imageV.layer.zPosition = 1
     return imageV
   }()
   
@@ -98,9 +99,9 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
   
   func setMainStackView() {
     view.addSubview(imageView)
-    imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
+    imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1, constant: 0).isActive = true
     imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.96).isActive = true
-    imageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
     imageView.centerXin(view)
     
     let mainStackView = VerticalStackView(
@@ -129,6 +130,16 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
   }
   
   func updateValues() {
+    let boderView = UIView()
+    boderView.layer.borderWidth = 3
+    boderView.layer.borderColor = Categories.color(location.category).withAlphaComponent(0.7).cgColor
+    view.addSubview(boderView)
+    boderView.matchParent()
+ 
+   imageView.layer.borderWidth = 0
+   imageView.layer.borderColor = Categories.color(location.category).withAlphaComponent(0.7).cgColor
+
+
     nameLabel.text = location.title
     categoryLabel.text = location.category.rawValue
     categoryLabel.textColor = Categories.color(location.category)

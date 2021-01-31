@@ -76,7 +76,7 @@ class LocationCardTVCell: CardTVCell {
     // set location address
     addressLabel.text = "\(LocationCardTVCell.checkLocationAddress(id: id))"
     
-    mainBackground.layer.borderColor = color.cgColor
+    mainBackground.layer.borderColor = color.withAlphaComponent(0.6).cgColor
     
     
   }

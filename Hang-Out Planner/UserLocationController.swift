@@ -37,8 +37,9 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
     }
   }
   
+  // This is for avoiding duplicates of updating. If true, try no to update gain.
   var isUpdatingLocation: Bool = false
-
+  
   
   
   private override init() {
@@ -58,7 +59,7 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
     locationManager.startUpdatingLocation()
     isUpdatingLocation = true
     self.afterLocationUpdated = completion
-
+    
   }
   
   /// Stop Start updating(tacking) user location
@@ -84,7 +85,7 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
     // If you have a completion handler, call it.
     guard let completion = self.afterLocationUpdated else {return}
     completion()
-  
+    
     
   }
   
@@ -92,25 +93,29 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     let status = manager.authorizationStatus
     if status == .denied || status == .restricted || status == .notDetermined{
-      print("This message is shown when user haven't allow using location data. So the current location might be nil. Don't worry")
       
-      // set default location. fix better one later.(get abstract location by ip address.(https://ipapi.co/json/)
-        coordinatesMostRecent = CLLocationCoordinate2D(latitude: Location.sampleStartPoint.latitude, longitude: Location.sampleStartPoint.longitude)
+      //If user denies or remained answering, try to get location by ip address
+      fetchUserLocationsFromIP(completion: { [weak self] result in
+        switch result{
+        case .success(let location):
+          
+          self?.coordinatesMostRecent =  CLLocationCoordinate2D(latitude:  location.latitude, longitude: location.longitude)
+          
+          userCurrentLocation.address = "\(location.country_name) \(location.region) \(location.city) \(location.postal)"
+          // After succeeding fetching location && `afterLocationUpdated` is prepared,
+          // invoke it == update map and address.
+          guard let afterLocationUpdated = self?.afterLocationUpdated else {return}
+          DispatchQueue.main.async {
+            afterLocationUpdated()
+          }
+        case .failure(let error):
+          print(error)
+        }
+      })
     }else{
       print("fatal error: \(error)")
     }
   }
-  
-//  // If user denied using their location, we set some default location.
-//  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-//
-//    let status = manager.authorizationStatus
-//    if status == .denied || status == .restricted || status == .notDetermined{
-//
-//      coordinatesMostRecent = CLLocationCoordinate2D(latitude: Location.sampleStartPoint.latitude, longitude: Location.sampleStartPoint.longitude)
-//    }
-//
-//  }
   
   
   /// Return if user has moved (user's coordinates has changed)
@@ -123,16 +128,20 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
     
     if cA.latitude != cB.latitude {return true}
     if cA.longitude != cB.longitude {return true}
-
+    
     return false
   }
   
   
   func getCurrentAddress(completion: @escaping ((String) -> Void)){
     var address = ""
-
+    
+    // Use coordinatesMostRecent instead of location manager.location
+    // this is because it also has coordinates fetched by IP
+    guard let coordinates = coordinatesMostRecent else {return}
+    let location = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
     //      show current address
-    CLGeocoder().reverseGeocodeLocation(locationManager.location!) { placemarks, error in
+    CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
       
       guard
         let placemark = placemarks?.first, error == nil,
@@ -141,55 +150,104 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
         let thoroughfare = placemark.thoroughfare,
         let subThoroughfare = placemark.subThoroughfare
       else {
-        completion("")
+        completion(" ")
         return
       }
       address = "\(administrativeArea) \(locality) \(thoroughfare) \(subThoroughfare)"
       completion(address)
+      
       return
     }
-
+    
   }
   
   
   /*
-  * calculate the center point of multiple latitude longitude coordinate-pairs
-    contributed by `https://github.com/ppoh71/playgounds/blob/master/centerLocationPoint.playground/Contents.swift`
-  */
+   * calculate the center point of multiple latitude longitude coordinate-pairs
+   contributed by `https://github.com/ppoh71/playgounds/blob/master/centerLocationPoint.playground/Contents.swift`
+   */
   // center func
   func getCenterCoord( LocationPoints: [CLLocationCoordinate2D]) -> CLLocationCoordinate2D{
+    
+    var x:Float = 0.0
+    var y:Float = 0.0
+    var z:Float = 0.0
+    
+    for points in LocationPoints {
       
-      var x:Float = 0.0
-      var y:Float = 0.0
-      var z:Float = 0.0
+      let lat = GLKMathDegreesToRadians(Float(points.latitude))
+      let long = GLKMathDegreesToRadians(Float(points.longitude))
       
-      for points in LocationPoints {
-          
-       let lat = GLKMathDegreesToRadians(Float(points.latitude))
-       let long = GLKMathDegreesToRadians(Float(points.longitude))
-          
-          x += cos(lat) * cos(long)
-          y += cos(lat) * sin(long)
-          z += sin(lat)
+      x += cos(lat) * cos(long)
+      y += cos(lat) * sin(long)
+      z += sin(lat)
+    }
+    
+    x = x / Float(LocationPoints.count)
+    y = y / Float(LocationPoints.count)
+    z = z / Float(LocationPoints.count)
+    
+    let resultLong = atan2(y, x)
+    let resultHyp = sqrt(x * x + y * y)
+    let resultLat = atan2(z, resultHyp)
+    
+    let result = CLLocationCoordinate2D(latitude: CLLocationDegrees(GLKMathRadiansToDegrees(Float(resultLat))), longitude: CLLocationDegrees(GLKMathRadiansToDegrees(Float(resultLong))))
+    
+    return result
+    
+    
+  }
+  
+  
+  
+  
+  
+  func fetchUserLocationsFromIP(completion: @escaping ((Result<ipLocation, Error>) -> Void)) {
+    
+    // Prepare base url
+    let baseURL = URL(string: "https://ipapi.co/json/")!
+    
+    // Create request from url
+    var request = URLRequest(url: baseURL)
+    
+    // Attach header info
+    request.httpMethod = "GET"
+    
+    
+    // This is async. Send request and pass respond to completion func.
+    URLSession.shared.dataTask(with: request) { (data, response, error) in
+      
+      // Error handling. If you couldn't get data and find error, pass to completion.
+      guard let data = data else{
+        if let error = error{ completion(.failure(error))}
+        return
       }
       
-      x = x / Float(LocationPoints.count)
-      y = y / Float(LocationPoints.count)
-      z = z / Float(LocationPoints.count)
-    
-      let resultLong = atan2(y, x)
-      let resultHyp = sqrt(x * x + y * y)
-      let resultLat = atan2(z, resultHyp)
+      // Parse JSON into `[YelpLocation]` and send it completion.
+      let jsonDecoder = JSONDecoder()
+      do {
+        let res = try jsonDecoder.decode(ipLocation.self, from: data)
+        completion(.success(res))
+      }catch{
+        completion(.failure(error))
+      }
       
-      
-      
-      let result = CLLocationCoordinate2D(latitude: CLLocationDegrees(GLKMathRadiansToDegrees(Float(resultLat))), longitude: CLLocationDegrees(GLKMathRadiansToDegrees(Float(resultLong))))
-      
-      return result
-
-      
+    }.resume()
   }
-
+  
+  
+  struct ipLocation: Codable{
+    var latitude : Double
+    var longitude: Double
+    var country_name : String
+    var region : String
+    var city : String
+    var postal : String
+  }
+  
+  
+  
+  
   
 }
 

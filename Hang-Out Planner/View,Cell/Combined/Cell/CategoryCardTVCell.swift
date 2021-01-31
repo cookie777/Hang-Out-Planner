@@ -25,7 +25,7 @@ class CategoryCardTVCell: CardTVCell{
       
       textlb.text = category
       textlb.textColor = Categories.color(c)
-      mainBackground.layer.borderColor = Categories.color(c).cgColor
+      mainBackground.layer.borderColor = Categories.color(c).withAlphaComponent(0.7).cgColor
     }
   }
   

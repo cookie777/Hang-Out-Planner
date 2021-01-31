@@ -56,7 +56,7 @@ class DistanceCardTVCell: CardTVCell {
     
     
     let timeStackView = VerticalStackView(
-      arrangedSubviews: [timeToReachByCar, timeToReachByWalk],
+      arrangedSubviews: [timeToReachByWalk,timeToReachByCar],
       spacing: 8
     )
     contentView.addSubview(timeStackView)
@@ -71,20 +71,18 @@ class DistanceCardTVCell: CardTVCell {
   }
   
   func update(with route: Route) {
-    let minuteToCar = totalMinOnCar(distance: route.distance)
-    let minuteToTake = totalMinOnFoot(distance: route.distance)
-    timeToReachByCar.text = "\(minuteToCar) mins 🚗"
-    timeToReachByWalk.text = "\(minuteToTake) mins 🚶‍♀️"
-  }
+    
+    let minuteByCar = SpeedCalculator.calcCarSpeedInMinute(distance: route.distance)
+    let timeOnFoot = SpeedCalculator.calcWalkingSpeed(distance: route.distance)
   
-  // meter -> how many minutes (1.4m/sec)
-  func totalMinOnFoot(distance: Double) -> Double {
-    let totalMin = (distance / 1.4) / 60
-    return round(totalMin)
+    switch minuteByCar {
+    case 0:
+      timeToReachByCar.text = ""
+    case 1:
+      timeToReachByCar.text = "\(minuteByCar) min 🚗"
+    default:
+      timeToReachByCar.text = "\(minuteByCar) mins 🚗"
+    }
+    timeToReachByWalk.text = timeOnFoot + "🚶‍♀️"
   }
-  func totalMinOnCar(distance: Double) -> Double {
-    let totalMin = (distance / 1.4) / 60 / 8
-    return round(totalMin)
-  }
-
 }

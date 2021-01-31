@@ -20,8 +20,8 @@ class MainViewController: UIViewController
   // MARK: - Class Instance variables
   let cellId = "categories"
   
-  var selectedCategories: [Categories] = [.clothes,.amusement,.cafe]
-  var categoryArray :[[String]] = [[Categories.clothes.rawValue],[Categories.amusement.rawValue],[Categories.cafe.rawValue],[],[]]
+  var selectedCategories: [Categories] = [.fashion,.amusement,.cafe]
+  var categoryArray :[[String]] = [[Categories.fashion.rawValue],[Categories.amusement.rawValue],[Categories.cafe.rawValue],[],[]]
   
   var sectionTitles: [String] = ["1st Location","2nd Location","3rd Location"]
   var goButton = GoButton()
@@ -37,25 +37,23 @@ class MainViewController: UIViewController
   }()
   
   let locationTitle = SubTextLabel(text: "Your current location is:")
-  let locationLabel = TextLabel(text: "")
+  let locationLabel : TextLabel =  {
+    let t = TextLabel(text: " ")
+    t.numberOfLines = 1
+    return t
+  }()
   // Wrapper of location info
   lazy var locationStackView = VerticalStackView(arrangedSubviews: [locationTitle, locationLabel], spacing: 8)
   
-  let routeLabel :UILabel   = {
-    let lb = MediumHeaderLabel(text: "Route")
-    // add bottom margin to label
-    let h = lb.intrinsicContentSize.height
-    lb.constraintHeight(equalToConstant: h+24)
-    return lb
-  }()
+  let routeLabel :UILabel   =  MediumHeaderLabel(text: "Route")
+  
   
   let tableview: UITableView = {
     let table = UITableView()
     table.translatesAutoresizingMaskIntoConstraints = false
     return table
   }()
-  // distance measument in meters added by yumi
-  let distanceSpan: CLLocationDistance = 2000
+
   
   // MARK: - Layout config
   override func viewDidLoad() {
@@ -63,45 +61,45 @@ class MainViewController: UIViewController
     view.backgroundColor = bgColor
     tableview.backgroundColor = bgColor
     
-    
-
-    // add to view and set constrans
-    setLayoutOfTableView()
-    setLayoutButton()
-    
     // Tableview setting
     tableview.register(CategoryCardTVCell.self, forCellReuseIdentifier: cellId)
     tableview.dataSource = self
     tableview.delegate = self
     tableview.allowsMultipleSelectionDuringEditing = true
 
+    // add to view and set constrans
+    setLayoutOfTableView()
+    setLayoutButton()
+    
+
+
   }
   
   func setLayoutOfTableView(){
-    
-    // Create upper [Title + map + location + route label] view
-    let userLocationStackView = VerticalStackView(arrangedSubviews: [headerTitle, mapView, locationStackView], spacing: 24)
-    let tableHeaderStackView = VerticalStackView(arrangedSubviews: [userLocationStackView,routeLabel],spacing: 32)
-    mapView.constraintHeight(equalToConstant: 200)
-    
     
     // First add to view(this order is important)
     view.addSubview(tableview)
     tableview.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
     
-    // hide scroll
-    tableview.showsVerticalScrollIndicator = false
+    // Create upper [Title + map + location + route label] view
+    let tableHeaderStackView = VerticalStackView(arrangedSubviews: [headerTitle, mapView, locationStackView,routeLabel, UIView()],spacing: 24)
+    tableHeaderStackView.setCustomSpacing(16, after: routeLabel)
+    mapView.constraintHeight(equalToConstant: 200)
     
     // Set upper view as `tableHeaderView` of the table view.
     let thv = tableHeaderStackView
     tableview.tableHeaderView = thv
-    thv.translatesAutoresizingMaskIntoConstraints = false
+//    thv.translatesAutoresizingMaskIntoConstraints = false
     
     // Set width same as table view
     thv.matchSizeWith(widthRatio: 1, heightRatio: nil)
+    
     // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
     tableview.tableHeaderView?.setNeedsLayout()
     tableview.tableHeaderView?.layoutIfNeeded()
+    
+    // hide scroll
+    tableview.showsVerticalScrollIndicator = false
     
   }
   
@@ -145,15 +143,15 @@ class MainViewController: UIViewController
     case Categories.cafe.rawValue:
       selectedCategories.remove(at: section)
       selectedCategories.insert(.cafe, at: section)
-    case Categories.clothes.rawValue:
+    case Categories.fashion.rawValue:
       selectedCategories.remove(at: section)
-      selectedCategories.insert(.clothes, at: section)
-    case Categories.restaurant.rawValue:
+      selectedCategories.insert(.fashion, at: section)
+    case Categories.restaurantAndCafe.rawValue:
       selectedCategories.remove(at: section)
-      selectedCategories.insert(.restaurant, at: section)
-    case Categories.park.rawValue:
+      selectedCategories.insert(.restaurantAndCafe, at: section)
+    case Categories.artAndGallery.rawValue:
       selectedCategories.remove(at: section)
-      selectedCategories.insert(.park, at: section)
+      selectedCategories.insert(.artAndGallery, at: section)
     default:
       selectedCategories.remove(at: section)
       selectedCategories.insert(.other, at: section)
@@ -161,39 +159,58 @@ class MainViewController: UIViewController
   }
   //Action when goButton is tapped
   @objc func goButtonTapped(){
-    
+    // this is to avoid pushing many times. We will enable it at view will appear.
+    goButton.isEnabled = false
     
     // For debug. If this var is true, it will only use sample data.
     if noMoreAPI{
+
+      let nextVC = PlanListTableViewController()
+      navigationController?.pushViewController(nextVC, animated: true)
+      
       allLocations = [userCurrentLocation] + Location.sampleLocations
       Planner.calculateAllRoutes()
       let plans = Planner.calculatePlans(categories: selectedCategories)
-      let nextVC = PlanListTableViewController(plans: plans)
-      navigationController?.pushViewController(nextVC, animated: true)
+      nextVC.plans = plans
+      nextVC.tableView.reloadData()
+      
       UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
       return
     }
     
     // if you has moved or no locations data?
     // -> then re-create(request, and calculate) all data
-    if UserLocationController.shared.hasUserMoved() || allLocations.count == 0{
+    if UserLocationController.shared.hasUserMoved()
+        || allLocations.count <= 21
+    {
+      let nextVC = PlanListTableViewController()
+      navigationController?.pushViewController(nextVC, animated: true)
+      
       NetworkController.shared.createAllLocations { [weak self] in
+
         Planner.calculateAllRoutes()
         let plans = Planner.calculatePlans(categories: self!.selectedCategories)
-        let nextVC = PlanListTableViewController(plans: plans)
-        self?.navigationController?.pushViewController(nextVC, animated: true)
+        nextVC.plans = plans
+        
+        DispatchQueue.main.async {
+          nextVC.tableView.reloadData()
+        }        
         // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
+        print(allLocations.count)
 
       }
       
     }else{
       // if same place + only category has changed
       // code : only do Planner.calculatePlans(), no createAllLocations
-      let plans = Planner.calculatePlans(categories: selectedCategories)
-      let nextVC = PlanListTableViewController(plans: plans)
+      
+      let nextVC = PlanListTableViewController()
       navigationController?.pushViewController(nextVC, animated: true)
       
+      let plans = Planner.calculatePlans(categories: selectedCategories)
+      nextVC.plans = plans
+      nextVC.tableView.reloadData()
       // if user info is completely same as previous "go" (== same coordinates, same category order)
       // just use previous plans (add later)
     }
@@ -208,29 +225,29 @@ class MainViewController: UIViewController
     switch sectionTitles.count {
     case 1:
       sectionTitles.append("2nd Location")
-      categoryArray[1].insert(Categories.clothes.rawValue, at: 0)
-      selectedCategories.append(.clothes)
-      addEditVC.categoryName0.text = Categories.clothes.rawValue
+      categoryArray[1].insert(Categories.fashion.rawValue, at: 0)
+      selectedCategories.append(.fashion)
+      addEditVC.categoryName0.text = Categories.fashion.rawValue
       addEditVC.row = 0
       addEditVC.section = 1
-      addEditVC.selectArray[0].insert(Categories.clothes.rawValue, at: 0)
+      addEditVC.selectArray[0].insert(Categories.fashion.rawValue, at: 0)
     case 2:
       sectionTitles.append("3rd Location")
-      categoryArray[2].insert(Categories.park.rawValue, at: 0)
-      selectedCategories.append(.park)
-      addEditVC.categoryName0.text = Categories.park.rawValue
+      categoryArray[2].insert(Categories.artAndGallery.rawValue, at: 0)
+      selectedCategories.append(.artAndGallery)
+      addEditVC.categoryName0.text = Categories.artAndGallery.rawValue
       addEditVC.row = 0
       addEditVC.section = 2
-      addEditVC.selectArray[0].insert(Categories.park.rawValue, at: 0)
+      addEditVC.selectArray[0].insert(Categories.artAndGallery.rawValue, at: 0)
 
     case 3:
       sectionTitles.append("4th Location")
-      categoryArray[3].insert(Categories.restaurant.rawValue, at: 0)
-      selectedCategories.append(.restaurant)
-      addEditVC.categoryName0.text = Categories.restaurant.rawValue
+      categoryArray[3].insert(Categories.restaurantAndCafe.rawValue, at: 0)
+      selectedCategories.append(.restaurantAndCafe)
+      addEditVC.categoryName0.text = Categories.restaurantAndCafe.rawValue
       addEditVC.row = 0
       addEditVC.section = 3
-      addEditVC.selectArray[0].insert(Categories.restaurant.rawValue, at: 0)
+      addEditVC.selectArray[0].insert(Categories.restaurantAndCafe.rawValue, at: 0)
 
     case 4:
       sectionTitles.append("5th Location")
@@ -351,55 +368,41 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController{
   
   override func viewWillAppear(_ animated: Bool) {
-    // Start updating location. Added by Yanmer
     
+    // Whenever the view is shown, enaible goButton.
+    goButton.isEnabled = true
     
+    // Start updating location.
     // if already updating, need not to do.
     if UserLocationController.shared.isUpdatingLocation{return}
     
+    
     UserLocationController.shared.start(completion: { [weak self] in
-      // update user annotation here
+      // Whenever user location is updated (or start updating), this closure is invoked.
       
-      let center = UserLocationController.shared.coordinatesMostRecent!
+      // Get current user locaiton
+      guard let center = UserLocationController.shared.coordinatesMostRecent else {return}
 
+      // Set region of the mapView using current location
       let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
       self?.mapView.setRegion(region, animated: false)
       self?.mapView.showsUserLocation = true
     
-      //      show current address
-      CLGeocoder().reverseGeocodeLocation(UserLocationController.shared.locationManager.location!) { placemarks, error in
-        guard
-          let placemark = placemarks?.first, error == nil,
-          let administrativeArea = placemark.administrativeArea,
-          let locality = placemark.locality,
-          let thoroughfare = placemark.thoroughfare,
-          let subThoroughfare = placemark.subThoroughfare
-        else {
-          self!.locationLabel.text = ""
-          return
-        }
-        let userAddress = "\(administrativeArea) \(locality) \(thoroughfare) \(subThoroughfare)"
-        self!.locationLabel.text = userAddress
-        userCurrentLocation.address = userAddress
+      // Get address by using current location
+      UserLocationController.shared.getCurrentAddress(){ address in
+        // update user location info
+        userCurrentLocation.address = address
+        // update location label
+        self?.locationLabel.text = address
       }
     })
     
   }
+  
+  
   override func viewWillDisappear(_ animated: Bool) {
     // Stop tracking user data.  Added by Yanmer.
     UserLocationController.shared.stop()
-  }
-  
-}
-
-// function to set initial zoom setting
-extension MainViewController {
-
-  func setZoomLevel(location: CLLocation) {
-    // create new region for zoom level
-    let mapCoordinates = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: distanceSpan, longitudinalMeters: distanceSpan)
-    // set new region
-    self.mapView.setRegion(mapCoordinates, animated: true)
   }
   
 }

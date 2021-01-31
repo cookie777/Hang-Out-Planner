@@ -22,17 +22,17 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
   var section: Int?
   let cellId = "categories"
   
-  var selectArray:[[String]] = [[],[Categories.clothes.rawValue,Categories.amusement.rawValue,Categories.cafe.rawValue,Categories.restaurant.rawValue,Categories.park.rawValue,]]
+  var selectArray:[[String]] = [[],[Categories.fashion.rawValue,Categories.amusement.rawValue,Categories.cafe.rawValue,Categories.restaurantAndCafe.rawValue,Categories.artAndGallery.rawValue,]]
   
   let headerTitle = LargeHeaderLabel(text: "How Are\nYou Feeling?")
   let smallTitle1 = SmallHeaderLabel(text: "Current Location")
   let smallTitle2 = SmallHeaderLabel(text: "Location Types")
   let categoryName0 = MediumHeaderLabel(text: Categories.cafe.rawValue)
   let categoryName1 = MediumHeaderLabel(text: Categories.amusement.rawValue)
-  let categoryName2 = MediumHeaderLabel(text: Categories.clothes.rawValue)
+  let categoryName2 = MediumHeaderLabel(text: Categories.fashion.rawValue)
   let categoryName3 = MediumHeaderLabel(text: Categories.cafe.rawValue)
-  let categoryName4 = MediumHeaderLabel(text: Categories.restaurant.rawValue)
-  let categoryName5 = MediumHeaderLabel(text: Categories.park.rawValue)
+  let categoryName4 = MediumHeaderLabel(text: Categories.restaurantAndCafe.rawValue)
+  let categoryName5 = MediumHeaderLabel(text: Categories.artAndGallery.rawValue)
   
   //  tabelView version
   let sectionTitle = ["Current Location","Location Types"]

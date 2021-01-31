@@ -172,7 +172,7 @@ struct Location{
     Location(
       id: 8,
       apiId: "kajMc2fkWKdzKJ1M4pm47Q",
-      category: .park,
+      category: .artAndGallery,
       latitude: 49.2978842,
       longitude: -123.1308093,
       title: "Stanley Park",
@@ -187,7 +187,7 @@ struct Location{
     Location(
       id: 9,
       apiId: "QZMDi6zSshZPxSwoyF3lvw",
-      category: .park,
+      category: .artAndGallery,
       latitude: 49.2388979593086,
       longitude: -123.110358343689,
       title: "Queen Elizabeth Park",
@@ -202,7 +202,7 @@ struct Location{
     Location(
       id: 10,
       apiId: "5nWnESoN_ZS4OPMi6PaLXA",
-      category: .park,
+      category: .artAndGallery,
       latitude: 49.2736605,
       longitude: -123.2418804,
       title: "Pacific Spirit Regional Park",
@@ -217,7 +217,7 @@ struct Location{
     Location(
       id: 11,
       apiId: "oB4GzgURuu6HGBEDECHWRw",
-      category: .restaurant,
+      category: .restaurantAndCafe,
       latitude: 49.22841,
       longitude: -123.00276,
       title: "Cactus Club Cafe Station Square",
@@ -232,7 +232,7 @@ struct Location{
     Location(
       id: 12,
       apiId: "NdEPf2Ls5Ql3_nkwjqKvXA",
-      category: .restaurant,
+      category: .restaurantAndCafe,
       latitude: 49.27501,
       longitude: -123.122,
       title: "The Flying Pig - Yaletown",
@@ -247,7 +247,7 @@ struct Location{
     Location(
       id: 13,
       apiId: "vXTo69v2bGEyuBdT0X1hrw",
-      category: .restaurant,
+      category: .restaurantAndCafe,
       latitude: 49.282912,
       longitude: -123.110593,
       title: "La Taqueria Pinche Taco Shop",
@@ -262,7 +262,7 @@ struct Location{
     Location(
       id: 14,
       apiId: "MaZuSyl_Cgozm3bWbZUk4w",
-      category: .clothes,
+      category: .fashion,
       latitude: 49.2817016,
       longitude: -123.1190082,
       title: "Vans",
@@ -277,7 +277,7 @@ struct Location{
     Location(
       id: 15,
       apiId: "zdNGQarK1bDPQhknUTb24A",
-      category: .clothes,
+      category: .fashion,
       latitude: 49.225957,
       longitude: -122.99923,
       title: "UNIQLO",
@@ -292,7 +292,7 @@ struct Location{
     Location(
       id: 16,
       apiId: "z7wNFWEBKSoEN5BTDodUBA",
-      category: .clothes,
+      category: .fashion,
       latitude: 49.2834,
       longitude: -123.11775,
       title: "H&M",

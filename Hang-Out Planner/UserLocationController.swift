@@ -63,6 +63,8 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
   
   /// Stop Start updating(tacking) user location
   func stop() {
+    // if nothing started, do nothing. This is important. Without this, it will cause an error at scene dissapper.
+    if !isUpdatingLocation{return}
     locationManager.stopUpdatingLocation()
     isUpdatingLocation = false
   }
@@ -126,6 +128,30 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
   }
   
   
+  func getCurrentAddress(completion: @escaping ((String) -> Void)){
+    var address = ""
+
+    //      show current address
+    CLGeocoder().reverseGeocodeLocation(locationManager.location!) { placemarks, error in
+      
+      guard
+        let placemark = placemarks?.first, error == nil,
+        let administrativeArea = placemark.administrativeArea,
+        let locality = placemark.locality,
+        let thoroughfare = placemark.thoroughfare,
+        let subThoroughfare = placemark.subThoroughfare
+      else {
+        completion("")
+        return
+      }
+      address = "\(administrativeArea) \(locality) \(thoroughfare) \(subThoroughfare)"
+      completion(address)
+      return
+    }
+
+  }
+  
+  
   /*
   * calculate the center point of multiple latitude longitude coordinate-pairs
     contributed by `https://github.com/ppoh71/playgounds/blob/master/centerLocationPoint.playground/Contents.swift`
@@ -160,17 +186,7 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
       let result = CLLocationCoordinate2D(latitude: CLLocationDegrees(GLKMathRadiansToDegrees(Float(resultLat))), longitude: CLLocationDegrees(GLKMathRadiansToDegrees(Float(resultLong))))
       
       return result
-    
-    
-//    let allCoordinates = plan.destinationList[0..<plan.destinationList.count-1].map{
-//      CLLocationCoordinate2D(
-//        latitude: allLocations[$0].latitude,
-//        longitude: allLocations[$0].longitude
-//      )
-//    }
-//    let centerCoordinate = UserLocationController.shared.getCenterCoord(LocationPoints: allCoordinates)
-//    mapView.setRegion(MKCoordinateRegion(center: centerCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)), animated: false)
-//
+
       
   }
 

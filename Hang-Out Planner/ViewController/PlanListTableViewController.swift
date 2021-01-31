@@ -13,7 +13,7 @@ import UIKit
 class PlanListTableViewController: UITableViewController {
   
   // [Plan] you receive from planner model
-  let plans: [Plan]
+  var plans: [Plan] = []
   var cellId = "planCardCell"
   let headerTitle = LargeHeaderLabel(text: "Where Do You \nWant To Go?")
   
@@ -47,6 +47,10 @@ class PlanListTableViewController: UITableViewController {
   
   init(plans: [Plan]) {
     self.plans = plans
+    super.init(style: .insetGrouped)
+  }
+  
+  init() {
     super.init(style: .insetGrouped)
   }
   

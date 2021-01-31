@@ -18,7 +18,11 @@ class CategoryCardTVCell: CardTVCell{
   var category : String = ""{
     didSet{
       guard let c = Categories(rawValue: category)  else {return}
-      icon.image = Categories.sfSymbolImage(c)
+      if let iconImg = Categories.iconImage(c){
+        icon.image = iconImg
+        Categories.overrideImageColor(imgV: icon, category: c)
+      }
+      
       textlb.text = category
       textlb.textColor = Categories.color(c)
       mainBackground.layer.borderColor = Categories.color(c).cgColor
@@ -31,6 +35,8 @@ class CategoryCardTVCell: CardTVCell{
     
     // Icon layout
     contentView.addSubview(icon)
+    icon.constraintWidth(equalToConstant: 22)
+    icon.constraintHeight(equalToConstant: 22)
     icon.centerYin(contentView)
     icon.leadingAnchor.constraint(equalTo: mainBackground.leadingAnchor, constant: 24).isActive = true
     

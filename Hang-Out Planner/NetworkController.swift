@@ -23,7 +23,6 @@ class NetworkController {
   var tempAllLocations : [Location] = []
   
   
-  
   /// fetch an image from imageURL, and return UIImage as completion handler
   /// - Parameters:
   ///   - urlString: String

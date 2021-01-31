@@ -198,7 +198,7 @@ class Planner {
         // record price level.
         if let p = currentLocation.priceLevel{
           avePriceLevel += Double(p)
-        }else if currentLocation.category != .park{
+        }else if currentLocation.category != .artAndGallery{
           // if nil -> set average priceLevel 2, but as for park, set 0.
           avePriceLevel += 2
         }

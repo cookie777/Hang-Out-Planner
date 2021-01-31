@@ -181,10 +181,8 @@ class MainViewController: UIViewController
     // if you has moved or no locations data?
     // -> then re-create(request, and calculate) all data
     if UserLocationController.shared.hasUserMoved()
-        || allLocations.count == 0
-        || !NetworkController.shared.yelpFetchSucceeded
+        || allLocations.count <= 21
     {
-      NetworkController.shared.yelpFetchSucceeded = false
       let nextVC = PlanListTableViewController()
       navigationController?.pushViewController(nextVC, animated: true)
       
@@ -199,8 +197,7 @@ class MainViewController: UIViewController
         }        
         // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
-        NetworkController.shared.yelpFetchSucceeded = true
-        print("ok")
+        print(allLocations.count)
 
       }
       

@@ -30,7 +30,7 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
   
   let imageView :UIImageView = {
     let imageV = UIImageView()
-//    imageV.layer.cornerRadius = 32
+    imageV.layer.cornerRadius = 8
     imageV.image = nil // later, fill
     imageV.translatesAutoresizingMaskIntoConstraints = false
     imageV.contentMode = .scaleAspectFill
@@ -99,7 +99,7 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
   func setMainStackView() {
     view.addSubview(imageView)
     imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
-    imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.88).isActive = true
+    imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.96).isActive = true
     imageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     imageView.centerXin(view)
     

@@ -22,8 +22,6 @@ class NetworkController {
   // After return final data, it should be all deleted from memory save.
   var tempAllLocations : [Location] = []
   
-  /// Success flag of yelp fetching. If this flag is
-  var yelpFetchSucceeded : Bool = false
   
   /// fetch an image from imageURL, and return UIImage as completion handler
   /// - Parameters:

@@ -37,25 +37,23 @@ class MainViewController: UIViewController
   }()
   
   let locationTitle = SubTextLabel(text: "Your current location is:")
-  let locationLabel = TextLabel(text: "")
+  let locationLabel : TextLabel =  {
+    let t = TextLabel(text: " ")
+    t.numberOfLines = 1
+    return t
+  }()
   // Wrapper of location info
   lazy var locationStackView = VerticalStackView(arrangedSubviews: [locationTitle, locationLabel], spacing: 8)
   
-  let routeLabel :UILabel   = {
-    let lb = MediumHeaderLabel(text: "Route")
-    // add bottom margin to label
-    let h = lb.intrinsicContentSize.height
-    lb.constraintHeight(equalToConstant: h+24)
-    return lb
-  }()
+  let routeLabel :UILabel   =  MediumHeaderLabel(text: "Route")
+  
   
   let tableview: UITableView = {
     let table = UITableView()
     table.translatesAutoresizingMaskIntoConstraints = false
     return table
   }()
-  // distance measument in meters added by yumi
-  let distanceSpan: CLLocationDistance = 2000
+
   
   // MARK: - Layout config
   override func viewDidLoad() {
@@ -63,45 +61,45 @@ class MainViewController: UIViewController
     view.backgroundColor = bgColor
     tableview.backgroundColor = bgColor
     
-    
-
-    // add to view and set constrans
-    setLayoutOfTableView()
-    setLayoutButton()
-    
     // Tableview setting
     tableview.register(CategoryCardTVCell.self, forCellReuseIdentifier: cellId)
     tableview.dataSource = self
     tableview.delegate = self
     tableview.allowsMultipleSelectionDuringEditing = true
 
+    // add to view and set constrans
+    setLayoutOfTableView()
+    setLayoutButton()
+    
+
+
   }
   
   func setLayoutOfTableView(){
-    
-    // Create upper [Title + map + location + route label] view
-    let userLocationStackView = VerticalStackView(arrangedSubviews: [headerTitle, mapView, locationStackView], spacing: 24)
-    let tableHeaderStackView = VerticalStackView(arrangedSubviews: [userLocationStackView,routeLabel],spacing: 32)
-    mapView.constraintHeight(equalToConstant: 200)
-    
     
     // First add to view(this order is important)
     view.addSubview(tableview)
     tableview.matchParent(padding: .init(top: 40, left: 32, bottom: 40, right:32))
     
-    // hide scroll
-    tableview.showsVerticalScrollIndicator = false
+    // Create upper [Title + map + location + route label] view
+    let tableHeaderStackView = VerticalStackView(arrangedSubviews: [headerTitle, mapView, locationStackView,routeLabel, UIView()],spacing: 24)
+    tableHeaderStackView.setCustomSpacing(16, after: routeLabel)
+    mapView.constraintHeight(equalToConstant: 200)
     
     // Set upper view as `tableHeaderView` of the table view.
     let thv = tableHeaderStackView
     tableview.tableHeaderView = thv
-    thv.translatesAutoresizingMaskIntoConstraints = false
+//    thv.translatesAutoresizingMaskIntoConstraints = false
     
     // Set width same as table view
     thv.matchSizeWith(widthRatio: 1, heightRatio: nil)
+    
     // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
     tableview.tableHeaderView?.setNeedsLayout()
     tableview.tableHeaderView?.layoutIfNeeded()
+    
+    // hide scroll
+    tableview.showsVerticalScrollIndicator = false
     
   }
   
@@ -375,7 +373,7 @@ extension MainViewController{
           let thoroughfare = placemark.thoroughfare,
           let subThoroughfare = placemark.subThoroughfare
         else {
-          self!.locationLabel.text = ""
+          self!.locationLabel.text = " "
           return
         }
         let userAddress = "\(administrativeArea) \(locality) \(thoroughfare) \(subThoroughfare)"
@@ -388,18 +386,6 @@ extension MainViewController{
   override func viewWillDisappear(_ animated: Bool) {
     // Stop tracking user data.  Added by Yanmer.
     UserLocationController.shared.stop()
-  }
-  
-}
-
-// function to set initial zoom setting
-extension MainViewController {
-
-  func setZoomLevel(location: CLLocation) {
-    // create new region for zoom level
-    let mapCoordinates = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: distanceSpan, longitudinalMeters: distanceSpan)
-    // set new region
-    self.mapView.setRegion(mapCoordinates, animated: true)
   }
   
 }

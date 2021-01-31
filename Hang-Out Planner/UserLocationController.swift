@@ -160,17 +160,7 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
       let result = CLLocationCoordinate2D(latitude: CLLocationDegrees(GLKMathRadiansToDegrees(Float(resultLat))), longitude: CLLocationDegrees(GLKMathRadiansToDegrees(Float(resultLong))))
       
       return result
-    
-    
-//    let allCoordinates = plan.destinationList[0..<plan.destinationList.count-1].map{
-//      CLLocationCoordinate2D(
-//        latitude: allLocations[$0].latitude,
-//        longitude: allLocations[$0].longitude
-//      )
-//    }
-//    let centerCoordinate = UserLocationController.shared.getCenterCoord(LocationPoints: allCoordinates)
-//    mapView.setRegion(MKCoordinateRegion(center: centerCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)), animated: false)
-//
+
       
   }
 

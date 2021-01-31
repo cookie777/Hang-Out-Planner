@@ -27,9 +27,7 @@ class PlanDetailViewController: UIViewController{
   /// variables related to mapKit
   var coordinate: (Double, Double)?
   
-  /// variables related to store fetched images
-  //  let locationCardCell = LocationCardTVCell()
-  //  var routeOrder = 0
+  /// variable to store fetched images
   var fetchedImages: [UIImage?] = []
   
   
@@ -95,10 +93,10 @@ class PlanDetailViewController: UIViewController{
     //set label value by plan data
     let star = Location.starConverter(score: plan.averageRating)
     (popularityWrapper.arrangedSubviews[1] as! TextLabel).text = star
-    let d = PlanCardTVCell.meterToKm(distance: plan.totalDistance)
+    let d = SpeedCalculator.meterTokm(distanceInMeter: plan.totalDistance)
     (totalDistanceWrapper.arrangedSubviews[1] as! TextLabel).text = "\(d) km"
-    let wStr = PlanCardTVCell.calcWalkingSpeed(distance: plan.totalDistance)
-    let car = PlanCardTVCell.calcCarSpeed(distance: plan.totalDistance)
+    let wStr = SpeedCalculator.calcWalkingSpeed(distance: plan.totalDistance)  + "🚶‍♂️"
+    let car = SpeedCalculator.calcCarSpeedInHour(distance: plan.totalDistance)
     let cStr = car >= 0.1 ?  "\(car)h 🚗" :  ""
     (totalTimeWrapper.arrangedSubviews[1] as! TextLabel).text = "\(cStr)\(wStr)"
     

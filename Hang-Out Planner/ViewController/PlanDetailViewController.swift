@@ -98,7 +98,7 @@ class PlanDetailViewController: UIViewController{
     let wStr = SpeedCalculator.calcWalkingSpeed(distance: plan.totalDistance)  + "🚶‍♂️"
     let car = SpeedCalculator.calcCarSpeedInHour(distance: plan.totalDistance)
     let cStr = car >= 0.1 ?  "\(car)h 🚗" :  ""
-    (totalTimeWrapper.arrangedSubviews[1] as! TextLabel).text = "\(cStr)\(wStr)"
+    (totalTimeWrapper.arrangedSubviews[1] as! TextLabel).text = "\(wStr)\(cStr)"
     
     
     //set annotation and thumbnail image per route

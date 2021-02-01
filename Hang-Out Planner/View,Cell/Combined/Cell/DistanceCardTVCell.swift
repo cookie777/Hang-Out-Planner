@@ -77,7 +77,7 @@ class DistanceCardTVCell: CardTVCell {
   
     switch minuteByCar {
     case 0:
-      timeToReachByCar.text = ""
+      timeToReachByCar.text = "1 min 🚗"
     case 1:
       timeToReachByCar.text = "\(minuteByCar) min 🚗"
     default:

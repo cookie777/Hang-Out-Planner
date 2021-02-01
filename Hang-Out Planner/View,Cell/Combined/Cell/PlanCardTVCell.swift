@@ -88,7 +88,7 @@ class PlanCardTVCell: CardTVCell {
     totalDistanceField.text = "\(SpeedCalculator.meterTokm(distanceInMeter: guessDistance)) Km"
   
     if hourByCar == 0.0 {
-      totalTimeField.text = timeOnFoot + "🚶‍♂️"
+      totalTimeField.text = timeOnFoot + "🚶‍♂️" 
     } else {
       totalTimeField.text = timeOnFoot + "🚶‍♂️" + "\(hourByCar) h 🚗"
     }

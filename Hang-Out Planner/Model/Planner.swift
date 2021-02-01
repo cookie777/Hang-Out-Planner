@@ -50,7 +50,8 @@ class Planner {
     let end = allLocations[endId]
     let coordinateStart = CLLocation(latitude: start.latitude, longitude: start.longitude)
     let coordinateEnd = CLLocation(latitude: end.latitude, longitude: end.longitude)
-    let distanceInMeters = coordinateStart.distance(from: coordinateEnd)
+    var distanceInMeters = coordinateStart.distance(from: coordinateEnd)
+    distanceInMeters *= 1.5 // try to assume actual distance
     return distanceInMeters
   }
 
@@ -218,7 +219,7 @@ class Planner {
       currentPlan = Plan(
         routes: routes,
         destinationList: plan.key,
-        totalDistance: plan.value * 1.5, // adjusting to real way
+        totalDistance: plan.value,
         totalTimeByWalk: nil,
         totalTimeByCar: nil,
         averageRating: aveRating,

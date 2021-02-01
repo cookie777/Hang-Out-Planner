@@ -15,7 +15,7 @@ class PlanListTableViewController: UITableViewController {
   // [Plan] you receive from planner model
   var plans: [Plan] = []
   var cellId = "planCardCell"
-  let headerTitle = LargeHeaderLabel(text: "Where Do You \nWant To Go?")
+  let headerTitle = LargeHeaderLabel(text: "What's \nYour plan?")
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,22 +26,22 @@ class PlanListTableViewController: UITableViewController {
     
 
     // Set upper view as `tableHeaderView` of the table view.
-    headerTitle.constraintHeight(equalToConstant: headerTitle.intrinsicContentSize.height + 24)
     let thv = headerTitle
     tableView.tableHeaderView = thv
     thv.translatesAutoresizingMaskIntoConstraints = false
     tableView.tableHeaderView?.anchors(
       topAnchor: nil,
       leadingAnchor: tableView.layoutMarginsGuide.leadingAnchor,
-      trailingAnchor: nil,
+      trailingAnchor: tableView.layoutMarginsGuide.trailingAnchor,
       bottomAnchor: nil,
-      padding: .init(top: nil, left: 12, right: 0, bottom: 0)
+      padding: .init(top: nil, left: 16, right: 8, bottom: nil)
     )
-
+    tableView.directionalLayoutMargins =  NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 32)
+    
     // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
     tableView.tableHeaderView?.setNeedsLayout()
     tableView.tableHeaderView?.layoutIfNeeded()
-    tableView.directionalLayoutMargins =  NSDirectionalEdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32)
+
 
   }
   

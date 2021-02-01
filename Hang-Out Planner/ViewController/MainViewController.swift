@@ -53,7 +53,9 @@ class MainViewController: UIViewController
     table.translatesAutoresizingMaskIntoConstraints = false
     return table
   }()
-
+  
+  ///variable to store bottom indexPath of tableView, added by yumi
+  var indexPathTillScrollDown: IndexPath?
   
   // MARK: - Layout config
   override func viewDidLoad() {
@@ -70,9 +72,6 @@ class MainViewController: UIViewController
     // add to view and set constrans
     setLayoutOfTableView()
     setLayoutButton()
-    
-
-
   }
   
   func setLayoutOfTableView(){
@@ -126,10 +125,11 @@ class MainViewController: UIViewController
   }
   
   
-  // MARK: - Botton Config
-  
+  // MARK: - Edit already selected category of location
   func edit(_ category: String,_ row: Int, _ section:Int) {
+
     let index = IndexPath(row: row, section: section)
+    self.indexPathTillScrollDown = IndexPath(row: row, section: section)
     categoryArray[section].remove(at:row)
     categoryArray[section].insert(category, at:row)
     tableview.reloadRows(at: [index], with: .automatic)
@@ -156,7 +156,64 @@ class MainViewController: UIViewController
       selectedCategories.remove(at: section)
       selectedCategories.insert(.other, at: section)
     }
+    
+    /// Scroll to bottom, added by yumi
+    self.tableview.scrollToRow(at: self.indexPathTillScrollDown!, at: .bottom, animated: true)
   }
+  
+  // MARK: - Add new category of location
+  /// added by yumi
+  func addCategory(_ category: String) {
+    /// add new section for selected location
+    switch sectionTitles.count {
+    case 1:
+      sectionTitles.append("2nd Location")
+      categoryArray[sectionTitles.count - 1].append(category)
+    case 2:
+      sectionTitles.append("3rd Location")
+      categoryArray[sectionTitles.count - 1].append(category)
+    case 3:
+      sectionTitles.append("4th Location")
+      categoryArray[sectionTitles.count - 1].append(category)
+    case 4:
+      sectionTitles.append("5th Location")
+      categoryArray[sectionTitles.count - 1].append(category)
+    default:
+      fatalError("error: adding category")
+    }
+
+    /// update table view with new set of section titles
+    tableview.reloadData()
+    
+    /// update SelectedCategory
+    switch category {
+    case Categories.amusement.rawValue:
+      selectedCategories.insert(.amusement, at: sectionTitles.count - 1)
+    case Categories.cafe.rawValue:
+      selectedCategories.insert(.cafe, at: sectionTitles.count - 1)
+    case Categories.fashion.rawValue:
+      selectedCategories.insert(.fashion, at: sectionTitles.count - 1)
+    case Categories.restaurantAndCafe.rawValue:
+      selectedCategories.insert(.restaurantAndCafe, at: sectionTitles.count - 1)
+    case Categories.artAndGallery.rawValue:
+      selectedCategories.insert(.artAndGallery, at: sectionTitles.count - 1)
+    default:
+      selectedCategories.insert(.other, at: sectionTitles.count - 1)
+    }
+    
+    /// destination for the new location item to be displayed
+    let destinationIndexPath = IndexPath(row: 0, section: sectionTitles.count - 1)
+    tableview.reloadRows(at: [destinationIndexPath], with: .automatic)
+    tableview.deselectRow(at: destinationIndexPath, animated: true)
+
+    self.indexPathTillScrollDown = IndexPath(row:  categoryArray[sectionTitles.count - 1].count - 1 , section: sectionTitles.count - 1)
+    /// Scroll to bottom
+    self.tableview.scrollToRow(at: self.indexPathTillScrollDown!, at: .bottom, animated: true)
+  }
+  
+  
+  
+  
   //Action when goButton is tapped
   @objc func goButtonTapped(){
     
@@ -226,53 +283,61 @@ class MainViewController: UIViewController
   }
   
   @objc func addButtonTapped(){
+//    let addEditVC = CategorySelectViewController()
+//    addEditVC.delegate = self
+//    print("sectiontitle\(sectionTitles)")
     let addEditVC = CategorySelectViewController()
     addEditVC.delegate = self
-    
-    switch sectionTitles.count {
-    case 1:
-      sectionTitles.append("2nd Location")
-      categoryArray[1].insert(Categories.fashion.rawValue, at: 0)
-      selectedCategories.append(.fashion)
-      addEditVC.categoryName0.text = Categories.fashion.rawValue
-      addEditVC.row = 0
-      addEditVC.section = 1
-      addEditVC.selectArray[0].insert(Categories.fashion.rawValue, at: 0)
-    case 2:
-      sectionTitles.append("3rd Location")
-      categoryArray[2].insert(Categories.artAndGallery.rawValue, at: 0)
-      selectedCategories.append(.artAndGallery)
-      addEditVC.categoryName0.text = Categories.artAndGallery.rawValue
-      addEditVC.row = 0
-      addEditVC.section = 2
-      addEditVC.selectArray[0].insert(Categories.artAndGallery.rawValue, at: 0)
-
-    case 3:
-      sectionTitles.append("4th Location")
-      categoryArray[3].insert(Categories.restaurantAndCafe.rawValue, at: 0)
-      selectedCategories.append(.restaurantAndCafe)
-      addEditVC.categoryName0.text = Categories.restaurantAndCafe.rawValue
-      addEditVC.row = 0
-      addEditVC.section = 3
-      addEditVC.selectArray[0].insert(Categories.restaurantAndCafe.rawValue, at: 0)
-
-    case 4:
-      sectionTitles.append("5th Location")
-      categoryArray[4].insert(Categories.amusement.rawValue, at: 0)
-      selectedCategories.append(.amusement)
-      addEditVC.categoryName0.text = Categories.amusement.rawValue
-      addEditVC.row = 0
-      addEditVC.section = 4
-      addEditVC.selectArray[0].insert(Categories.amusement.rawValue, at: 0)
-
-    default:
-      print("Add Button didn't work...")
-    }
+    addEditVC.selectArray[0].insert(nil, at: 0)
     let addToDoVC = UINavigationController(rootViewController: addEditVC)
     addToDoVC.hideBarBackground() // hide nv bar background. added by yanmer
+//    switch sectionTitles.count {
+//    case 1:
+//      sectionTitles.append("2nd Location")
+//      categoryArray[1].insert(Categories.fashion.rawValue, at: 0)
+//      selectedCategories.append(.fashion)
+//      addEditVC.categoryName0.text = Categories.fashion.rawValue
+//      addEditVC.row = 0
+//      addEditVC.section = 1
+//      addEditVC.selectArray[0].insert(Categories.fashion.rawValue, at: 0)
+//    case 2:
+//      sectionTitles.append("3rd Location")
+//      categoryArray[2].insert(Categories.artAndGallery.rawValue, at: 0)
+//      selectedCategories.append(.artAndGallery)
+//      addEditVC.categoryName0.text = Categories.artAndGallery.rawValue
+//      addEditVC.row = 0
+//      addEditVC.section = 2
+//      addEditVC.selectArray[0].insert(Categories.artAndGallery.rawValue, at: 0)
+    
+//
+//    case 3:
+//      sectionTitles.append("4th Location")
+//      categoryArray[3].insert(Categories.restaurantAndCafe.rawValue, at: 0)
+//      selectedCategories.append(.restaurantAndCafe)
+//      addEditVC.categoryName0.text = Categories.restaurantAndCafe.rawValue
+//      addEditVC.row = 0
+//      addEditVC.section = 3
+//      addEditVC.selectArray[0].insert(Categories.restaurantAndCafe.rawValue, at: 0)
+//
+//    case 4:
+//      sectionTitles.append("5th Location")
+//      categoryArray[4].insert(Categories.amusement.rawValue, at: 0)
+//      selectedCategories.append(.amusement)
+//      addEditVC.categoryName0.text = Categories.amusement.rawValue
+//      addEditVC.row = 0
+//      addEditVC.section = 4
+//      addEditVC.selectArray[0].insert(Categories.amusement.rawValue, at: 0)
+//
+//    default:
+//      print("Add Button didn't work...")
+//    }
+//    let addToDoVC = UINavigationController(rootViewController: addEditVC)
+//    addToDoVC.hideBarBackground() // hide nv bar background. added by yanmer
     present(addToDoVC, animated: true, completion: nil)
     tableview.reloadData()
     updateAddButtonState()
+    
+    
   }
   //  if the number of section is over 4, add button will disappear
   func updateAddButtonState() {
@@ -350,6 +415,9 @@ extension MainViewController: UITableViewDelegate{
     present(addToDoVC, animated: true, completion: nil)
     tableview.deselectRow(at: indexPath, animated: true)
     tableview.reloadData()
+    
+  
+    
   }
 }
 
@@ -357,6 +425,7 @@ extension MainViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return categoryArray[section].count
   }
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell
     cell.category = categoryArray[indexPath.section][indexPath.row]
@@ -409,6 +478,7 @@ extension MainViewController{
       }
     })
     
+   
   }
   
   

@@ -1,4 +1,3 @@
-
 # Hang-Out-Planner
 
 ## Concept
@@ -38,13 +37,16 @@ We can get geolocation from IP address.
 ## Usage
 1, Select maximum 5 categories and tap go button.
 
-![ezgif com-video-to-gif](https://user-images.githubusercontent.com/60034714/106401685-4d8c6900-63da-11eb-9f38-24f14c4ce184.gif)
+
+![ezgif com-video-to-gif-6](https://user-images.githubusercontent.com/60034714/106438984-0c24a980-642c-11eb-8ba1-49d6363e6039.gif)
+
 
 Then, the application is going to generate some daily plan near your current place.
 
 2, Tap a plan which application generated.
 
-![ezgif com-video-to-gif-2](https://user-images.githubusercontent.com/60034714/106401769-b96ed180-63da-11eb-878b-c970cc916a1d.gif)
+![ezgif com-video-to-gif-9](https://user-images.githubusercontent.com/60034714/106439831-ffed1c00-642c-11eb-9a4c-2a44593f67ea.gif)
+
 
 Then, the application is going to show the route and the name of each place.
 
@@ -55,14 +57,19 @@ Even if fetching image delay, placeholdern will be shown until compleating fetch
 
 3, Tap a place in the plan.
 
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106401877-8416b380-63db-11eb-8f2c-987cf2e1dc53.png">
+
+![ezgif com-video-to-gif-7](https://user-images.githubusercontent.com/60034714/106438820-d7185700-642b-11eb-82b9-618068631092.gif)
+
 
 
 Then, the application is going to show the detail of the place.
 
 If you tap the “Yelp” label right bottom of the screen, you can go to the Yelp website of the place in Safari.
 
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106367428-7556d080-62f7-11eb-8e29-8e38a6889032.png">
+
+
+![ezgif com-video-to-gif-8](https://user-images.githubusercontent.com/60034714/106438832-dbdd0b00-642b-11eb-97fc-580f61ce7780.gif)
+
 
 
 ## Background

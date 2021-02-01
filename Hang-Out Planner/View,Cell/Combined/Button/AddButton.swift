@@ -18,6 +18,9 @@ class AddButton: MainVCButton {
     setTitleColor(UIColor.systemBlue.withAlphaComponent(0.5), for: .highlighted)
 
     self.backgroundColor = .systemBackground
+    
+    layer.borderWidth = 2.4
+    layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
   }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

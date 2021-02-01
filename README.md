@@ -1,3 +1,4 @@
+
 # Hang-Out-Planner
 
 ## Concept
@@ -19,32 +20,44 @@ This application uses two API(MapKit and Yelp API).
 ### Mapkit
 Display map or satellite imagery within your app, call out points of interest,and determine placemark information for map coordinates.
 
+[Website](https://developer.apple.com/documentation/mapkit/)
+
+
 
 ### Yelp API
 Yelp is a popular online directory for discovering local businesses ranging from bars, restaurants, and cafes to hairdressers, spas, and gas stations.
 
+[Website](https://www.yelp.com/developers)
+
+
+### ip-api
+We can get geolocation from IP address.
+
+[Website](https://ip-api.com)
 
 ## Usage
 1, Select maximum 5 categories and tap go button.
 
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106366955-f90ebe00-62f3-11eb-8bc4-b8d37ebff380.png"> <img width="184" alt="image" src="https://user-images.githubusercontent.com/60034714/106366969-2491a880-62f4-11eb-8fa1-daaa2c2e5985.png">
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/60034714/106401685-4d8c6900-63da-11eb-9f38-24f14c4ce184.gif)
 
 Then, the application is going to generate some daily plan near your current place.
 
 2, Tap a plan which application generated.
 
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106366972-28252f80-62f4-11eb-95d0-c99bbbb6c383.png"> <img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106366973-2b202000-62f4-11eb-94a6-595819e9aa5f.png">
+![ezgif com-video-to-gif-2](https://user-images.githubusercontent.com/60034714/106401769-b96ed180-63da-11eb-878b-c970cc916a1d.gif)
 
 Then, the application is going to show the route and concise introduction of each place.
 
 3, Tap a place in the plan.
 
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106366977-2e1b1080-62f4-11eb-8247-a533ad26deb3.png"> <img width="204" alt="image" src="https://user-images.githubusercontent.com/60034714/106366979-307d6a80-62f4-11eb-81c8-a25afedba572.png">
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/60034714/106401790-e327f880-63da-11eb-99a3-9a6cd2e6d87b.gif)
+
 
 Then, the application is going to show the detail of the place. If you tap the “Yelp” label right bottom of the screen, you can go to the Yelp website of the place in Safari.
 
 
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106366981-33785b00-62f4-11eb-9a64-1258575cf92f.png">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106401877-8416b380-63db-11eb-8f2c-987cf2e1dc53.png">
+
 
 Then, the application is going to show the detail of the place. If you tap the “Yelp” label right bottom of the screen, you can go to the Yelp website of the place in Safari.
 
@@ -76,4 +89,3 @@ Then, the application is going to show the detail of the place. If you tap the �
 - User can share the plan 
 - User save the plan and route
 - Easy to use all over the world (By using other API like Yelp)
-

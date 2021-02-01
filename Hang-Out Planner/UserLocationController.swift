@@ -91,6 +91,14 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
   
   // Error handling. This will be called when unable to retrieve a location value.
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    alterFetchLocaition(manager, error: error)
+  }
+  
+  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    alterFetchLocaition(manager, error: nil)
+  }
+  
+  func alterFetchLocaition(_ manager: CLLocationManager, error: Error?) {
     let status = manager.authorizationStatus
     if status == .denied || status == .restricted || status == .notDetermined{
       
@@ -113,7 +121,9 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
         }
       })
     }else{
-      print("fatal error: \(error)")
+      if let error = error{
+        print("fatal error: \(error)")
+      }
     }
   }
   

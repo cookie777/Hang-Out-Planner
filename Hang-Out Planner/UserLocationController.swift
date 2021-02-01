@@ -152,18 +152,20 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
     let location = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
     //      show current address
     CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-      
       guard
-        let placemark = placemarks?.first, error == nil,
-        let administrativeArea = placemark.administrativeArea,
-        let locality = placemark.locality,
-        let thoroughfare = placemark.thoroughfare,
-        let subThoroughfare = placemark.subThoroughfare
+        let placemark = placemarks?.first, error == nil
       else {
         completion(" ")
         return
       }
-      address = "\(administrativeArea) \(locality) \(thoroughfare) \(subThoroughfare)"
+//      let postalCode = placemark.postalCode ?? ""
+      let administrativeArea = placemark.administrativeArea ?? ""
+      let locality = placemark.locality ?? ""
+      let thoroughfare = placemark.thoroughfare ?? ""
+      let subThoroughfare = placemark.subThoroughfare ?? ""
+//      let name = placemark.name ?? ""
+      
+      address = "\(subThoroughfare) \(thoroughfare), \(locality), \(administrativeArea)"
       completion(address)
       
       return

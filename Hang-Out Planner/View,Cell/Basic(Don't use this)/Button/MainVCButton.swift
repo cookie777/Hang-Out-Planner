@@ -27,6 +27,8 @@ class MainVCButton: UIButton {
     layer.masksToBounds = false
     layer.shadowRadius = 10.0
     layer.shadowOpacity = 0.13
+    
+  
 
     
   }

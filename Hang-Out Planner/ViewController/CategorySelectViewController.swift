@@ -39,7 +39,7 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
   let categoryName5 = MediumHeaderLabel(text: Categories.artAndGallery.rawValue)
   
   //  tabelView version
-  let sectionTitle = ["Current Location Type","Location Types"]
+  let sectionTitle = ["Current Location Type"," \nLocation Types"]
     
   let tableview: UITableView = {
     let table = UITableView()

@@ -178,6 +178,7 @@ class MainViewController: UIViewController
     case 4:
       sectionTitles.append("5th Location")
       categoryArray[sectionTitles.count - 1].append(category)
+      updateAddButtonState()
     default:
       fatalError("error: adding category")
     }
@@ -283,9 +284,6 @@ class MainViewController: UIViewController
   }
   
   @objc func addButtonTapped(){
-//    let addEditVC = CategorySelectViewController()
-//    addEditVC.delegate = self
-//    print("sectiontitle\(sectionTitles)")
     let addEditVC = CategorySelectViewController()
     addEditVC.delegate = self
     addEditVC.selectArray[0].insert(nil, at: 0)
@@ -335,9 +333,7 @@ class MainViewController: UIViewController
 //    addToDoVC.hideBarBackground() // hide nv bar background. added by yanmer
     present(addToDoVC, animated: true, completion: nil)
     tableview.reloadData()
-    updateAddButtonState()
-    
-    
+//    updateAddButtonState()
   }
   //  if the number of section is over 4, add button will disappear
   func updateAddButtonState() {

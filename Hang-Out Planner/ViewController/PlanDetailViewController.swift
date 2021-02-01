@@ -128,7 +128,7 @@ class PlanDetailViewController: UIViewController{
     for index in  1...numOfRoutes - 1{
       sectionTitles += ["Location \(index)"]
     }
-    sectionTitles += ["\nBack to Start"]
+    sectionTitles += ["\nStart Location"]
     
     
     // Set up layouts
@@ -249,7 +249,6 @@ class PlanDetailViewController: UIViewController{
     if let locationImage = fetchedImages[imageId]  {
       nextVC.imageView.image = locationImage
     }
-
     present(nextVC, animated: true, completion: nil)
   }
   

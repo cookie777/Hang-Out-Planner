@@ -21,6 +21,7 @@ class LargeHeaderLabel: BasicLabel {
     super.init(text: text)
     self.font = LargeHeaderLabel.fontData
     self.textAlignment = .left
+    self.numberOfLines = 0
     
   }
   required init?(coder: NSCoder) {

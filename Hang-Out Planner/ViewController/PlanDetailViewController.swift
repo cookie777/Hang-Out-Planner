@@ -288,6 +288,12 @@ extension PlanDetailViewController : UITableViewDataSource {
         cell.setMargin(insets: .init(top: 8, left: 0 , right: 0, bottom: 8))
         cell.locationImageView.image = placeHolderImage
         
+        // this is only start point doesn't show selected action (don't turn white)
+        if section == 0{
+          cell.selectedBackgroundView?.backgroundColor = .clear
+        }else{
+          cell.selectedBackgroundView?.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.4)
+        }
         // update info of cell
         let route = plan.routes[section]
         cell.update(with: route)
@@ -297,10 +303,7 @@ extension PlanDetailViewController : UITableViewDataSource {
           cell.locationImageView.image = fetchedImages[section]
           return cell
         }
-        
-//        // Fill place holder
-//        self.fetchedImages[section] = placeHolderImage
-        
+  
         // check imageURL of the route
         let urlString = checkImageURL(id: route.startLocationId)
         // apply default image if imageURL is nil

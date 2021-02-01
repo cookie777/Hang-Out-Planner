@@ -46,22 +46,36 @@ Then, the application is going to generate some daily plan near your current pla
 
 ![ezgif com-video-to-gif-2](https://user-images.githubusercontent.com/60034714/106401769-b96ed180-63da-11eb-878b-c970cc916a1d.gif)
 
-Then, the application is going to show the route and concise introduction of each place.
+Then, the application is going to show the route and the name of each place.
+
+
+![ezgif com-video-to-gif-4](https://user-images.githubusercontent.com/60034714/106427560-76355280-641c-11eb-80b3-87fab3348385.gif)
+
+Even if fetching image delay, placeholdern will be shown until compleating fetching.
 
 3, Tap a place in the plan.
-
-![ezgif com-video-to-gif](https://user-images.githubusercontent.com/60034714/106401790-e327f880-63da-11eb-99a3-9a6cd2e6d87b.gif)
-
-
-Then, the application is going to show the detail of the place. If you tap the “Yelp” label right bottom of the screen, you can go to the Yelp website of the place in Safari.
-
 
 <img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106401877-8416b380-63db-11eb-8f2c-987cf2e1dc53.png">
 
 
-Then, the application is going to show the detail of the place. If you tap the “Yelp” label right bottom of the screen, you can go to the Yelp website of the place in Safari.
+Then, the application is going to show the detail of the place.
+
+If you tap the “Yelp” label right bottom of the screen, you can go to the Yelp website of the place in Safari.
 
 <img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106367428-7556d080-62f7-11eb-8e29-8e38a6889032.png">
+
+
+## Background
+
+### First screen
+<img width="400" alt="image" src="https://user-images.githubusercontent.com/60034714/106431532-41c49500-6422-11eb-97ee-cb1d41399813.png">
+
+### When user tap "Go"
+<img width="400" alt="image" src="https://user-images.githubusercontent.com/60034714/106431544-4721df80-6422-11eb-8ce1-e4e07293e9f3.png">
+
+### Showing the result
+<img width="400" alt="image" src="https://user-images.githubusercontent.com/60034714/106431561-4d17c080-6422-11eb-87c7-0b2e5c722414.png">
+
 
 ## Contribution
 

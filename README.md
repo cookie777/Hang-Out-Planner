@@ -68,13 +68,13 @@ If you tap the “Yelp” label right bottom of the screen, you can go to the Ye
 ## Background
 
 ### First screen
-<img width="400" alt="image" src="https://user-images.githubusercontent.com/60034714/106431532-41c49500-6422-11eb-97ee-cb1d41399813.png">
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/60034714/106431532-41c49500-6422-11eb-97ee-cb1d41399813.png">
 
 ### When user tap "Go"
-<img width="400" alt="image" src="https://user-images.githubusercontent.com/60034714/106431544-4721df80-6422-11eb-8ce1-e4e07293e9f3.png">
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/60034714/106431544-4721df80-6422-11eb-8ce1-e4e07293e9f3.png">
 
 ### Showing the result
-<img width="400" alt="image" src="https://user-images.githubusercontent.com/60034714/106431561-4d17c080-6422-11eb-87c7-0b2e5c722414.png">
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/60034714/106431561-4d17c080-6422-11eb-87c7-0b2e5c722414.png">
 
 
 ## Contribution

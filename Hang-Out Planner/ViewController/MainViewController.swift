@@ -68,7 +68,7 @@ class MainViewController: UIViewController
     tableview.dataSource = self
     tableview.delegate = self
     tableview.allowsMultipleSelectionDuringEditing = true
-
+    
     // add to view and set constrans
     setLayoutOfTableView()
     setLayoutButton()
@@ -88,7 +88,7 @@ class MainViewController: UIViewController
     // Set upper view as `tableHeaderView` of the table view.
     let thv = tableHeaderStackView
     tableview.tableHeaderView = thv
-//    thv.translatesAutoresizingMaskIntoConstraints = false
+    //    thv.translatesAutoresizingMaskIntoConstraints = false
     
     // Set width same as table view
     thv.matchSizeWith(widthRatio: 1, heightRatio: nil)
@@ -109,7 +109,7 @@ class MainViewController: UIViewController
     
     let goButtonSize = goButton.intrinsicContentSize.width
     let addButtonSize = addButton.intrinsicContentSize.width
-
+    
     goButton.translatesAutoresizingMaskIntoConstraints = false
     goButton.addTarget(self, action: #selector(goButtonTapped), for: .touchUpInside)
     goButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: goButtonSize + 16).isActive = true
@@ -127,7 +127,7 @@ class MainViewController: UIViewController
   
   // MARK: - Edit already selected category of location
   func edit(_ category: String,_ row: Int, _ section:Int) {
-
+    
     let index = IndexPath(row: row, section: section)
     self.indexPathTillScrollDown = IndexPath(row: row, section: section)
     categoryArray[section].remove(at:row)
@@ -182,7 +182,7 @@ class MainViewController: UIViewController
     default:
       fatalError("error: adding category")
     }
-
+    
     /// update table view with new set of section titles
     tableview.reloadData()
     
@@ -206,7 +206,7 @@ class MainViewController: UIViewController
     let destinationIndexPath = IndexPath(row: 0, section: sectionTitles.count - 1)
     tableview.reloadRows(at: [destinationIndexPath], with: .automatic)
     tableview.deselectRow(at: destinationIndexPath, animated: true)
-
+    
     self.indexPathTillScrollDown = IndexPath(row:  categoryArray[sectionTitles.count - 1].count - 1 , section: sectionTitles.count - 1)
     /// Scroll to bottom
     self.tableview.scrollToRow(at: self.indexPathTillScrollDown!, at: .bottom, animated: true)
@@ -229,7 +229,7 @@ class MainViewController: UIViewController
     
     // For debug. If this var is true, it will only use sample data.
     if noMoreAPI{
-
+      
       let nextVC = PlanListTableViewController()
       navigationController?.pushViewController(nextVC, animated: true)
       
@@ -252,7 +252,7 @@ class MainViewController: UIViewController
       navigationController?.pushViewController(nextVC, animated: true)
       
       NetworkController.shared.createAllLocations { [weak self] in
-
+        
         Planner.calculateAllRoutes()
         let plans = Planner.calculatePlans(categories: self!.selectedCategories)
         nextVC.plans = plans
@@ -262,8 +262,7 @@ class MainViewController: UIViewController
         }        
         // update the previous coordinates
         UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
-        print(allLocations.count)
-
+        
       }
       
     }else{
@@ -289,51 +288,10 @@ class MainViewController: UIViewController
     addEditVC.selectArray[0].insert(nil, at: 0)
     let addToDoVC = UINavigationController(rootViewController: addEditVC)
     addToDoVC.hideBarBackground() // hide nv bar background. added by yanmer
-//    switch sectionTitles.count {
-//    case 1:
-//      sectionTitles.append("2nd Location")
-//      categoryArray[1].insert(Categories.fashion.rawValue, at: 0)
-//      selectedCategories.append(.fashion)
-//      addEditVC.categoryName0.text = Categories.fashion.rawValue
-//      addEditVC.row = 0
-//      addEditVC.section = 1
-//      addEditVC.selectArray[0].insert(Categories.fashion.rawValue, at: 0)
-//    case 2:
-//      sectionTitles.append("3rd Location")
-//      categoryArray[2].insert(Categories.artAndGallery.rawValue, at: 0)
-//      selectedCategories.append(.artAndGallery)
-//      addEditVC.categoryName0.text = Categories.artAndGallery.rawValue
-//      addEditVC.row = 0
-//      addEditVC.section = 2
-//      addEditVC.selectArray[0].insert(Categories.artAndGallery.rawValue, at: 0)
-    
-//
-//    case 3:
-//      sectionTitles.append("4th Location")
-//      categoryArray[3].insert(Categories.restaurantAndCafe.rawValue, at: 0)
-//      selectedCategories.append(.restaurantAndCafe)
-//      addEditVC.categoryName0.text = Categories.restaurantAndCafe.rawValue
-//      addEditVC.row = 0
-//      addEditVC.section = 3
-//      addEditVC.selectArray[0].insert(Categories.restaurantAndCafe.rawValue, at: 0)
-//
-//    case 4:
-//      sectionTitles.append("5th Location")
-//      categoryArray[4].insert(Categories.amusement.rawValue, at: 0)
-//      selectedCategories.append(.amusement)
-//      addEditVC.categoryName0.text = Categories.amusement.rawValue
-//      addEditVC.row = 0
-//      addEditVC.section = 4
-//      addEditVC.selectArray[0].insert(Categories.amusement.rawValue, at: 0)
-//
-//    default:
-//      print("Add Button didn't work...")
-//    }
-//    let addToDoVC = UINavigationController(rootViewController: addEditVC)
-//    addToDoVC.hideBarBackground() // hide nv bar background. added by yanmer
+    //    addToDoVC.hideBarBackground() // hide nv bar background. added by yanmer
     present(addToDoVC, animated: true, completion: nil)
     tableview.reloadData()
-//    updateAddButtonState()
+    //    updateAddButtonState()
   }
   //  if the number of section is over 4, add button will disappear
   func updateAddButtonState() {
@@ -394,10 +352,6 @@ extension MainViewController: UITableViewDelegate{
   }
   
   
-  //  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-  //    let removedToDoItem = categoryArray[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-  //    categoryArray[destinationIndexPath.section].insert(removedToDoItem, at: destinationIndexPath.row)
-  //  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let addEditVC = CategorySelectViewController()
@@ -412,7 +366,7 @@ extension MainViewController: UITableViewDelegate{
     tableview.deselectRow(at: indexPath, animated: true)
     tableview.reloadData()
     
-  
+    
     
   }
 }
@@ -447,17 +401,17 @@ extension MainViewController{
     // Start updating location.
     // if already updating, need not to do.
     if UserLocationController.shared.isUpdatingLocation{return}
-
+    
     
     UserLocationController.shared.start(completion: { [weak self] in
       // Whenever user location is updated (or start updating), this closure is invoked.
       
       // Get current user locaiton
       guard let center = UserLocationController.shared.coordinatesMostRecent else {return}
-
+      
       // Set region of the mapView using current location
       let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-
+      
       self?.mapView.setRegion(region, animated: false)
       self?.mapView.showsUserLocation = true
       // Get address by using current location
@@ -474,7 +428,7 @@ extension MainViewController{
       }
     })
     
-   
+    
   }
   
   

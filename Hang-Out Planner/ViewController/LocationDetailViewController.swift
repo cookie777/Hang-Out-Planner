@@ -131,10 +131,7 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
   
   
   func updateValues() {
-    
-//    imageView.layer.borderWidth = 0
-//    imageView.layer.borderColor = Categories.color(location.category).withAlphaComponent(0.7).cgColor
-//    
+
     
     nameLabel.text = location.title
     categoryLabel.text = location.category.rawValue

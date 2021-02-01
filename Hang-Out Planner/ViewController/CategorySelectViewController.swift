@@ -24,13 +24,12 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
   var section: Int?
   let cellId = "categories"
   
-//  var selectArray:[[String]] = [[],[Categories.fashion.rawValue,Categories.amusement.rawValue,Categories.cafe.rawValue,Categories.restaurantAndCafe.rawValue,Categories.artAndGallery.rawValue,]]
   
   var selectArray:[[String?]] = [[],[Categories.fashion.rawValue,Categories.amusement.rawValue,Categories.cafe.rawValue,Categories.restaurantAndCafe.rawValue,Categories.artAndGallery.rawValue,]]
   
   let headerTitle = LargeHeaderLabel(text: "How Are\nYou Feeling?")
-//  let smallTitle1 = SmallHeaderLabel(text: "Current Location Type")
-//  let smallTitle2 = SmallHeaderLabel(text: "Location Types")
+  //  let smallTitle1 = SmallHeaderLabel(text: "Current Location Type")
+  //  let smallTitle2 = SmallHeaderLabel(text: "Location Types")
   let categoryName0 = MediumHeaderLabel(text: Categories.cafe.rawValue)
   let categoryName1 = MediumHeaderLabel(text: Categories.amusement.rawValue)
   let categoryName2 = MediumHeaderLabel(text: Categories.fashion.rawValue)
@@ -40,7 +39,7 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
   
   //  tabelView version
   let sectionTitle = ["Current Location Type"," \nLocation Types"]
-    
+  
   let tableview: UITableView = {
     let table = UITableView()
     table.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +54,7 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissFunc))
     
     setLayoutOfTableview()
-
+    
   }
   
   func setLayoutOfTableview()  {
@@ -84,51 +83,16 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
     // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
     tableview.tableHeaderView?.setNeedsLayout()
     tableview.tableHeaderView?.layoutIfNeeded()
- 
+    
   }
   
-//  @objc func tapped1 () {
-//    categoryName0.text = categoryName1.text
-//    let category = categoryName0.text
-//    delegate?.edit(category!,row!,section!)
-//    dismissFunc()
-//  }
-//  @objc func tapped2 () {
-//    categoryName0.text = categoryName2.text
-//    let category = categoryName0.text
-//    delegate?.edit(category!,row!,section!)
-//    dismissFunc()
-//  }
-//  @objc func tapped3 () {
-//    categoryName0.text = categoryName3.text
-//    let category = categoryName0.text
-//    delegate?.edit(category!,row!,section!)
-//    dismissFunc()
-//  }
-//  @objc func tapped4 () {
-//    categoryName0.text = categoryName4.text
-//    let category = categoryName0.text
-//    delegate?.edit(category!,row!,section!)
-//    dismissFunc()
-//  }
-//  @objc func tapped5 () {
-//    categoryName0.text = categoryName5.text
-//    let category = categoryName0.text
-//    delegate?.edit(category!,row!,section!)
-//    dismissFunc()
-//  }
-//  @objc func saveToDo() {
-//    let category = categoryName0.text
-//    delegate?.edit(category!,row!,section!)
-//    dismissFunc()
-//  }
   @objc func dismissFunc() {
     dismiss(animated: true, completion: nil)
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     if selectArray[0][0] == nil {
-        return sectionTitle[1]
+      return sectionTitle[1]
     } else {
       if section == 0 {
         return sectionTitle[0]
@@ -137,7 +101,7 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
       }
     }
   }
-
+  
   func numberOfSections(in tableView: UITableView) -> Int {
     /// if tapped add button
     if selectArray[0][0] == nil {
@@ -180,7 +144,7 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
     /// when newly add category
     if selectArray[0][0] == nil {
       if let category = selectArray[1][indexPath.row] {
-      delegate?.addCategory(category)
+        delegate?.addCategory(category)
       }
       dismissFunc()
     } else {
@@ -225,5 +189,5 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
       }
       return cell
     }
-}
+  }
 }

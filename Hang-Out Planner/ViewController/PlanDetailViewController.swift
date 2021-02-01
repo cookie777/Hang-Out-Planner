@@ -29,6 +29,7 @@ class PlanDetailViewController: UIViewController{
   
   /// variable to store fetched images
   var fetchedImages: [UIImage?] = []
+  var placeHolderImage = UIImage(systemName: "photo" ,withConfiguration: UIImage.SymbolConfiguration.init(weight: .thin))?.withTintColor(.systemGray6, renderingMode: .alwaysOriginal)
   
   
   // MARK: - SubViews
@@ -114,7 +115,7 @@ class PlanDetailViewController: UIViewController{
       //Set image for starting point
       //      let config = UIImage.SymbolConfiguration(
       //      fetchedImages[0] = UIImage(systemName: "mappin.and.ellipse")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
-      fetchedImages[0] = UIImage()
+      fetchedImages[0] = placeHolderImage
       
       routeCount += 1
     }
@@ -286,6 +287,7 @@ extension PlanDetailViewController : UITableViewDataSource {
       case 0:
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdForLocation, for: indexPath)  as! LocationCardTVCell
         cell.setMargin(insets: .init(top: 8, left: 0 , right: 0, bottom: 8))
+        cell.locationImageView.image = placeHolderImage
         
         // update info of cell
         let route = plan.routes[section]
@@ -297,8 +299,8 @@ extension PlanDetailViewController : UITableViewDataSource {
           return cell
         }
         
-        // Fill place holder
-        self.fetchedImages[section] = UIImage(systemName: "photo")
+//        // Fill place holder
+//        self.fetchedImages[section] = placeHolderImage
         
         // check imageURL of the route
         let urlString = checkImageURL(id: route.startLocationId)

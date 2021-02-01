@@ -129,7 +129,6 @@ class MainViewController: UIViewController
   func edit(_ category: String,_ row: Int, _ section:Int) {
     
     let index = IndexPath(row: row, section: section)
-    self.indexPathTillScrollDown = IndexPath(row: row, section: section)
     categoryArray[section].remove(at:row)
     categoryArray[section].insert(category, at:row)
     tableview.reloadRows(at: [index], with: .automatic)
@@ -157,8 +156,7 @@ class MainViewController: UIViewController
       selectedCategories.insert(.other, at: section)
     }
     
-    /// Scroll to bottom, added by yumi
-    self.tableview.scrollToRow(at: self.indexPathTillScrollDown!, at: .bottom, animated: true)
+    scrollToDown()
   }
   
   // MARK: - Add new category of location
@@ -207,12 +205,15 @@ class MainViewController: UIViewController
     tableview.reloadRows(at: [destinationIndexPath], with: .automatic)
     tableview.deselectRow(at: destinationIndexPath, animated: true)
     
-    self.indexPathTillScrollDown = IndexPath(row:  categoryArray[sectionTitles.count - 1].count - 1 , section: sectionTitles.count - 1)
-    /// Scroll to bottom
-    self.tableview.scrollToRow(at: self.indexPathTillScrollDown!, at: .bottom, animated: true)
+    scrollToDown()
   }
   
-  
+  /// scroll down to bottom of tableView
+   func scrollToDown(){
+    self.indexPathTillScrollDown = IndexPath(row: categoryArray[sectionTitles.count - 1].count - 1 , section: sectionTitles.count - 1)
+    /// Scroll to bottom
+    self.tableview.scrollToRow(at: self.indexPathTillScrollDown!, at: .bottom, animated: true)
+   }
   
   
   //Action when goButton is tapped

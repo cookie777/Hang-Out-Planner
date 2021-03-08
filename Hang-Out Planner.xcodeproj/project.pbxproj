@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4823EEFF25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */; };
 		4823EF0325C16057006C7324 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EF0225C16057006C7324 /* ShadowView.swift */; };
+		48452E1325F1A10700432776 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48452E1225F1A10700432776 /* Constants.swift */; };
 		486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D0D5D25BD412D00858B03 /* UserLocationController.swift */; };
 		4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */; };
 		488094BD25C2AD1B0087416A /* UIStackView+removeAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+hideBarBackground.swift"; sourceTree = "<group>"; };
 		4823EF0225C16057006C7324 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		48452E1225F1A10700432776 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		486D0D5D25BD412D00858B03 /* UserLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationController.swift; sourceTree = "<group>"; };
 		4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustedTableView.swift; sourceTree = "<group>"; };
 		488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+removeAll.swift"; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				48DE334225B8ECE2001630B7 /* Plan.swift */,
 				48DE334025B8ECE2001630B7 /* Route.swift */,
 				AEB778AB25C7770500AA2EE5 /* SpeedCalculator.swift */,
+				48452E1225F1A10700432776 /* Constants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */,
 				48A4C60225B553AA00264AF9 /* AddButton.swift in Sources */,
 				48A4C5F225B5536300264AF9 /* MainVCButton.swift in Sources */,
+				48452E1325F1A10700432776 /* Constants.swift in Sources */,
 				48A4C62125B5549500264AF9 /* LocationCardTVCell.swift in Sources */,
 				48A4C5CE25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */,
 				48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */,

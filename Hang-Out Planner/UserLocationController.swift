@@ -40,8 +40,7 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
   // This is for avoiding duplicates of updating. If true, try no to update gain.
   var isUpdatingLocation: Bool = false
   
-  
-  
+
   private override init() {
     // create only one locationManager
     locationManager = CLLocationManager()
@@ -85,20 +84,19 @@ class UserLocationController: NSObject, CLLocationManagerDelegate {
     // If you have a completion handler, call it.
     guard let completion = self.afterLocationUpdated else {return}
     completion()
-    
-    
+
   }
   
   // Error handling. This will be called when unable to retrieve a location value.
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    alterFetchLocaition(manager, error: error)
+    alterFetchLocation(manager, error: error)
   }
   
   func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    alterFetchLocaition(manager, error: nil)
+    alterFetchLocation(manager, error: nil)
   }
   
-  func alterFetchLocaition(_ manager: CLLocationManager, error: Error?) {
+  func alterFetchLocation(_ manager: CLLocationManager, error: Error?) {
     let status = manager.authorizationStatus
     if status == .denied || status == .restricted || status == .notDetermined{
       

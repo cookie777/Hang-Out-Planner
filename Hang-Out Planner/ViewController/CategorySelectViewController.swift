@@ -9,8 +9,8 @@ import UIKit
 
 protocol EditCategoryDelegate: class{
   
-  func edit(_ categoryName:String,_ row: Int,_ section:Int)
-  func addCategory(_ category: String)
+  func edit(_ category: Categories)
+  func addCategory(_ category: Categories)
   
 }
 
@@ -25,11 +25,19 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
   let cellId = "categories"
   
   
-  var selectArray:[[String?]] = [[],[Categories.fashion.rawValue,Categories.amusement.rawValue,Categories.cafe.rawValue,Categories.restaurantAndCafe.rawValue,Categories.artAndGallery.rawValue,]]
+//  var selectArray:[[String?]] = [[],[Categories.fashion.rawValue,Categories.amusement.rawValue,Categories.cafe.rawValue,Categories.restaurantAndCafe.rawValue,Categories.artAndGallery.rawValue,]]
+  
+  var editingCategory : Categories?
+  var categoryList : [Categories] = [
+    Categories.fashion,
+    Categories.amusement,
+    Categories.cafe,
+    Categories.restaurantAndCafe,
+    Categories.artAndGallery
+  ]
   
   let headerTitle = LargeHeaderLabel(text: "How Are\nYou Feeling?")
-  //  let smallTitle1 = SmallHeaderLabel(text: "Current Location Type")
-  //  let smallTitle2 = SmallHeaderLabel(text: "Location Types")
+
   let categoryName0 = MediumHeaderLabel(text: Categories.cafe.rawValue)
   let categoryName1 = MediumHeaderLabel(text: Categories.amusement.rawValue)
   let categoryName2 = MediumHeaderLabel(text: Categories.fashion.rawValue)
@@ -51,7 +59,7 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
     view.backgroundColor = bgColor
     
     //    navigationItem.rightBarButtonItem = saveButton
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissFunc))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismiss))
     
     setLayoutOfTableview()
     
@@ -86,98 +94,84 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
     
   }
   
-  @objc func dismissFunc() {
-    dismiss(animated: true, completion: nil)
-  }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if selectArray[0][0] == nil {
-      return sectionTitle[1]
-    } else {
-      if section == 0 {
+    // add
+    guard let _ = editingCategory else { return sectionTitle[1] }
+    // edit
+    switch section {
+      case 0:
         return sectionTitle[0]
-      } else {
+      default:
         return sectionTitle[1]
-      }
     }
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    /// if tapped add button
-    if selectArray[0][0] == nil {
-      return 1
-    } else {
-      return 2
-    }
+    // add
+    guard let _ = editingCategory else { return 1 }
+    // edit
+    return 2
   }
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if selectArray[0][0] == nil {
+    // add
+    guard let _ = editingCategory else { return 8+56+8 }
+    
+    // set row height caring margin. Top+content+bottom
+    switch (indexPath.section, indexPath.row) {
+    case (0,0):
+      return 8+56+40
+    case (1,0):
+      return 16+56+8
+    default:
       return 8+56+8
-    } else {
-      // set row height caring margin. Top+content+bottom
-      switch (indexPath.section, indexPath.row) {
-      case (0,0):
-        return 8+56+40
-      case (1,0):
-        return 16+56+8
-      default:
-        return 8+56+8
-      }
     }
+    
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    if selectArray[0][0] == nil {
+    // add
+    guard let _ = editingCategory else {
       let text = sectionTitle[1]
       let lb = MediumHeaderLabel(text: text)
       return lb
-    } else {
-      let text = sectionTitle[section]
-      let lb = section == 0 ? SubTextLabel(text: text) : MediumHeaderLabel(text: text)
-      return lb
     }
+    
+    // edit
+    let text = sectionTitle[section]
+    let lb = section == 0 ? SubTextLabel(text: text) : MediumHeaderLabel(text: text)
+    return lb
   }
   
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-    /// when newly add category
-    if selectArray[0][0] == nil {
-      if let category = selectArray[1][indexPath.row] {
-        delegate?.addCategory(category)
-      }
-      dismissFunc()
-    } else {
-      /// when edit selected category
-      if let category = selectArray[1][indexPath.row] {
-        delegate?.edit(category,row!,section!)
-      }
-      dismissFunc()
-    }
+    // when newly add category
+//    delegate?.addCategory(<#T##category: String##String#>)
+    dismiss(animated: true, completion: nil)
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if selectArray[0][0] == nil {
-      return 5
+    
+    guard let _ = editingCategory else { return 5 }
+    
+    if section == 0 {
+      return 1
     } else {
-      if section == 0 {
-        return 1
-      } else {
-        return 5
-      }
+      return 5
     }
+
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    if selectArray[0][0] == nil {
+    if editingCategory == nil {
       let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell
-      cell.category = selectArray[1][indexPath.row] ?? "failure"
+      cell.category = categoryList[indexPath.row].rawValue
       cell.setMargin(insets: .init(top: 8, left: 0 , right: 0, bottom: 8))
       return cell
     } else {
       let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell
-      cell.category = selectArray[indexPath.section][indexPath.row] ?? "failure"
+      cell.category =  categoryList[indexPath.row].rawValue
       /// set content margin
       switch (indexPath.section, indexPath.row) {
       case (0,0):

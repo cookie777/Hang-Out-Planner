@@ -40,6 +40,7 @@
 		48A4C66F25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66A25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift */; };
 		48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */; };
 		48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
+		48B8D31E25FD6F2F006E8B03 /* CategoryCVListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B8D31D25FD6F2F006E8B03 /* CategoryCVListCell.swift */; };
 		48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4876325B5836800EA55D6 /* BasicLabel.swift */; };
 		48DDE18725BE5B1B008FA63A /* NetworkController+fetchLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */; };
 		48DE334325B8ECE2001630B7 /* Catetory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333C25B8ECE2001630B7 /* Catetory.swift */; };
@@ -90,6 +91,7 @@
 		48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintLayout.swift"; sourceTree = "<group>"; };
 		48A4C67425B557D900264AF9 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		48B59E2E25BBD446008FC66E /* DefaultLocation(Vancouver).gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DefaultLocation(Vancouver).gpx"; sourceTree = "<group>"; };
+		48B8D31D25FD6F2F006E8B03 /* CategoryCVListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCVListCell.swift; sourceTree = "<group>"; };
 		48D4876325B5836800EA55D6 /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkController+fetchLocations.swift"; sourceTree = "<group>"; };
 		48DE333C25B8ECE2001630B7 /* Catetory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catetory.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 		48A4C63325B5559200264AF9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				48B8D31D25FD6F2F006E8B03 /* CategoryCVListCell.swift */,
 				48A4C61625B5546C00264AF9 /* CategoryCardTVCell.swift */,
 				48A4C61B25B5548000264AF9 /* PlanCardTVCell.swift */,
 				48A4C62025B5549500264AF9 /* LocationCardTVCell.swift */,
@@ -383,6 +386,7 @@
 				48A4C62625B554AB00264AF9 /* DistanceCardTVCell.swift in Sources */,
 				48DE334525B8ECE2001630B7 /* Location.swift in Sources */,
 				48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */,
+				48B8D31E25FD6F2F006E8B03 /* CategoryCVListCell.swift in Sources */,
 				48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */,
 				4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */,
 				48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */,

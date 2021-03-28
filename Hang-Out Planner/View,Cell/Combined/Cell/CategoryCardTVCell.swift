@@ -9,6 +9,8 @@ import UIKit
 
 class CategoryCardTVCell: CardTVCell{
   
+  static let identifier = "cardTVCell"
+  
   var icon = UIImageView(frame: .zero)
   var textlb = SmallHeaderLabel(text: "")
   

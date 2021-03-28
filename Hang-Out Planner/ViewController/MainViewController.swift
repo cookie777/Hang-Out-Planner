@@ -14,11 +14,10 @@ import CoreLocation
 // swipe
 // add edit
 enum Section: Hashable {
-  case map, list
+  case list
 }
 
 enum Item: Hashable{
-  case map
   case category(Categories)
   
   // wrapper -> associate value
@@ -38,7 +37,7 @@ enum Item: Hashable{
 
 class MainViewController : UICollectionViewController {
   
-  let sections: [Section] = [.map, .list]
+  let sections: [Section] = [.list]
   
   var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
   var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
@@ -76,67 +75,37 @@ extension MainViewController {
   private func createCollectionViewLayout() {
     // cell
     collectionView.register(
-      MapCVCell.self,
-      forCellWithReuseIdentifier: Constants.Identifier.Cell.map
-    )
-    collectionView.register(
       CardCVCell.self,
       forCellWithReuseIdentifier: Constants.Identifier.Cell.list
     )
     // supplementary (header)
     collectionView.register(
-      HeaderSupplementaryView.self,
+      MapHeaderSupplementaryView.self,
       forSupplementaryViewOfKind: Constants.Kind.sectionHeader,
-      withReuseIdentifier: Constants.Identifier.SupplementaryView.section
+      withReuseIdentifier: Constants.Identifier.SupplementaryView.mapSection
     )
     // supplementary (group header)
     collectionView.register(
-      HeaderSupplementaryView.self,
+      LocationIndexHeaderSupplementaryView.self,
       forSupplementaryViewOfKind: Constants.Kind.groupHeader,
-      withReuseIdentifier: Constants.Identifier.SupplementaryView.group
+      withReuseIdentifier: Constants.Identifier.SupplementaryView.locationIndex
     )
     // compositionalLayout
     collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false)
   }
   
-  
   private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
     return UICollectionViewCompositionalLayout
     { [unowned self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
       switch self.sections[sectionIndex] {
-        case .map:
-          return createMapSection()
         case .list:
-          return createListSection()
+          return createSection()
       }
     }
   }
   
-  /// Static: display only one item.
-  private func createMapSection() -> NSCollectionLayoutSection{
-    let itemSize = NSCollectionLayoutSize(
-      widthDimension: .fractionalWidth(1.0),
-      heightDimension: .fractionalHeight(1.0)
-    )
-    let item = NSCollectionLayoutItem(layoutSize: itemSize)
-    
-    let groupSize = NSCollectionLayoutSize(
-      widthDimension: .fractionalWidth(1.0),
-      heightDimension: .absolute(320)
-    )
-    let group = NSCollectionLayoutGroup.vertical(
-      layoutSize: groupSize,
-      subitems: [item]
-    )
-    
-    let section = NSCollectionLayoutSection(group: group)
-    section.boundarySupplementaryItems = [createHeader(56, Constants.Kind.sectionHeader)]
-    
-    return section
-  }
-  
   ///Dynamic: 0...number of location are displayed.
-  private func createListSection() -> NSCollectionLayoutSection {
+  private func createSection() -> NSCollectionLayoutSection {
     
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
@@ -153,40 +122,43 @@ extension MainViewController {
       subitem: item,
       count: 1
     )
-    let headerSize = NSCollectionLayoutSize(
-      widthDimension: .fractionalWidth(1.0),
-      heightDimension: .absolute(60)
-    )
-    let a = NSCollectionLayoutAnchor(edges: [.top], absoluteOffset: CGPoint(x: 0.0, y: -40))
-    let h = NSCollectionLayoutSupplementaryItem(layoutSize: headerSize, elementKind: Constants.Kind.groupHeader, containerAnchor: a)
-    group.supplementaryItems = [h]
+    group.supplementaryItems = [createGroupHeader()]
     
     let section = NSCollectionLayoutSection(group: group)
     section.interGroupSpacing = 60
-    section.contentInsets = .init(top: 40, leading: 0, bottom: 0, trailing: 0)
-    section.boundarySupplementaryItems = [createHeader(48, Constants.Kind.sectionHeader)]
+    section.contentInsets = .init(top: 40, leading: 32, bottom: 0, trailing: 32)
+    section.boundarySupplementaryItems = [createMapSectionHeader(48, Constants.Kind.sectionHeader)]
     
     return section
   }
   
   /// Create layout of header
-  private func createHeader(
+  private func createMapSectionHeader(
     _ height: CGFloat = 40,
     _ kindOf: String = ""
   ) -> NSCollectionLayoutBoundarySupplementaryItem {
     let headerSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
-      heightDimension: .absolute(height)
+      heightDimension: .estimated(height)
     )
     let header = NSCollectionLayoutBoundarySupplementaryItem(
       layoutSize: headerSize,
       elementKind: kindOf,
       alignment: .top
     )
-    
     return header
   }
   
+  /// create group header used in section
+  private func createGroupHeader() -> NSCollectionLayoutSupplementaryItem{
+    let headerSize = NSCollectionLayoutSize(
+      widthDimension: .fractionalWidth(1.0),
+      heightDimension: .absolute(60)
+    )
+    let anchor = NSCollectionLayoutAnchor(edges: [.top], absoluteOffset: CGPoint(x: 0.0, y: -40))
+    let groupHeader = NSCollectionLayoutSupplementaryItem(layoutSize: headerSize, elementKind: Constants.Kind.groupHeader, containerAnchor: anchor)
+    return groupHeader
+  }
 }
 
 
@@ -198,8 +170,7 @@ extension MainViewController {
   private func resetSnapshot() {
     snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
     snapshot.deleteAllItems()
-    snapshot.appendSections([.map, .list])
-    snapshot.appendItems([.map], toSection: .map)
+    snapshot.appendSections([.list])
   }
   
   /// Define Diffable Data source
@@ -214,12 +185,6 @@ extension MainViewController {
         { [unowned self] (collectionView, indexPath, item) -> UICollectionViewCell? in
           
           switch self.sections[indexPath.section] {
-            case .map:
-              let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: Constants.Identifier.Cell.map,
-                for: indexPath
-              ) as! MapCVCell
-              return cell
             case .list:
               let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: Constants.Identifier.Cell.list,
@@ -241,15 +206,13 @@ extension MainViewController {
         // if ReusableSupplementaryView is for section header
         if let headerView = self.collectionView.dequeueReusableSupplementaryView(
           ofKind: kind,
-          withReuseIdentifier: Constants.Identifier.SupplementaryView.section,
+          withReuseIdentifier: Constants.Identifier.SupplementaryView.mapSection,
           for: indexPath
-        ) as? HeaderSupplementaryView {
+        ) as? MapHeaderSupplementaryView {
           // config view
           switch self.sections[indexPath.section] {
-            case .map:
-              headerView.configure(label: LargeHeaderLabel(text: "Map"))
             case .list:
-              headerView.configure(label: MediumHeaderLabel(text: "List"))
+              headerView.configure()
           }
           return headerView
         }
@@ -259,11 +222,11 @@ extension MainViewController {
         // if ReusableSupplementaryView is for group header
         if let headerView = self.collectionView.dequeueReusableSupplementaryView(
           ofKind: kind,
-          withReuseIdentifier: Constants.Identifier.SupplementaryView.group,
+          withReuseIdentifier: Constants.Identifier.SupplementaryView.locationIndex,
           for: indexPath
-        ) as? HeaderSupplementaryView {
+        ) as? LocationIndexHeaderSupplementaryView {
           // config view
-          headerView.configure(label: SmallHeaderLabel(text: String(indexPath.row)))
+          headerView.configure(lb: SmallHeaderLabel(text: String(indexPath.row)))
           return headerView
         }
       }
@@ -271,14 +234,12 @@ extension MainViewController {
       return nil
     }
     
-    
-    
     // Allow every item to be reordered
     dataSource.reorderingHandlers.canReorderItem = { item in
       print(item)
       return item.category != nil
     }
-    // Option 2: Update the backing store from the final item identifiers
+    // Update snapshot after reorder
     dataSource.reorderingHandlers.didReorder = { [weak self] transaction in
       guard let self = self else { return }
       self.snapshot = transaction.finalSnapshot
@@ -288,10 +249,31 @@ extension MainViewController {
   }
 }
 
+
 // MARK: - Model
 
-class HeaderSupplementaryView: UICollectionReusableView {
-  let label: UILabel! = nil
+class MapHeaderSupplementaryView: UICollectionReusableView {
+  
+  let headerTitle = LargeHeaderLabel(text: "Where Do You \nWant To Go?")
+  let mapView : MKMapView = {
+    let map = MKMapView()
+    map.backgroundColor = .lightGray
+    map.translatesAutoresizingMaskIntoConstraints = false
+    map.layer.cornerRadius = 32
+    map.constraintHeight(equalToConstant: 200)
+    return map
+  }()
+  
+  let locationTitle = SubTextLabel(text: "Your current location is:")
+  let locationLabel : TextLabel =  {
+    let t = TextLabel(text: "location")
+    t.numberOfLines = 1
+    return t
+  }()
+  // Wrapper of location info
+  lazy var locationStackView = VerticalStackView(arrangedSubviews: [locationTitle, locationLabel], spacing: 8)
+  
+  let routeLabel :UILabel   =  MediumHeaderLabel(text: "Route")
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -300,15 +282,25 @@ class HeaderSupplementaryView: UICollectionReusableView {
     fatalError()
   }
   
-  func configure(label: UILabel) {
-    addSubview(label)
-    label.matchParent()
-    
+  func configure() {
+    let stackView = VerticalStackView(
+      arrangedSubviews: [
+        headerTitle,
+        mapView,
+        locationStackView,
+        routeLabel,
+        UIView()
+      ],
+      spacing: 24
+    )
+    stackView.setCustomSpacing(16, after: routeLabel)
+    addSubview(stackView)
+    stackView.matchParent()
   }
 }
 
-class GroupHeaderSupplementaryView: UICollectionReusableView {
-  let label: UILabel! = nil
+class LocationIndexHeaderSupplementaryView: UICollectionReusableView {
+  var label: UILabel! = nil
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -317,28 +309,13 @@ class GroupHeaderSupplementaryView: UICollectionReusableView {
     fatalError()
   }
   
-  func configure(label: UILabel) {
+  func configure(lb: UILabel) {
+    label = lb
     addSubview(label)
     label.matchParent()
   }
 }
 
-
-class MapCVCell: UICollectionViewCell {
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    
-    contentView.backgroundColor = .systemPink
-    let lb = SmallHeaderLabel(text: "map")
-    contentView.addSubview(lb)
-    lb.matchParent()
-    
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-}
 
 class CardCVCell: UICollectionViewCell {
   let location = SmallHeaderLabel(text: "aaa")

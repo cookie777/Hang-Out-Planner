@@ -17,8 +17,8 @@ struct Constants {
       static let list = "list"
     }
     struct SupplementaryView {
-      static let section = "section"
-      static let group = "group"
+      static let mapSection = "map-section"
+      static let locationIndex = "group"
     }
   }
   struct Kind {

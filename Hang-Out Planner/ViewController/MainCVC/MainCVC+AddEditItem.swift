@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - AddEdit config
 
-extension MainViewController: AddEditCategoryDelegate {
+extension MainCollectionViewController: AddEditCategoryDelegate {
   // When edit is finished
   func edit(_ newItem: (id: UUID, val: Category), _ oldItem: (id: UUID, val: Category)) {
     snapshot.insertItems([Item.category(newItem)], afterItem: Item.category(oldItem))
@@ -37,7 +37,7 @@ extension MainViewController: AddEditCategoryDelegate {
     let didSelectItem = snapshot.itemIdentifiers(inSection: .list)[indexPath.row]
     
     let addEditVC = CategorySelectViewController()
-    addEditVC.editingItem = (didSelectItem.id!, didSelectItem.category!)
+    addEditVC.editingItem = (didSelectItem.categoryId!, didSelectItem.category!)
     addEditVC.delegate = self
     let addToDoVC = UINavigationController(rootViewController: addEditVC)
     addToDoVC.hideBarBackground() // hide nv bar background.

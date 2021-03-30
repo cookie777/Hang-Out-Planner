@@ -1,16 +1,13 @@
 //
-//  PlanCardTVCell.swift
+//  PlanCardCollectionViewCell.swift
 //  Hang-Out Planner
 //
-//  Created by Takayuki Yamaguchi on 2021-01-17.
+//  Created by Takayuki Yamaguchi on 2021-03-30.
 //
 
 import UIKit
 
-
-class PlanCardTVCell: CardTVCell {
-  // cell content
-  
+class PlanCardCVCell: UICollectionViewCell {
   
   var topNLabel : LargeHeaderLabel = {
     let lb = LargeHeaderLabel(text: "a") // 1,2,3...
@@ -21,22 +18,17 @@ class PlanCardTVCell: CardTVCell {
   var popularityField = TextLabel(text : "") // ⭐️⭐️⭐️
   var totalDistanceField = TextLabel(text: "") // Total 2.3km
   var totalTimeField = TextLabel(text: "") // 🚗 1h 🚶‍♂️2.3h
-  
   var locationLabel =  SmallHeaderLabel(text: "") // Route
-  //  var locationField = TextLabel(text: "") // Location A, B, ....
-//  var locationFields : [TextLabel] = [TextLabel(text: "already")]
+
   let locationListStackView = VerticalStackView(
     arrangedSubviews: [] as [TextLabel],
     spacing: 8,
     alignment: .leading
   )
 
-  
-  
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: .default, reuseIdentifier: reuseIdentifier)
-
-
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    
     let totalInfoStackView = VerticalStackView(
       arrangedSubviews: [popularityField, totalDistanceField,totalTimeField],
       spacing: 8,
@@ -62,12 +54,10 @@ class PlanCardTVCell: CardTVCell {
       spacing: 24
     )
     mainStackView.isLayoutMarginsRelativeArrangement = true
-    mainStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 32, leading: 16, bottom: 32, trailing: 16)
+//    mainStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 32, leading: 16, bottom: 32, trailing: 16)
   
     contentView.addSubview(mainStackView)
     mainStackView.matchParent()
-    
-    
   }
   
   required init?(coder: NSCoder) {
@@ -78,7 +68,7 @@ class PlanCardTVCell: CardTVCell {
   /// update cell content based on `plan`
   /// - Parameter plan: current plan on the cell
   /// - Parameter planIndex: plan index. 0 is best.
-  func update(with plan: Plan, planIndex: Int) {
+  func configure(with plan: Plan, planIndex: Int) {
   
     topNLabel.text = "\(planIndex + 1)"
     let guessDistance = plan.totalDistance
@@ -88,11 +78,11 @@ class PlanCardTVCell: CardTVCell {
     totalDistanceField.text = "\(SpeedCalculator.meterTokm(distanceInMeter: guessDistance)) Km"
   
     if hourByCar == 0.0 {
-      totalTimeField.text = timeOnFoot + "🚶‍♂️" 
+      totalTimeField.text = timeOnFoot + "🚶‍♂️"
     } else {
       totalTimeField.text = timeOnFoot + "🚶‍♂️" + "\(hourByCar) h 🚗"
     }
- 
+   
     popularityField.text = Location.starConverter(score: plan.averageRating)
     
     locationLabel.text = "Route"

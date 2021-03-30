@@ -28,7 +28,6 @@ extension NetworkController{
     return apiKey
   }
   
-  
   // MARK: - Fetch func
   
   /// Create all locations by fetching yelp-api.
@@ -89,10 +88,6 @@ extension NetworkController{
       
     }
   }
-  
-  
-
-  
   
   /// Fetch locations from yelp API.
   /// ## Flow overview :

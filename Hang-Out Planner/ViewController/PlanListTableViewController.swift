@@ -5,6 +5,10 @@
 //  Created by Takayuki Yamaguchi on 2021-01-17.
 //
 
+
+
+
+
 import UIKit
 
 ///  Screen which display list of plan `[Plan]`.
@@ -22,8 +26,6 @@ class PlanListTableViewController: UITableViewController {
     view.backgroundColor = bgColor
 
     tableView.register(PlanCardTVCell.self, forCellReuseIdentifier: cellId)
-    
-    
 
     // Set upper view as `tableHeaderView` of the table view.
     let thv = headerTitle
@@ -41,7 +43,6 @@ class PlanListTableViewController: UITableViewController {
     // We need to set layout of header at this time. Otherwise (if we do it later), it will Overflow!
     tableView.tableHeaderView?.setNeedsLayout()
     tableView.tableHeaderView?.layoutIfNeeded()
-
 
   }
   

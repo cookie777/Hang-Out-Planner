@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - DataSource config
 
-extension MainViewController {
+extension MainCollectionViewController {
   
   /// Delete all items of snapshot
   private func resetSnapshot() {
@@ -33,16 +33,17 @@ extension MainViewController {
               let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: Constants.Identifier.Cell.list,
                 for: indexPath
-              ) as! CardCVCell
+              ) as! CategoryCardCVCell
               
               // cell.location.text = String(indexPath.row)
-              cell.location.text = item.category?.rawValue
+              cell.category = item.category
               cell.delegate = self
               return cell
+            default:
+              return nil
           }
         }
     )
-    
     
     dataSource.supplementaryViewProvider = {
       [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView? in
@@ -56,8 +57,10 @@ extension MainViewController {
         ) as? MapHeaderCollectionReusableView {
           // config view
           switch self.sections[indexPath.section] {
-            case .list:
-              headerView.configure()
+          case .list:
+            headerView.configure()
+          default:
+            return nil
           }
           return headerView
         }
@@ -71,7 +74,8 @@ extension MainViewController {
           for: indexPath
         ) as? HeaderCollectionReusableView {
           // config view
-          headerView.configure(lb: SmallHeaderLabel(text: String(indexPath.row)))
+          let headerText = "Location: " + String(indexPath.row + 1)
+          headerView.configure(lb: TextLabel(text: headerText))
           return headerView
         }
       }

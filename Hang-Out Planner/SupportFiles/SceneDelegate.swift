@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let scene = (scene as? UIWindowScene) else { return }
     window = UIWindow(windowScene: scene)
     window?.makeKeyAndVisible()
-    let nv = UINavigationController(rootViewController: MainViewController(collectionViewLayout: UICollectionViewLayout()))
+    let nv = UINavigationController(rootViewController: MainCollectionViewController())
     
     // Hiding navigationBar color and border. Extension func
     nv.hideBarBackground()

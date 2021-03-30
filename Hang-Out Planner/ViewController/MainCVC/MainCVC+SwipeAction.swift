@@ -7,7 +7,7 @@
 import SwipeCellKit
 
 
-extension MainViewController: SwipeCollectionViewCellDelegate {
+extension MainCollectionViewController: SwipeCollectionViewCellDelegate {
   func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
     guard orientation == .right else { return nil }
     

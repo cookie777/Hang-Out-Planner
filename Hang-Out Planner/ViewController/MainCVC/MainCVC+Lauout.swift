@@ -9,12 +9,10 @@ import UIKit
 
 // MARK: - Layout config
 
-extension MainViewController {
+extension MainCollectionViewController {
   
   func createViewControllerLayout() {
-    view.addSubview(collectionView)
     collectionView.backgroundColor = UIColor.Custom.bg
-    collectionView.matchParent()
     createGoButton()
     createAddButton()
   }
@@ -47,7 +45,7 @@ extension MainViewController {
   func createCollectionViewLayout() {
     // cell
     collectionView.register(
-      CardCVCell.self,
+      CategoryCardCVCell.self,
       forCellWithReuseIdentifier: Constants.Identifier.Cell.list
     )
     // supplementary (header)
@@ -72,6 +70,8 @@ extension MainViewController {
       switch self.sections[sectionIndex] {
         case .list:
           return createSection()
+        default:
+          return nil
       }
     }
   }
@@ -87,7 +87,7 @@ extension MainViewController {
     
     let groupSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
-      heightDimension: .estimated(80)
+      heightDimension: .estimated(60)
     )
     let group = NSCollectionLayoutGroup.vertical(
       layoutSize: groupSize,
@@ -125,10 +125,14 @@ extension MainViewController {
   private func createGroupHeader() -> NSCollectionLayoutSupplementaryItem{
     let headerSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
-      heightDimension: .absolute(60)
+      heightDimension: .estimated(0)
     )
-    let anchor = NSCollectionLayoutAnchor(edges: [.top], absoluteOffset: CGPoint(x: 0.0, y: -40))
-    let groupHeader = NSCollectionLayoutSupplementaryItem(layoutSize: headerSize, elementKind: Constants.Kind.groupHeader, containerAnchor: anchor)
+    let anchor = NSCollectionLayoutAnchor(edges: [.top], absoluteOffset: CGPoint(x: 0.0, y: -24))
+    let groupHeader = NSCollectionLayoutSupplementaryItem(
+      layoutSize: headerSize,
+      elementKind: Constants.Kind.groupHeader,
+      containerAnchor: anchor
+    )
     return groupHeader
   }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Route{
+struct Route: Hashable{
   let startLocationId : Int
   let nextLocationId  : Int
 

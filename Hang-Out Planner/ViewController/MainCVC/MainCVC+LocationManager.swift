@@ -10,7 +10,7 @@
 // The first time is called in viewDid load.
 import MapKit
 
-extension MainViewController{
+extension MainCollectionViewController{
 
   override func viewWillAppear(_ animated: Bool) {
 

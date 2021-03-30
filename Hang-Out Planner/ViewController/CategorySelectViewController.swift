@@ -7,44 +7,33 @@
 
 import UIKit
 
-protocol EditCategoryDelegate: class{
+protocol AddEditCategoryDelegate: class{
   
-  func edit(_ category: Categories)
-  func addCategory(_ category: Categories)
+  func edit(_ newItem: (id: UUID, val: Category), _ oldItem: (id: UUID, val: Category))
+  func addCategory(_ category: Category)
   
 }
 
 
 class CategorySelectViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
-  
-  weak var delegate: EditCategoryDelegate?
+  weak var delegate: AddEditCategoryDelegate?
   
   var row: Int?
   var section: Int?
   let cellId = "categories"
   
-  
-//  var selectArray:[[String?]] = [[],[Categories.fashion.rawValue,Categories.amusement.rawValue,Categories.cafe.rawValue,Categories.restaurantAndCafe.rawValue,Categories.artAndGallery.rawValue,]]
-  
-  var editingCategory : Categories?
-  var categoryList : [Categories] = [
-    Categories.fashion,
-    Categories.amusement,
-    Categories.cafe,
-    Categories.restaurantAndCafe,
-    Categories.artAndGallery
+  var editingItem : (id: UUID, val: Category)?
+  var categoryList : [Category] = [
+    Category.fashion,
+    Category.amusement,
+    Category.cafe,
+    Category.restaurantAndCafe,
+    Category.artAndGallery
   ]
   
   let headerTitle = LargeHeaderLabel(text: "How Are\nYou Feeling?")
 
-  let categoryName0 = MediumHeaderLabel(text: Categories.cafe.rawValue)
-  let categoryName1 = MediumHeaderLabel(text: Categories.amusement.rawValue)
-  let categoryName2 = MediumHeaderLabel(text: Categories.fashion.rawValue)
-  let categoryName3 = MediumHeaderLabel(text: Categories.cafe.rawValue)
-  let categoryName4 = MediumHeaderLabel(text: Categories.restaurantAndCafe.rawValue)
-  let categoryName5 = MediumHeaderLabel(text: Categories.artAndGallery.rawValue)
-  
   //  tabelView version
   let sectionTitle = ["Current Location Type"," \nLocation Types"]
   
@@ -59,10 +48,14 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
     view.backgroundColor = bgColor
     
     //    navigationItem.rightBarButtonItem = saveButton
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismiss))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(close))
     
     setLayoutOfTableview()
     
+  }
+  
+  @objc func close() {
+    dismiss(animated: true, completion: nil)
   }
   
   func setLayoutOfTableview()  {
@@ -77,8 +70,6 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
     tableview.dataSource = self
     tableview.delegate = self
     tableview.separatorStyle = .none
-    // why not working?!
-    //    tableview.layoutMargins = UIEdgeInsets(top: 0,left: 32,bottom: 0,right: 32)
     
     // Set upper view as `tableHeaderView` of the table view.
     headerTitle.constraintHeight(equalToConstant: headerTitle.intrinsicContentSize.height + 24)
@@ -94,10 +85,9 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
     
   }
   
-  
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     // add
-    guard let _ = editingCategory else { return sectionTitle[1] }
+    guard let _ = editingItem else { return sectionTitle[1] }
     // edit
     switch section {
       case 0:
@@ -109,13 +99,13 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
   
   func numberOfSections(in tableView: UITableView) -> Int {
     // add
-    guard let _ = editingCategory else { return 1 }
+    guard let _ = editingItem else { return 1 }
     // edit
     return 2
   }
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     // add
-    guard let _ = editingCategory else { return 8+56+8 }
+    guard let _ = editingItem else { return 8+56+8 }
     
     // set row height caring margin. Top+content+bottom
     switch (indexPath.section, indexPath.row) {
@@ -131,7 +121,7 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     // add
-    guard let _ = editingCategory else {
+    guard let _ = editingItem else {
       let text = sectionTitle[1]
       let lb = MediumHeaderLabel(text: text)
       return lb
@@ -145,14 +135,23 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
   
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
     // when newly add category
-//    delegate?.addCategory(<#T##category: String##String#>)
-    dismiss(animated: true, completion: nil)
+    if let oldItem = editingItem {
+      if indexPath.section == 0 { return }
+      let newItem = (oldItem.id, categoryList[indexPath.row])
+      if newItem != oldItem {
+        delegate?.edit(newItem, oldItem)
+      }
+    } else {
+      delegate?.addCategory(categoryList[indexPath.row])
+    }
+    close()
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    guard let _ = editingCategory else { return 5 }
+    guard let _ = editingItem else { return 5 }
     
     if section == 0 {
       return 1
@@ -164,14 +163,18 @@ class CategorySelectViewController: UIViewController, UITableViewDataSource, UIT
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    if editingCategory == nil {
+    if editingItem == nil {
       let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell
       cell.category = categoryList[indexPath.row].rawValue
       cell.setMargin(insets: .init(top: 8, left: 0 , right: 0, bottom: 8))
       return cell
     } else {
       let cell = tableview.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryCardTVCell
-      cell.category =  categoryList[indexPath.row].rawValue
+      if indexPath.section == 0 {
+        cell.category =  editingItem?.val.rawValue ?? ""
+      } else {
+        cell.category =  categoryList[indexPath.row].rawValue
+      }
       /// set content margin
       switch (indexPath.section, indexPath.row) {
       case (0,0):

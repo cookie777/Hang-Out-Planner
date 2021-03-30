@@ -67,7 +67,7 @@ class LocationCardTVCell: CardTVCell {
   
   func update(with route: Route) {
     let id = route.startLocationId
-    let color = Categories.color(allLocations.first {$0.id == id}?.category ?? .other)
+    let color = Category.color(allLocations.first {$0.id == id}?.category ?? .other)
     
     // set location title
     locationTitleLabel.text = "\(PlanCardTVCell.checkLocationName(id: id))"

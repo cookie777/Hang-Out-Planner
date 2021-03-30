@@ -135,7 +135,7 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
     
     nameLabel.text = location.title
     categoryLabel.text = location.category.rawValue
-    categoryLabel.textColor = Categories.color(location.category)
+    categoryLabel.textColor = Category.color(location.category)
     
     var rating = " "
     var reviewCount = " "

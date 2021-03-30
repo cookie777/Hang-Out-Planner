@@ -18,13 +18,12 @@ struct Constants {
     }
     struct SupplementaryView {
       static let mapSection = "map-section"
-      static let locationIndex = "group"
+      static let header = "header"
     }
   }
   struct Kind {
     static let sectionHeader = "kind-section"
     static let groupHeader = "kind-group"
-    static let footer = "footer"
   }
 }
 

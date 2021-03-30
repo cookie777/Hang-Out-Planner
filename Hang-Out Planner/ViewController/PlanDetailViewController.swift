@@ -519,7 +519,7 @@ class CustomAnnotation: NSObject, MKAnnotation {
     self.subtitle = location.address
     self.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
     self.routeOrder = routeOrder
-    self.markerTintColor = Categories.color(location.category).withAlphaComponent(0.7)
+    self.markerTintColor = Category.color(location.category).withAlphaComponent(0.7)
     super.init()
   }
   

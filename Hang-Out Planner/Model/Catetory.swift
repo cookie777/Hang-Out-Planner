@@ -12,7 +12,7 @@ import UIKit
 /// Definition of categories
 /// eg usage,
 /// var userOrder: [Categories] = [.clothes, .restaurant, .park]
-enum Categories : String {
+enum Category : String {
   case amusement = "Amusement"
   case restaurantAndCafe = "Food & Cafe"
   case fashion = "Fashion"
@@ -20,7 +20,7 @@ enum Categories : String {
   case cafe = "Cafe"
   case other = "Other"
   
-  static func color(_ categories: Categories)->UIColor{
+  static func color(_ categories: Category)->UIColor{
     switch categories {
     case .fashion:
       return .systemPurple
@@ -37,7 +37,7 @@ enum Categories : String {
     }
   }
   
-  static func iconImage(_ categories: Categories)->UIImage?{
+  static func iconImage(_ categories: Category)->UIImage?{
     switch categories {
     case .fashion:
       return UIImage(named: "store_mall_directory")
@@ -54,7 +54,7 @@ enum Categories : String {
     }
   }
   
-  static func overrideImageColor(imgV : UIImageView,  category : Categories){
+  static func overrideImageColor(imgV : UIImageView,  category : Category){
     let img = imgV.image
     imgV.image =  img?.withRenderingMode(.alwaysTemplate)
     imgV.tintColor = color(category)

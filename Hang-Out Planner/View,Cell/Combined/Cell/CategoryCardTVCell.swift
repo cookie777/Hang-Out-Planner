@@ -19,15 +19,15 @@ class CategoryCardTVCell: CardTVCell{
   // If category is set, we also set icon img, lb text, background color
   var category : String = ""{
     didSet{
-      guard let c = Categories(rawValue: category)  else {return}
-      if let iconImg = Categories.iconImage(c){
+      guard let c = Category(rawValue: category)  else {return}
+      if let iconImg = Category.iconImage(c){
         icon.image = iconImg
-        Categories.overrideImageColor(imgV: icon, category: c)
+        Category.overrideImageColor(imgV: icon, category: c)
       }
       
       textlb.text = category
-      textlb.textColor = Categories.color(c)
-      mainBackground.layer.borderColor = Categories.color(c).withAlphaComponent(0.7).cgColor
+      textlb.textColor = Category.color(c)
+      mainBackground.layer.borderColor = Category.color(c).withAlphaComponent(0.7).cgColor
     }
   }
   

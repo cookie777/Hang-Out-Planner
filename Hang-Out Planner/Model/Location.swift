@@ -13,7 +13,7 @@ struct Location{
   // Have to change all optional except id and category
   var id      : Int // used for app calculation
   let apiId   : String?// used for api call
-  let category: Categories
+  let category: Category
   
   var latitude    : Double
   var longitude   : Double

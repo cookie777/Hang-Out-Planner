@@ -62,7 +62,7 @@ class Planner {
   /// Calc best plan by distance
   /// - Parameter categories: category of location(order) that user wants to go.
   /// - Returns: TopN best plan.
-  static func calculatePlans(categories: [Categories]) -> [Plan]{
+  static func calculatePlans(categories: [Category]) -> [Plan]{
     
     var locationCandidates : [[Int]] = []
     for category in categories{

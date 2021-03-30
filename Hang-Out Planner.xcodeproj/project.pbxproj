@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D0D5D25BD412D00858B03 /* UserLocationController.swift */; };
 		4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */; };
 		488094BD25C2AD1B0087416A /* UIStackView+removeAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */; };
+		4891BB652611A07A006F1892 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891BB642611A07A006F1892 /* HeaderCollectionReusableView.swift */; };
+		4891BB702611A1AB006F1892 /* MapHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891BB6F2611A1AB006F1892 /* MapHeaderCollectionReusableView.swift */; };
 		48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57125B52D3900264AF9 /* AppDelegate.swift */; };
 		48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57325B52D3900264AF9 /* SceneDelegate.swift */; };
 		48A4C57B25B52D3B00264AF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48A4C57A25B52D3B00264AF9 /* Assets.xcassets */; };
@@ -49,9 +51,16 @@
 		48DE334625B8ECE2001630B7 /* Planner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333F25B8ECE2001630B7 /* Planner.swift */; };
 		48DE334725B8ECE2001630B7 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334025B8ECE2001630B7 /* Route.swift */; };
 		48DE334925B8ECE2001630B7 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334225B8ECE2001630B7 /* Plan.swift */; };
+		48F08B532612A72A00618418 /* MainVC+LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F08B522612A72A00618418 /* MainVC+LocationManager.swift */; };
+		48F08B562612A78C00618418 /* MainVC+SwipeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F08B552612A78C00618418 /* MainVC+SwipeAction.swift */; };
+		48F08B592612A98800618418 /* MainVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F08B582612A98800618418 /* MainVC+DataSource.swift */; };
+		48F08B5C2612A9DC00618418 /* MainVC+Lauout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F08B5B2612A9DC00618418 /* MainVC+Lauout.swift */; };
+		48F08B5F2612AA2D00618418 /* MainVC+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F08B5E2612AA2D00618418 /* MainVC+Transition.swift */; };
+		48F08B622612AA6000618418 /* MainVC+AddEditItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F08B612612AA6000618418 /* MainVC+AddEditItem.swift */; };
 		AEAA13FF25C627B30066C487 /* yelp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEAA13FE25C627B30066C487 /* yelp-Info.plist */; };
 		AEB778AC25C7770500AA2EE5 /* SpeedCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB778AB25C7770500AA2EE5 /* SpeedCalculator.swift */; };
 		B088871F25B911D000D5F9E0 /* CategorySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */; };
+		BA38033DFCD1D7C1685C1125 /* Pods_Hang_Out_Planner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6FA3A07B886D717E5D2A8B /* Pods_Hang_Out_Planner.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +70,8 @@
 		486D0D5D25BD412D00858B03 /* UserLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationController.swift; sourceTree = "<group>"; };
 		4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustedTableView.swift; sourceTree = "<group>"; };
 		488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+removeAll.swift"; sourceTree = "<group>"; };
+		4891BB642611A07A006F1892 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		4891BB6F2611A1AB006F1892 /* MapHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hang-Out Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A4C57125B52D3900264AF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48A4C57325B52D3900264AF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,9 +111,18 @@
 		48DE333F25B8ECE2001630B7 /* Planner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planner.swift; sourceTree = "<group>"; };
 		48DE334025B8ECE2001630B7 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		48DE334225B8ECE2001630B7 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
+		48F08B522612A72A00618418 /* MainVC+LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+LocationManager.swift"; sourceTree = "<group>"; };
+		48F08B552612A78C00618418 /* MainVC+SwipeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+SwipeAction.swift"; sourceTree = "<group>"; };
+		48F08B582612A98800618418 /* MainVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+DataSource.swift"; sourceTree = "<group>"; };
+		48F08B5B2612A9DC00618418 /* MainVC+Lauout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+Lauout.swift"; sourceTree = "<group>"; };
+		48F08B5E2612AA2D00618418 /* MainVC+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+Transition.swift"; sourceTree = "<group>"; };
+		48F08B612612AA6000618418 /* MainVC+AddEditItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+AddEditItem.swift"; sourceTree = "<group>"; };
+		621E0751E7DCCE715F5A2DC6 /* Pods-Hang-Out Planner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hang-Out Planner.debug.xcconfig"; path = "Target Support Files/Pods-Hang-Out Planner/Pods-Hang-Out Planner.debug.xcconfig"; sourceTree = "<group>"; };
 		AEAA13FE25C627B30066C487 /* yelp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "yelp-Info.plist"; sourceTree = "<group>"; };
 		AEB778AB25C7770500AA2EE5 /* SpeedCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedCalculator.swift; sourceTree = "<group>"; };
 		B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectViewController.swift; sourceTree = "<group>"; };
+		FC3EAF626EF57E8478797CA0 /* Pods-Hang-Out Planner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hang-Out Planner.release.xcconfig"; path = "Target Support Files/Pods-Hang-Out Planner/Pods-Hang-Out Planner.release.xcconfig"; sourceTree = "<group>"; };
+		FC6FA3A07B886D717E5D2A8B /* Pods_Hang_Out_Planner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hang_Out_Planner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,18 +130,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA38033DFCD1D7C1685C1125 /* Pods_Hang_Out_Planner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4891BB632611A007006F1892 /* SupplementaryView */ = {
+			isa = PBXGroup;
+			children = (
+				4891BB642611A07A006F1892 /* HeaderCollectionReusableView.swift */,
+				4891BB6F2611A1AB006F1892 /* MapHeaderCollectionReusableView.swift */,
+			);
+			path = SupplementaryView;
+			sourceTree = "<group>";
+		};
 		48A4C56525B52D3900264AF9 = {
 			isa = PBXGroup;
 			children = (
 				48B59E2E25BBD446008FC66E /* DefaultLocation(Vancouver).gpx */,
 				48A4C57025B52D3900264AF9 /* Hang-Out Planner */,
 				48A4C56F25B52D3900264AF9 /* Products */,
+				C1CE077690C4DF05B1A92F9F /* Pods */,
+				D5D5EA5918BB189303E3FFAD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,6 +231,7 @@
 		48A4C62F25B5551400264AF9 /* Combined */ = {
 			isa = PBXGroup;
 			children = (
+				4891BB632611A007006F1892 /* SupplementaryView */,
 				48A4C63425B555B200264AF9 /* Label */,
 				48A4C63325B5559200264AF9 /* Cell */,
 				48A4C63225B5558500264AF9 /* Button */,
@@ -289,7 +322,7 @@
 		48A4C68125B5580800264AF9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				48A4C5BD25B5385D00264AF9 /* MainViewController.swift */,
+				48F08B502612A70900618418 /* MainVC */,
 				B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */,
 				48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */,
 				48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */,
@@ -306,6 +339,37 @@
 			path = Label;
 			sourceTree = "<group>";
 		};
+		48F08B502612A70900618418 /* MainVC */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C5BD25B5385D00264AF9 /* MainViewController.swift */,
+				48F08B612612AA6000618418 /* MainVC+AddEditItem.swift */,
+				48F08B5E2612AA2D00618418 /* MainVC+Transition.swift */,
+				48F08B5B2612A9DC00618418 /* MainVC+Lauout.swift */,
+				48F08B582612A98800618418 /* MainVC+DataSource.swift */,
+				48F08B522612A72A00618418 /* MainVC+LocationManager.swift */,
+				48F08B552612A78C00618418 /* MainVC+SwipeAction.swift */,
+			);
+			path = MainVC;
+			sourceTree = "<group>";
+		};
+		C1CE077690C4DF05B1A92F9F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				621E0751E7DCCE715F5A2DC6 /* Pods-Hang-Out Planner.debug.xcconfig */,
+				FC3EAF626EF57E8478797CA0 /* Pods-Hang-Out Planner.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D5D5EA5918BB189303E3FFAD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC6FA3A07B886D717E5D2A8B /* Pods_Hang_Out_Planner.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -313,9 +377,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48A4C59825B52D3B00264AF9 /* Build configuration list for PBXNativeTarget "Hang-Out Planner" */;
 			buildPhases = (
+				EFFF00A813EAFFDE8D97B755 /* [CP] Check Pods Manifest.lock */,
 				48A4C56A25B52D3900264AF9 /* Sources */,
 				48A4C56B25B52D3900264AF9 /* Frameworks */,
 				48A4C56C25B52D3900264AF9 /* Resources */,
+				C6ACB84BDEC3D68270987BCD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -371,15 +437,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C6ACB84BDEC3D68270987BCD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hang-Out Planner/Pods-Hang-Out Planner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hang-Out Planner/Pods-Hang-Out Planner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hang-Out Planner/Pods-Hang-Out Planner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFFF00A813EAFFDE8D97B755 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Hang-Out Planner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		48A4C56A25B52D3900264AF9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F08B562612A78C00618418 /* MainVC+SwipeAction.swift in Sources */,
+				48F08B5C2612A9DC00618418 /* MainVC+Lauout.swift in Sources */,
 				48DDE18725BE5B1B008FA63A /* NetworkController+fetchLocations.swift in Sources */,
 				48A4C65525B5568100264AF9 /* TextLabel.swift in Sources */,
 				48A4C66E25B5574A00264AF9 /* UILabel+LineSpacing.swift in Sources */,
+				4891BB652611A07A006F1892 /* HeaderCollectionReusableView.swift in Sources */,
 				48DE334725B8ECE2001630B7 /* Route.swift in Sources */,
+				48F08B532612A72A00618418 /* MainVC+LocationManager.swift in Sources */,
 				48A4C66D25B5574A00264AF9 /* VerticalStackView.swift in Sources */,
 				48A4C5E825B552CA00264AF9 /* LocationDetailViewController.swift in Sources */,
 				48A4C60C25B553E100264AF9 /* CardTVCell.swift in Sources */,
@@ -389,6 +501,8 @@
 				48B8D31E25FD6F2F006E8B03 /* CategoryCVListCell.swift in Sources */,
 				48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */,
 				4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */,
+				48F08B592612A98800618418 /* MainVC+DataSource.swift in Sources */,
+				48F08B622612AA6000618418 /* MainVC+AddEditItem.swift in Sources */,
 				48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */,
 				AEB778AC25C7770500AA2EE5 /* SpeedCalculator.swift in Sources */,
 				48A4C60725B553B400264AF9 /* GoButton.swift in Sources */,
@@ -402,6 +516,7 @@
 				48A4C60225B553AA00264AF9 /* AddButton.swift in Sources */,
 				48A4C5F225B5536300264AF9 /* MainVCButton.swift in Sources */,
 				48452E1325F1A10700432776 /* Constants.swift in Sources */,
+				48F08B5F2612AA2D00618418 /* MainVC+Transition.swift in Sources */,
 				48A4C62125B5549500264AF9 /* LocationCardTVCell.swift in Sources */,
 				48A4C5CE25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */,
 				48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */,
@@ -416,6 +531,7 @@
 				48A4C66C25B5574A00264AF9 /* HorizontalStackView.swift in Sources */,
 				48A4C5BE25B5385D00264AF9 /* MainViewController.swift in Sources */,
 				4823EEFF25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift in Sources */,
+				4891BB702611A1AB006F1892 /* MapHeaderCollectionReusableView.swift in Sources */,
 				4823EF0325C16057006C7324 /* ShadowView.swift in Sources */,
 				48A4C64825B5564800264AF9 /* MediumHeaderLabel.swift in Sources */,
 			);
@@ -553,6 +669,7 @@
 		};
 		48A4C59925B52D3B00264AF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 621E0751E7DCCE715F5A2DC6 /* Pods-Hang-Out Planner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -572,6 +689,7 @@
 		};
 		48A4C59A25B52D3B00264AF9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC3EAF626EF57E8478797CA0 /* Pods-Hang-Out Planner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

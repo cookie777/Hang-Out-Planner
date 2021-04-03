@@ -7,10 +7,9 @@
 
 import UIKit
 
-
 /// Header view for collection view. You can set any kind of label.
-class HeaderCollectionReusableView: UICollectionReusableView {
-  var label: UILabel! = nil
+class GeneticLabelCollectionReusableView: UICollectionReusableView {
+  var label: UILabel?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -20,8 +19,13 @@ class HeaderCollectionReusableView: UICollectionReusableView {
   }
   
   func configure(lb: UILabel) {
-    label = lb
-    addSubview(label)
-    label.matchParent()
+    // If label is nil, initialize. Otherwise, update only text
+    if label == nil {
+      label = lb
+      addSubview(label!)
+      label?.matchParent()
+    } else {
+      label?.text = lb.text
+    }
   }
 }

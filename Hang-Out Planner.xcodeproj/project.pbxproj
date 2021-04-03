@@ -8,13 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		4823EEFF25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */; };
-		4823EF0325C16057006C7324 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823EF0225C16057006C7324 /* ShadowView.swift */; };
 		48452E1325F1A10700432776 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48452E1225F1A10700432776 /* Constants.swift */; };
+		485B7E77261559E20039A334 /* PlanDetailMapCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B7E76261559E20039A334 /* PlanDetailMapCollectionReusableView.swift */; };
+		485B7E7B26155B8C0039A334 /* PlanDetailCVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B7E7A26155B8C0039A334 /* PlanDetailCVC+DataSource.swift */; };
+		485B7E7E261563780039A334 /* PlanDetailCVC+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B7E7D261563780039A334 /* PlanDetailCVC+Layout.swift */; };
+		485DAB462617B7B8001437D6 /* MKMapView+fitAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DAB452617B7B8001437D6 /* MKMapView+fitAll.swift */; };
+		485DAB652617FBC3001437D6 /* PlanDetailCVC+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DAB642617FBC3001437D6 /* PlanDetailCVC+Transition.swift */; };
+		485DAB7126181264001437D6 /* MKMapView+TakeSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DAB7026181264001437D6 /* MKMapView+TakeSnapshot.swift */; };
 		486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D0D5D25BD412D00858B03 /* UserLocationController.swift */; };
 		4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */; };
 		488094BD25C2AD1B0087416A /* UIStackView+removeAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */; };
-		4891BB652611A07A006F1892 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891BB642611A07A006F1892 /* HeaderCollectionReusableView.swift */; };
-		4891BB702611A1AB006F1892 /* MapHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891BB6F2611A1AB006F1892 /* MapHeaderCollectionReusableView.swift */; };
+		4891BB652611A07A006F1892 /* GeneticLabelCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891BB642611A07A006F1892 /* GeneticLabelCollectionReusableView.swift */; };
+		4891BB702611A1AB006F1892 /* MainMapCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891BB6F2611A1AB006F1892 /* MainMapCollectionReusableView.swift */; };
 		48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57125B52D3900264AF9 /* AppDelegate.swift */; };
 		48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C57325B52D3900264AF9 /* SceneDelegate.swift */; };
 		48A4C57B25B52D3B00264AF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48A4C57A25B52D3B00264AF9 /* Assets.xcassets */; };
@@ -42,6 +47,7 @@
 		48A4C66F25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66A25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift */; };
 		48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */; };
 		48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A4C67425B557D900264AF9 /* NetworkController.swift */; };
+		48BC2BC62615649200CB485C /* LocationCardCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BC2BC52615649200CB485C /* LocationCardCVCell.swift */; };
 		48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4876325B5836800EA55D6 /* BasicLabel.swift */; };
 		48DDE18725BE5B1B008FA63A /* NetworkController+fetchLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */; };
 		48DE334325B8ECE2001630B7 /* Catetory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333C25B8ECE2001630B7 /* Catetory.swift */; };
@@ -50,6 +56,10 @@
 		48DE334625B8ECE2001630B7 /* Planner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE333F25B8ECE2001630B7 /* Planner.swift */; };
 		48DE334725B8ECE2001630B7 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334025B8ECE2001630B7 /* Route.swift */; };
 		48DE334925B8ECE2001630B7 /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE334225B8ECE2001630B7 /* Plan.swift */; };
+		48E9D1C626167FBD00042908 /* DistanceCardCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D1C526167FBD00042908 /* DistanceCardCVCell.swift */; };
+		48E9D2242617A30100042908 /* PlanDetailCVC+MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D2232617A30100042908 /* PlanDetailCVC+MapView.swift */; };
+		48E9D2362617A9D400042908 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D2352617A9D400042908 /* CustomAnnotation.swift */; };
+		48E9D23A2617AA3100042908 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9D2392617AA3100042908 /* CustomAnnotationView.swift */; };
 		48E9F56A2612F0E200BBA223 /* SectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9F5692612F0E200BBA223 /* SectionItem.swift */; };
 		48E9F5802612F92F00BBA223 /* PlanListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9F57F2612F92F00BBA223 /* PlanListCollectionViewController.swift */; };
 		48E9F58A2613064D00BBA223 /* PlanListCVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E9F5892613064D00BBA223 /* PlanListCVC+DataSource.swift */; };
@@ -71,13 +81,18 @@
 
 /* Begin PBXFileReference section */
 		4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+hideBarBackground.swift"; sourceTree = "<group>"; };
-		4823EF0225C16057006C7324 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		48452E1225F1A10700432776 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		485B7E76261559E20039A334 /* PlanDetailMapCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDetailMapCollectionReusableView.swift; sourceTree = "<group>"; };
+		485B7E7A26155B8C0039A334 /* PlanDetailCVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanDetailCVC+DataSource.swift"; sourceTree = "<group>"; };
+		485B7E7D261563780039A334 /* PlanDetailCVC+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanDetailCVC+Layout.swift"; sourceTree = "<group>"; };
+		485DAB452617B7B8001437D6 /* MKMapView+fitAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+fitAll.swift"; sourceTree = "<group>"; };
+		485DAB642617FBC3001437D6 /* PlanDetailCVC+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanDetailCVC+Transition.swift"; sourceTree = "<group>"; };
+		485DAB7026181264001437D6 /* MKMapView+TakeSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+TakeSnapshot.swift"; sourceTree = "<group>"; };
 		486D0D5D25BD412D00858B03 /* UserLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationController.swift; sourceTree = "<group>"; };
 		4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustedTableView.swift; sourceTree = "<group>"; };
 		488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+removeAll.swift"; sourceTree = "<group>"; };
-		4891BB642611A07A006F1892 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
-		4891BB6F2611A1AB006F1892 /* MapHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		4891BB642611A07A006F1892 /* GeneticLabelCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneticLabelCollectionReusableView.swift; sourceTree = "<group>"; };
+		4891BB6F2611A1AB006F1892 /* MainMapCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapCollectionReusableView.swift; sourceTree = "<group>"; };
 		48A4C56E25B52D3900264AF9 /* Hang-Out Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hang-Out Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A4C57125B52D3900264AF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48A4C57325B52D3900264AF9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +123,7 @@
 		48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintLayout.swift"; sourceTree = "<group>"; };
 		48A4C67425B557D900264AF9 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		48B59E2E25BBD446008FC66E /* DefaultLocation(Vancouver).gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DefaultLocation(Vancouver).gpx"; sourceTree = "<group>"; };
+		48BC2BC52615649200CB485C /* LocationCardCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCardCVCell.swift; sourceTree = "<group>"; };
 		48D4876325B5836800EA55D6 /* BasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLabel.swift; sourceTree = "<group>"; };
 		48DDE18625BE5B1B008FA63A /* NetworkController+fetchLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkController+fetchLocations.swift"; sourceTree = "<group>"; };
 		48DE333C25B8ECE2001630B7 /* Catetory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catetory.swift; sourceTree = "<group>"; };
@@ -116,6 +132,10 @@
 		48DE333F25B8ECE2001630B7 /* Planner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planner.swift; sourceTree = "<group>"; };
 		48DE334025B8ECE2001630B7 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		48DE334225B8ECE2001630B7 /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
+		48E9D1C526167FBD00042908 /* DistanceCardCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceCardCVCell.swift; sourceTree = "<group>"; };
+		48E9D2232617A30100042908 /* PlanDetailCVC+MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanDetailCVC+MapView.swift"; sourceTree = "<group>"; };
+		48E9D2352617A9D400042908 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		48E9D2392617AA3100042908 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		48E9F5692612F0E200BBA223 /* SectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionItem.swift; sourceTree = "<group>"; };
 		48E9F57F2612F92F00BBA223 /* PlanListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanListCollectionViewController.swift; sourceTree = "<group>"; };
 		48E9F5892613064D00BBA223 /* PlanListCVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanListCVC+DataSource.swift"; sourceTree = "<group>"; };
@@ -149,11 +169,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		485B7E7926155B520039A334 /* PlanDetailCVC */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */,
+				485B7E7A26155B8C0039A334 /* PlanDetailCVC+DataSource.swift */,
+				485B7E7D261563780039A334 /* PlanDetailCVC+Layout.swift */,
+				485DAB642617FBC3001437D6 /* PlanDetailCVC+Transition.swift */,
+			);
+			path = PlanDetailCVC;
+			sourceTree = "<group>";
+		};
 		4891BB632611A007006F1892 /* SupplementaryView */ = {
 			isa = PBXGroup;
 			children = (
-				4891BB642611A07A006F1892 /* HeaderCollectionReusableView.swift */,
-				4891BB6F2611A1AB006F1892 /* MapHeaderCollectionReusableView.swift */,
+				4891BB642611A07A006F1892 /* GeneticLabelCollectionReusableView.swift */,
+				4891BB6F2611A1AB006F1892 /* MainMapCollectionReusableView.swift */,
+				485B7E76261559E20039A334 /* PlanDetailMapCollectionReusableView.swift */,
 			);
 			path = SupplementaryView;
 			sourceTree = "<group>";
@@ -221,35 +253,27 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		48A4C62A25B554D600264AF9 /* Basic(Don't use this) */ = {
+		48A4C62A25B554D600264AF9 /* SuperClass */ = {
 			isa = PBXGroup;
 			children = (
-				4823EF0225C16057006C7324 /* ShadowView.swift */,
 				48D4876225B5833600EA55D6 /* Label */,
 				48A4C63125B5557C00264AF9 /* Button */,
 				48A4C63025B5557000264AF9 /* Cell */,
 			);
-			path = "Basic(Don't use this)";
+			path = SuperClass;
 			sourceTree = "<group>";
 		};
 		48A4C62B25B554ED00264AF9 /* View,Cell */ = {
 			isa = PBXGroup;
 			children = (
-				48A4C62F25B5551400264AF9 /* Combined */,
-				48A4C62A25B554D600264AF9 /* Basic(Don't use this) */,
+				48A4C63225B5558500264AF9 /* Button */,
+				48A4C63325B5559200264AF9 /* Cell */,
+				48A4C63425B555B200264AF9 /* Label */,
+				48E9D2302617A8DA00042908 /* Annotation */,
+				4891BB632611A007006F1892 /* SupplementaryView */,
+				48A4C62A25B554D600264AF9 /* SuperClass */,
 			);
 			path = "View,Cell";
-			sourceTree = "<group>";
-		};
-		48A4C62F25B5551400264AF9 /* Combined */ = {
-			isa = PBXGroup;
-			children = (
-				4891BB632611A007006F1892 /* SupplementaryView */,
-				48A4C63425B555B200264AF9 /* Label */,
-				48A4C63325B5559200264AF9 /* Cell */,
-				48A4C63225B5558500264AF9 /* Button */,
-			);
-			path = Combined;
 			sourceTree = "<group>";
 		};
 		48A4C63025B5557000264AF9 /* Cell */ = {
@@ -282,12 +306,11 @@
 		48A4C63325B5559200264AF9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				48BC2BC0261563EC00CB485C /* Archives */,
 				48F08B6F2612EE1D00618418 /* CategoryCardCVCell.swift */,
+				48BC2BC52615649200CB485C /* LocationCardCVCell.swift */,
+				48E9D1C526167FBD00042908 /* DistanceCardCVCell.swift */,
 				48E9F58E2613099800BBA223 /* PlanCardCVCell.swift */,
-				48A4C61625B5546C00264AF9 /* CategoryCardTVCell.swift */,
-				48A4C61B25B5548000264AF9 /* PlanCardTVCell.swift */,
-				48A4C62025B5549500264AF9 /* LocationCardTVCell.swift */,
-				48A4C62525B554AB00264AF9 /* DistanceCardTVCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -330,6 +353,8 @@
 				48A4C66B25B5574A00264AF9 /* UIView+ConstraintLayout.swift */,
 				4823EEFE25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift */,
 				488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */,
+				485DAB452617B7B8001437D6 /* MKMapView+fitAll.swift */,
+				485DAB7026181264001437D6 /* MKMapView+TakeSnapshot.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -340,11 +365,23 @@
 				48F08B502612A70900618418 /* MainCVC */,
 				B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */,
 				48E9F5822613035300BBA223 /* PlanListCVC */,
-				48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */,
-				48A4C5CD25B5528D00264AF9 /* PlanDetailViewController.swift */,
+				485B7E7926155B520039A334 /* PlanDetailCVC */,
 				48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */,
+				48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		48BC2BC0261563EC00CB485C /* Archives */ = {
+			isa = PBXGroup;
+			children = (
+				48E9D2232617A30100042908 /* PlanDetailCVC+MapView.swift */,
+				48A4C62525B554AB00264AF9 /* DistanceCardTVCell.swift */,
+				48A4C61625B5546C00264AF9 /* CategoryCardTVCell.swift */,
+				48A4C61B25B5548000264AF9 /* PlanCardTVCell.swift */,
+				48A4C62025B5549500264AF9 /* LocationCardTVCell.swift */,
+			);
+			path = Archives;
 			sourceTree = "<group>";
 		};
 		48D4876225B5833600EA55D6 /* Label */ = {
@@ -353,6 +390,15 @@
 				48D4876325B5836800EA55D6 /* BasicLabel.swift */,
 			);
 			path = Label;
+			sourceTree = "<group>";
+		};
+		48E9D2302617A8DA00042908 /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				48E9D2352617A9D400042908 /* CustomAnnotation.swift */,
+				48E9D2392617AA3100042908 /* CustomAnnotationView.swift */,
+			);
+			path = Annotation;
 			sourceTree = "<group>";
 		};
 		48E9F5822613035300BBA223 /* PlanListCVC */ = {
@@ -510,24 +556,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48E9D2242617A30100042908 /* PlanDetailCVC+MapView.swift in Sources */,
 				48E9F56A2612F0E200BBA223 /* SectionItem.swift in Sources */,
 				48F08B562612A78C00618418 /* MainCVC+SwipeAction.swift in Sources */,
 				48F08B5C2612A9DC00618418 /* MainCVC+Lauout.swift in Sources */,
+				48BC2BC62615649200CB485C /* LocationCardCVCell.swift in Sources */,
 				48DDE18725BE5B1B008FA63A /* NetworkController+fetchLocations.swift in Sources */,
 				48E9F58F2613099800BBA223 /* PlanCardCVCell.swift in Sources */,
 				48A4C65525B5568100264AF9 /* TextLabel.swift in Sources */,
 				48A4C66E25B5574A00264AF9 /* UILabel+LineSpacing.swift in Sources */,
-				4891BB652611A07A006F1892 /* HeaderCollectionReusableView.swift in Sources */,
+				4891BB652611A07A006F1892 /* GeneticLabelCollectionReusableView.swift in Sources */,
+				485DAB7126181264001437D6 /* MKMapView+TakeSnapshot.swift in Sources */,
 				48DE334725B8ECE2001630B7 /* Route.swift in Sources */,
 				48F08B532612A72A00618418 /* MainCVC+LocationManager.swift in Sources */,
 				48A4C66D25B5574A00264AF9 /* VerticalStackView.swift in Sources */,
 				48A4C5E825B552CA00264AF9 /* LocationDetailViewController.swift in Sources */,
 				48A4C60C25B553E100264AF9 /* CardTVCell.swift in Sources */,
+				485B7E77261559E20039A334 /* PlanDetailMapCollectionReusableView.swift in Sources */,
 				48A4C62625B554AB00264AF9 /* DistanceCardTVCell.swift in Sources */,
 				48DE334525B8ECE2001630B7 /* Location.swift in Sources */,
 				48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */,
 				48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */,
+				48E9D2362617A9D400042908 /* CustomAnnotation.swift in Sources */,
 				4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */,
+				485DAB652617FBC3001437D6 /* PlanDetailCVC+Transition.swift in Sources */,
 				48F08B592612A98800618418 /* MainCVC+DataSource.swift in Sources */,
 				48F08B622612AA6000618418 /* MainCVC+AddEditItem.swift in Sources */,
 				48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */,
@@ -542,6 +594,7 @@
 				48A4C61725B5546C00264AF9 /* CategoryCardTVCell.swift in Sources */,
 				48E9F59326130B2800BBA223 /* PlanListCVC+Layout.swift in Sources */,
 				486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */,
+				485B7E7E261563780039A334 /* PlanDetailCVC+Layout.swift in Sources */,
 				48A4C60225B553AA00264AF9 /* AddButton.swift in Sources */,
 				48A4C5F225B5536300264AF9 /* MainVCButton.swift in Sources */,
 				48452E1325F1A10700432776 /* Constants.swift in Sources */,
@@ -562,10 +615,13 @@
 				48DE334625B8ECE2001630B7 /* Planner.swift in Sources */,
 				48A4C66C25B5574A00264AF9 /* HorizontalStackView.swift in Sources */,
 				48A4C5BE25B5385D00264AF9 /* MainCollectionViewController.swift in Sources */,
+				48E9D1C626167FBD00042908 /* DistanceCardCVCell.swift in Sources */,
 				4823EEFF25C0E4CE006C7324 /* UINavigationController+hideBarBackground.swift in Sources */,
-				4891BB702611A1AB006F1892 /* MapHeaderCollectionReusableView.swift in Sources */,
-				4823EF0325C16057006C7324 /* ShadowView.swift in Sources */,
+				485DAB462617B7B8001437D6 /* MKMapView+fitAll.swift in Sources */,
+				4891BB702611A1AB006F1892 /* MainMapCollectionReusableView.swift in Sources */,
 				48A4C64825B5564800264AF9 /* MediumHeaderLabel.swift in Sources */,
+				48E9D23A2617AA3100042908 /* CustomAnnotationView.swift in Sources */,
+				485B7E7B26155B8C0039A334 /* PlanDetailCVC+DataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

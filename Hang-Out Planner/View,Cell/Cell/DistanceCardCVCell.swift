@@ -1,17 +1,15 @@
 //
-//  DistanceCardTVCell.swift
+//  DistanceCardCVCell.swift
 //  Hang-Out Planner
 //
-//  Created by Takayuki Yamaguchi on 2021-01-17.
+//  Created by Takayuki Yamaguchi on 2021-04-01.
 //
 
 import UIKit
 
-class DistanceCardTVCell: CardTVCell {
-
-  // Distance symbol
-  //  var arrowEmoji = SubTextLabel(text: "⇣")
-//  var arrowEmoji = UIImageView(image: UIImage(systemName: "arrowtriangle.down.fill")?.withTintColor(.systemGray3, renderingMode: .alwaysOriginal))
+class DistanceCardCVCell: BasicCardCollectionViewCell {
+  static let identifier = "distance"
+  
   var distanceLine : VerticalStackView = {
     
     let circleSize : CGFloat = 10
@@ -48,9 +46,9 @@ class DistanceCardTVCell: CardTVCell {
   
   var timeToReachByWalk = SubTextLabel(text: "")
   var timeToReachByCar = SubTextLabel(text: "")
-
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
     contentView.addSubview(distanceLine)
     distanceLine.centerXYin(contentView)
     

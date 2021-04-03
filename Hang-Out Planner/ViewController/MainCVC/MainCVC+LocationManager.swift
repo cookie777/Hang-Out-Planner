@@ -30,7 +30,7 @@ extension MainCollectionViewController{
       // Set region of the mapView using current location
       let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
       
-      let headerView = self.collectionView.visibleSupplementaryViews(ofKind: Constants.Kind.sectionHeader).first as! MapHeaderCollectionReusableView
+      let headerView = self.collectionView.visibleSupplementaryViews(ofKind: Constants.Kind.sectionHeader).first as! MainMapCollectionReusableView
       let mapView = headerView.mapView
       let locationLabel = headerView.locationLabel
       

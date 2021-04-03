@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Location{
+struct Location: Hashable {
   
   // Have to change all optional except id and category
   var id      : Int // used for app calculation

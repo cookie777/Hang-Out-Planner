@@ -15,11 +15,24 @@ extension PlanListCollectionViewController {
     snapshot.deleteAllItems()
     snapshot.appendSections([.list])
   }
+  func register() {
+    // cell
+    collectionView.register(
+      PlanCardCVCell.self,
+      forCellWithReuseIdentifier: Constants.Identifier.Cell.list
+    )
+    // supplementary (header)
+    collectionView.register(
+      GeneticLabelCollectionReusableView.self,
+      forSupplementaryViewOfKind: Constants.Kind.sectionHeader,
+      withReuseIdentifier: Constants.Identifier.SupplementaryView.geneticLabel
+    )
+  }
 
   /// Define Diffable Data source
   func createDiffableDataSource(){
     resetSnapshot()
-    print(plans.map{$0.hashValue})
+    register()
     snapshot.appendItems(Item.wrapPlan(items: plans), toSection: .list)
 
     dataSource = UICollectionViewDiffableDataSource<Section, Item>(
@@ -51,9 +64,9 @@ extension PlanListCollectionViewController {
         // if ReusableSupplementaryView is for section header
         if let headerView = self.collectionView.dequeueReusableSupplementaryView(
           ofKind: kind,
-          withReuseIdentifier: Constants.Identifier.SupplementaryView.header,
+          withReuseIdentifier: Constants.Identifier.SupplementaryView.geneticLabel,
           for: indexPath
-        ) as? HeaderCollectionReusableView {
+        ) as? GeneticLabelCollectionReusableView {
           // config view
           switch self.sections[indexPath.section] {
           case .list:

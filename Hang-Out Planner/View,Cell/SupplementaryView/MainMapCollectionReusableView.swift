@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class MapHeaderCollectionReusableView: UICollectionReusableView {
+class MainMapCollectionReusableView: UICollectionReusableView {
   let headerTitle = LargeHeaderLabel(text: "Where Do You \nWant To Go?")
   let mapView : MKMapView = {
     let map = MKMapView()

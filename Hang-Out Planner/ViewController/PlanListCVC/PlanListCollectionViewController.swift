@@ -32,8 +32,8 @@ class PlanListCollectionViewController: UICollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let planDetailVC = PlanDetailViewController(plan: plans[indexPath.row])
-    navigationController?.pushViewController(planDetailVC, animated: true)
+    let planDetailCVC = PlanDetailCollectionViewController(plans[indexPath.row])
+    navigationController?.pushViewController(planDetailCVC, animated: true)
   }
   
 }

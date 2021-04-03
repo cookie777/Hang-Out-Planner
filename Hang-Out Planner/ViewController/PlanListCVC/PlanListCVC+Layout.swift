@@ -10,18 +10,7 @@ import UIKit
 extension PlanListCollectionViewController {
  
   func createCollectionViewLayout() {
-    collectionView.backgroundColor = UIColor.Custom.bg
-    // cell
-    collectionView.register(
-      PlanCardCVCell.self,
-      forCellWithReuseIdentifier: Constants.Identifier.Cell.list
-    )
-    // supplementary (header)
-    collectionView.register(
-      HeaderCollectionReusableView.self,
-      forSupplementaryViewOfKind: Constants.Kind.sectionHeader,
-      withReuseIdentifier: Constants.Identifier.SupplementaryView.header
-    )
+    collectionView.backgroundColor = UIColor.Custom.forBackground
     // compositionalLayout
     collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false)
   }

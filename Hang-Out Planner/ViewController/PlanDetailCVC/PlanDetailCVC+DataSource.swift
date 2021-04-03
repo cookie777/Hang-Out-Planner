@@ -1,15 +1,13 @@
 //
-//  MainVC+DataSource.swift
+//  PlanDetailCVC+DataSource.swift
 //  Hang-Out Planner
 //
-//  Created by Takayuki Yamaguchi on 2021-03-29.
+//  Created by Takayuki Yamaguchi on 2021-03-31.
 //
 
 import UIKit
 
-// MARK: - DataSource config
-
-extension MainCollectionViewController {
+extension PlanDetailCollectionViewController {
   
   /// Delete all items of snapshot
   private func resetSnapshot() {
@@ -18,17 +16,32 @@ extension MainCollectionViewController {
     snapshot.appendSections([.list])
   }
   
-  private func register(){
+  private func initSnapshot() {
+    resetSnapshot()
+    var source: [Item] = []
+    for route in plan.routes {
+      let location = allLocations.first { $0.id == route.startLocationId }
+      source.append(Item.location(location!))
+      source.append(Item.route(route))
+    }
+    snapshot.appendItems(source, toSection: .list)
+  }
+  
+  private func register() {
     // cell
     collectionView.register(
-      CategoryCardCVCell.self,
+      LocationCardCVCell.self,
       forCellWithReuseIdentifier: Constants.Identifier.Cell.list
+    )
+    collectionView.register(
+      DistanceCardCVCell.self,
+      forCellWithReuseIdentifier: DistanceCardCVCell.identifier
     )
     // supplementary (header)
     collectionView.register(
-      MainMapCollectionReusableView.self,
+      PlanDetailMapCollectionReusableView.self,
       forSupplementaryViewOfKind: Constants.Kind.sectionHeader,
-      withReuseIdentifier: Constants.Identifier.SupplementaryView.mainMap
+      withReuseIdentifier: Constants.Identifier.SupplementaryView.planDetailMap
     )
     // supplementary (group header)
     collectionView.register(
@@ -39,10 +52,9 @@ extension MainCollectionViewController {
   }
   
   /// Define Diffable Data source
-  func createDiffableDataSource(){
-    resetSnapshot()
+  func createDiffableDataSource() {
+    initSnapshot()
     register()
-    snapshot.appendItems(Item.wrapCategory(items: [.cafe, .amusement, .artAndGallery]), toSection: .list)
     
     dataSource = UICollectionViewDiffableDataSource<Section, Item>(
       collectionView: collectionView,
@@ -51,17 +63,30 @@ extension MainCollectionViewController {
           
           switch self.sections[indexPath.section] {
           case .list:
-            let cell = collectionView.dequeueReusableCell(
-              withReuseIdentifier: Constants.Identifier.Cell.list,
-              for: indexPath
-            ) as! CategoryCardCVCell
-         
-            cell.category = item.category
-            cell.delegate = self //swipe
-            return cell
+            
+            if let location = item.location {
+              let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Constants.Identifier.Cell.list,
+                for: indexPath
+              ) as! LocationCardCVCell
+              cell.update(with: indexPath.row/2, and: location, and: fetchedImages)
+              return cell
+            }
+            
+            if let route = item.route {
+              let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: DistanceCardCVCell.identifier,
+                for: indexPath
+              ) as! DistanceCardCVCell
+              cell.update(with: route)
+              return cell
+            }
+            
           default:
             return nil
           }
+          
+          return nil
         }
     )
     
@@ -72,15 +97,15 @@ extension MainCollectionViewController {
         // if ReusableSupplementaryView is for section header
         if let headerView = self.collectionView.dequeueReusableSupplementaryView(
           ofKind: kind,
-          withReuseIdentifier: Constants.Identifier.SupplementaryView.mainMap,
+          withReuseIdentifier: Constants.Identifier.SupplementaryView.planDetailMap,
           for: indexPath
-        ) as? MainMapCollectionReusableView {
+        ) as? PlanDetailMapCollectionReusableView {
           // config view
           switch self.sections[indexPath.section] {
-          case .list:
-            headerView.configure()
-          default:
-            return nil
+            case .list:
+              headerView.config(with: plan, and: fetchedImages)
+            default:
+              return nil
           }
           return headerView
         }
@@ -94,8 +119,8 @@ extension MainCollectionViewController {
           for: indexPath
         ) as? GeneticLabelCollectionReusableView {
           // config view
-          let headerText = "Location: " + String(indexPath.row + 1)
-          headerView.configure(lb: TextLabel(text: headerText))
+          let text = indexPath.row == 0 ? "Start" : "Location: " + String(indexPath.row)
+          headerView.configure(lb: TextLabel(text: text))
           return headerView
         }
       }
@@ -109,7 +134,8 @@ extension MainCollectionViewController {
       return item.category != nil
     }
     // Update snapshot after reorder
-    dataSource.reorderingHandlers.didReorder = { [unowned self] transaction in
+    dataSource.reorderingHandlers.didReorder = { [weak self] transaction in
+      guard let self = self else { return }
       self.snapshot = transaction.finalSnapshot
     }
     

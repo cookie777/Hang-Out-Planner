@@ -13,6 +13,7 @@ struct Plan: Hashable{
   let routes    : [Route]
   let destinationList: [Int] // id of location. The Order == where to go next
   
+  
   let totalDistance   : Double //meter
   
   // These two time will be estimated not from api, but just from simple calculate using average speed.

@@ -9,6 +9,8 @@ import MapKit
 
 class CustomAnnotation: NSObject, MKAnnotation {
   
+  var location: Location
+  
   var title: String?
   var subtitle: String?
   var coordinate: CLLocationCoordinate2D
@@ -21,6 +23,7 @@ class CustomAnnotation: NSObject, MKAnnotation {
   var glyphText = String("1")
   
   init(location: Location, routeOrder: Int ) {
+    self.location = location
     self.locationId = location.id
     self.title = location.title
     self.subtitle = location.address

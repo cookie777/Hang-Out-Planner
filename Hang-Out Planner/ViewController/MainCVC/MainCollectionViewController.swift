@@ -20,12 +20,15 @@ class MainCollectionViewController : UICollectionViewController {
   var addButton = AddButton()
   
   init() {
-    super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    super.init(collectionViewLayout: UICollectionViewLayout())
+    
     createCollectionViewLayout()
     createDiffableDataSource()
   }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+
   
 }

@@ -9,6 +9,7 @@ import Foundation
 
 // MARK: - Section
 enum Section: Hashable {
+  case single
   case list
   case other // not used. for scalability.
 }

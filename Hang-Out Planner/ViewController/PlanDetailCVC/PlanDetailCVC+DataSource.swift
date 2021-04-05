@@ -31,7 +31,7 @@ extension PlanDetailCollectionViewController {
     // cell
     collectionView.register(
       LocationCardCVCell.self,
-      forCellWithReuseIdentifier: Constants.Identifier.Cell.list
+      forCellWithReuseIdentifier: LocationCardCVCell.identifier
     )
     collectionView.register(
       DistanceCardCVCell.self,
@@ -41,13 +41,13 @@ extension PlanDetailCollectionViewController {
     collectionView.register(
       PlanDetailMapCollectionReusableView.self,
       forSupplementaryViewOfKind: Constants.Kind.sectionHeader,
-      withReuseIdentifier: Constants.Identifier.SupplementaryView.planDetailMap
+      withReuseIdentifier: PlanDetailMapCollectionReusableView.identifier
     )
     // supplementary (group header)
     collectionView.register(
       GeneticLabelCollectionReusableView.self,
       forSupplementaryViewOfKind: Constants.Kind.groupHeader,
-      withReuseIdentifier: Constants.Identifier.SupplementaryView.geneticLabel
+      withReuseIdentifier: GeneticLabelCollectionReusableView.identifier
     )
   }
   
@@ -66,7 +66,7 @@ extension PlanDetailCollectionViewController {
             
             if let location = item.location {
               let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: Constants.Identifier.Cell.list,
+                withReuseIdentifier: LocationCardCVCell.identifier,
                 for: indexPath
               ) as! LocationCardCVCell
               cell.update(with: indexPath.row/2, and: location, and: fetchedImages)
@@ -97,7 +97,7 @@ extension PlanDetailCollectionViewController {
         // if ReusableSupplementaryView is for section header
         if let headerView = self.collectionView.dequeueReusableSupplementaryView(
           ofKind: kind,
-          withReuseIdentifier: Constants.Identifier.SupplementaryView.planDetailMap,
+          withReuseIdentifier: PlanDetailMapCollectionReusableView.identifier,
           for: indexPath
         ) as? PlanDetailMapCollectionReusableView {
           // config view
@@ -115,7 +115,7 @@ extension PlanDetailCollectionViewController {
         // if ReusableSupplementaryView is for group header
         if let headerView = self.collectionView.dequeueReusableSupplementaryView(
           ofKind: kind,
-          withReuseIdentifier: Constants.Identifier.SupplementaryView.geneticLabel,
+          withReuseIdentifier: GeneticLabelCollectionReusableView.identifier,
           for: indexPath
         ) as? GeneticLabelCollectionReusableView {
           // config view

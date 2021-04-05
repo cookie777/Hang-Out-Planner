@@ -1,104 +1,14 @@
 //
-//  LocationDetailViewController.swift
+//  LocationDetialVC.swift
 //  Hang-Out Planner
 //
-//  Created by Takayuki Yamaguchi on 2021-01-17.
+//  Created by Takayuki Yamaguchi on 2021-04-02.
 //
 
 import UIKit
-import SafariServices
 
-///  This vc is to display location detail when user select at PlanDetailViewController.Priority is Low.
-class LocationDetailViewController: UIViewController,UITextViewDelegate {
-  
-  // A location selected at `PlanDetailViewController`
-  let location: Location
-  
-  init(location: Location) {
-    self.location = location
-    super.init(nibName: nil, bundle: nil)
-  }
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  let backButton: UIButton = {
-    let button = UIButton()
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
-  
-  let imageView :UIImageView = {
-    let imageV = UIImageView()
-    imageV.layer.cornerRadius = 8
-    imageV.image = nil // later, fill
-    imageV.translatesAutoresizingMaskIntoConstraints = false
-    imageV.contentMode = .scaleAspectFill
-    imageV.layer.masksToBounds = true
-    imageV.layer.zPosition = 1
-    return imageV
-  }()
-  
-  let nameLabel = LargeHeaderLabel(text:" ")
-  let categoryLabel = TextLabel(text: " ")
-  
-  let ratingLabelLeft = TextLabel(text: " ")
-  let ratingLabelRight = TextLabel(text: " on Yelp")
-  lazy var ratingLabelWrapper = HorizontalStackView(arrangedSubviews: [ratingLabelLeft, ratingLabelRight])
-  
-  let addressTitle = SmallHeaderLabel(text: "Address")
-  let addressLabel = SubTextLabel(text: " ")
-  let phoneTitle = SmallHeaderLabel(text: "Phone")
-  let phoneLabel = SubTextLabel(text: " ")
-  
-  let yelpLinkLabel = SubTextLabel(text: "Find more on")
-  let yelpLink = TextLabel(text: "  Yelp")
-  lazy var yelpLinkWrapper = HorizontalStackView(arrangedSubviews: [yelpLinkLabel, yelpLink])
-  
-  lazy var lowerStackView = VerticalStackView(
-    arrangedSubviews: [
-      nameLabel,
-      categoryLabel,
-      ratingLabelWrapper,
-      addressTitle,
-      addressLabel,
-      phoneTitle,
-      phoneLabel,
-      yelpLinkWrapper
-    ])
-  
-  let mainScrollView = UIScrollView()
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    view.backgroundColor = .systemBackground
-    
-    // If there is no image, try fetch.
-    if imageView.image == nil {
-      let locationUrl = location.imageURL
-      NetworkController.shared.fetchImage(urlString: locationUrl) { (fetchedimage) in
-        guard let fetchedImage = fetchedimage else {return}
-        DispatchQueue.main.async {
-          self.imageView.image = fetchedImage
-        }
-      }
-    }
-    
-    
-    setMainScrollView()
-    updateValues()
-    
-    // Adding button or gestureRec has to be later than scroll bar.
-    setYelpLink()
-    setBackButton()
-    
-    // This has to be last. Because layoutifneeded has to be done, after every element has added.
-    setContentSize()
-  }
-  
-
-  func setMainScrollView() {
-    
+extension LocationDetailViewController {
+  func configMainScrollView() {
     // Set scroll view
     view.addSubview(mainScrollView)
     mainScrollView.matchParent()
@@ -124,15 +34,9 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
     lowerStackView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor, constant: -32*2).isActive = true
     lowerStackView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 24).isActive = true
     lowerStackView.centerXin(mainScrollView)
-    
-
-    
   }
   
-  
-  func updateValues() {
-
-    
+  func configLabel() {
     nameLabel.text = location.title
     categoryLabel.text = location.category.rawValue
     categoryLabel.textColor = Category.color(location.category)
@@ -149,13 +53,12 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
     phoneLabel.text = location.phone ?? " "
   }
   
-  func setBackButton() {
-    
+  func configBackButton() {
     // Set Back button. Independent to other views
     view.addSubview(backButton)
     backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 32).isActive = true
     backButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
-    backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+    backButton.addTarget(self, action: #selector(backActionTapped), for: .touchUpInside)
     backButton.setTitle("Close", for: .normal)
     backButton.setTitleColor(.systemBlue, for: .normal)
     backButton.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .bold)
@@ -164,22 +67,20 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
     backButton.layer.shadowOffset = CGSize(width: 0, height: -1)
     backButton.layer.shadowRadius = 6
     backButton.layer.shadowOpacity = 0.6
-    
   }
   
-  
-  func setYelpLink() {
+  func configYelpLink() {
     yelpLink.setContentHuggingPriority(.required, for: .horizontal)
     yelpLink.textColor = .systemBlue
     yelpLinkLabel.textAlignment = .right
-    let tap = UITapGestureRecognizer(target: self, action: #selector(goToYelp))
+    let tap = UITapGestureRecognizer(target: self, action: #selector(goToYelpTapped))
     yelpLink.isUserInteractionEnabled = true
     yelpLink.addGestureRecognizer(tap)
     yelpLink.layer.zPosition = 2
   }
   
   // When you want to set dynamic scroll view height depends on content, you must set content size.
-  func setContentSize() {
+  func configContentSize() {
     imageView.layoutIfNeeded()
     lowerStackView.layoutIfNeeded()
     mainScrollView.contentSize = CGSize(
@@ -187,17 +88,17 @@ class LocationDetailViewController: UIViewController,UITextViewDelegate {
       height: imageView.frame.height + 24 + lowerStackView.frame.height + 48
     )
   }
-  
-  @objc func backAction() {
+}
+
+
+import SafariServices
+extension LocationDetailViewController {
+  @objc func backActionTapped() {
     self.dismiss(animated: true, completion: nil)
   }
   //  if you tap Yelp Label, you can go to the website.
-  @objc func goToYelp() {
+  @objc func goToYelpTapped() {
     let vc = SFSafariViewController(url: URL(string: location.website!)!)
     present(vc, animated: true)
   }
 }
-
-
-
-

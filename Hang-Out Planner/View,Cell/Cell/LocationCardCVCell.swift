@@ -8,6 +8,8 @@
 import UIKit
 
 class LocationCardCVCell: BasicCardCollectionViewCell {
+  static let identifier = "location card"
+  
   var locationTitleLabel = SmallHeaderLabel(text: "")
   var addressLabel = SubTextLabel(text: "")
   
@@ -71,10 +73,13 @@ class LocationCardCVCell: BasicCardCollectionViewCell {
   }
   
   func fetchAndApplyImage(_ index: Int, _ url: String?, _ fetchedImages: FetchedImages) {
-    // If some image has already existed, avoid fetching
+    // If some image has already existed, don't fetch
     if let image = fetchedImages.source![index] {
       locationImageView.image = image
       return
+    } else {
+      // otherwise, firstly update as place holder
+      locationImageView.image = Constants.Image.placeHolder
     }
 
     // if there is no image, and imageURL is available

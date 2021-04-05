@@ -22,19 +22,19 @@ extension MainCollectionViewController {
     // cell
     collectionView.register(
       CategoryCardCVCell.self,
-      forCellWithReuseIdentifier: Constants.Identifier.Cell.list
+      forCellWithReuseIdentifier: CategoryCardCVCell.identifier
     )
     // supplementary (header)
     collectionView.register(
       MainMapCollectionReusableView.self,
       forSupplementaryViewOfKind: Constants.Kind.sectionHeader,
-      withReuseIdentifier: Constants.Identifier.SupplementaryView.mainMap
+      withReuseIdentifier: MainMapCollectionReusableView.identifier
     )
     // supplementary (group header)
     collectionView.register(
       GeneticLabelCollectionReusableView.self,
       forSupplementaryViewOfKind: Constants.Kind.groupHeader,
-      withReuseIdentifier: Constants.Identifier.SupplementaryView.geneticLabel
+      withReuseIdentifier: GeneticLabelCollectionReusableView.identifier
     )
   }
   
@@ -52,7 +52,7 @@ extension MainCollectionViewController {
           switch self.sections[indexPath.section] {
           case .list:
             let cell = collectionView.dequeueReusableCell(
-              withReuseIdentifier: Constants.Identifier.Cell.list,
+              withReuseIdentifier: CategoryCardCVCell.identifier,
               for: indexPath
             ) as! CategoryCardCVCell
          
@@ -72,7 +72,7 @@ extension MainCollectionViewController {
         // if ReusableSupplementaryView is for section header
         if let headerView = self.collectionView.dequeueReusableSupplementaryView(
           ofKind: kind,
-          withReuseIdentifier: Constants.Identifier.SupplementaryView.mainMap,
+          withReuseIdentifier: MainMapCollectionReusableView.identifier,
           for: indexPath
         ) as? MainMapCollectionReusableView {
           // config view
@@ -90,7 +90,7 @@ extension MainCollectionViewController {
         // if ReusableSupplementaryView is for group header
         if let headerView = self.collectionView.dequeueReusableSupplementaryView(
           ofKind: kind,
-          withReuseIdentifier: Constants.Identifier.SupplementaryView.geneticLabel,
+          withReuseIdentifier: GeneticLabelCollectionReusableView.identifier,
           for: indexPath
         ) as? GeneticLabelCollectionReusableView {
           // config view

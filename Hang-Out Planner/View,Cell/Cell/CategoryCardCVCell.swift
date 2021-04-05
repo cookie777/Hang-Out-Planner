@@ -8,6 +8,7 @@
 import SwipeCellKit
 
 class CategoryCardCVCell: BasicCardCollectionViewCell {
+  static let identifier = "category card"
   
   var icon = UIImageView(frame: .zero)
   var textlb = SmallHeaderLabel(text: "")

@@ -8,6 +8,7 @@
 import UIKit
 
 class PlanCardCVCell: UICollectionViewCell {
+  static let identifier = "plan card"
   
   var topNLabel : LargeHeaderLabel = {
     let lb = LargeHeaderLabel(text: "a") // 1,2,3...
@@ -95,17 +96,5 @@ class PlanCardCVCell: UICollectionViewCell {
       locationListStackView.addArrangedSubview(lb)
     }
     
-  }
-  
-
-  // return Location title by location id
-  static func checkLocationName(id: Int) -> String {
-    var locationName = ""
-    for location in allLocations {
-      if location.id == id {
-        locationName = location.title
-      }
-    }
-    return locationName
   }
 }

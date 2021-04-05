@@ -10,21 +10,6 @@ import UIKit
 
 
 struct Constants {
-  
-  struct Identifier {
-    struct Cell {
-      static let map = "map"
-      static let list = "list"
-      static let distance = "d"
-    }
-    // What to use
-    struct SupplementaryView {
-      static let mainMap = "main-map"
-      static let planDetailMap = "planDetail-map"
-      static let geneticLabel = "genetic-label"
-    }
-  }
-  // where to put, purpose
   struct Kind {
     static let sectionHeader = "kind-section"
     static let groupHeader = "kind-group"
@@ -38,7 +23,9 @@ struct Constants {
     static let annotationTapped = NSNotification.Name("annotationIsTapped")
   }
   
-  
+  struct UI {
+    static let categoryCellHeight: CGFloat = 56
+  }
 }
 
 extension UIView {

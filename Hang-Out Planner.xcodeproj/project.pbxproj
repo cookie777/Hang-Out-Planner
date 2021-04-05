@@ -15,8 +15,15 @@
 		485DAB462617B7B8001437D6 /* MKMapView+fitAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DAB452617B7B8001437D6 /* MKMapView+fitAll.swift */; };
 		485DAB652617FBC3001437D6 /* PlanDetailCVC+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DAB642617FBC3001437D6 /* PlanDetailCVC+Transition.swift */; };
 		485DAB7126181264001437D6 /* MKMapView+TakeSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DAB7026181264001437D6 /* MKMapView+TakeSnapshot.swift */; };
+		486C88AE261A41FB00831294 /* PlanDetailMapCRV+MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C88AD261A41FB00831294 /* PlanDetailMapCRV+MapView.swift */; };
+		486C88B5261A427500831294 /* CategorySelectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C88B4261A427500831294 /* CategorySelectionCollectionViewController.swift */; };
 		486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D0D5D25BD412D00858B03 /* UserLocationController.swift */; };
+		4870F3AD26183153008FCF0E /* LocationDetialVC+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4870F3AC26183153008FCF0E /* LocationDetialVC+Layout.swift */; };
 		4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */; };
+		488022FC261A873700CD36D1 /* CategorySelectionCVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488022FB261A873700CD36D1 /* CategorySelectionCVC+DataSource.swift */; };
+		48802305261AA4C100CD36D1 /* CategorySelectionCVC+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48802304261AA4C100CD36D1 /* CategorySelectionCVC+Layout.swift */; };
+		48802324261ACBC400CD36D1 /* CategorySelectionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48802323261ACBC400CD36D1 /* CategorySelectionCollectionReusableView.swift */; };
+		4880232C261AD8C400CD36D1 /* CategorySelectionCVC+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880232B261AD8C400CD36D1 /* CategorySelectionCVC+Transition.swift */; };
 		488094BD25C2AD1B0087416A /* UIStackView+removeAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */; };
 		4891BB652611A07A006F1892 /* GeneticLabelCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891BB642611A07A006F1892 /* GeneticLabelCollectionReusableView.swift */; };
 		4891BB702611A1AB006F1892 /* MainMapCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891BB6F2611A1AB006F1892 /* MainMapCollectionReusableView.swift */; };
@@ -88,8 +95,15 @@
 		485DAB452617B7B8001437D6 /* MKMapView+fitAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+fitAll.swift"; sourceTree = "<group>"; };
 		485DAB642617FBC3001437D6 /* PlanDetailCVC+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanDetailCVC+Transition.swift"; sourceTree = "<group>"; };
 		485DAB7026181264001437D6 /* MKMapView+TakeSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+TakeSnapshot.swift"; sourceTree = "<group>"; };
+		486C88AD261A41FB00831294 /* PlanDetailMapCRV+MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlanDetailMapCRV+MapView.swift"; sourceTree = "<group>"; };
+		486C88B4261A427500831294 /* CategorySelectionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionCollectionViewController.swift; sourceTree = "<group>"; };
 		486D0D5D25BD412D00858B03 /* UserLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationController.swift; sourceTree = "<group>"; };
+		4870F3AC26183153008FCF0E /* LocationDetialVC+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationDetialVC+Layout.swift"; sourceTree = "<group>"; };
 		4875971A25C21A1F00B3C5ED /* AdjustedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustedTableView.swift; sourceTree = "<group>"; };
+		488022FB261A873700CD36D1 /* CategorySelectionCVC+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategorySelectionCVC+DataSource.swift"; sourceTree = "<group>"; };
+		48802304261AA4C100CD36D1 /* CategorySelectionCVC+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategorySelectionCVC+Layout.swift"; sourceTree = "<group>"; };
+		48802323261ACBC400CD36D1 /* CategorySelectionCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionCollectionReusableView.swift; sourceTree = "<group>"; };
+		4880232B261AD8C400CD36D1 /* CategorySelectionCVC+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategorySelectionCVC+Transition.swift"; sourceTree = "<group>"; };
 		488094BC25C2AD1B0087416A /* UIStackView+removeAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+removeAll.swift"; sourceTree = "<group>"; };
 		4891BB642611A07A006F1892 /* GeneticLabelCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneticLabelCollectionReusableView.swift; sourceTree = "<group>"; };
 		4891BB6F2611A1AB006F1892 /* MainMapCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -180,12 +194,42 @@
 			path = PlanDetailCVC;
 			sourceTree = "<group>";
 		};
+		486C88AC261A419900831294 /* PlanDetailMapCRV */ = {
+			isa = PBXGroup;
+			children = (
+				485B7E76261559E20039A334 /* PlanDetailMapCollectionReusableView.swift */,
+				486C88AD261A41FB00831294 /* PlanDetailMapCRV+MapView.swift */,
+			);
+			path = PlanDetailMapCRV;
+			sourceTree = "<group>";
+		};
+		486C88B7261A428600831294 /* CategorySelectionCVC */ = {
+			isa = PBXGroup;
+			children = (
+				486C88B4261A427500831294 /* CategorySelectionCollectionViewController.swift */,
+				488022FB261A873700CD36D1 /* CategorySelectionCVC+DataSource.swift */,
+				48802304261AA4C100CD36D1 /* CategorySelectionCVC+Layout.swift */,
+				4880232B261AD8C400CD36D1 /* CategorySelectionCVC+Transition.swift */,
+			);
+			path = CategorySelectionCVC;
+			sourceTree = "<group>";
+		};
+		4870F3AB261830F6008FCF0E /* LocationDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */,
+				4870F3AC26183153008FCF0E /* LocationDetialVC+Layout.swift */,
+			);
+			path = LocationDetailVC;
+			sourceTree = "<group>";
+		};
 		4891BB632611A007006F1892 /* SupplementaryView */ = {
 			isa = PBXGroup;
 			children = (
 				4891BB642611A07A006F1892 /* GeneticLabelCollectionReusableView.swift */,
 				4891BB6F2611A1AB006F1892 /* MainMapCollectionReusableView.swift */,
-				485B7E76261559E20039A334 /* PlanDetailMapCollectionReusableView.swift */,
+				48802323261ACBC400CD36D1 /* CategorySelectionCollectionReusableView.swift */,
+				486C88AC261A419900831294 /* PlanDetailMapCRV */,
 			);
 			path = SupplementaryView;
 			sourceTree = "<group>";
@@ -195,6 +239,7 @@
 			children = (
 				48B59E2E25BBD446008FC66E /* DefaultLocation(Vancouver).gpx */,
 				48A4C57025B52D3900264AF9 /* Hang-Out Planner */,
+				48BC2BC0261563EC00CB485C /* Archives */,
 				48A4C56F25B52D3900264AF9 /* Products */,
 				C1CE077690C4DF05B1A92F9F /* Pods */,
 				D5D5EA5918BB189303E3FFAD /* Frameworks */,
@@ -306,7 +351,6 @@
 		48A4C63325B5559200264AF9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				48BC2BC0261563EC00CB485C /* Archives */,
 				48F08B6F2612EE1D00618418 /* CategoryCardCVCell.swift */,
 				48BC2BC52615649200CB485C /* LocationCardCVCell.swift */,
 				48E9D1C526167FBD00042908 /* DistanceCardCVCell.swift */,
@@ -363,11 +407,10 @@
 			isa = PBXGroup;
 			children = (
 				48F08B502612A70900618418 /* MainCVC */,
-				B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */,
+				486C88B7261A428600831294 /* CategorySelectionCVC */,
 				48E9F5822613035300BBA223 /* PlanListCVC */,
 				485B7E7926155B520039A334 /* PlanDetailCVC */,
-				48A4C5E725B552CA00264AF9 /* LocationDetailViewController.swift */,
-				48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */,
+				4870F3AB261830F6008FCF0E /* LocationDetailVC */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -375,6 +418,8 @@
 		48BC2BC0261563EC00CB485C /* Archives */ = {
 			isa = PBXGroup;
 			children = (
+				B088871E25B911D000D5F9E0 /* CategorySelectViewController.swift */,
+				48A4C5C825B5524700264AF9 /* PlanListTableViewController.swift */,
 				48E9D2232617A30100042908 /* PlanDetailCVC+MapView.swift */,
 				48A4C62525B554AB00264AF9 /* DistanceCardTVCell.swift */,
 				48A4C61625B5546C00264AF9 /* CategoryCardTVCell.swift */,
@@ -405,8 +450,8 @@
 			isa = PBXGroup;
 			children = (
 				48E9F57F2612F92F00BBA223 /* PlanListCollectionViewController.swift */,
-				48E9F5892613064D00BBA223 /* PlanListCVC+DataSource.swift */,
 				48E9F59226130B2800BBA223 /* PlanListCVC+Layout.swift */,
+				48E9F5892613064D00BBA223 /* PlanListCVC+DataSource.swift */,
 			);
 			path = PlanListCVC;
 			sourceTree = "<group>";
@@ -564,6 +609,7 @@
 				48DDE18725BE5B1B008FA63A /* NetworkController+fetchLocations.swift in Sources */,
 				48E9F58F2613099800BBA223 /* PlanCardCVCell.swift in Sources */,
 				48A4C65525B5568100264AF9 /* TextLabel.swift in Sources */,
+				486C88AE261A41FB00831294 /* PlanDetailMapCRV+MapView.swift in Sources */,
 				48A4C66E25B5574A00264AF9 /* UILabel+LineSpacing.swift in Sources */,
 				4891BB652611A07A006F1892 /* GeneticLabelCollectionReusableView.swift in Sources */,
 				485DAB7126181264001437D6 /* MKMapView+TakeSnapshot.swift in Sources */,
@@ -577,6 +623,7 @@
 				48DE334525B8ECE2001630B7 /* Location.swift in Sources */,
 				48A4C57225B52D3900264AF9 /* AppDelegate.swift in Sources */,
 				48A4C64225B5562B00264AF9 /* LargeHeaderLabel.swift in Sources */,
+				4880232C261AD8C400CD36D1 /* CategorySelectionCVC+Transition.swift in Sources */,
 				48E9D2362617A9D400042908 /* CustomAnnotation.swift in Sources */,
 				4875971B25C21A1F00B3C5ED /* AdjustedTableView.swift in Sources */,
 				485DAB652617FBC3001437D6 /* PlanDetailCVC+Transition.swift in Sources */,
@@ -585,6 +632,7 @@
 				48A4C67025B5574A00264AF9 /* UIView+ConstraintLayout.swift in Sources */,
 				AEB778AC25C7770500AA2EE5 /* SpeedCalculator.swift in Sources */,
 				48A4C60725B553B400264AF9 /* GoButton.swift in Sources */,
+				48802305261AA4C100CD36D1 /* CategorySelectionCVC+Layout.swift in Sources */,
 				48D4876425B5836800EA55D6 /* BasicLabel.swift in Sources */,
 				48A4C66F25B5574A00264AF9 /* UIEdgeInsetsnilAcceptable.swift in Sources */,
 				48A4C67525B557D900264AF9 /* NetworkController.swift in Sources */,
@@ -593,18 +641,22 @@
 				48DE334425B8ECE2001630B7 /* GlobalVariable.swift in Sources */,
 				48A4C61725B5546C00264AF9 /* CategoryCardTVCell.swift in Sources */,
 				48E9F59326130B2800BBA223 /* PlanListCVC+Layout.swift in Sources */,
+				486C88B5261A427500831294 /* CategorySelectionCollectionViewController.swift in Sources */,
 				486D0D5E25BD412D00858B03 /* UserLocationController.swift in Sources */,
 				485B7E7E261563780039A334 /* PlanDetailCVC+Layout.swift in Sources */,
 				48A4C60225B553AA00264AF9 /* AddButton.swift in Sources */,
 				48A4C5F225B5536300264AF9 /* MainVCButton.swift in Sources */,
 				48452E1325F1A10700432776 /* Constants.swift in Sources */,
 				48F08B5F2612AA2D00618418 /* MainCVC+Transition.swift in Sources */,
+				48802324261ACBC400CD36D1 /* CategorySelectionCollectionReusableView.swift in Sources */,
 				48A4C62125B5549500264AF9 /* LocationCardTVCell.swift in Sources */,
+				488022FC261A873700CD36D1 /* CategorySelectionCVC+DataSource.swift in Sources */,
 				48A4C5CE25B5528D00264AF9 /* PlanDetailViewController.swift in Sources */,
 				48E9F58A2613064D00BBA223 /* PlanListCVC+DataSource.swift in Sources */,
 				48A4C57425B52D3900264AF9 /* SceneDelegate.swift in Sources */,
 				48A4C5C925B5524700264AF9 /* PlanListTableViewController.swift in Sources */,
 				48A4C61C25B5548000264AF9 /* PlanCardTVCell.swift in Sources */,
+				4870F3AD26183153008FCF0E /* LocationDetialVC+Layout.swift in Sources */,
 				48DE334925B8ECE2001630B7 /* Plan.swift in Sources */,
 				48F08B702612EE1D00618418 /* CategoryCardCVCell.swift in Sources */,
 				48DE334325B8ECE2001630B7 /* Catetory.swift in Sources */,

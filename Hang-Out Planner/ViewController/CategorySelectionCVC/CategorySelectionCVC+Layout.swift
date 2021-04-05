@@ -1,17 +1,18 @@
 //
-//  PlanListCVC+Layout.swift
+//  CategorySelectionCVC.swift
 //  Hang-Out Planner
 //
-//  Created by Takayuki Yamaguchi on 2021-03-30.
+//  Created by Takayuki Yamaguchi on 2021-04-04.
 //
 
 import UIKit
 
-extension PlanListCollectionViewController {
- 
+extension CategorySelectionCollectionViewController {
   func createCollectionViewLayout() {
     view.backgroundColor = UIColor.Custom.forBackground
     collectionView.backgroundColor = UIColor.Custom.forBackground
+    // close button
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissViewController))
     // compositionalLayout
     collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false)
   }
@@ -29,10 +30,9 @@ extension PlanListCollectionViewController {
   }
   
   private func createSection() -> NSCollectionLayoutSection {
-    
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
-      heightDimension: .estimated(160)
+      heightDimension: .estimated(Constants.UI.categoryCellHeight)
     )
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
@@ -42,26 +42,24 @@ extension PlanListCollectionViewController {
     )
     let group = NSCollectionLayoutGroup.horizontal(
       layoutSize: groupSize,
-      subitem: item,
-      count: 1
+      subitems: [item]
     )
-    group.contentInsets = .init(top: 32, leading: 8, bottom: 32, trailing: 16)
+    group.contentInsets = .init(top: 32, leading: 0, bottom: 32, trailing: 0)
     
     let section = NSCollectionLayoutSection(group: group)
-    section.interGroupSpacing = 48
+    section.interGroupSpacing = 24
     section.contentInsets = .init(top: 16, leading: 32, bottom: 0, trailing: 32)
-    section.boundarySupplementaryItems = [createHeader(0, Constants.Kind.sectionHeader)]
-    
+    section.boundarySupplementaryItems = [createHeader(Constants.Kind.sectionHeader)]
     return section
   }
   
   /// create group header used in section
   private func createHeader(
-    _ height: CGFloat = 40,
-    _ kindOf: String = ""
+    _ kindOf: String = "",
+    _ height: CGFloat = 0
   ) -> NSCollectionLayoutBoundarySupplementaryItem {
     let headerSize = NSCollectionLayoutSize(
-      widthDimension: .fractionalWidth(1.0),
+      widthDimension: .fractionalWidth(1.0*0.98),
       heightDimension: .estimated(height)
     )
     let header = NSCollectionLayoutBoundarySupplementaryItem(
@@ -71,5 +69,5 @@ extension PlanListCollectionViewController {
     )
     return header
   }
-
+  
 }

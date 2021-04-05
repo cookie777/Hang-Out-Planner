@@ -9,6 +9,8 @@ import UIKit
 
 /// Header view for collection view. You can set any kind of label.
 class GeneticLabelCollectionReusableView: UICollectionReusableView {
+  static let identifier = "generic label"
+  
   var label: UILabel?
   
   override init(frame: CGRect) {

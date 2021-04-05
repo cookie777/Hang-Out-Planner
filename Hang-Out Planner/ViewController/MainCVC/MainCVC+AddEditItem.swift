@@ -9,13 +9,14 @@ import UIKit
 
 // MARK: - AddEdit config
 
-extension MainCollectionViewController: AddEditCategoryDelegate {
+extension MainCollectionViewController: AddEditItemDelegate {
   // When edit is finished
   func edit(_ newItem: (id: UUID, val: Category), _ oldItem: (id: UUID, val: Category)) {
     snapshot.insertItems([Item.category(newItem)], afterItem: Item.category(oldItem))
     snapshot.deleteItems([Item.category(oldItem)])
       dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
   }
+  
   // When add is finished
   func addCategory(_ category: Category) {
     let newItem = Item.category((UUID(), category))
@@ -26,32 +27,34 @@ extension MainCollectionViewController: AddEditCategoryDelegate {
     updateGoButtonState()
     
     collectionView.scrollToItem(
-      at: IndexPath(item: snapshot.numberOfItems(inSection: .list) - 1,
-                    section: sections.firstIndex(of: .list) ?? 0),
+      at: IndexPath(item: snapshot.numberOfItems(inSection: .list) - 1, section: sections.firstIndex(of: .list) ?? 0),
       at: .bottom,
       animated: true
     )
   }
+  
   // when item is selected
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let didSelectItem = snapshot.itemIdentifiers(inSection: .list)[indexPath.row]
+    let editingItem = snapshot.itemIdentifiers(inSection: .list)[indexPath.row]
     
-    let addEditVC = CategorySelectViewController()
-    addEditVC.editingItem = (didSelectItem.categoryId!, didSelectItem.category!)
-    addEditVC.delegate = self
-    let addToDoVC = UINavigationController(rootViewController: addEditVC)
-    addToDoVC.hideBarBackground() // hide nv bar background.
-    present(addToDoVC, animated: true, completion: nil)
+    let editVC = CategorySelectionCollectionViewController()
+    editVC.editingItem = (editingItem.categoryId!, editingItem.category!)
+    editVC.delegate = self
+    let nextVC = UINavigationController(rootViewController: editVC)
+    nextVC.clearNavigationBar(with: UIColor.Custom.forBackground)
+    present(nextVC, animated: true, completion: nil)
   }
 
+  //when add button is tapped
   @objc func addButtonTapped(){
-    let addEditVC = CategorySelectViewController()
-    addEditVC.delegate = self
-    let addToDoVC = UINavigationController(rootViewController: addEditVC)
-    addToDoVC.hideBarBackground() // hide nv bar background.
-    present(addToDoVC, animated: true, completion: nil)
+    let addVC = CategorySelectionCollectionViewController()
+    addVC.delegate = self
+    let nextVC = UINavigationController(rootViewController: addVC)
+    nextVC.clearNavigationBar(with: UIColor.Custom.forBackground)
+    present(nextVC, animated: true, completion: nil)
   }
 
+  // when go button is tapped
   @objc func goButtonTapped(){
     // If no user location, stop going next
     guard let _ = UserLocationController.shared.coordinatesMostRecent else {

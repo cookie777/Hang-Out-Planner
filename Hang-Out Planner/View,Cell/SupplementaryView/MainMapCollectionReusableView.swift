@@ -9,6 +9,8 @@ import UIKit
 import MapKit
 
 class MainMapCollectionReusableView: UICollectionReusableView {
+  static let identifier = "main map"
+  
   let headerTitle = LargeHeaderLabel(text: "Where Do You \nWant To Go?")
   let mapView : MKMapView = {
     let map = MKMapView()

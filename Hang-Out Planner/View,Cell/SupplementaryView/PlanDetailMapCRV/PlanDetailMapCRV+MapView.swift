@@ -36,7 +36,7 @@ extension PlanDetailMapCollectionReusableView: MKMapViewDelegate {
 extension PlanDetailMapCollectionReusableView {
   /// Create annotation on locations
   private func createAnnotation(startLocationId: Int, routeCount: Int) {
-    guard let currentLocation = (allLocations.first{$0.id == startLocationId}) else {return}
+    guard let currentLocation = (User.allLocations.first{$0.id == startLocationId}) else {return}
 
     let annotation = CustomAnnotation(location: currentLocation, routeOrder: routeCount)
     // set annotation marker to routeOrder count
@@ -102,7 +102,7 @@ extension PlanDetailMapCollectionReusableView {
   /// - Parameter itemId: id of location
   /// - Returns: MKMapItem to draw route
   private func createMapItemFromItemId(itemId : Int)-> MKMapItem{
-    let location = allLocations[itemId]
+    let location = User.allLocations[itemId]
     let coordinates = CLLocationCoordinate2D(
       latitude: location.latitude,
       longitude: location.longitude

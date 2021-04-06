@@ -10,6 +10,7 @@ import Foundation
 // This extension is to add fetching locations data from yelp-api
 // The code is long, so I added as extension
 extension NetworkController{
+  // MARK: - API key
   
   // Getting the apiKey from plist
   private func getAPIKey()->String{
@@ -28,7 +29,8 @@ extension NetworkController{
     return apiKey
   }
   
-  // MARK: - Fetch func
+  
+  // MARK: - Fetch functions
   
   /// Create all locations by fetching yelp-api.
   /// - Created data will be store as `allLocations`
@@ -78,9 +80,9 @@ extension NetworkController{
     group.notify(queue: .main) {
       
       // Creating final locations with adding user location and assigning id.
-      allLocations.removeAll()
-      allLocations = [userCurrentLocation] + NetworkController.shared.tempAllLocations
-      (0..<allLocations.count).forEach{allLocations[$0].id = $0}
+      User.allLocations.removeAll()
+      User.allLocations = [User.userLocation] + NetworkController.shared.tempAllLocations
+      (0..<User.allLocations.count).forEach{User.allLocations[$0].id = $0}
       // Remove temp data for memory saving.
       NetworkController.shared.tempAllLocations.removeAll()
       
@@ -108,8 +110,8 @@ extension NetworkController{
     
     // Query parameters. This will be like ? key0=value0 & key1=value1 ...
     // Use user coordinates fetched from GPS
-    let lat =  UserLocationController.shared.coordinatesMostRecent!.latitude as Double// later fix. set some default coordinate
-    let long = UserLocationController.shared.coordinatesMostRecent!.longitude as Double// later fix.
+    let lat =  LocationController.shared.coordinatesOfMostRecent!.latitude as Double// later fix. set some default coordinate
+    let long = LocationController.shared.coordinatesOfMostRecent!.longitude as Double// later fix.
     // Search area n meter from coordinates.
     let radius = 10_000
     let queryParameters = [
@@ -225,11 +227,14 @@ extension NetworkController{
     
   }
   
-  
-  // MARK: - Decode struct for JSON parsing.
+}
+
+
+// MARK: - Decode model for JSON parsing.
+
+extension NetworkController {
   struct YelpFields: Codable {
     var businesses : [YelpLocation]
-    
   }
   struct YelpLocation: Codable {
     var title    : String
@@ -266,21 +271,19 @@ extension NetworkController{
       case address        = "location"
       case phone
     }
-    
   }
 }
 
 
-// MARK: - Debug func. Print data
+
+// MARK: - Debug funcions. Printing data
 
 extension NetworkController{
   
   // print `[Location]`
   func printLocations(locations: [Location]) {
-    
     for l in locations{
       print("""
-
         apiId      : \(l.id)
         latitude: \(l.latitude)
         longitude: \(l.longitude)
@@ -294,15 +297,12 @@ extension NetworkController{
         address: \(l.address)
         ranking : \(String(describing: l.ranking))
         phone: \(String(describing: l.phone))
-
       """)
     }
   }
   
-  
   // print `[Location]`
   func printPlans(plans: [Plan]) {
-
     for l in plans{
       print("""
 
@@ -325,8 +325,6 @@ extension NetworkController{
       }
       print("""
         ------------------------
-
-
 
 
       """)

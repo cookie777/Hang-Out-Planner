@@ -7,7 +7,8 @@
 
 import UIKit
 
-// MARK: - AddEdit config
+
+// MARK: - AddEdit delegate func
 
 extension MainCollectionViewController: AddEditItemDelegate {
   // When edit is finished
@@ -32,13 +33,19 @@ extension MainCollectionViewController: AddEditItemDelegate {
       animated: true
     )
   }
-  
+}
+
+
+// MARK: - AddEdit config
+
+extension MainCollectionViewController {
   // when item is selected
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let editingItem = snapshot.itemIdentifiers(inSection: .list)[indexPath.row]
     
-    let editVC = CategorySelectionCollectionViewController()
-    editVC.editingItem = (editingItem.categoryId!, editingItem.category!)
+    let editVC = CategorySelectionCollectionViewController(
+      (editingItem.categoryId!,editingItem.category!)
+    )
     editVC.delegate = self
     let nextVC = UINavigationController(rootViewController: editVC)
     nextVC.clearNavigationBar(with: UIColor.Custom.forBackground)
@@ -57,7 +64,7 @@ extension MainCollectionViewController: AddEditItemDelegate {
   // when go button is tapped
   @objc func goButtonTapped(){
     // If no user location, stop going next
-    guard let _ = UserLocationController.shared.coordinatesMostRecent else {
+    guard let _ = LocationController.shared.coordinatesOfMostRecent else {
       print("no user location, try it again!")
       return
     }
@@ -67,14 +74,14 @@ extension MainCollectionViewController: AddEditItemDelegate {
     
     let selectCategories = snapshot.itemIdentifiers(inSection: .list).map {$0.category!}
     
-    if noMoreAPI { // Debug mode. If true, it will only use sample data.
+    if Constants.Debug.noMoreAPI { // Debug mode. If true, it will only use sample data.
       transitWithDebugMode(selectCategories)
       return
     }
     
     // If user has moved or if there is no locations data,
     // then re-create(request, and calculate) all data
-    if UserLocationController.shared.hasUserMoved() || allLocations.count <= 21 {
+    if LocationController.shared.hasUserMoved() || User.allLocations.count <= 21 {
       transitWithApiRequest(selectCategories)
     }else{
     // otherwise reuse calc data.

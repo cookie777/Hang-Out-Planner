@@ -19,13 +19,13 @@ extension MainCollectionViewController{
 
     // Start updating location.
     // if already updating, need not to do.
-    if UserLocationController.shared.isUpdatingLocation{return}
+    if LocationController.shared.isUpdatingLocation{return}
 
-    UserLocationController.shared.start(completion: { [unowned self] in
+    LocationController.shared.start(completion: { [unowned self] in
       // Whenever user location is updated (or start updating), this closure is invoked.
-
+      
       // Get current user locaiton
-      guard let center = UserLocationController.shared.coordinatesMostRecent else {return}
+      guard let center = LocationController.shared.coordinatesOfMostRecent else {return}
 
       // Set region of the mapView using current location
       let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
@@ -36,15 +36,16 @@ extension MainCollectionViewController{
       
       mapView.setRegion(region, animated: false)
       mapView.showsUserLocation = true
+      
       // Get address by using current location
-      UserLocationController.shared.getCurrentAddress(){ address in
+      LocationController.shared.generateRecentAddress(){ address in
         // if you couldn't get address, use ip one.
         if address.count <= 1 {
-          locationLabel.text = userCurrentLocation.address
+          locationLabel.text = User.userLocation.address
           return
         }
         // update user location info
-        userCurrentLocation.address = address
+        User.userLocation.address = address
         // update location label
         locationLabel.text = address
       }
@@ -53,7 +54,7 @@ extension MainCollectionViewController{
 
   override func viewWillDisappear(_ animated: Bool) {
     // Stop tracking user data.
-    UserLocationController.shared.stop()
+    LocationController.shared.stop()
   }
 
 }

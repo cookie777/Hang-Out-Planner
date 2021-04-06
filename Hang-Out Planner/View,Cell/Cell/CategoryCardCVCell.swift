@@ -11,18 +11,23 @@ class CategoryCardCVCell: BasicCardCollectionViewCell {
   static let identifier = "category card"
   
   var icon = UIImageView(frame: .zero)
-  var textlb = SmallHeaderLabel(text: "")
+  var checkmark = UIImageView(image: UIImage(systemName: "checkmark"))
+  var mainLabel = SmallHeaderLabel(text: "")
   
   // If category is set, we also set icon img, lb text, background color
   var category : Category! {
     didSet{
+      // update icon
       if let iconImg = Category.iconImage(category){
         icon.image = iconImg
         Category.overrideImageColor(imgV: icon, category: category)
+        Category.overrideImageColor(imgV: checkmark, category: category)
       }
       
-      textlb.text = category.rawValue
-      textlb.textColor = Category.color(category)
+      
+      // update label text and color
+      mainLabel.text = category.rawValue
+      mainLabel.textColor = Category.color(category)
       mainBackground.layer.borderColor = Category.color(category).withAlphaComponent(0.7).cgColor
     }
   }
@@ -30,6 +35,10 @@ class CategoryCardCVCell: BasicCardCollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
+    configureLayout()
+  }
+  
+  private func configureLayout() {
     // Icon layout
     contentView.addSubview(icon)
     icon.constraintWidth(equalToConstant: 22)
@@ -37,10 +46,17 @@ class CategoryCardCVCell: BasicCardCollectionViewCell {
     icon.centerYin(contentView)
     icon.leadingAnchor.constraint(equalTo: mainBackground.leadingAnchor, constant: 24).isActive = true
     
-    // Text layout
-    contentView.addSubview(textlb)
-    textlb.centerXYin(contentView)
+    // checkmark
+    contentView.addSubview(checkmark)
+    checkmark.constraintWidth(equalToConstant: 20)
+    checkmark.constraintHeight(equalToConstant: 20)
+    checkmark.centerYin(contentView)
+    checkmark.trailingAnchor.constraint(equalTo: mainBackground.trailingAnchor, constant: -24).isActive = true
+    checkmark.isHidden = true
     
+    // Text layout
+    contentView.addSubview(mainLabel)
+    mainLabel.centerXYin(contentView)
   }
   
   required init?(coder: NSCoder) {

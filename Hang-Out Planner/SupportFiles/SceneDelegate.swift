@@ -99,7 +99,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // to restore the scene back to its current state.
     
     // Whenever the screen gets background, stop tracking
-    UserLocationController.shared.stop()
+    LocationController.shared.stop()
   }
   
   

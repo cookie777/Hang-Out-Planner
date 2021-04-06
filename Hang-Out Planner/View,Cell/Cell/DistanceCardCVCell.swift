@@ -42,17 +42,27 @@ class DistanceCardCVCell: BasicCardCollectionViewCell {
     return sv
   }()
   
-  
-  
   var timeToReachByWalk = SubTextLabel(text: "")
   var timeToReachByCar = SubTextLabel(text: "")
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    configureLayout()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  func configureLayout() {
+    // base
+    self.backgroundColor = UIColor.Custom.forBackground
+    
+    // Distance line
     contentView.addSubview(distanceLine)
     distanceLine.centerXYin(contentView)
     
-    
+    // Distance label
     let timeStackView = VerticalStackView(
       arrangedSubviews: [timeToReachByWalk,timeToReachByCar],
       spacing: 8
@@ -60,16 +70,9 @@ class DistanceCardCVCell: BasicCardCollectionViewCell {
     contentView.addSubview(timeStackView)
     timeStackView.centerYin(distanceLine)
     timeStackView.leadingAnchor.constraint(equalTo: distanceLine.centerXAnchor, constant: 32).isActive = true
-
-    self.backgroundColor = bgColor
   }
   
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  func update(with route: Route) {
-    
+  func configureUI(with route: Route) {
     let minuteByCar = SpeedCalculator.calcCarSpeedInMinute(distance: route.distance)
     let timeOnFoot = SpeedCalculator.calcWalkingSpeed(distance: route.distance)
   

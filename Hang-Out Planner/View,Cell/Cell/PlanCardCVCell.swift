@@ -90,7 +90,7 @@ class PlanCardCVCell: UICollectionViewCell {
     locationListStackView.removeAllArrangedSubviews() // reusing cell, so must reset array.
     for i in 1..<plan.destinationList.count-1{
       let lb = TextLabel(text: "")
-      let text = allLocations[plan.destinationList[i]].title
+      let text = User.allLocations[plan.destinationList[i]].title
       lb.text =  text
       lb.numberOfLines = 1 // no break line.
       locationListStackView.addArrangedSubview(lb)

@@ -105,7 +105,6 @@ extension MainCollectionViewController {
     
     // Allow every item to be reordered
     dataSource.reorderingHandlers.canReorderItem = { item in
-      print(item)
       return item.category != nil
     }
     // Update snapshot after reorder

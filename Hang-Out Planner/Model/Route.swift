@@ -11,7 +11,7 @@ struct Route: Hashable{
   let startLocationId : Int
   let nextLocationId  : Int
 
-  let distance          : Double // meter
+  let distance: Double // meter
   
   // time(second) cost to go the next location.
   // These two time will be estimated not from api, but just from simple calculate using average speed.
@@ -19,12 +19,6 @@ struct Route: Hashable{
   let timeToReachByWalk : Int?
   let timeToReachByCar  : Int?
   
-  /// This is a place to store all routes.
-  /// We will do this when the app is launched.
-  /// But the ideal is, calculates this data at server beforehand, and when the app is launched, we download it.
-  static var allRoutes : [[Route]] = {
-    return [sampleRoutes]
-  }()
   
   static var sampleRoutes : [Route] = [
     Route(

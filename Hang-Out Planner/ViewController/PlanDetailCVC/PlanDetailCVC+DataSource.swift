@@ -20,7 +20,7 @@ extension PlanDetailCollectionViewController {
     resetSnapshot()
     var source: [Item] = []
     for route in plan.routes {
-      let location = allLocations.first { $0.id == route.startLocationId }
+      let location = User.allLocations.first { $0.id == route.startLocationId }
       source.append(Item.location(location!))
       source.append(Item.route(route))
     }
@@ -78,7 +78,7 @@ extension PlanDetailCollectionViewController {
                 withReuseIdentifier: DistanceCardCVCell.identifier,
                 for: indexPath
               ) as! DistanceCardCVCell
-              cell.update(with: route)
+              cell.configureUI(with: route)
               return cell
             }
             
@@ -126,17 +126,6 @@ extension PlanDetailCollectionViewController {
       }
       
       return nil
-    }
-    
-    // Allow every item to be reordered
-    dataSource.reorderingHandlers.canReorderItem = { item in
-      print(item)
-      return item.category != nil
-    }
-    // Update snapshot after reorder
-    dataSource.reorderingHandlers.didReorder = { [weak self] transaction in
-      guard let self = self else { return }
-      self.snapshot = transaction.finalSnapshot
     }
     
     dataSource.apply(snapshot, animatingDifferences: false)

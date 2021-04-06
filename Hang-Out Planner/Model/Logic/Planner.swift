@@ -29,13 +29,13 @@ class Planner {
   // MARK: - Pre-Calc. Creates `allRoutes`.
   ///  Calculate every routes between locations including user's current location.
   static func calculateAllRoutes(){
-    let numOfLocations = allLocations.count
+    let numOfLocations = User.allLocations.count
     
     // Calculate and store all routes
     for si in 0..<numOfLocations{
       for ei in 0..<numOfLocations{
         // I can reduce here. N^2 -> N^N/2. Fix later
-        allRoutes[si][ei] = calculateDistance(startId: si, endId: ei)
+        User.allRoutes[si][ei] = calculateDistance(startId: si, endId: ei)
       }
     }
   }
@@ -46,8 +46,8 @@ class Planner {
   ///   - endId: end id of location in `allLocations`
   /// - Returns: Simple straight distance (Euclidean distance?), without using api.
   static func calculateDistance(startId: Int, endId: Int)->Double{
-    let start = allLocations[startId]
-    let end = allLocations[endId]
+    let start = User.allLocations[startId]
+    let end = User.allLocations[endId]
     let coordinateStart = CLLocation(latitude: start.latitude, longitude: start.longitude)
     let coordinateEnd = CLLocation(latitude: end.latitude, longitude: end.longitude)
     var distanceInMeters = coordinateStart.distance(from: coordinateEnd)
@@ -66,7 +66,7 @@ class Planner {
     
     var locationCandidates : [[Int]] = []
     for category in categories{
-      let l = (allLocations.filter {$0.category == category}).map {$0.id}
+      let l = (User.allLocations.filter {$0.category == category}).map {$0.id}
       locationCandidates.append(l)
     }
 
@@ -128,7 +128,7 @@ class Planner {
       for i in 0...plan.count-2 {
         let start = plan[i]
         let end = plan[i+1]
-        totalDistance += allRoutes[start][end] ?? Double.infinity
+        totalDistance += User.allRoutes[start][end] ?? Double.infinity
       }
       
       
@@ -165,7 +165,7 @@ class Planner {
         let route = Route(
           startLocationId: start,
           nextLocationId: end,
-          distance: allRoutes[start][end]!,
+          distance: User.allRoutes[start][end]!,
           timeToReachByWalk: nil,
           timeToReachByCar: nil
         )
@@ -182,7 +182,7 @@ class Planner {
       var aveRanking = 0.0 // Ranking is just an order of Best in yelp-api. if you get topN item at each category, it will be 0..<N
   
       for i in 1...theNumOfLocation{
-        let currentLocation = allLocations[plan.key[i]]
+        let currentLocation = User.allLocations[plan.key[i]]
         
         // recored rating. if nil, don't count
         if let r = currentLocation.rating{

@@ -15,12 +15,12 @@ extension MainCollectionViewController {
     let nextVC = PlanListCollectionViewController()
     navigationController?.pushViewController(nextVC, animated: true)
 
-    allLocations = [userCurrentLocation] + Location.sampleLocations
+    User.allLocations = [User.userLocation] + Location.sampleLocations
     Planner.calculateAllRoutes()
     let plans = Planner.calculatePlans(categories: selectCategories)
     nextVC.plans = plans
 
-    UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
+    LocationController.shared.coordinatesOfLastTimeTappedGo = LocationController.shared.coordinatesOfMostRecent
   }
   
   func transitWithApiRequest(_ selectCategories: [Category]) {
@@ -32,7 +32,7 @@ extension MainCollectionViewController {
       let plans = Planner.calculatePlans(categories: selectCategories)
       nextVC.plans = plans
       // update the previous coordinates
-      UserLocationController.shared.coordinatesLastTimeYouTappedGo = UserLocationController.shared.coordinatesMostRecent
+      LocationController.shared.coordinatesOfLastTimeTappedGo = LocationController.shared.coordinatesOfMostRecent
     }
   }
   

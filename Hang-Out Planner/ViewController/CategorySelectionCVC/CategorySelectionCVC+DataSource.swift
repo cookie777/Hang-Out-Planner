@@ -8,7 +8,20 @@
 import UIKit
 
 extension CategorySelectionCollectionViewController {
-  func resetSnapshot() {
+  
+  
+  /// If there is an editing Item, set it and bring the category to first
+  /// - Parameter editingItem: the item(category) using is editing
+  func setUpEditingItem(_ editingItem: (id: UUID, val: Category)?) {
+    guard let editingItem = editingItem else { return }
+    guard let editingCategoryIndex = categories.firstIndex(of: editingItem.val) else { return }
+    
+    self.editingItem = editingItem
+    categories.remove(at: editingCategoryIndex)
+    categories.insert(editingItem.val, at: 0)
+  }
+  
+  private func resetSnapshot() {
     snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
     snapshot.deleteAllItems()
     snapshot.appendSections([.list])
@@ -38,7 +51,7 @@ extension CategorySelectionCollectionViewController {
   func createDiffableDataSource(){
     resetSnapshot()
     register()
-    snapshot.appendItems(categories, toSection: .list)
+    snapshot.appendItems(Item.wrapCategory(items: categories), toSection: .list)
     
     dataSource = UICollectionViewDiffableDataSource<Section, Item>(
       collectionView: collectionView,
@@ -52,6 +65,12 @@ extension CategorySelectionCollectionViewController {
                 for: indexPath
               ) as! CategoryCardCVCell
               cell.category = item.category
+              
+              // display check mark if the cell is editing category
+              if editingItem?.val == item.category {
+                cell.checkmark.isHidden = false
+              }
+              
               return cell
             default:
               return nil
@@ -76,28 +95,3 @@ extension CategorySelectionCollectionViewController {
     dataSource.apply(snapshot, animatingDifferences: false)
   }
 }
-
-
-
-
-//  override func numberOfSections(in collectionView: UICollectionView) -> Int {
-//    return sections.count
-//  }
-//
-//  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//    switch sections[section] {
-//      case .list:
-//        return items.count
-//      default:
-//        return 0
-//    }
-//  }
-//
-//  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//
-//    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCardCVCell.identifier, for: indexPath) as? CategoryCardCVCell else { return UICollectionViewCell() }
-//
-//    cell.category = items[indexPath.row].category
-//
-//    return cell
-//  }

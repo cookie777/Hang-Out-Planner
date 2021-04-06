@@ -35,7 +35,6 @@ struct Location: Hashable {
   /// - Parameter score: 1...5
   /// - Returns: ⭐️
   static func starConverter(score :Double)->String{
-    
     let star = "⭐️"
     
     var score = score

@@ -13,18 +13,20 @@ class CategorySelectionCollectionViewController: UICollectionViewController {
   var snapshot: NSDiffableDataSourceSnapshot<Section, Item>!
   var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
   
+  /// attach uuid to allow multiple same category in the snapshot.
   var editingItem : (id: UUID, val: Category)?
   var sections :[Section] = [.list]
-  var categories: [Item] = [
-    .category((UUID(),.amusement)),
-    .category((UUID(),.artAndGallery)),
-    .category((UUID(),.cafe)),
-    .category((UUID(),.fashion)),
-    .category((UUID(),.restaurantAndCafe)),
+  var categories: [Category] = [
+    .amusement,
+    .artAndGallery,
+    .cafe,
+    .fashion,
+    .restaurantAndCafe
   ]
   
-  init() {
+  init(_ editingItem: (id: UUID, val: Category)? = nil) {
     super.init(collectionViewLayout: UICollectionViewLayout())
+    setUpEditingItem(editingItem)
     createCollectionViewLayout()
     createDiffableDataSource()
   }

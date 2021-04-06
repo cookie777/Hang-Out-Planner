@@ -54,7 +54,6 @@ extension UIView {
 }
 
 extension UIColor {
-  
   struct Custom {
     static var forText: UIColor {
       return UIColor { (traitCollection: UITraitCollection) -> UIColor in
@@ -67,6 +66,5 @@ extension UIColor {
         return traitCollection.userInterfaceStyle == .light ? .white : .black
       }
     }
-
   }
 }

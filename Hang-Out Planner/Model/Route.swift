@@ -18,8 +18,12 @@ struct Route: Hashable{
   // Ideally, we can get from mapkit but there is an api limitation. So this time, don't use it.
   let timeToReachByWalk : Int?
   let timeToReachByCar  : Int?
-  
-  
+}
+
+
+// MARK: - Sample Data
+
+extension Route {
   static var sampleRoutes : [Route] = [
     Route(
       startLocationId: Location.sampleStartPoint.id,

@@ -8,8 +8,6 @@
 import Foundation
 
 struct User {
-  
-  
   static var userLocation : Location = Location(
     id: 0,
     apiId: nil,

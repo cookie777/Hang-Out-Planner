@@ -42,10 +42,26 @@ struct Location: Hashable {
     
     return String(repeating: star, count: Int(score))
   }
-  
-  
-  
-  // later discard.
+}
+
+
+/*
+ Usage example
+ 
+ var locations : [Categories: [Location]] =
+ 
+ [
+ amusement: [location0, location1, location2...] ,
+ restaurant: [location0, location1, location2...] ,
+ ...
+ ]
+ 
+ */
+
+
+// MARK: - Sample data
+
+extension Location {
   static var sampleStartPoint = Location(
     id: 0,
     apiId: "mNK0w1qq-Z4bC5ZXdwFn2Q",
@@ -60,7 +76,6 @@ struct Location: Hashable {
     reviewCount: 7,
     priceLevel: nil
   )
-  
   
   static var sampleLocations = [
     Location(
@@ -305,19 +320,4 @@ struct Location: Hashable {
       
     ),
   ]
-  
 }
-
-
-/*
- Usage example
- 
- var locations : [Categories: [Location]] =
- 
- [
- amusement: [location0, location1, location2...] ,
- restaurant: [location0, location1, location2...] ,
- ...
- ]
- 
- */

@@ -113,7 +113,7 @@ extension NetworkController{
     let lat =  LocationController.shared.coordinatesOfMostRecent!.latitude as Double// later fix. set some default coordinate
     let long = LocationController.shared.coordinatesOfMostRecent!.longitude as Double// later fix.
     // Search area n meter from coordinates.
-    let radius = 10_000
+    let radius = 35_000
     let queryParameters = [
       "latitude": "\(lat)",
       "longitude": "\(long)",
@@ -217,7 +217,7 @@ extension NetworkController{
           default: return nil
           }
         }(),
-        ranking: topNLocations.count+1,
+        recommendationLevel: topNLocations.count+1,
         phone: yl.phone
       )
       topNLocations.append(l)
@@ -295,7 +295,7 @@ extension NetworkController{
         priceLevel   : \(String(describing: l.priceLevel))
         category   : \(l.category)
         address: \(l.address)
-        ranking : \(String(describing: l.ranking))
+        ranking : \(String(describing: l.recommendationLevel))
         phone: \(String(describing: l.phone))
       """)
     }

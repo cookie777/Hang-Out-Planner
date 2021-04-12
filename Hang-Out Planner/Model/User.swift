@@ -32,7 +32,7 @@ struct User {
   static var allLocations : [Location]  = []
   
   /// All routes (distances) between `allLocations` are stored here.
-  static var allRoutes : [[Double?]] = {
+  static var allDistances : [[Double?]] = {
     // create allRoutes data wit nil
     var arr  = Array(
       repeating: Array<Double?>(repeating: nil, count: allLocations.count), count: allLocations.count

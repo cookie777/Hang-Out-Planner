@@ -271,6 +271,7 @@
 				48802339261B935600CD36D1 /* Controller */,
 				48A4C68125B5580800264AF9 /* ViewController */,
 				48A4C62B25B554ED00264AF9 /* View,Cell */,
+				48802338261B06E300CD36D1 /* Logic */,
 				48A4C5B125B52E3C00264AF9 /* Model */,
 				48A4C5A425B52DDD00264AF9 /* SupportFiles */,
 				48A4C57F25B52D3B00264AF9 /* Info.plist */,
@@ -294,7 +295,6 @@
 		48A4C5B125B52E3C00264AF9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				48802338261B06E300CD36D1 /* Logic */,
 				48E9F5692612F0E200BBA223 /* SectionItem.swift */,
 				48DE333C25B8ECE2001630B7 /* Catetory.swift */,
 				48DE333E25B8ECE2001630B7 /* Location.swift */,

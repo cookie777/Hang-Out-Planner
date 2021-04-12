@@ -10,8 +10,7 @@ import Foundation
 /// var plans : [Plan]
 struct Plan {
   let routes    : [Route]
-  let destinationList: [Int] // id of location. The Order == where to go next
-  
+  let destinationIdList: [Int] // id of location. The Order == where to go next
   
   let totalDistance   : Double //meter
   
@@ -24,13 +23,13 @@ struct Plan {
   let averageRating: Double
   let averageReviewCount: Double
   let averagePriceLevel: Double
-  let averageRanking: Double? // not absolute, might not use
+  let averageRecommendation: Double? // not absolute, might not use
 }
 
 extension Plan: Hashable {
   func hash(into hasher: inout Hasher) {
     hasher.combine(routes)
-    hasher.combine(destinationList)
+    hasher.combine(destinationIdList)
   }
   
   static func == (lhs: Plan, rhs: Plan) -> Bool {

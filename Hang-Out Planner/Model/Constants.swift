@@ -29,7 +29,7 @@ struct Constants {
   
   struct Debug {
     // This is a debug switcher. if you turn on, it will use only sample data
-    static let noMoreAPI = true
+    static let noMoreAPI = false
   }
 }
 

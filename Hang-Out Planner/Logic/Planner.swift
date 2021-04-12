@@ -25,8 +25,8 @@ class Planner {
   */
   
   
-  
   // MARK: - Pre-Calc. Creates `allRoutes`.
+  
   ///  Calculate every routes between locations including user's current location.
   static func calculateAllRoutes(){
     let numOfLocations = User.allLocations.count
@@ -35,7 +35,7 @@ class Planner {
     for si in 0..<numOfLocations{
       for ei in 0..<numOfLocations{
         // I can reduce here. N^2 -> N^N/2. Fix later
-        User.allRoutes[si][ei] = calculateDistance(startId: si, endId: ei)
+        User.allDistances[si][ei] = calculateDistance(startId: si, endId: ei)
       }
     }
   }
@@ -128,7 +128,7 @@ class Planner {
       for i in 0...plan.count-2 {
         let start = plan[i]
         let end = plan[i+1]
-        totalDistance += User.allRoutes[start][end] ?? Double.infinity
+        totalDistance += User.allDistances[start][end] ?? Double.infinity
       }
       
       
@@ -165,7 +165,7 @@ class Planner {
         let route = Route(
           startLocationId: start,
           nextLocationId: end,
-          distance: User.allRoutes[start][end]!,
+          distance: User.allDistances[start][end]!,
           timeToReachByWalk: nil,
           timeToReachByCar: nil
         )
@@ -179,7 +179,7 @@ class Planner {
       var aveReviewCount = 0.0
       var avePriceLevel = 0.0
       
-      var aveRanking = 0.0 // Ranking is just an order of Best in yelp-api. if you get topN item at each category, it will be 0..<N
+      var aveRecommendation = 0.0 // Ranking is just an order of Best in yelp-api. if you get topN item at each category, it will be 0..<N
   
       for i in 1...theNumOfLocation{
         let currentLocation = User.allLocations[plan.key[i]]
@@ -205,27 +205,27 @@ class Planner {
         }
         
         // record ranking
-        if let r = currentLocation.ranking{
-          aveRanking += Double(r)
+        if let r = currentLocation.recommendationLevel{
+          aveRecommendation += Double(r)
         }
       }
       
       aveRating =  aveRating / Double(theNumOfLocation - aveRatingNil)
       aveReviewCount = aveReviewCount / Double(theNumOfLocation)
       avePriceLevel = avePriceLevel / Double(theNumOfLocation)
-      aveRanking = aveRanking / Double(theNumOfLocation)
+      aveRecommendation = aveRecommendation / Double(theNumOfLocation)
 
 
       currentPlan = Plan(
         routes: routes,
-        destinationList: plan.key,
+        destinationIdList: plan.key,
         totalDistance: plan.value,
         totalTimeByWalk: nil,
         totalTimeByCar: nil,
         averageRating: aveRating,
         averageReviewCount: aveReviewCount,
         averagePriceLevel: avePriceLevel,
-        averageRanking: aveRanking
+        averageRecommendation: aveRecommendation
       )
       returnPlans.append(currentPlan)
       

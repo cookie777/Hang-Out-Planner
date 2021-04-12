@@ -27,7 +27,7 @@ struct Location: Hashable {
   let rating: Double? // Double. Value ranges from 1, 1.5, ... 4.5, 5. Higher is better.
   let reviewCount: Int?
   let priceLevel: Int? // // Price level of the business. Value is one of 1, 2, 3 and 4. 1 means low cost, whereas 4 mean high cost.
-  var ranking: Int? = nil // The best Mach order from yelp api. not absolute
+  var recommendationLevel: Int? = nil // The best Mach order from yelp api. not absolute
   var phone : String? = nil
   
   
@@ -91,7 +91,7 @@ extension Location {
       rating: 4.0,
       reviewCount: 52,
       priceLevel: 1,
-      ranking: 1
+      recommendationLevel: 1
     ),
     Location(
       id: 2,
@@ -106,7 +106,7 @@ extension Location {
       rating: 4.0,
       reviewCount: 294,
       priceLevel: 2,
-      ranking: 2
+      recommendationLevel: 2
     ),
     Location(
       id: 3,
@@ -121,7 +121,7 @@ extension Location {
       rating: 4.0,
       reviewCount: 2304,
       priceLevel: 2,
-      ranking: 3
+      recommendationLevel: 3
     ),
     Location(
       id: 4,
@@ -136,7 +136,7 @@ extension Location {
       rating: 4.5,
       reviewCount: 1095,
       priceLevel: 2,
-      ranking: 4
+      recommendationLevel: 4
     ),
     Location(
       id: 5,
@@ -151,7 +151,7 @@ extension Location {
       rating: 3.5,
       reviewCount: 171,
       priceLevel: nil,
-      ranking: 1
+      recommendationLevel: 1
     ),
     Location(
       id: 6,
@@ -166,7 +166,7 @@ extension Location {
       rating: 5.0,
       reviewCount: 89,
       priceLevel: nil,
-      ranking: 2
+      recommendationLevel: 2
     ),
     Location(
       id: 7,
@@ -181,7 +181,7 @@ extension Location {
       rating: 4.5,
       reviewCount: 42,
       priceLevel: nil,
-      ranking: 3
+      recommendationLevel: 3
     ),
     Location(
       id: 8,
@@ -196,7 +196,7 @@ extension Location {
       rating: 5.0,
       reviewCount: 938,
       priceLevel: nil,
-      ranking: 1
+      recommendationLevel: 1
     ),
     Location(
       id: 9,
@@ -211,7 +211,7 @@ extension Location {
       rating: 4.5,
       reviewCount: 152,
       priceLevel: nil,
-      ranking: 2
+      recommendationLevel: 2
     ),
     Location(
       id: 10,
@@ -226,7 +226,7 @@ extension Location {
       rating: 4.5,
       reviewCount: 46,
       priceLevel: nil,
-      ranking: 3
+      recommendationLevel: 3
     ),
     Location(
       id: 11,
@@ -241,7 +241,7 @@ extension Location {
       rating: 4.0,
       reviewCount: 80,
       priceLevel: 2,
-      ranking: 1
+      recommendationLevel: 1
     ),
     Location(
       id: 12,
@@ -256,7 +256,7 @@ extension Location {
       rating: 4.0,
       reviewCount: 1092,
       priceLevel: 2,
-      ranking: 2
+      recommendationLevel: 2
     ),
     Location(
       id: 13,
@@ -271,7 +271,7 @@ extension Location {
       rating: 4.5,
       reviewCount: 473,
       priceLevel: 2,
-      ranking: 3
+      recommendationLevel: 3
     ),
     Location(
       id: 14,
@@ -286,7 +286,7 @@ extension Location {
       rating: 4.5,
       reviewCount: 9,
       priceLevel: 2,
-      ranking: 1
+      recommendationLevel: 1
     ),
     Location(
       id: 15,
@@ -301,7 +301,7 @@ extension Location {
       rating: 3.5,
       reviewCount: 20,
       priceLevel: 2,
-      ranking: 2
+      recommendationLevel: 2
     ),
     Location(
       id: 16,
@@ -316,7 +316,7 @@ extension Location {
       rating: 2.5,
       reviewCount: 87,
       priceLevel: 2,
-      ranking: 3
+      recommendationLevel: 3
       
     ),
   ]

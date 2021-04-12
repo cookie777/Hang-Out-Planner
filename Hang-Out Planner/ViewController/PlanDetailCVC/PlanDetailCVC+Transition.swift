@@ -29,7 +29,7 @@ extension PlanDetailCollectionViewController {
     // dest list [0, 12, 11, 5, 0]
     // imageId == 2
     // fetched image [0, image, "image" ,image]
-    guard let imageId = plan.destinationList.firstIndex(where: {$0 == location.id}) else { return }
+    guard let imageId = plan.destinationIdList.firstIndex(where: {$0 == location.id}) else { return }
     if let locationImage = fetchedImages.source?[imageId]  {
       nextVC.imageView.image = locationImage
     }

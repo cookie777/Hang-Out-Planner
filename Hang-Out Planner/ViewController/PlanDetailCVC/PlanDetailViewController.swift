@@ -26,7 +26,7 @@ class PlanDetailCollectionViewController: UICollectionViewController {
     
     fetchedImages.source = [UIImage?](
       repeating: nil,
-      count: plan.destinationList.count - 1
+      count: plan.destinationIdList.count - 1
     )
 
     createCollectionViewLayout()

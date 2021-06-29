@@ -79,7 +79,7 @@ extension MainCollectionViewController {
     
     let section = NSCollectionLayoutSection(group: group)
     section.interGroupSpacing = 60
-    section.contentInsets = .init(top: 40, leading: 32, bottom: 0, trailing: 32)
+    section.contentInsets = .init(top: 0, leading: 32, bottom: 0, trailing: 32)
     section.boundarySupplementaryItems = [createMapSectionHeader(48, Constants.Kind.sectionHeader)]
     
     return section

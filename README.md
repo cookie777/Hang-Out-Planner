@@ -20,7 +20,9 @@ This is because,
 
 To solve these problems, we created is a great application, which instantly and automatically generates a plan which is a collection of navigation routes based on famous locations surrounded by your current location.
 
-<img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-summary.webp" alt="select categories" style="max-width: 240px; width: 100%; border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
+<div align="center" >
+<img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-summary.webp" alt="select categories" width=240 border-radius="6px" style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
+</div>
 
 ## Spec
 
@@ -45,15 +47,15 @@ For example, if a user chooses 'Restaurant' ➔ 'Nature, Park' ➔ 'Art' in New 
 3. After selecting a plan, a user can look at its details with routes on the map, distance, cost, and so on.
 4. Of course, users can see each location's data.
 
-<div style="
+<div align="center" style="
   display: inline-flex;
   gap: 16px;
 ">
-  <img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-todo.webp" alt="todo" style="max-width: 240px; width: 100%; border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
+  <img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-todo.webp" alt="todo"  width=240 style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
 
-  <img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-planner.webp" alt="planner" style="max-width: 240px; width: 100%; border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
+  <img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-planner.webp" alt="planner" width=240 style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
 
-  <img class="app-screen-capture"  src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-location-manager.webp"  alt="location-manager" style="max-width: 240px; width: 100%; border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;" />
+  <img class="app-screen-capture"  src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-location-manager.webp"  alt="location-manager" width=240 style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;" />
 </div>
 
 
@@ -135,8 +137,9 @@ After a user decides their categories, this app asks API (yelp) to fetch related
 
 Fetching images is expensive. Sometimes, if the internet connection is weak it costs a lot of time to get images. In this kind of situation, we didn't want the screen to stop until it fetched and displayed images. So we firstly display place holder and try fetching images asynchronously. As soon as it finished fetching, we replace images so that the user can feel no stress!
 
-<img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-async-fetch.webp" alt="look the plan detail" style="max-width: 240px; width: 100%; border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
-
+<div align="center">
+<img class="app-screen-capture" align="center" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-async-fetch.webp" alt="look the plan detail" width=240 style=" border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
+</div>
 
 ## Future work
 

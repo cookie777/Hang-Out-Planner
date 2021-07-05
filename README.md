@@ -152,7 +152,7 @@ What we're planning to do next is as follows.
 
 ## Team member
 
-### Tak (me :[cookie777](https://github.com/cookie777))
+### Tak ([cookie777](https://github.com/cookie777))
 
 - Team manager
 - UI Designer

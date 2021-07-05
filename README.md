@@ -1,105 +1,170 @@
+# iOS: Hang out Planner
 
-# Hang-Out-Planner
+keyword: Swift, REST API, DispatchGroup, diffable data sources, MapKit, CoreLocation
 
-## Concept
-Hang-Out-Planner is an application which instantly auto-generates a daily plan.
+## Summary
+Created a native iOS application with Swift. This app suggests optimized root which includes locations that the user prefers. This app uses modern collection views with diffable data source, async API-fetch with dispatch group.
 
-## User
-- People who are not familiar with the user’s current place.                                  (e.g. tourists, transients living in the city, etc.)
-- People who are lazy to make plans
+## Motivation
 
-## Feature
-- You can choose maximum 5 categories which you’re interested in
-- You can make daily plans for the place of user’s current location
-- You can see the directions and route options between each place on the map 
-- You can see concise introduction of each place
+### Problem
 
+These days, there are a lot of locations and places where we want to visit. However, it is very difficult to find out which to visit, and next to visit.
 
-## API
-This application uses two API(MapKit and Yelp API).
-### Mapkit
-Display map or satellite imagery within your app, call out points of interest,and determine placemark information for map coordinates.
+This is because,
 
-[Website](https://developer.apple.com/documentation/mapkit/)
+1. There are too many places so that it is troublesome to find out decent ones.
+2. Even if you find out them, it is also painstaking to think about the best route. For example, which places to visit first and next so that we can go multiple places efficiently.
 
+### Solution
 
+To solve these problems, we created is a great application, which instantly and automatically generates a plan which is a collection of navigation routes based on famous locations surrounded by your current location.
 
-### Yelp API
-Yelp is a popular online directory for discovering local businesses ranging from bars, restaurants, and cafes to hairdressers, spas, and gas stations.
+<div align="center" >
+<img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-summary.webp" alt="select categories" width=240 border-radius="6px" style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
+</div>
 
-[Website](https://www.yelp.com/developers)
+## Spec
 
-
-### ip-api
-We can get geolocation from IP address.
-
-[Website](https://ip-api.com)
+- Swift: version 5.4
+- MapKit: To display route and user location
+- Core Location: To get the user current location
+- REST-API: Get external location data from yelp.
+- Collection View: With diffable data source.
 
 ## Usage
-1, Select maximum 5 categories and tap go button.
 
-![ezgif com-video-to-gif](https://user-images.githubusercontent.com/60034714/106401685-4d8c6900-63da-11eb-9f38-24f14c4ce184.gif)
+### Flow
 
-Then, the application is going to generate some daily plan near your current place.
+The user first selects some categories of locations with the order. Then the app will fetch locations surrounded by a user and calculates auto-suggests the best (most famous and closest) route includes locations that belong to the category user has chosen. 
 
-2, Tap a plan which application generated.
+For example, if a user chooses 'Restaurant' ➔ 'Nature, Park' ➔ 'Art' in New York, the app will suggest the route 'SHAKE SHACK' ➔ 'Central Park' ➔ 'Carnegie Hall'.
 
-![ezgif com-video-to-gif-2](https://user-images.githubusercontent.com/60034714/106401769-b96ed180-63da-11eb-878b-c970cc916a1d.gif)
+### How to use
 
-Then, the application is going to show the route and the name of each place.
+1. A user selects some categories with their preferred order. 
+2. After deciding categories, a list of plans is displayed to a user.
+3. After selecting a plan, a user can look at its details with routes on the map, distance, cost, and so on.
+4. Of course, users can see each location's data.
 
+<div align="center" style="
+  display: inline-flex;
+  gap: 16px;
+">
+  <img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-todo.webp" alt="todo"  width=240 style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
 
-![ezgif com-video-to-gif-4](https://user-images.githubusercontent.com/60034714/106427560-76355280-641c-11eb-80b3-87fab3348385.gif)
+  <img class="app-screen-capture" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-planner.webp" alt="planner" width=240 style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
 
-Even if fetching image delay, placeholdern will be shown until compleating fetching.
-
-3, Tap a place in the plan.
-
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106401877-8416b380-63db-11eb-8f2c-987cf2e1dc53.png">
-
-
-Then, the application is going to show the detail of the place.
-
-If you tap the “Yelp” label right bottom of the screen, you can go to the Yelp website of the place in Safari.
-
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/60034714/106367428-7556d080-62f7-11eb-8e29-8e38a6889032.png">
+  <img class="app-screen-capture"  src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-location-manager.webp"  alt="location-manager" width=240 style="border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;" />
+</div>
 
 
-## Background
+## Agile project management
 
-### First screen
-<img width="700" alt="image" src="https://user-images.githubusercontent.com/60034714/106431532-41c49500-6422-11eb-97ee-cb1d41399813.png">
+We used notion for scheduling and used the agile style. This makes this project complete in just two weeks!
 
-### When user tap "Go"
-<img width="700" alt="image" src="https://user-images.githubusercontent.com/60034714/106431544-4721df80-6422-11eb-8ce1-e4e07293e9f3.png">
-
-### Showing the result
-<img width="700" alt="image" src="https://user-images.githubusercontent.com/60034714/106431561-4d17c080-6422-11eb-87c7-0b2e5c722414.png">
+![Schedules](https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/manager-schedule.webp)
+![Docs](https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/manager-docs.webp)
+![Tasks](https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/manager-requirements.webp)
 
 
-## Contribution
+## UI Designing
 
-### Taka (`cookie777`)
-- Manage our group  
-- Design & UI
-- Model for logic part 
-- MapKit
-- YelpAPI
+We created a whole UI mock using Figma. In addition to creating a style guide, We create design components that are well suitable for implementing swift codes.
 
-### Yumi (`YumiMachin`)
-- ViewController for Result
-- MapKit
-- Refine category
-- Select category icon
+![UI mock 1](https://github.com/cookie777/images/blob/main/works/2021-01-Hang-Out-Planner/ui-mock1.webp?raw=true)
+![UI mock 2](https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/ui-mock2.webp)
 
 
-### Kengo (`kengo-taka`)
-- ViewController for input
-- ReadMe
-- Set cache
+## Back-end
+
+We design the architecture and algorithm of fetching and suggesting items. We also created tracking of user location by using core location.
+
+### Fetching user location
+
+The app fetches the user's location in two ways, locationManager and IP address.
+When you visit the target screen, we set the location manager to start fetching his/her location. Even a user denies it, we can assume approximate location by using the IP address from API.
+
+![Fetching location](https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/back-end-location.webp)
 
 
-## Future Work
-- User can share the plan 
-- User save the plan and route
-- Easy to use all over the world (By using other API like Yelp)
+This function will be executed at `sceneWillEnterForeground` and `viewWillAppear`
+
+```swift
+extension LocationController {
+  /// Start updating(tacking) user location
+  /// - Parameter completion: an action you want to do when the user location is updated.
+  func start(completion : @escaping(()->Void)) {
+    locationManager.requestAlwaysAuthorization()
+    locationManager.startUpdatingLocation()
+    isUpdatingLocation = true
+    self.completionDidLocationUpdated = completion
+  }
+```
+
+### How to suggest the routes
+
+![DispatchGroup](https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/back-end-fetching.webp)
+
+After a user decides their categories, this app asks API (yelp) to fetch related locations. It will ask serval times to get different times. These fetching are executed as **async and concurrently**. Once all fetching has complete, we proceed to the next step. These processes were realized by using `DispatchGroup`.
+
+```swift
+    group.enter()
+    NetworkController.shared.fetchLocations(
+      group : group,
+      category:CategoriesForAPI.amusement,
+      completion: NetworkController.shared.convertAndStoreLocation
+    )
+```
+
+```swift
+    // This is executed after "all fetch are done"
+    group.notify(queue: .main) {
+      
+      // Creating final locations with adding user location and assigning id.
+      User.allLocations.removeAll()
+      User.allLocations = [User.userLocation] + NetworkController.shared.tempAllLocations
+      (0..<User.allLocations.count).forEach{User.allLocations[$0].id = $0}
+      // Remove temp data for memory saving.
+      NetworkController.shared.tempAllLocations.removeAll()
+      
+      completion()
+      
+    }
+```
+
+### Async Fetching
+
+Fetching images is expensive. Sometimes, if the internet connection is weak it costs a lot of time to get images. In this kind of situation, we didn't want the screen to stop until it fetched and displayed images. So we firstly display place holder and try fetching images asynchronously. As soon as it finished fetching, we replace images so that the user can feel no stress!
+
+<div align="center">
+<img class="app-screen-capture" align="center" src="https://raw.githubusercontent.com/cookie777/images/main/works/2021-01-Hang-Out-Planner/animation-async-fetch.webp" alt="look the plan detail" width=240 style=" border: 2px solid #021a40; background-color: #ff0;border-radius: 6px;"/>
+</div>
+
+## Future work
+
+What we're planning to do next is as follows.
+
+- Store plans as permanent data using core data or realm
+- Publish in the app store
+- Implement user account by using firebase
+
+
+## Team member
+
+### Tak ([cookie777](https://github.com/cookie777))
+
+- Team manager
+- UI Designer
+- Back end developer
+
+### Yumi ([YumiMachin](https://github.com/YumiMachino))
+
+- Front end 
+- Back end (implement image API fetching)
+
+
+### Kengo ([kengo-taka](https://github.com/kengo-taka))
+
+- Front end
+- Created ReadMe, Docs.

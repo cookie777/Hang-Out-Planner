@@ -21,10 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let scene = (scene as? UIWindowScene) else { return }
     window = UIWindow(windowScene: scene)
     window?.makeKeyAndVisible()
-    let nv = UINavigationController(rootViewController: MainViewController())
+    let nv = UINavigationController(rootViewController: MainCollectionViewController())
     
     // Hiding navigationBar color and border. Extension func
-    nv.hideBarBackground()
+    nv.clearNavigationBar(with: UIColor.Custom.forBackground)
     
     
     window?.rootViewController = nv
@@ -54,41 +54,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // if current VC is main VC, then start updating.
     
 
-    // Start updating location.
-    // if already updating, need not to do.
-    if UserLocationController.shared.isUpdatingLocation{return}
-    
-    
-    UserLocationController.shared.start(completion: { [weak self] in
-      
-      guard let nv = self?.window?.rootViewController as? UINavigationController,
-            let mainVC = nv.topViewController as? MainViewController else{return}
-      
-      
-      // Whenever user location is updated (or start updating), this closure is invoked.
-      
-      // Get current user locaiton
-      guard let center = UserLocationController.shared.coordinatesMostRecent else {return}
-      // Set region of the mapView using current location
-      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-     
-      mainVC.mapView.setRegion(region, animated: false)
-      mainVC.mapView.showsUserLocation = true
-    
-      // Get address by using current location
-      UserLocationController.shared.getCurrentAddress(){ address in
-        
-        // if you couldn't get address, use ip one.
-        if address.count <= 1 {
-          mainVC.locationLabel.text = userCurrentLocation.address
-          return
-        }
-        // update user location info
-        userCurrentLocation.address = address
-        // update location label
-        mainVC.locationLabel.text = address
-      }
-    })
+//    // Start updating location.
+//    // if already updating, need not to do.
+//    if UserLocationController.shared.isUpdatingLocation{return}
+//    
+//    
+//    UserLocationController.shared.start(completion: { [weak self] in
+//      
+//      guard let nv = self?.window?.rootViewController as? UINavigationController,
+//            let mainVC = nv.topViewController as? MainViewController else{return}
+//      
+//      
+//      // Whenever user location is updated (or start updating), this closure is invoked.
+//      
+//      // Get current user locaiton
+//      guard let center = UserLocationController.shared.coordinatesMostRecent else {return}
+//      // Set region of the mapView using current location
+//      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//     
+//      mainVC.mapView.setRegion(region, animated: false)
+//      mainVC.mapView.showsUserLocation = true
+//    
+//      // Get address by using current location
+//      UserLocationController.shared.getCurrentAddress(){ address in
+//        
+//        // if you couldn't get address, use ip one.
+//        if address.count <= 1 {
+//          mainVC.locationLabel.text = userCurrentLocation.address
+//          return
+//        }
+//        // update user location info
+//        userCurrentLocation.address = address
+//        // update location label
+//        mainVC.locationLabel.text = address
+//      }
+//    })
   }
    
 
@@ -99,7 +99,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // to restore the scene back to its current state.
     
     // Whenever the screen gets background, stop tracking
-    UserLocationController.shared.stop()
+    LocationController.shared.stop()
   }
   
   
